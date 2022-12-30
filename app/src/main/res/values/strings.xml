@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MobilePQI</string>
+    <string name="splashscreen">SplashScreen</string>
+    <string name="buttonsplashscreen">ButtonSplashScreen</string>
+</resources>
