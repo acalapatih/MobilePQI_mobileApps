@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
@@ -9,17 +9,15 @@ plugins {
 apply from: '../shared_dependencies.gradle'
 
 android {
-    namespace 'com.uinjkt.mobilepqi'
+    namespace 'com.mobilepqi.core'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.uinjkt.mobilepqi"
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -38,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation project(":core")
+
 }
 
 kapt {
