@@ -1,6 +1,6 @@
 package com.mobilepqi.core.data
 
-import com.mobilepqi.core.data.remote.network.ApiResponse
+import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.first

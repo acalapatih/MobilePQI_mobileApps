@@ -1,4 +1,4 @@
-package com.mobilepqi.core.data.remote.network
+package com.mobilepqi.core.data.source.remote.network
 
 sealed class ApiResponse<out R> {
     data class Success<out T>(val data: T) : ApiResponse<T>()
