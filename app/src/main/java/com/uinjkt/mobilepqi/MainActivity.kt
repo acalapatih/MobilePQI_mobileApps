@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -10,6 +11,7 @@ import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -24,17 +26,26 @@ class MainActivity : AppCompatActivity(), LocationListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var locationManager: LocationManager
     private val locationPermissionCode = 2
+    private var isGranted = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        requestAccess()
         getLocation()
 
-//        requestAccess()
-
-        binding.btnLocation.setOnClickListener {
+//        binding.btnLocation.setOnClickListener {
 //            getLocation()
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("this", "onResume")
+        if (isGranted) {
+            getLocation()
         }
     }
 
@@ -62,7 +73,6 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 showAlert()
             }
         }
-
     }
 
     private fun showAlert() {
@@ -80,7 +90,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
         alertDialog.show()
     }
 
-    //    private fun requestAccess() {
+//    private fun requestAccess() {
 //        if ((ContextCompat.checkSelfPermission(
 //                this,
 //                android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -93,7 +103,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
 //            )
 //        }
 //    }
-//
+
 //    private fun getLocation() {
 //        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
 //        if ((ContextCompat.checkSelfPermission(
@@ -108,31 +118,33 @@ class MainActivity : AppCompatActivity(), LocationListener {
 //            )
 //        } else {
 //            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+//            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5f, this)
 //        }
 //    }
 
     override fun onLocationChanged(location: Location) {
-        showLocation(location.latitude, location.longitude)
+        Log.d("ha", "onLocationChanged: kepanggil ${location.longitude}")
+//        showLocation(location.latitude, location.longitude)
     }
 
-    override fun onProviderEnabled(provider: String) {
-        Toast.makeText(this, "Enable", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onProviderDisabled(provider: String) {
-        Toast.makeText(this, "Disable", Toast.LENGTH_SHORT).show()
-        val alertDialog = AlertDialog.Builder(this)
-        alertDialog.setTitle("SETTINGS")
-        alertDialog.setMessage("Enable Location Provider! Go to settings menu?")
-        alertDialog.setPositiveButton("Settings") { _, _ ->
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
-        }
-        alertDialog.setNegativeButton("Cancel") { dialog, _ ->
-            dialog.cancel()
-        }
-        alertDialog.show()
-    }
+//    override fun onProviderEnabled(provider: String) {
+//        Toast.makeText(this, "Enable", Toast.LENGTH_SHORT).show()
+//    }
+//
+//    override fun onProviderDisabled(provider: String) {
+//        Toast.makeText(this, "Disable", Toast.LENGTH_SHORT).show()
+//        val alertDialog = AlertDialog.Builder(this)
+//        alertDialog.setTitle("SETTINGS")
+//        alertDialog.setMessage("Enable Location Provider! Go to settings menu?")
+//        alertDialog.setPositiveButton("Settings") { _, _ ->
+//            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+//            startActivity(intent)
+//        }
+//        alertDialog.setNegativeButton("Cancel") { dialog, _ ->
+//            dialog.cancel()
+//        }
+//        alertDialog.show()
+//    }
 
     private fun showLocation(latitude: Double, longitude: Double) {
         Geocoder(this, Locale.getDefault()).getAddress(
@@ -175,6 +187,7 @@ class MainActivity : AppCompatActivity(), LocationListener {
                 getLocation()
             } else {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                isGranted = false
             }
         }
     }

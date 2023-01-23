@@ -37,6 +37,7 @@ class LocationService : LocationListener {
                 )
             } else {
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5f, this)
                 return locationManager.getLastKnownLocation(provider)
             }
         }
