@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:src="@drawable/img_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="18dp"/>
+
+        <TextView
+            android:id="@+id/txt_navbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_navbar_informasi"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@id/img_back"
+            app:layout_constraintTop_toTopOf="@id/img_back"
+            app:layout_constraintBottom_toBottomOf="@id/img_back"
+            android:layout_marginStart="5dp"/>
+
+        <ImageView
+            android:id="@+id/img_profil_dosen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_profil_dosen"
+            app:layout_constraintStart_toStartOf="@id/txt_navbar"
+            app:layout_constraintTop_toBottomOf="@id/txt_navbar"
+            android:layout_marginTop="12dp"/>
+
+        <TextView
+            android:id="@+id/txt_nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_nama"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/img_profil_dosen"
+            app:layout_constraintTop_toBottomOf="@id/txt_navbar"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="12dp"/>
+
+        <TextView
+            android:id="@+id/txt_nomor_induk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_nomor_induk"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/txt_nama"
+            app:layout_constraintTop_toBottomOf="@id/txt_nama"/>
+
+        <TextView
+            android:id="@+id/txt_fakultas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_fakultas"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_profil_dosen"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="44dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_fakultas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toBottomOf="@id/txt_fakultas"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"/>
+
+        <EditText
+            android:id="@+id/input_fakultas"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_fakultas"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_prodi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_prodi"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_fakultas"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="44dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_prodi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toBottomOf="@id/txt_prodi"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"/>
+
+        <EditText
+            android:id="@+id/input_prodi"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_prodi"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_email"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_prodi"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="44dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toBottomOf="@id/txt_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"/>
+
+        <EditText
+            android:id="@+id/input_email"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_tglahir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_tglahir"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_email"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="44dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_tglahir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toBottomOf="@id/txt_tglahir"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"/>
+
+        <EditText
+            android:id="@+id/input_tglahir"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_tglahir"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_nohp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_nohp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_tglahir"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="44dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_nohp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toBottomOf="@id/txt_nohp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"/>
+
+        <EditText
+            android:id="@+id/input_nohp"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_nohp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_alamat"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/input_nohp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="44dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toBottomOf="@id/txt_alamat"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"/>
+
+        <EditText
+            android:id="@+id/input_alamat"
+            android:layout_width="330dp"
+            android:layout_height="50dp"
+            app:layout_constraintTop_toBottomOf="@id/txt_alamat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:layout_width="195dp"
+            android:layout_height="50dp"
+            android:theme="@style/button.navy"
+            android:textColor="@color/white"
+            android:text="@string/btn_simpan"
+            app:layout_constraintTop_toBottomOf="@id/input_alamat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="60dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
