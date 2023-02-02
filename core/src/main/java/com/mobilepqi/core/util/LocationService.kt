@@ -16,7 +16,6 @@ class LocationService : LocationListener {
     private lateinit var context: Context
     private val locationPermissionCode = 2
 
-
     fun initLocationManager(context: Context) {
         this.context = context
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager

@@ -44,36 +44,36 @@ class MainActivity : AppCompatActivity(), LocationListener {
     override fun onResume() {
         super.onResume()
         Log.d("this", "onResume")
-        if (isGranted) {
-            getLocation()
-        }
+//        if (isGranted) {
+//            getLocation()
+//        }
     }
 
-    private fun getLocation() {
-        val locationService = LocationService()
-        locationService.initLocationManager(this)
-        if ((ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED)
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                locationPermissionCode
-            )
-        } else {
-            val gpsLocation = locationService.getLocation(LocationManager.GPS_PROVIDER, this)
-            if (gpsLocation != null) {
-                val latitude = gpsLocation.latitude
-                val longitude = gpsLocation.longitude
-                showLocation(latitude, longitude)
-            } else {
+//    private fun getLocation() {
+//        val locationService = LocationService()
+//        locationService.initLocationManager(this)
+//        if ((ContextCompat.checkSelfPermission(
+//                this,
+//                android.Manifest.permission.ACCESS_FINE_LOCATION
+//            ) != PackageManager.PERMISSION_GRANTED)
+//        ) {
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+//                locationPermissionCode
+//            )
+//        } else {
+//            val gpsLocation = locationService.getLocation(LocationManager.GPS_PROVIDER, this)
+//            if (gpsLocation != null) {
+//                val latitude = gpsLocation.latitude
+//                val longitude = gpsLocation.longitude
+//                showLocation(latitude, longitude)
+//            } else {
 //                onProviderDisabled(LocationManager.GPS_PROVIDER)
-                showAlert()
-            }
-        }
-    }
+//                showAlert()
+//            }
+//        }
+//    }
 
     private fun showAlert() {
         val alertDialog = AlertDialog.Builder(this)
@@ -104,27 +104,27 @@ class MainActivity : AppCompatActivity(), LocationListener {
 //        }
 //    }
 
-//    private fun getLocation() {
-//        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        if ((ContextCompat.checkSelfPermission(
-//                this,
-//                android.Manifest.permission.ACCESS_FINE_LOCATION
-//            ) != PackageManager.PERMISSION_GRANTED)
-//        ) {
-//            ActivityCompat.requestPermissions(
-//                this,
-//                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-//                locationPermissionCode
-//            )
-//        } else {
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
-//            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5f, this)
-//        }
-//    }
+    private fun getLocation() {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionCode
+            )
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5f, this)
+        }
+    }
 
     override fun onLocationChanged(location: Location) {
         Log.d("ha", "onLocationChanged: kepanggil ${location.longitude}")
-//        showLocation(location.latitude, location.longitude)
+        showLocation(location.latitude, location.longitude)
     }
 
 //    override fun onProviderEnabled(provider: String) {
