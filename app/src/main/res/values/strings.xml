@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">MobilePQI</string>
-    <string name="txt_nama">Mahasiswa</string>
+    <string name="txt_nama">Dosen</string>
     <string name="txt_nomor_induk">196903161999000000</string>
     <string name="txt_profil">Edit Profil</string>
     <string name="txt_pengaturan">Pengaturan</string>
