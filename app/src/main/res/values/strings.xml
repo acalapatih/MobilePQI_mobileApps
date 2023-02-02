@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">MobilePQI</string>
+    <string name="txt_nama">Mahasiswa</string>
+    <string name="txt_nomor_induk">196903161999000000</string>
+    <string name="txt_profil">Edit Profil</string>
+    <string name="txt_pengaturan">Pengaturan</string>
+    <string name="txt_logout">Log Out</string>
+
+<!--    Profil Informasi Pribadi-->
+    <string name="txt_navbar_informasi">Profil > Informasi Pribadi</string>
+    <string name="txt_fakultas">Fakultas</string>
+    <string name="txt_prodi">Program Studi</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_tglahir">Tanggal Lahir</string>
+    <string name="txt_nohp">No. Hp</string>
+    <string name="txt_alamat">Alamat</string>
+    <string name="btn_simpan">Simpan</string>
+
+    <!--    Profil Informasi Pribadi-->
+    <string name="txt_navbar_pengaturan">Profil > Pengaturan</string>
+    <string name="txt_bahasa">Bahasa</string>
+    <string name="btn_bahasa">Ubah</string>
+    <string name="txt_camera">Camera</string>
+    <string name="txt_about">About</string>
+    <string name="txt_bantuan">Bantuan</string>
+
 </resources>

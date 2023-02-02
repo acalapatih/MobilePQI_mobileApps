@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="34dp"
+        android:layout_height="32dp"
+        android:src="@drawable/img_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="18dp"/>
+
+    <TextView
+        android:id="@+id/txt_navbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_navbar_pengaturan"
+        android:fontFamily="@font/inter_bold"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@id/img_back"
+        app:layout_constraintTop_toTopOf="@id/img_back"
+        app:layout_constraintBottom_toBottomOf="@id/img_back"
+        android:layout_marginStart="5dp"/>
+    
+    <ImageView
+        android:id="@+id/img_bahasa"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:src="@drawable/img_bahasa"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_navbar"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="78dp"/>
+
+    <TextView
+        android:id="@+id/txt_bahasa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_bahasa"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/img_bahasa"
+        app:layout_constraintTop_toTopOf="@id/img_bahasa"
+        app:layout_constraintBottom_toBottomOf="@id/img_bahasa"
+        android:layout_marginStart="10dp"/>
+    
+    <Button
+        android:id="@+id/btn_bahasa"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:text="@string/btn_bahasa"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="@id/txt_bahasa"
+        app:layout_constraintBottom_toBottomOf="@id/txt_bahasa"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp"/>
+
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="@color/navy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_bahasa"
+        android:layout_marginTop="12dp"/>
+    
+    <ImageView
+        android:id="@+id/img_camera"
+        android:layout_width="34dp"
+        android:layout_height="27dp"
+        android:src="@drawable/img_camera"
+        app:layout_constraintStart_toStartOf="@id/img_bahasa"
+        app:layout_constraintTop_toBottomOf="@id/img_bahasa"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txt_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_camera"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/img_camera"
+        app:layout_constraintTop_toTopOf="@id/img_camera"
+        app:layout_constraintBottom_toBottomOf="@id/img_camera"
+        android:layout_marginStart="10dp"/>
+
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="@color/navy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_camera"
+        android:layout_marginTop="12dp"/>
+
+    <ImageView
+        android:id="@+id/img_about"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/img_about"
+        app:layout_constraintStart_toStartOf="@id/img_camera"
+        app:layout_constraintTop_toBottomOf="@id/img_camera"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txt_about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_about"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/img_about"
+        app:layout_constraintTop_toTopOf="@id/img_about"
+        app:layout_constraintBottom_toBottomOf="@id/img_about"
+        android:layout_marginStart="10dp"/>
+
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="@color/navy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_about"
+        android:layout_marginTop="12dp"/>
+
+    <ImageView
+        android:id="@+id/img_bantuan"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/img_bantuan"
+        app:layout_constraintStart_toStartOf="@id/img_about"
+        app:layout_constraintTop_toBottomOf="@id/img_about"
+        android:layout_marginTop="25dp"/>
+
+    <TextView
+        android:id="@+id/txt_bantuan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_bantuan"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/img_bantuan"
+        app:layout_constraintTop_toTopOf="@id/img_bantuan"
+        app:layout_constraintBottom_toBottomOf="@id/img_bantuan"
+        android:layout_marginStart="10dp"/>
+
+    <View
+        android:layout_width="320dp"
+        android:layout_height="1dp"
+        android:background="@color/navy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_bantuan"
+        android:layout_marginTop="12dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
