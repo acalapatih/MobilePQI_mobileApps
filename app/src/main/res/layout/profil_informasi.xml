@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -251,7 +251,7 @@
         <Button
             android:layout_width="195dp"
             android:layout_height="50dp"
-            android:theme="@style/button.navy"
+            android:theme="@style/btn.navy"
             android:textColor="@color/white"
             android:text="@string/btn_simpan"
             app:layout_constraintTop_toBottomOf="@id/input_alamat"

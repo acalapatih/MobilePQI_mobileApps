@@ -13,8 +13,8 @@ class Activity2 : Activity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profil_informasi)
-        val next = findViewById<View>(R.id.img_back) as ImageView
-        next.setOnClickListener {
+        val back = findViewById<View>(R.id.img_back) as ImageView
+        back.setOnClickListener {
             val intent = Intent()
             setResult(RESULT_OK, intent)
             finish()
