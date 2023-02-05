@@ -8,29 +8,24 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.mobilepqi.core.util.LocationService
+import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMainBinding
 import java.util.*
 
-class MainActivity : AppCompatActivity(), LocationService.GetLocationService {
+class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
 
-    private lateinit var binding: ActivityMainBinding
     private lateinit var locationService: LocationService
     private val locationPermissionCode = 99
     private var isGranted = true
+    override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         locationService = LocationService(this)
-
         requestAccess()
     }
 
@@ -95,7 +90,7 @@ class MainActivity : AppCompatActivity(), LocationService.GetLocationService {
     }
 
     override fun gpsOn() {
-        Toast.makeText(this, "Enable", Toast.LENGTH_SHORT).show()
+        showToast("GPS Enable")
     }
 
     override fun gpsOff() {
@@ -114,10 +109,10 @@ class MainActivity : AppCompatActivity(), LocationService.GetLocationService {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                showToast("Permission Granted")
                 requestAccess()
             } else {
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                showToast("Permission Denied")
                 isGranted = false
             }
         }
