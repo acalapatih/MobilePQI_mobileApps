@@ -6,53 +6,50 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
-import android.widget.Toast
 import androidx.annotation.RequiresPermission
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-class LocationService : LocationListener {
+class LocationService(private val listener: GetLocationService) : LocationListener {
+
     private lateinit var locationManager: LocationManager
-    private lateinit var context: Context
     private val locationPermissionCode = 2
 
-    fun initLocationManager(context: Context) {
-        this.context = context
-        locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-    }
-
     @RequiresPermission("android.permission.ACCESS_FINE_LOCATION")
-    fun getLocation(provider: String, activity: Activity): Location? {
-        if (locationManager.isProviderEnabled(provider)) {
-            if ((ContextCompat.checkSelfPermission(
-                    context,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED)
-            ) {
-                ActivityCompat.requestPermissions(
-                    activity,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    locationPermissionCode
-                )
-            } else {
-                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
-                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5f, this)
-                return locationManager.getLastKnownLocation(provider)
-            }
+    fun getLocation(activity: Activity) {
+        locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if ((ContextCompat.checkSelfPermission(
+                activity,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED)
+        ) {
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionCode
+            )
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 5f, this)
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5f, this)
         }
-        return null
     }
 
     override fun onProviderEnabled(provider: String) {
-        Toast.makeText(context, "Enable GPS", Toast.LENGTH_SHORT).show()
+        listener.gpsOn()
     }
 
     override fun onProviderDisabled(provider: String) {
-
+        listener.gpsOff()
     }
 
     override fun onLocationChanged(location: Location) {
+        listener.locationDetected(location)
+    }
 
+    interface GetLocationService {
+        fun gpsOn()
+        fun gpsOff()
+        fun locationDetected(location: Location)
     }
 
 }
