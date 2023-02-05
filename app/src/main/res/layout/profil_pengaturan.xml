@@ -15,10 +15,10 @@
         android:layout_marginStart="18dp"/>
 
     <TextView
-        android:id="@+id/txt_navbar"
+        android:id="@+id/tv_navbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_navbar_pengaturan"
+        android:text="@string/tv_navbar_pengaturan"
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -33,15 +33,15 @@
         android:layout_height="36dp"
         android:src="@drawable/img_bahasa"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_navbar"
+        app:layout_constraintTop_toBottomOf="@id/tv_navbar"
         android:layout_marginStart="40dp"
         android:layout_marginTop="78dp"/>
 
     <TextView
-        android:id="@+id/txt_bahasa"
+        android:id="@+id/tv_bahasa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_bahasa"
+        android:text="@string/tv_bahasa"
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -57,8 +57,10 @@
         android:text="@string/btn_bahasa"
         android:fontFamily="@font/inter_medium"
         android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="@id/txt_bahasa"
-        app:layout_constraintBottom_toBottomOf="@id/txt_bahasa"
+        app:shapeAppearance="@style/btn.rounded"
+        android:backgroundTint="@color/blue"
+        app:layout_constraintTop_toTopOf="@id/tv_bahasa"
+        app:layout_constraintBottom_toBottomOf="@id/tv_bahasa"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="40dp"/>
 
@@ -68,7 +70,7 @@
         android:background="@color/navy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_bahasa"
+        app:layout_constraintTop_toBottomOf="@id/tv_bahasa"
         android:layout_marginTop="12dp"/>
     
     <ImageView
@@ -81,10 +83,10 @@
         android:layout_marginTop="25dp"/>
 
     <TextView
-        android:id="@+id/txt_camera"
+        android:id="@+id/tv_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_camera"
+        android:text="@string/tv_camera"
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -98,8 +100,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/txt_camera"
-        app:layout_constraintBottom_toBottomOf="@id/txt_camera"
+        app:layout_constraintTop_toTopOf="@id/tv_camera"
+        app:layout_constraintBottom_toBottomOf="@id/tv_camera"
         android:layout_marginEnd="40dp"/>
 
     <View
@@ -108,7 +110,7 @@
         android:background="@color/navy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_camera"
+        app:layout_constraintTop_toBottomOf="@id/tv_camera"
         android:layout_marginTop="12dp"/>
 
     <ImageView
@@ -121,10 +123,10 @@
         android:layout_marginTop="25dp"/>
 
     <TextView
-        android:id="@+id/txt_about"
+        android:id="@+id/tv_about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_about"
+        android:text="@string/tv_about"
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -139,7 +141,7 @@
         android:background="@color/navy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_about"
+        app:layout_constraintTop_toBottomOf="@id/tv_about"
         android:layout_marginTop="12dp"/>
 
     <ImageView
@@ -152,10 +154,10 @@
         android:layout_marginTop="25dp"/>
 
     <TextView
-        android:id="@+id/txt_bantuan"
+        android:id="@+id/tv_bantuan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_bantuan"
+        android:text="@string/tv_bantuan"
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -170,7 +172,7 @@
         android:background="@color/navy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_bantuan"
+        app:layout_constraintTop_toBottomOf="@id/tv_bantuan"
         android:layout_marginTop="12dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,18 +10,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/img_dosen"
-        android:contentDescription="@string/txt_nama"
+        android:contentDescription="@string/tv_nama"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/txt_nama"
+        app:layout_constraintBottom_toTopOf="@id/tv_nama"
         android:layout_marginTop="10dp"/>
 
     <TextView
-        android:id="@+id/txt_nama"
+        android:id="@+id/tv_nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_nama"
+        android:text="@string/tv_nama"
         android:fontFamily="@font/inter_bold"
         android:textSize="24sp"
         android:textColor="@color/black"
@@ -31,13 +31,13 @@
         android:layout_marginTop="5dp"/>
 
     <TextView
-        android:id="@+id/txt_nomor_induk"
+        android:id="@+id/tv_nomor_induk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_nomor_induk"
+        android:text="@string/tv_nomor_induk"
         android:textSize="16sp"
         android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/txt_nama"
+        app:layout_constraintTop_toBottomOf="@id/tv_nama"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -46,18 +46,18 @@
         android:layout_width="25dp"
         android:layout_height="24dp"
         android:src="@drawable/img_profil"
-        android:contentDescription="@string/txt_profil"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nomor_induk"
+        android:contentDescription="@string/tv_profil"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nomor_induk"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/txt_profil"
+        app:layout_constraintEnd_toStartOf="@id/tv_profil"
         android:layout_marginTop="50dp"
         android:layout_marginStart="25dp"/>
 
     <TextView
-        android:id="@+id/txt_profil"
+        android:id="@+id/tv_profil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_profil"
+        android:text="@string/tv_profil"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/img_profil"
@@ -70,18 +70,18 @@
         android:layout_width="26dp"
         android:layout_height="24dp"
         android:src="@drawable/img_pengaturan"
-        android:contentDescription="@string/txt_pengaturan"
+        android:contentDescription="@string/tv_pengaturan"
         app:layout_constraintTop_toBottomOf="@id/img_profil"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/txt_pengaturan"
+        app:layout_constraintEnd_toStartOf="@id/tv_pengaturan"
         android:layout_marginTop="38dp"
         android:layout_marginStart="25dp"/>
 
     <TextView
-        android:id="@+id/txt_pengaturan"
+        android:id="@+id/tv_pengaturan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_pengaturan"
+        android:text="@string/tv_pengaturan"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/img_pengaturan"
@@ -94,18 +94,18 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:src="@drawable/img_logout"
-        android:contentDescription="@string/txt_logout"
+        android:contentDescription="@string/tv_logout"
         app:layout_constraintTop_toBottomOf="@id/img_pengaturan"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/txt_logout"
+        app:layout_constraintEnd_toStartOf="@id/tv_logout"
         android:layout_marginTop="38dp"
         android:layout_marginStart="25dp"/>
 
     <TextView
-        android:id="@+id/txt_logout"
+        android:id="@+id/tv_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txt_logout"
+        android:text="@string/tv_logout"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/img_logout"

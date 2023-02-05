@@ -15,7 +15,8 @@
     </style>
 
 <!--    Button Color-->
-    <style name="btn.navy" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <item name="colorAccent">@color/navy</item>
+    <style name="btn.rounded" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">100%</item>
     </style>
 </resources>
