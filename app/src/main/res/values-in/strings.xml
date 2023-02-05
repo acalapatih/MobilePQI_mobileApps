@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MobilePQI</string>
-    <string name="txt_mulai">Mulai</string>
+    <string name="tv_deskripsi_text">E-learning untuk \nPendidikan Qiroah dan \nIbadah</string>
+    <string name="btn_mulai_text">Mulai</string>
 </resources>
