@@ -81,7 +81,7 @@
             android:text="@string/tv_email"
             android:fontFamily="@font/inter_medium"
             android:textColor="@color/black"
-            app:layout_constraintStart_toStartOf="@id/tv_nama"
+            app:layout_constraintStart_toStartOf="@id/tv_nomor_induk"
             app:layout_constraintTop_toBottomOf="@id/tv_nomor_induk"/>
 
         <TextView
@@ -108,7 +108,7 @@
 
         <EditText
             android:id="@+id/input_fakultas"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/tv_fakultas"
             app:layout_constraintStart_toStartOf="parent"
@@ -137,7 +137,7 @@
 
         <EditText
             android:id="@+id/input_prodi"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/tv_prodi"
             app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +156,7 @@
             android:layout_marginStart="44dp"/>
 
         <ImageView
-            android:id="@+id/img_edit_email"
+            android:id="@+id/img_edit_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/img_edit"
@@ -166,7 +166,7 @@
 
         <EditText
             android:id="@+id/input_password"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/tv_password"
             app:layout_constraintStart_toStartOf="parent"
@@ -195,7 +195,7 @@
 
         <EditText
             android:id="@+id/input_tglahir"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/tv_tglahir"
             app:layout_constraintStart_toStartOf="parent"
@@ -224,7 +224,7 @@
 
         <EditText
             android:id="@+id/input_nohp"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/tv_nohp"
             app:layout_constraintStart_toStartOf="parent"
@@ -253,7 +253,7 @@
 
         <EditText
             android:id="@+id/input_alamat"
-            android:layout_width="330dp"
+            android:layout_width="300dp"
             android:layout_height="50dp"
             app:layout_constraintTop_toBottomOf="@id/tv_alamat"
             app:layout_constraintStart_toStartOf="parent"
