@@ -122,7 +122,7 @@
         android:autofillHints="@string/tv_password_text"
         android:hint="@string/tv_password_text"
         android:inputType="textPassword"
-        android:maxLength="20"
+        android:maxLength="24"
         android:ems="10"
         app:layout_constraintBottom_toTopOf="@+id/btn_signin"
         app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
