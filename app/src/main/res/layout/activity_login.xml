@@ -24,7 +24,6 @@
         android:layout_height="75dp"
         android:layout_marginStart="110dp"
         android:layout_marginTop="140dp"
-        android:layout_marginEnd="10dp"
         android:importantForAccessibility="no"
         app:layout_constraintEnd_toStartOf="@+id/iv_logo_pujitaklim_login"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +35,7 @@
         android:layout_width="96dp"
         android:layout_height="89dp"
         android:layout_marginTop="140dp"
-        android:layout_marginEnd="110dp"
+        android:layout_marginEnd="100dp"
         android:importantForAccessibility="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_logo_uinjkt_login"
@@ -106,9 +105,10 @@
         android:hint="@string/tv_nip_nim_signin_text"
         android:inputType="numberSigned"
         android:maxLength="13"
+        android:ems="10"
         app:layout_constraintBottom_toTopOf="@+id/tv_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
+        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
         app:layout_constraintTop_toBottomOf="@+id/tv_nip_nim_signin" />
 
     <EditText
@@ -122,10 +122,11 @@
         android:autofillHints="@string/tv_password_text"
         android:hint="@string/tv_password_text"
         android:inputType="textPassword"
-        android:maxLength="32"
+        android:maxLength="20"
+        android:ems="10"
         app:layout_constraintBottom_toTopOf="@+id/btn_signin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
+        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
         app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
     <ImageView
