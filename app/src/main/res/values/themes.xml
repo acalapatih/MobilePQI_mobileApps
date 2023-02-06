@@ -22,4 +22,14 @@
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
     </style>
+
+    <style name="FieldRounded10dp">
+        <item name="android:background">@drawable/bg_field_10dp</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:paddingRight">5dp</item>
+    </style>
 </resources>

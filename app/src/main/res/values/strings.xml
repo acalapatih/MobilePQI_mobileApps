@@ -2,4 +2,10 @@
     <string name="app_name">MobilePQI</string>
     <string name="tv_deskripsi_text">E-learning untuk \nPendidikan Qiroah dan \nIbadah</string>
     <string name="btn_mulai_text">Mulai</string>
+    <string name="tv_signin_text">Sign In</string>
+    <string name="tv_nip_nim_signin_text">NIP/NIM</string>
+    <string name="tv_password_text">Password</string>
+    <string name="tv_lupa_password_text">Lupa Password?</string>
+    <string name="tv_belum_daftar_text">Belum Punya Akun?</string>
+    <string name="tv_belum_daftar_click_text"><u>Daftar Sekarang</u></string>
 </resources>
