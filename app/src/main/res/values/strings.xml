@@ -1,16 +1,39 @@
 <resources>
     <string name="app_name">MobilePQI</string>
+
+    <!--    Dashboard-->
+    <string name="tv_salam">Assalamu\'alaikum</string>
+    <string name="tv_kelas">PQI-2C</string>
+    <string name="tv_sholat">Sholat Ashar</string>
+    <string name="tv_lokasi">Lokasi Anda</string>
+    <string name="tv_waktu">15:06 WIB</string>
+    <string name="tv_daerah">Cawang</string>
+    <string name="tv_silabus">Silabus</string>
+    <string name="tv_ibadah">Ibadah</string>
+    <string name="tv_qiroah">Qiroah</string>
+    <string name="tv_tugas">Tugas</string>
+    <string name="tv_judul">Praktikum Qiroah dan Ibadah</string>
+    <string name="tv_update">Anda memposting tugas baru</string>
+    <string name="tv_tanggal_tugas">29 November 2022</string>
+    <string name="tv_nama_tugas">Tugas 6</string>
+    <string name="tv_deadline_tugas">Tenggat waktu : 30 Desember 2022</string>
+    <string name="tv_tanggal_hafalan">29 November 2022</string>
+    <string name="tv_nama_hafalan">Surah An-Naba</string>
+    <string name="tv_deadline_hafalan">Tenggat waktu : 30 Desember 2022</string>
+
+    <!--    Profil-->
     <string name="tv_nama">Dosen</string>
     <string name="tv_nomor_induk">196903161999000000</string>
     <string name="tv_profil">Edit Profil</string>
     <string name="tv_pengaturan">Pengaturan</string>
     <string name="tv_logout">Log Out</string>
 
-<!--    Profil Informasi Pribadi-->
+    <!--    Profil Informasi Pribadi-->
     <string name="tv_navbar_informasi">Profil > Informasi Pribadi</string>
     <string name="tv_fakultas">Fakultas</string>
     <string name="tv_prodi">Program Studi</string>
-    <string name="tv_email">Email</string>
+    <string name="tv_email">saepul@mhs.uinjkt.ac.id</string>
+    <string name="tv_password">Password</string>
     <string name="tv_tglahir">Tanggal Lahir</string>
     <string name="tv_nohp">No. Hp</string>
     <string name="tv_alamat">Alamat</string>

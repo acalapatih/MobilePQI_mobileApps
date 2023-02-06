@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_header"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="-45dp"/>
+
+        <TextView
+            android:id="@+id/tv_salam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_salam"
+            android:fontFamily="@font/inter"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_nama"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/tv_salam"
+            app:layout_constraintTop_toBottomOf="@id/tv_salam"
+            android:layout_marginTop="5dp"/>
+        
+        <ImageView
+            android:id="@+id/img_kelas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_kelas"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/img_user"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/img_user"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:src="@drawable/img_user"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_kelas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_kelas"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="24sp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="150dp"/>
+
+        <ImageView
+            android:id="@+id/img_dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_dashboard"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="188dp"/>
+
+        <ImageView
+            android:id="@+id/img_waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_waktu"
+            app:layout_constraintTop_toTopOf="@id/img_dashboard"
+            app:layout_constraintStart_toStartOf="@id/img_dashboard"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="30dp"/>
+
+        <TextView
+            android:id="@+id/tv_sholat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_sholat"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/img_waktu"
+            app:layout_constraintBottom_toBottomOf="@id/img_waktu"
+            app:layout_constraintStart_toEndOf="@id/img_waktu"
+            android:layout_marginStart="3dp"/>
+        
+        <ImageView
+            android:id="@+id/img_lokasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_lokasi"
+            app:layout_constraintTop_toTopOf="@id/img_dashboard"
+            app:layout_constraintStart_toEndOf="@id/tv_sholat"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="65dp"/>
+
+        <TextView
+            android:id="@+id/tv_lokasi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_lokasi"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="15sp"
+            app:layout_constraintTop_toTopOf="@id/img_lokasi"
+            app:layout_constraintBottom_toBottomOf="@id/img_lokasi"
+            app:layout_constraintStart_toEndOf="@id/img_lokasi"
+            android:layout_marginStart="3dp"/>
+
+        <TextView
+            android:id="@+id/tv_waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_waktu"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_sholat"
+            app:layout_constraintStart_toStartOf="@id/tv_sholat"/>
+
+        <TextView
+            android:id="@+id/tv_daerah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_daerah"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_lokasi"
+            app:layout_constraintStart_toStartOf="@id/tv_lokasi"/>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="300dp"
+            android:layout_height="2dp"
+            android:background="@color/grey_ACACAC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/img_dashboard"
+            android:layout_marginTop="70dp"/>
+
+        <ImageView
+            android:id="@+id/img_silabus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_silabus"
+            app:layout_constraintTop_toTopOf="@+id/view_line"
+            app:layout_constraintStart_toStartOf="@id/img_dashboard"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="35dp"/>
+
+        <TextView
+            android:id="@+id/tv_silabus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_silabus"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="15sp"
+            android:textColor="@color/grey_636363"
+            app:layout_constraintTop_toBottomOf="@id/img_silabus"
+            app:layout_constraintStart_toStartOf="@id/img_silabus"
+            app:layout_constraintEnd_toEndOf="@id/img_silabus"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:id="@+id/img_ibadah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_ibadah"
+            app:layout_constraintTop_toTopOf="@+id/view_line"
+            app:layout_constraintStart_toEndOf="@id/img_silabus"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_ibadah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_ibadah"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="15sp"
+            android:textColor="@color/grey_636363"
+            app:layout_constraintTop_toBottomOf="@id/img_ibadah"
+            app:layout_constraintStart_toStartOf="@id/img_ibadah"
+            app:layout_constraintEnd_toEndOf="@id/img_ibadah"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:id="@+id/img_qiroah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_qiroah"
+            app:layout_constraintTop_toTopOf="@+id/view_line"
+            app:layout_constraintStart_toEndOf="@id/img_ibadah"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_qiroah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_qiroah"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="15sp"
+            android:textColor="@color/grey_636363"
+            app:layout_constraintTop_toBottomOf="@id/img_qiroah"
+            app:layout_constraintStart_toStartOf="@id/img_qiroah"
+            app:layout_constraintEnd_toEndOf="@id/img_qiroah"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:id="@+id/img_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_tugas"
+            app:layout_constraintTop_toTopOf="@+id/view_line"
+            app:layout_constraintStart_toEndOf="@id/img_qiroah"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_tugas"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="15sp"
+            android:textColor="@color/grey_636363"
+            app:layout_constraintTop_toBottomOf="@id/img_tugas"
+            app:layout_constraintStart_toStartOf="@id/img_tugas"
+            app:layout_constraintEnd_toEndOf="@id/img_tugas"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_judul"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/img_dashboard"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="35dp"
+            android:layout_marginStart="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_update_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_update"
+            android:fontFamily="@font/inter"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_judul"
+            app:layout_constraintStart_toStartOf="@id/tv_judul"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_tanggal_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_tanggal_tugas"
+            android:fontFamily="@font/inter"
+            android:textSize="15sp"
+            android:textColor="@color/grey_636363"
+            app:layout_constraintTop_toBottomOf="@id/tv_update_tugas"
+            app:layout_constraintStart_toStartOf="@id/tv_judul"
+            android:layout_marginTop="5dp"/>
+        
+        <View
+            android:id="@+id/bg_tugas_rounded"
+            android:layout_width="380dp"
+            android:layout_height="82dp"
+            style="@style/bg_tugas_rounded"
+            app:layout_constraintTop_toBottomOf="@id/tv_tanggal_tugas"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="5dp"/>
+
+        <ImageView
+            android:id="@+id/img_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_task"
+            app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
+            app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
+            app:layout_constraintStart_toStartOf="@id/bg_tugas_rounded"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_nama_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_nama_tugas"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
+            app:layout_constraintStart_toEndOf="@id/img_task"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="6dp"/>
+
+        <View
+            android:id="@+id/tugas_line"
+            android:layout_width="280dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_tugas"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_tugas"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_deadline_tugas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_deadline_tugas"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_tugas"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/tv_update_hafalan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_update"
+            android:fontFamily="@font/inter"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/bg_tugas_rounded"
+            app:layout_constraintStart_toStartOf="@id/tv_update_tugas"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_tanggal_hafalan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_tanggal_tugas"
+            android:fontFamily="@font/inter"
+            android:textSize="15sp"
+            android:textColor="@color/grey_636363"
+            app:layout_constraintTop_toBottomOf="@id/tv_update_hafalan"
+            app:layout_constraintStart_toStartOf="@id/tv_update_hafalan"
+            android:layout_marginTop="5dp"/>
+
+        <View
+            android:id="@+id/bg_hafalan_rounded"
+            android:layout_width="380dp"
+            android:layout_height="82dp"
+            style="@style/bg_tugas_rounded"
+            app:layout_constraintTop_toBottomOf="@id/tv_tanggal_hafalan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="50dp"/>
+
+        <ImageView
+            android:id="@+id/img_hafalan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/img_task"
+            app:layout_constraintTop_toTopOf="@id/bg_hafalan_rounded"
+            app:layout_constraintBottom_toBottomOf="@id/bg_hafalan_rounded"
+            app:layout_constraintStart_toStartOf="@id/bg_hafalan_rounded"
+            android:layout_marginStart="15dp"/>
+
+        <TextView
+            android:id="@+id/tv_nama_hafalan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_nama_hafalan"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/bg_hafalan_rounded"
+            app:layout_constraintStart_toEndOf="@id/img_hafalan"
+            android:layout_marginTop="18dp"
+            android:layout_marginStart="6dp"/>
+
+        <View
+            android:id="@+id/hafalan_line"
+            android:layout_width="280dp"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_hafalan"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_hafalan"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_deadline_hafalan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_deadline_hafalan"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@id/bg_hafalan_rounded"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_hafalan"
+            android:layout_marginBottom="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

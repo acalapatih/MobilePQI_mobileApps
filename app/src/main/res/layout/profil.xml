@@ -9,7 +9,7 @@
         android:id="@+id/img_dosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_dosen"
+        android:src="@drawable/img_user"
         android:contentDescription="@string/tv_nama"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

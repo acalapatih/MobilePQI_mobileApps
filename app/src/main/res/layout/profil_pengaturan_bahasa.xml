@@ -49,17 +49,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="40dp"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_terapkan"
         android:layout_width="130dp"
         android:layout_height="48dp"
-        app:shapeAppearance="@style/btn.rounded"
-        android:backgroundTint="@color/blue"
         android:text="@string/btn_terapkan"
+        android:fontFamily="@font/inter_medium"
         android:textSize="16sp"
+        android:textColor="@color/white"
+        style="@style/btn_blue_rounded"
         app:layout_constraintTop_toBottomOf="@id/rb_bahasa_indo"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="60dp"/>
+        android:layout_marginEnd="40dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
