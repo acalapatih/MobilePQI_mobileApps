@@ -1,17 +1,28 @@
 package com.uinjkt.mobilepqi.ui.setting
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import com.uinjkt.mobilepqi.R
+import com.uinjkt.mobilepqi.common.BaseActivity
+import com.uinjkt.mobilepqi.databinding.ActivityProfilPengaturanBahasaBinding
 
-class ProfilePengaturanBahasa: Activity(){
+class ProfilePengaturanBahasa : BaseActivity<ActivityProfilPengaturanBahasaBinding>() {
+    companion object {
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, ProfilePengaturanBahasa::class.java)
+            context.startActivity(starter)
+        }
+    }
+
+    override fun getViewBinding(): ActivityProfilPengaturanBahasaBinding =
+        ActivityProfilPengaturanBahasaBinding.inflate(layoutInflater)
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.profil_pengaturan_bahasa)
-        val back = findViewById<View>(R.id.img_back)
-        back.setOnClickListener {view->
+        supportActionBar?.hide()
+        val back = binding.imgBack
+        back.setOnClickListener { view ->
             val intent = Intent(view.context, ProfilePengaturan::class.java)
             startActivityForResult(intent, 0)
         }

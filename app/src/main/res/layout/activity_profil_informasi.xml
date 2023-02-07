@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
@@ -96,23 +97,29 @@
             android:layout_marginTop="30dp"
             android:layout_marginStart="44dp"/>
 
-        <ImageButton
-            android:id="@+id/img_edit_fakultas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_edit"
-            android:background="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/tv_fakultas"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="40dp"/>
-
         <EditText
             android:id="@+id/input_fakultas"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintTop_toBottomOf="@id/tv_fakultas"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageButton
+            android:id="@+id/img_edit_fakultas"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toTopOf="@id/input_fakultas"
+            app:layout_constraintBottom_toBottomOf="@id/input_fakultas"
+            app:layout_constraintEnd_toEndOf="@id/input_fakultas"/>
 
         <TextView
             android:id="@+id/tv_prodi"
@@ -126,22 +133,29 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="44dp"/>
 
-        <ImageView
-            android:id="@+id/img_edit_prodi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_edit"
-            app:layout_constraintTop_toBottomOf="@id/tv_prodi"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="40dp"/>
-
         <EditText
             android:id="@+id/input_prodi"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintTop_toBottomOf="@id/tv_prodi"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageButton
+            android:id="@+id/img_edit_prodi"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toTopOf="@id/input_prodi"
+            app:layout_constraintBottom_toBottomOf="@id/input_prodi"
+            app:layout_constraintEnd_toEndOf="@id/input_prodi"/>
 
         <TextView
             android:id="@+id/tv_password"
@@ -155,22 +169,29 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="44dp"/>
 
-        <ImageView
-            android:id="@+id/img_edit_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_edit"
-            app:layout_constraintTop_toBottomOf="@id/tv_password"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="40dp"/>
-
         <EditText
             android:id="@+id/input_password"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintTop_toBottomOf="@id/tv_password"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageButton
+            android:id="@+id/img_edit_password"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toTopOf="@id/input_password"
+            app:layout_constraintBottom_toBottomOf="@id/input_password"
+            app:layout_constraintEnd_toEndOf="@id/input_password"/>
 
         <TextView
             android:id="@+id/tv_tglahir"
@@ -184,22 +205,29 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="44dp"/>
 
-        <ImageView
-            android:id="@+id/img_edit_tglahir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_edit"
-            app:layout_constraintTop_toBottomOf="@id/tv_tglahir"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="40dp"/>
-
         <EditText
             android:id="@+id/input_tglahir"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintTop_toBottomOf="@id/tv_tglahir"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_tglahir"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toTopOf="@id/input_tglahir"
+            app:layout_constraintBottom_toBottomOf="@id/input_tglahir"
+            app:layout_constraintEnd_toEndOf="@id/input_tglahir"/>
 
         <TextView
             android:id="@+id/tv_nohp"
@@ -213,22 +241,29 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="44dp"/>
 
-        <ImageView
-            android:id="@+id/img_edit_nohp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_edit"
-            app:layout_constraintTop_toBottomOf="@id/tv_nohp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="40dp"/>
-
         <EditText
             android:id="@+id/input_nohp"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintTop_toBottomOf="@id/tv_nohp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_nohp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toTopOf="@id/input_nohp"
+            app:layout_constraintBottom_toBottomOf="@id/input_nohp"
+            app:layout_constraintEnd_toEndOf="@id/input_nohp"/>
 
         <TextView
             android:id="@+id/tv_alamat"
@@ -242,24 +277,32 @@
             android:layout_marginTop="12dp"
             android:layout_marginStart="44dp"/>
 
-        <ImageView
-            android:id="@+id/img_edit_alamat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/img_edit"
-            app:layout_constraintTop_toBottomOf="@id/tv_alamat"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="40dp"/>
-
         <EditText
             android:id="@+id/input_alamat"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             app:layout_constraintTop_toBottomOf="@id/tv_alamat"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <ImageView
+            android:id="@+id/img_edit_alamat"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@color/white"
+            android:src="@drawable/img_edit"
+            app:layout_constraintTop_toTopOf="@id/input_alamat"
+            app:layout_constraintBottom_toBottomOf="@id/input_alamat"
+            app:layout_constraintEnd_toEndOf="@id/input_alamat"/>
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_simpan_profil"
             android:layout_width="195dp"
             android:layout_height="50dp"
             android:layout_marginTop="120dp"

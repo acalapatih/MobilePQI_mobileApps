@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">MobilePQI</string>
 
+    <string name="tv_action_bar_profil">Profil</string>
+
     <!--    Dashboard-->
     <string name="tv_salam">Assalamu\'alaikum</string>
     <string name="tv_kelas">PQI-2C</string>
