@@ -7,6 +7,7 @@ import android.text.method.PasswordTransformationMethod
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
+import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 
 
 class SigninActivity : BaseActivity<ActivitySigninBinding>() {
@@ -18,7 +19,8 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         }
     }
 
-    override fun getViewBinding(): ActivitySigninBinding = ActivitySigninBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivitySigninBinding =
+        ActivitySigninBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +45,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 binding.txtPasswordSignin.setSelection(start, end)
                 isSelected = true;
             }
+        }
+
+        binding.tvBelumDaftarClick.setOnClickListener {
+            SignupActivity.start(this)
         }
     }
 }

@@ -6,17 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.signin.SigninActivity">
 
-    <ImageView
+    <View
         android:id="@+id/iv_rectangle_blue_rounded"
         android:layout_width="0dp"
-        android:layout_height="460dp"
-        android:layout_marginTop="147dp"
+        android:layout_height="400dp"
+        android:background="@drawable/bg_rectangle_blue_rounded"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_mobilepqi_signin"
-        app:srcCompat="@drawable/bg_rectangle_blue_rounded" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/iv_logo_uinjkt_login"
@@ -74,11 +72,28 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="70dp"
         android:fontFamily="@font/inter_medium"
-        android:text="@string/tv_nip_nim_signin_text"
+        android:text="@string/tv_nip_nim_text"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_rectangle_blue_rounded" />
+
+    <EditText
+        android:id="@+id/txt_nip_nim_signin"
+        style="@style/FieldRounded10dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:autofillHints="@string/tv_nip_nim_text"
+        android:hint="@string/tv_nip_nim_text"
+        android:inputType="numberSigned"
+        android:maxLength="20"
+        app:layout_constraintBottom_toTopOf="@+id/tv_password"
+        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
+        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nip_nim_signin" />
 
     <TextView
         android:id="@+id/tv_password"
@@ -92,23 +107,6 @@
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_nip_nim_signin" />
-
-    <EditText
-        android:id="@+id/txt_nip_nim_signin"
-        style="@style/FieldRounded10dp"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:autofillHints="@string/tv_nip_nim_signin_text"
-        android:hint="@string/tv_nip_nim_signin_text"
-        android:inputType="numberSigned"
-        android:maxLength="20"
-        app:layout_constraintBottom_toTopOf="@+id/tv_password"
-        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nip_nim_signin" />
 
     <EditText
         android:id="@+id/txt_password_signin"
@@ -142,9 +140,11 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_signin"
         style="@style/ButtonBlueRounded30dp"
-        android:layout_width="320dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:text="@string/tv_signin_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -154,7 +154,7 @@
         android:id="@+id/tv_lupa_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="@font/inter_medium"
         android:text="@string/tv_lupa_password_text"
@@ -168,8 +168,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="55dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:text="@string/tv_belum_daftar_text"
@@ -184,9 +184,9 @@
         android:id="@+id/tv_belum_daftar_click"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/inter_medium"
         android:gravity="center"
         android:text="@string/tv_belum_daftar_click_text"

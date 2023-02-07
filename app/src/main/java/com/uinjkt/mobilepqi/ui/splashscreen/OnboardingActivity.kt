@@ -22,7 +22,8 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         }
     }
 
-    override fun getViewBinding(): ActivityOnboardingBinding = ActivityOnboardingBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityOnboardingBinding =
+        ActivityOnboardingBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

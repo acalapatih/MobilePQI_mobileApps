@@ -19,7 +19,8 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         }
     }
 
-    override fun getViewBinding(): ActivitySplashScreenBinding = ActivitySplashScreenBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivitySplashScreenBinding =
+        ActivitySplashScreenBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
