@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/img_back"
+        android:id="@+id/ic_back"
         android:layout_width="34dp"
         android:layout_height="32dp"
-        android:src="@drawable/img_back"
+        android:src="@drawable/ic_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"
@@ -23,9 +23,9 @@
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/img_back"
-        app:layout_constraintTop_toTopOf="@id/img_back"
-        app:layout_constraintBottom_toBottomOf="@id/img_back"
+        app:layout_constraintStart_toEndOf="@id/ic_back"
+        app:layout_constraintTop_toTopOf="@id/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/ic_back"
         android:layout_marginStart="5dp"/>
     
     <TextView

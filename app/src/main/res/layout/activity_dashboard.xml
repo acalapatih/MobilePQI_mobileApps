@@ -45,10 +45,10 @@
             android:layout_marginTop="5dp"/>
         
         <ImageView
-            android:id="@+id/img_kelas"
+            android:id="@+id/ic_kelas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_kelas"
+            android:src="@drawable/ic_kelas"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/img_user"
             android:layout_marginTop="38dp"
@@ -88,10 +88,10 @@
             android:layout_marginTop="188dp"/>
 
         <ImageView
-            android:id="@+id/img_waktu"
+            android:id="@+id/ic_waktu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_waktu"
+            android:src="@drawable/ic_waktu"
             app:layout_constraintTop_toTopOf="@id/img_dashboard"
             app:layout_constraintStart_toStartOf="@id/img_dashboard"
             android:layout_marginTop="12dp"
@@ -104,16 +104,16 @@
             android:text="@string/tv_sholat"
             android:fontFamily="@font/inter_medium"
             android:textSize="15sp"
-            app:layout_constraintTop_toTopOf="@id/img_waktu"
-            app:layout_constraintBottom_toBottomOf="@id/img_waktu"
-            app:layout_constraintStart_toEndOf="@id/img_waktu"
+            app:layout_constraintTop_toTopOf="@id/ic_waktu"
+            app:layout_constraintBottom_toBottomOf="@id/ic_waktu"
+            app:layout_constraintStart_toEndOf="@id/ic_waktu"
             android:layout_marginStart="3dp"/>
         
         <ImageView
-            android:id="@+id/img_lokasi"
+            android:id="@+id/ic_lokasi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_lokasi"
+            android:src="@drawable/ic_lokasi"
             app:layout_constraintTop_toTopOf="@id/img_dashboard"
             app:layout_constraintStart_toEndOf="@id/tv_sholat"
             android:layout_marginTop="12dp"
@@ -126,9 +126,9 @@
             android:text="@string/tv_lokasi"
             android:fontFamily="@font/inter_medium"
             android:textSize="15sp"
-            app:layout_constraintTop_toTopOf="@id/img_lokasi"
-            app:layout_constraintBottom_toBottomOf="@id/img_lokasi"
-            app:layout_constraintStart_toEndOf="@id/img_lokasi"
+            app:layout_constraintTop_toTopOf="@id/ic_lokasi"
+            app:layout_constraintBottom_toBottomOf="@id/ic_lokasi"
+            app:layout_constraintStart_toEndOf="@id/ic_lokasi"
             android:layout_marginStart="3dp"/>
 
         <TextView
@@ -164,10 +164,10 @@
             android:layout_marginTop="70dp"/>
 
         <ImageView
-            android:id="@+id/img_silabus"
+            android:id="@+id/ic_silabus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_silabus"
+            android:src="@drawable/ic_silabus"
             app:layout_constraintTop_toTopOf="@+id/view_line"
             app:layout_constraintStart_toStartOf="@id/img_dashboard"
             android:layout_marginTop="32dp"
@@ -181,18 +181,18 @@
             android:fontFamily="@font/inter_medium"
             android:textSize="15sp"
             android:textColor="@color/grey_636363"
-            app:layout_constraintTop_toBottomOf="@id/img_silabus"
-            app:layout_constraintStart_toStartOf="@id/img_silabus"
-            app:layout_constraintEnd_toEndOf="@id/img_silabus"
+            app:layout_constraintTop_toBottomOf="@id/ic_silabus"
+            app:layout_constraintStart_toStartOf="@id/ic_silabus"
+            app:layout_constraintEnd_toEndOf="@id/ic_silabus"
             android:layout_marginTop="5dp"/>
 
         <ImageView
-            android:id="@+id/img_ibadah"
+            android:id="@+id/ic_ibadah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_ibadah"
+            android:src="@drawable/ic_ibadah"
             app:layout_constraintTop_toTopOf="@+id/view_line"
-            app:layout_constraintStart_toEndOf="@id/img_silabus"
+            app:layout_constraintStart_toEndOf="@id/ic_silabus"
             android:layout_marginTop="32dp"
             android:layout_marginStart="15dp"/>
 
@@ -204,18 +204,18 @@
             android:fontFamily="@font/inter_medium"
             android:textSize="15sp"
             android:textColor="@color/grey_636363"
-            app:layout_constraintTop_toBottomOf="@id/img_ibadah"
-            app:layout_constraintStart_toStartOf="@id/img_ibadah"
-            app:layout_constraintEnd_toEndOf="@id/img_ibadah"
+            app:layout_constraintTop_toBottomOf="@id/ic_ibadah"
+            app:layout_constraintStart_toStartOf="@id/ic_ibadah"
+            app:layout_constraintEnd_toEndOf="@id/ic_ibadah"
             android:layout_marginTop="5dp"/>
 
         <ImageView
-            android:id="@+id/img_qiroah"
+            android:id="@+id/ic_qiroah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_qiroah"
+            android:src="@drawable/ic_qiroah"
             app:layout_constraintTop_toTopOf="@+id/view_line"
-            app:layout_constraintStart_toEndOf="@id/img_ibadah"
+            app:layout_constraintStart_toEndOf="@id/ic_ibadah"
             android:layout_marginTop="32dp"
             android:layout_marginStart="15dp"/>
 
@@ -227,18 +227,18 @@
             android:fontFamily="@font/inter_medium"
             android:textSize="15sp"
             android:textColor="@color/grey_636363"
-            app:layout_constraintTop_toBottomOf="@id/img_qiroah"
-            app:layout_constraintStart_toStartOf="@id/img_qiroah"
-            app:layout_constraintEnd_toEndOf="@id/img_qiroah"
+            app:layout_constraintTop_toBottomOf="@id/ic_qiroah"
+            app:layout_constraintStart_toStartOf="@id/ic_qiroah"
+            app:layout_constraintEnd_toEndOf="@id/ic_qiroah"
             android:layout_marginTop="5dp"/>
 
         <ImageView
-            android:id="@+id/img_tugas"
+            android:id="@+id/ic_tugas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_tugas"
+            android:src="@drawable/ic_tugas"
             app:layout_constraintTop_toTopOf="@+id/view_line"
-            app:layout_constraintStart_toEndOf="@id/img_qiroah"
+            app:layout_constraintStart_toEndOf="@id/ic_qiroah"
             android:layout_marginTop="32dp"
             android:layout_marginStart="15dp"/>
 
@@ -250,9 +250,9 @@
             android:fontFamily="@font/inter_medium"
             android:textSize="15sp"
             android:textColor="@color/grey_636363"
-            app:layout_constraintTop_toBottomOf="@id/img_tugas"
-            app:layout_constraintStart_toStartOf="@id/img_tugas"
-            app:layout_constraintEnd_toEndOf="@id/img_tugas"
+            app:layout_constraintTop_toBottomOf="@id/ic_tugas"
+            app:layout_constraintStart_toStartOf="@id/ic_tugas"
+            app:layout_constraintEnd_toEndOf="@id/ic_tugas"
             android:layout_marginTop="5dp"/>
 
         <TextView
@@ -305,10 +305,10 @@
             android:layout_marginEnd="10dp"/>
 
         <ImageView
-            android:id="@+id/img_task"
+            android:id="@+id/ic_task"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_task"
+            android:src="@drawable/ic_task"
             app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
             app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
             app:layout_constraintStart_toStartOf="@id/bg_tugas_rounded"
@@ -323,7 +323,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
-            app:layout_constraintStart_toEndOf="@id/img_task"
+            app:layout_constraintStart_toEndOf="@id/ic_task"
             android:layout_marginTop="18dp"
             android:layout_marginStart="6dp"/>
 
@@ -387,10 +387,10 @@
             android:layout_marginEnd="10dp"/>
 
         <ImageView
-            android:id="@+id/img_hafalan"
+            android:id="@+id/ic_hafalan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/img_task"
+            android:src="@drawable/ic_task"
             app:layout_constraintTop_toTopOf="@id/bg_hafalan_rounded"
             app:layout_constraintBottom_toBottomOf="@id/bg_hafalan_rounded"
             app:layout_constraintStart_toStartOf="@id/bg_hafalan_rounded"
@@ -405,7 +405,7 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="@id/bg_hafalan_rounded"
-            app:layout_constraintStart_toEndOf="@id/img_hafalan"
+            app:layout_constraintStart_toEndOf="@id/ic_hafalan"
             android:layout_marginTop="18dp"
             android:layout_marginStart="6dp"/>
 

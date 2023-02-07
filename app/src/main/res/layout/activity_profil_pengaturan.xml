@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
-        android:id="@+id/img_back"
+        android:id="@+id/ic_back"
         android:layout_width="34dp"
         android:layout_height="32dp"
-        android:src="@drawable/img_back"
+        android:src="@drawable/ic_back"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="20dp"
@@ -22,16 +22,16 @@
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/img_back"
-        app:layout_constraintTop_toTopOf="@id/img_back"
-        app:layout_constraintBottom_toBottomOf="@id/img_back"
+        app:layout_constraintStart_toEndOf="@id/ic_back"
+        app:layout_constraintTop_toTopOf="@id/ic_back"
+        app:layout_constraintBottom_toBottomOf="@id/ic_back"
         android:layout_marginStart="5dp"/>
     
     <ImageView
-        android:id="@+id/img_bahasa"
+        android:id="@+id/ic_bahasa"
         android:layout_width="36dp"
         android:layout_height="36dp"
-        android:src="@drawable/img_bahasa"
+        android:src="@drawable/ic_bahasa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_navbar"
         android:layout_marginStart="40dp"
@@ -45,9 +45,9 @@
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/img_bahasa"
-        app:layout_constraintTop_toTopOf="@id/img_bahasa"
-        app:layout_constraintBottom_toBottomOf="@id/img_bahasa"
+        app:layout_constraintStart_toEndOf="@id/ic_bahasa"
+        app:layout_constraintTop_toTopOf="@id/ic_bahasa"
+        app:layout_constraintBottom_toBottomOf="@id/ic_bahasa"
         android:layout_marginStart="10dp"/>
     
     <androidx.appcompat.widget.AppCompatButton
@@ -74,12 +74,12 @@
         android:layout_marginTop="12dp"/>
     
     <ImageView
-        android:id="@+id/img_camera"
+        android:id="@+id/ic_camera"
         android:layout_width="34dp"
         android:layout_height="27dp"
-        android:src="@drawable/img_camera"
-        app:layout_constraintStart_toStartOf="@id/img_bahasa"
-        app:layout_constraintTop_toBottomOf="@id/img_bahasa"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintStart_toStartOf="@id/ic_bahasa"
+        app:layout_constraintTop_toBottomOf="@id/ic_bahasa"
         android:layout_marginTop="25dp"/>
 
     <TextView
@@ -90,9 +90,9 @@
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/img_camera"
-        app:layout_constraintTop_toTopOf="@id/img_camera"
-        app:layout_constraintBottom_toBottomOf="@id/img_camera"
+        app:layout_constraintStart_toEndOf="@id/ic_camera"
+        app:layout_constraintTop_toTopOf="@id/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@id/ic_camera"
         android:layout_marginStart="10dp"/>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -114,12 +114,12 @@
         android:layout_marginTop="12dp"/>
 
     <ImageView
-        android:id="@+id/img_about"
+        android:id="@+id/ic_about"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/img_about"
-        app:layout_constraintStart_toStartOf="@id/img_camera"
-        app:layout_constraintTop_toBottomOf="@id/img_camera"
+        android:src="@drawable/ic_about"
+        app:layout_constraintStart_toStartOf="@id/ic_camera"
+        app:layout_constraintTop_toBottomOf="@id/ic_camera"
         android:layout_marginTop="25dp"/>
 
     <TextView
@@ -130,9 +130,9 @@
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/img_about"
-        app:layout_constraintTop_toTopOf="@id/img_about"
-        app:layout_constraintBottom_toBottomOf="@id/img_about"
+        app:layout_constraintStart_toEndOf="@id/ic_about"
+        app:layout_constraintTop_toTopOf="@id/ic_about"
+        app:layout_constraintBottom_toBottomOf="@id/ic_about"
         android:layout_marginStart="10dp"/>
 
     <View
@@ -145,12 +145,12 @@
         android:layout_marginTop="12dp"/>
 
     <ImageView
-        android:id="@+id/img_bantuan"
+        android:id="@+id/ic_bantuan"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/img_bantuan"
-        app:layout_constraintStart_toStartOf="@id/img_about"
-        app:layout_constraintTop_toBottomOf="@id/img_about"
+        android:src="@drawable/ic_bantuan"
+        app:layout_constraintStart_toStartOf="@id/ic_about"
+        app:layout_constraintTop_toBottomOf="@id/ic_about"
         android:layout_marginTop="25dp"/>
 
     <TextView
@@ -161,9 +161,9 @@
         android:fontFamily="@font/inter_bold"
         android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintStart_toEndOf="@id/img_bantuan"
-        app:layout_constraintTop_toTopOf="@id/img_bantuan"
-        app:layout_constraintBottom_toBottomOf="@id/img_bantuan"
+        app:layout_constraintStart_toEndOf="@id/ic_bantuan"
+        app:layout_constraintTop_toTopOf="@id/ic_bantuan"
+        app:layout_constraintBottom_toBottomOf="@id/ic_bantuan"
         android:layout_marginStart="10dp"/>
 
     <View

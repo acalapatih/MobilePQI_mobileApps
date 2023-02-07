@@ -11,10 +11,10 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/img_back"
+            android:id="@+id/ic_back"
             android:layout_width="34dp"
             android:layout_height="32dp"
-            android:src="@drawable/img_back"
+            android:src="@drawable/ic_back"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="20dp"
@@ -28,9 +28,9 @@
             android:fontFamily="@font/inter_bold"
             android:textColor="@color/black"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/img_back"
-            app:layout_constraintTop_toTopOf="@id/img_back"
-            app:layout_constraintBottom_toBottomOf="@id/img_back"
+            app:layout_constraintStart_toEndOf="@id/ic_back"
+            app:layout_constraintTop_toTopOf="@id/ic_back"
+            app:layout_constraintBottom_toBottomOf="@id/ic_back"
             android:layout_marginStart="5dp"/>
 
         <ImageView
@@ -43,10 +43,10 @@
             android:layout_marginTop="12dp"/>
 
         <ImageView
-            android:id="@+id/img_edit_profil"
+            android:id="@+id/ic_edit_profil"
             android:layout_width="45dp"
             android:layout_height="40dp"
-            android:src="@drawable/img_edit_profil"
+            android:src="@drawable/ic_edit_profil"
             app:layout_constraintStart_toStartOf="@id/img_profil"
             app:layout_constraintEnd_toEndOf="@id/img_profil"
             app:layout_constraintTop_toBottomOf="@id/tv_navbar"
@@ -93,7 +93,7 @@
             android:fontFamily="@font/inter_medium"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/img_profil"
+            app:layout_constraintTop_toBottomOf="@id/ic_edit_profil"
             android:layout_marginTop="30dp"
             android:layout_marginStart="44dp"/>
 
@@ -112,11 +112,11 @@
             android:layout_marginEnd="40dp"/>
 
         <ImageButton
-            android:id="@+id/img_edit_fakultas"
+            android:id="@+id/ic_edit_fakultas"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@color/white"
-            android:src="@drawable/img_edit"
+            android:src="@drawable/ic_edit"
             app:layout_constraintTop_toTopOf="@id/input_fakultas"
             app:layout_constraintBottom_toBottomOf="@id/input_fakultas"
             app:layout_constraintEnd_toEndOf="@id/input_fakultas"/>
@@ -148,11 +148,11 @@
             android:layout_marginEnd="40dp"/>
 
         <ImageButton
-            android:id="@+id/img_edit_prodi"
+            android:id="@+id/ic_edit_prodi"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
-            android:src="@drawable/img_edit"
+            android:src="@drawable/ic_edit"
             app:layout_constraintTop_toTopOf="@id/input_prodi"
             app:layout_constraintBottom_toBottomOf="@id/input_prodi"
             app:layout_constraintEnd_toEndOf="@id/input_prodi"/>
@@ -184,11 +184,11 @@
             android:layout_marginEnd="40dp"/>
 
         <ImageButton
-            android:id="@+id/img_edit_password"
+            android:id="@+id/ic_edit_password"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
-            android:src="@drawable/img_edit"
+            android:src="@drawable/ic_edit"
             app:layout_constraintTop_toTopOf="@id/input_password"
             app:layout_constraintBottom_toBottomOf="@id/input_password"
             app:layout_constraintEnd_toEndOf="@id/input_password"/>
@@ -220,11 +220,11 @@
             android:layout_marginEnd="40dp"/>
 
         <ImageView
-            android:id="@+id/img_edit_tglahir"
+            android:id="@+id/ic_edit_tglahir"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
-            android:src="@drawable/img_edit"
+            android:src="@drawable/ic_edit"
             app:layout_constraintTop_toTopOf="@id/input_tglahir"
             app:layout_constraintBottom_toBottomOf="@id/input_tglahir"
             app:layout_constraintEnd_toEndOf="@id/input_tglahir"/>
@@ -256,11 +256,11 @@
             android:layout_marginEnd="40dp"/>
 
         <ImageView
-            android:id="@+id/img_edit_nohp"
+            android:id="@+id/ic_edit_nohp"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
-            android:src="@drawable/img_edit"
+            android:src="@drawable/ic_edit"
             app:layout_constraintTop_toTopOf="@id/input_nohp"
             app:layout_constraintBottom_toBottomOf="@id/input_nohp"
             app:layout_constraintEnd_toEndOf="@id/input_nohp"/>
@@ -292,11 +292,11 @@
             android:layout_marginEnd="40dp"/>
 
         <ImageView
-            android:id="@+id/img_edit_alamat"
+            android:id="@+id/ic_edit_alamat"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
-            android:src="@drawable/img_edit"
+            android:src="@drawable/ic_edit"
             app:layout_constraintTop_toTopOf="@id/input_alamat"
             app:layout_constraintBottom_toBottomOf="@id/input_alamat"
             app:layout_constraintEnd_toEndOf="@id/input_alamat"/>
