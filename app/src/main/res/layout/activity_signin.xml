@@ -104,7 +104,7 @@
         android:autofillHints="@string/tv_nip_nim_signin_text"
         android:hint="@string/tv_nip_nim_signin_text"
         android:inputType="numberSigned"
-        android:maxLength="13"
+        android:maxLength="20"
         app:layout_constraintBottom_toTopOf="@+id/tv_password"
         app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
         app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"

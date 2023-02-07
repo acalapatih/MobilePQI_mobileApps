@@ -1,37 +1,46 @@
 package com.uinjkt.mobilepqi.ui.signin
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
-import android.widget.EditText
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatActivity
 import com.uinjkt.mobilepqi.R
+import com.uinjkt.mobilepqi.common.BaseActivity
+import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
 
 
-class SigninActivity : AppCompatActivity() {
+class SigninActivity : BaseActivity<ActivitySigninBinding>() {
+    companion object {
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, SigninActivity::class.java)
+            context.startActivity(starter)
+        }
+    }
+
+    override fun getViewBinding(): ActivitySigninBinding = ActivitySigninBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
         supportActionBar?.hide()
 
         // show hide password with eye icon
         var isSelected = true
-        val iv_show_hide_password: ImageView = findViewById(R.id.iv_show_hide_password)
-        val txt_password: EditText = findViewById(R.id.txt_password_signin)
-        iv_show_hide_password.setOnClickListener {
+        binding.ivShowHidePassword.setOnClickListener {
             if (isSelected) {
-                iv_show_hide_password.setImageResource(R.drawable.ic_eye_hide_password)
-                val start = txt_password.getSelectionStart()
-                val end = txt_password.getSelectionEnd()
-                txt_password.setTransformationMethod(null)
-                txt_password.setSelection(start, end)
+                binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_hide_password)
+                val start = binding.txtPasswordSignin.getSelectionStart()
+                val end = binding.txtPasswordSignin.getSelectionEnd()
+                binding.txtPasswordSignin.setTransformationMethod(null)
+                binding.txtPasswordSignin.setSelection(start, end)
                 isSelected = false;
             } else {
-                iv_show_hide_password.setImageResource(R.drawable.ic_eye_show_password)
-                val start = txt_password.getSelectionStart()
-                val end = txt_password.getSelectionEnd()
-                txt_password.transformationMethod = PasswordTransformationMethod()
-                txt_password.setSelection(start, end)
+                binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_show_password)
+                val start = binding.txtPasswordSignin.getSelectionStart()
+                val end = binding.txtPasswordSignin.getSelectionEnd()
+                binding.txtPasswordSignin.transformationMethod = PasswordTransformationMethod()
+                binding.txtPasswordSignin.setSelection(start, end)
                 isSelected = true;
             }
         }

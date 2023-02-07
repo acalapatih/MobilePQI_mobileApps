@@ -1,19 +1,28 @@
 package com.uinjkt.mobilepqi.ui.splashscreen
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import com.uinjkt.mobilepqi.R
+import com.uinjkt.mobilepqi.common.BaseActivity
+import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 
-class SplashScreenActivity : AppCompatActivity() {
+class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
+    companion object {
+        @JvmStatic
+        fun start(context: Context) {
+            val starter = Intent(context, SplashScreenActivity::class.java)
+            context.startActivity(starter)
+        }
+    }
+
+    override fun getViewBinding(): ActivitySplashScreenBinding = ActivitySplashScreenBinding.inflate(layoutInflater)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
 
         supportActionBar?.hide()
 
@@ -27,10 +36,8 @@ class SplashScreenActivity : AppCompatActivity() {
             )
         }
 
-        val btn_mulai: Button = findViewById(R.id.btn_mulai)
-        btn_mulai.setOnClickListener {
-            val intent = Intent(this, SigninActivity::class.java)
-            startActivity(intent)
+        binding.btnMulai.setOnClickListener {
+            SigninActivity.start(this)
             finish()
         }
     }
