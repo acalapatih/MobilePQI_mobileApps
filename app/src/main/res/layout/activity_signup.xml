@@ -71,7 +71,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/txt_nama_signup"
+                android:id="@+id/et_nama_signup"
                 style="@style/FieldRounded10dp"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -98,10 +98,10 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_nama_signup" />
+                app:layout_constraintTop_toBottomOf="@+id/et_nama_signup" />
 
             <EditText
-                android:id="@+id/txt_nip_nim_signup"
+                android:id="@+id/et_nip_nim_signup"
                 style="@style/FieldRounded10dp"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -128,10 +128,10 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_nip_nim_signup" />
+                app:layout_constraintTop_toBottomOf="@+id/et_nip_nim_signup" />
 
             <EditText
-                android:id="@+id/txt_email_signup"
+                android:id="@+id/et_email_signup"
                 style="@style/FieldRounded10dp"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -141,7 +141,7 @@
                 android:autofillHints="@string/tv_email_text"
                 android:hint="@string/tv_email_text"
                 android:inputType="textEmailAddress"
-                android:maxLength="20"
+                android:maxLength="50"
                 app:layout_constraintBottom_toTopOf="@+id/tv_password"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -158,10 +158,10 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_email_signup" />
+                app:layout_constraintTop_toBottomOf="@+id/et_email_signup" />
 
             <EditText
-                android:id="@+id/txt_password_signup"
+                android:id="@+id/et_password_signup"
                 style="@style/FieldRounded10dp"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
@@ -181,11 +181,11 @@
                 android:layout_height="wrap_content"
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_eye_show_password"
-                app:layout_constraintBottom_toBottomOf="@+id/txt_password_signup"
-                app:layout_constraintEnd_toEndOf="@+id/txt_password_signup"
+                app:layout_constraintBottom_toBottomOf="@+id/et_password_signup"
+                app:layout_constraintEnd_toEndOf="@+id/et_password_signup"
                 app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintStart_toStartOf="@+id/txt_password_signup"
-                app:layout_constraintTop_toTopOf="@+id/txt_password_signup" />
+                app:layout_constraintStart_toStartOf="@+id/et_password_signup"
+                app:layout_constraintTop_toTopOf="@+id/et_password_signup" />
 
             <TextView
                 android:id="@+id/tv_deskripsi_password"
@@ -197,7 +197,7 @@
                 android:text="@string/tv_deskripsi_password_text"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txt_password_signup" />
+                app:layout_constraintTop_toBottomOf="@+id/et_password_signup" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_signup"

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityLupaPasswordBinding
+import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 
 class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
     companion object {
@@ -23,5 +24,8 @@ class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
 
         supportActionBar?.hide()
 
+        binding.ivCloseLupaPassword.setOnClickListener {
+            SigninActivity.start(this)
+        }
     }
 }

@@ -31,17 +31,17 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         binding.ivShowHidePassword.setOnClickListener {
             if (isSelected) {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_hide_password)
-                val start = binding.txtPasswordSignup.getSelectionStart()
-                val end = binding.txtPasswordSignup.getSelectionEnd()
-                binding.txtPasswordSignup.setTransformationMethod(null)
-                binding.txtPasswordSignup.setSelection(start, end)
+                val start = binding.etPasswordSignup.getSelectionStart()
+                val end = binding.etPasswordSignup.getSelectionEnd()
+                binding.etPasswordSignup.setTransformationMethod(null)
+                binding.etPasswordSignup.setSelection(start, end)
                 isSelected = false;
             } else {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_show_password)
-                val start = binding.txtPasswordSignup.getSelectionStart()
-                val end = binding.txtPasswordSignup.getSelectionEnd()
-                binding.txtPasswordSignup.transformationMethod = PasswordTransformationMethod()
-                binding.txtPasswordSignup.setSelection(start, end)
+                val start = binding.etPasswordSignup.getSelectionStart()
+                val end = binding.etPasswordSignup.getSelectionEnd()
+                binding.etPasswordSignup.transformationMethod = PasswordTransformationMethod()
+                binding.etPasswordSignup.setSelection(start, end)
                 isSelected = true;
             }
         }

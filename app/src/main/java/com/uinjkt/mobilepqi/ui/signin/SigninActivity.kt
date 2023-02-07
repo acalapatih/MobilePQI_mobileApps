@@ -7,6 +7,7 @@ import android.text.method.PasswordTransformationMethod
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
+import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 
 
@@ -32,23 +33,27 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         binding.ivShowHidePassword.setOnClickListener {
             if (isSelected) {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_hide_password)
-                val start = binding.txtPasswordSignin.getSelectionStart()
-                val end = binding.txtPasswordSignin.getSelectionEnd()
-                binding.txtPasswordSignin.setTransformationMethod(null)
-                binding.txtPasswordSignin.setSelection(start, end)
+                val start = binding.etPasswordSignin.getSelectionStart()
+                val end = binding.etPasswordSignin.getSelectionEnd()
+                binding.etPasswordSignin.setTransformationMethod(null)
+                binding.etPasswordSignin.setSelection(start, end)
                 isSelected = false;
             } else {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_show_password)
-                val start = binding.txtPasswordSignin.getSelectionStart()
-                val end = binding.txtPasswordSignin.getSelectionEnd()
-                binding.txtPasswordSignin.transformationMethod = PasswordTransformationMethod()
-                binding.txtPasswordSignin.setSelection(start, end)
+                val start = binding.etPasswordSignin.getSelectionStart()
+                val end = binding.etPasswordSignin.getSelectionEnd()
+                binding.etPasswordSignin.transformationMethod = PasswordTransformationMethod()
+                binding.etPasswordSignin.setSelection(start, end)
                 isSelected = true;
             }
         }
 
         binding.tvBelumDaftarClick.setOnClickListener {
             SignupActivity.start(this)
+        }
+
+        binding.tvLupaPassword.setOnClickListener {
+            LupaPasswordActivity.start(this)
         }
     }
 }
