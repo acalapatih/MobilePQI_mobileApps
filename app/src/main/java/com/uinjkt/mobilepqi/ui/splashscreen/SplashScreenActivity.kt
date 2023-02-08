@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi.ui.splashscreen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -13,6 +14,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
 
+@SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
     companion object {
         @JvmStatic
@@ -43,12 +45,12 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         // animation for the splash screen
         val transitionAnimation = AnimationUtils.loadAnimation(this, R.anim.splash_screen_transition)
         // set the animation
-        binding.ivAwanBintang.setAnimation(transitionAnimation)
-        binding.ivLogoPujitaklim.setAnimation(transitionAnimation)
-        binding.ivLogoUinjkt.setAnimation(transitionAnimation)
-        binding.ivLogoQuran.setAnimation(transitionAnimation)
-        binding.tvMobilepqiSplash.setAnimation(transitionAnimation)
-        binding.tvDeskripsiSplash.setAnimation(transitionAnimation)
+        binding.ivAwanBintang.animation = transitionAnimation
+        binding.ivLogoPujitaklim.animation = transitionAnimation
+        binding.ivLogoUinjkt.animation = transitionAnimation
+        binding.ivLogoQuran.animation = transitionAnimation
+        binding.tvMobilepqiSplash.animation = transitionAnimation
+        binding.tvDeskripsiSplash.animation = transitionAnimation
 
         // launch the OnboardingActivity with delay 1500ms
         val handler = Handler(Looper.getMainLooper())
