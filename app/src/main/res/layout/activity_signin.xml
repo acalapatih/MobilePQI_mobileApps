@@ -6,16 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.signin.SigninActivity">
 
-    <View
-        android:id="@+id/iv_rectangle_blue_rounded"
-        android:layout_width="0dp"
-        android:layout_height="400dp"
-        android:background="@drawable/bg_rectangle_blue_rounded"
-        android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/iv_logo_uinjkt_login"
         android:layout_width="75dp"
@@ -52,149 +42,158 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo_pujitaklim_login" />
 
-    <TextView
-        android:id="@+id/tv_signin"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:fontFamily="@font/inter_bold"
-        android:text="@string/tv_signin_text"
-        android:textColor="@color/white"
-        android:textSize="24sp"
+        android:background="@drawable/bg_rectangle_blue_rounded"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_rectangle_blue_rounded" />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/tv_nip_nim_signin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="70dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/tv_nip_nim_text"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/iv_rectangle_blue_rounded" />
+        <TextView
+            android:id="@+id/tv_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/tv_signin_text"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_nip_nim_signin"
-        style="@style/FieldRounded10dp"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:autofillHints="@string/tv_nip_nim_text"
-        android:hint="@string/tv_nip_nim_text"
-        android:inputType="numberSigned"
-        android:maxLength="20"
-        app:layout_constraintBottom_toTopOf="@+id/tv_password"
-        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintTop_toBottomOf="@+id/tv_nip_nim_signin" />
+        <TextView
+            android:id="@+id/tv_nip_nim_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="70dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_nip_nim_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/tv_password_text"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nip_nim_signin" />
+        <EditText
+            android:id="@+id/et_nip_nim_signin"
+            style="@style/FieldRounded10dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="@string/tv_nip_nim_text"
+            android:hint="@string/tv_nip_nim_text"
+            android:inputType="numberSigned"
+            android:maxLength="20"
+            app:layout_constraintBottom_toTopOf="@+id/tv_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nip_nim_signin" />
 
-    <EditText
-        android:id="@+id/et_password_signin"
-        style="@style/FieldRounded10dp"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:autofillHints="@string/tv_password_text"
-        android:hint="@string/tv_password_text"
-        android:inputType="textPassword"
-        android:maxLength="20"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signin"
-        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintTop_toBottomOf="@+id/tv_password" />
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_password_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_nip_nim_signin" />
 
-    <ImageView
-        android:id="@+id/iv_show_hide_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:importantForAccessibility="no"
-        android:src="@drawable/ic_eye_show_password"
-        app:layout_constraintBottom_toBottomOf="@+id/et_password_signin"
-        app:layout_constraintEnd_toEndOf="@+id/et_password_signin"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/et_password_signin"
-        app:layout_constraintTop_toTopOf="@+id/et_password_signin" />
+        <EditText
+            android:id="@+id/et_password_signin"
+            style="@style/FieldRounded10dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:autofillHints="@string/tv_password_text"
+            android:hint="@string/tv_password_text"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            app:layout_constraintBottom_toTopOf="@+id/btn_signin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_password" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_signin"
-        style="@style/ButtonBlueRounded30dp"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
-        android:text="@string/tv_signin_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_password_signin" />
+        <ImageView
+            android:id="@+id/iv_show_hide_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_eye_show_password"
+            app:layout_constraintBottom_toBottomOf="@+id/et_password_signin"
+            app:layout_constraintEnd_toEndOf="@+id/et_password_signin"
+            app:layout_constraintHorizontal_bias="0.95"
+            app:layout_constraintStart_toStartOf="@+id/et_password_signin"
+            app:layout_constraintTop_toTopOf="@+id/et_password_signin" />
 
-    <TextView
-        android:id="@+id/tv_lupa_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/inter_medium"
-        android:text="@string/tv_lupa_password_text"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_signin"
+            style="@style/ButtonBlueRounded30dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:text="@string/tv_signin_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_password_signin" />
 
-    <TextView
-        android:id="@+id/tv_belum_daftar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/inter_medium"
-        android:gravity="center"
-        android:text="@string/tv_belum_daftar_text"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintEnd_toStartOf="@+id/tv_belum_daftar_click"
-        app:layout_constraintStart_toStartOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
+        <TextView
+            android:id="@+id/tv_lupa_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_lupa_password_text"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
 
-    <TextView
-        android:id="@+id/tv_belum_daftar_click"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="@font/inter_medium"
-        android:gravity="center"
-        android:text="@string/tv_belum_daftar_click_text"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintEnd_toEndOf="@+id/iv_rectangle_blue_rounded"
-        app:layout_constraintStart_toEndOf="@+id/tv_belum_daftar"
-        app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
+        <TextView
+            android:id="@+id/tv_belum_daftar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="55dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:text="@string/tv_belum_daftar_text"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_belum_daftar_click"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
+
+        <TextView
+            android:id="@+id/tv_belum_daftar_click"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/inter_medium"
+            android:gravity="center"
+            android:text="@string/tv_belum_daftar_click_text"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_belum_daftar"
+            app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
