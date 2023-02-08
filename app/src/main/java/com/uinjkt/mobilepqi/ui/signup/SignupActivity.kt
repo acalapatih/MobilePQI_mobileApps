@@ -31,15 +31,15 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         binding.ivShowHidePassword.setOnClickListener {
             if (isSelected) {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_hide_password)
-                val start = binding.etPasswordSignup.getSelectionStart()
-                val end = binding.etPasswordSignup.getSelectionEnd()
-                binding.etPasswordSignup.setTransformationMethod(null)
+                val start = binding.etPasswordSignup.selectionStart
+                val end = binding.etPasswordSignup.selectionEnd
+                binding.etPasswordSignup.transformationMethod = null
                 binding.etPasswordSignup.setSelection(start, end)
                 isSelected = false;
             } else {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_show_password)
-                val start = binding.etPasswordSignup.getSelectionStart()
-                val end = binding.etPasswordSignup.getSelectionEnd()
+                val start = binding.etPasswordSignup.selectionStart
+                val end = binding.etPasswordSignup.selectionEnd
                 binding.etPasswordSignup.transformationMethod = PasswordTransformationMethod()
                 binding.etPasswordSignup.setSelection(start, end)
                 isSelected = true;
@@ -48,6 +48,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
         binding.tvSudahDaftarClick.setOnClickListener {
             SigninActivity.start(this)
+            finish()
         }
     }
 }

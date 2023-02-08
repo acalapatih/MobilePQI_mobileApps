@@ -26,6 +26,7 @@ class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
 
         binding.ivCloseLupaPassword.setOnClickListener {
             SigninActivity.start(this)
+            finish()
         }
     }
 }

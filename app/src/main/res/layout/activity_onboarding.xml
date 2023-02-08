@@ -77,4 +77,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_mobilepqi_splash" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_mulai"
+        style="@style/ButtonBlueRounded30dp"
+        android:layout_width="185dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/btn_mulai_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_deskripsi_splash"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

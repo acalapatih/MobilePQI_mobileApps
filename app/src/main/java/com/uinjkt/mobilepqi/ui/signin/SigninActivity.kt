@@ -33,15 +33,15 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         binding.ivShowHidePassword.setOnClickListener {
             if (isSelected) {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_hide_password)
-                val start = binding.etPasswordSignin.getSelectionStart()
-                val end = binding.etPasswordSignin.getSelectionEnd()
-                binding.etPasswordSignin.setTransformationMethod(null)
+                val start = binding.etPasswordSignin.selectionStart
+                val end = binding.etPasswordSignin.selectionEnd
+                binding.etPasswordSignin.transformationMethod = null
                 binding.etPasswordSignin.setSelection(start, end)
                 isSelected = false;
             } else {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_show_password)
-                val start = binding.etPasswordSignin.getSelectionStart()
-                val end = binding.etPasswordSignin.getSelectionEnd()
+                val start = binding.etPasswordSignin.selectionStart
+                val end = binding.etPasswordSignin.selectionEnd
                 binding.etPasswordSignin.transformationMethod = PasswordTransformationMethod()
                 binding.etPasswordSignin.setSelection(start, end)
                 isSelected = true;
@@ -50,6 +50,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
         binding.tvBelumDaftarClick.setOnClickListener {
             SignupActivity.start(this)
+            finish()
         }
 
         binding.tvLupaPassword.setOnClickListener {
