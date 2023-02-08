@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">MobilePQI</string>
+
+<!--    Daftar Kelas-->
+    <string name="tv_action_bar_daftarkelas">Daftar Kelas Anda</string>
+    <string name="tv_buatkelas">Buat Kelas</string>
+    <string name="tv_namakelas">PQI-2A</string>
+    <string name="tv_ruangkelas">Ruang 4.012</string>
+    <string name="tv_jadwalkelas">Senin, 07.30 – 10.00</string>
+    <string name="tv_anggotakelas">Anggota\n25</string>
+
+<!--    Buat Kelas-->
+    <string name="tv_action_bar_buatkelas">Buat Kelas</string>
+    <string name="tv_datakelas">Lengkapi Data Kelas</string>
+    <string name="tv_edit_namakelas">Nama Kelas</string>
+    <string name="tv_edit_ruangkelas">Ruangan Kelas</string>
+    <string name="tv_edit_jadwalkelas">Jadwal Kelas</string>
+    <string name="btn_simpan">Simpan</string>
+
+
 </resources>
