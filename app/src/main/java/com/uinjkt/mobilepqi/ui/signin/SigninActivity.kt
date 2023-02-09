@@ -72,7 +72,6 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
             }
         }
 
-
         val passwordStream = RxTextView.textChanges(binding.etPasswordSignin)
             .skipInitialValue()
             .map { password ->
