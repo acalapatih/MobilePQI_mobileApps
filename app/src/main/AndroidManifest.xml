@@ -18,7 +18,7 @@
         android:theme="@style/Theme.MobilePQI"
         tools:targetApi="31">
         <activity
-            android:name=".ui.DaftarKelasActivity"
+            android:name=".ui.kelas.DaftarKelasActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +26,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BuatKelasActivity"></activity>
+        <activity android:name=".ui.kelas.BuatKelasActivity" />
+        <activity android:name=".ui.kelas.DetailKelasActivity"/>
+        <activity android:name=".ui.tambahdosen.TambahDosenActivity"/>
     </application>
 
 </manifest>

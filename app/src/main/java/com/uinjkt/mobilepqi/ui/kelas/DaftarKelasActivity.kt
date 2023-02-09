@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui
+package com.uinjkt.mobilepqi.ui.kelas
 
 import android.content.Context
 import android.content.Intent
@@ -29,6 +29,12 @@ class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>() {
         buatkelas2.setOnClickListener {view ->
             val buatkelasIntent = Intent(view.context, BuatKelasActivity::class.java)
             startActivityForResult(buatkelasIntent, 0)
+        }
+
+        val detailKelasIcon = binding.icDetailKelas
+        detailKelasIcon.setOnClickListener{view ->
+            val detailKelasIntent = Intent(view.context, DetailKelasActivity::class.java)
+            startActivityForResult(detailKelasIntent, 0)
         }
     }
 }

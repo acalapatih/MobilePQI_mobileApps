@@ -28,7 +28,7 @@
         android:id="@+id/ic_buatkelas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_buatkelas"
+        android:src="@drawable/ic_buat_kelas"
         app:layout_constraintTop_toBottomOf="@id/action_bar_daftarkelas"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="15dp"
@@ -51,7 +51,7 @@
         android:id="@+id/img_daftarkelas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_daftarkelas"
+        android:src="@drawable/img_daftar_kelas"
         app:layout_constraintTop_toBottomOf="@+id/ic_buatkelas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,10 +60,10 @@
         android:layout_marginEnd="15dp"/>
 
     <ImageView
-        android:id="@+id/ic_tambahkelas"
+        android:id="@+id/ic_detail_kelas"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/ic_tambahkelas"
+        android:src="@drawable/ic_detail_kelas"
         app:layout_constraintStart_toStartOf="@id/img_daftarkelas"
         app:layout_constraintTop_toTopOf="@id/img_daftarkelas"
         app:layout_constraintBottom_toBottomOf="@id/img_daftarkelas"
@@ -78,7 +78,7 @@
         android:textSize="24sp"
         android:textColor="@color/navy_06283D"
         app:layout_constraintTop_toTopOf="@id/img_daftarkelas"
-        app:layout_constraintStart_toEndOf="@id/ic_tambahkelas"
+        app:layout_constraintStart_toEndOf="@id/ic_detail_kelas"
         android:layout_marginTop="2dp"
         android:layout_marginStart="12dp"/>
 

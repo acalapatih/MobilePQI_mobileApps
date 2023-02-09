@@ -17,5 +17,23 @@
     <string name="tv_edit_jadwalkelas">Jadwal Kelas</string>
     <string name="btn_simpan">Simpan</string>
 
+<!--    Detail Kelas-->
+    <string name="tv_action_bar_detailkelas">Kelas PQI-2C</string>
+    <string name="tv_label_kode_kelas">Kode Kelas</string>
+    <string name="tv_kode_kelas">Gr33DisG00d</string>
+    <string name="tv_label_dosen">Dosen</string>
+    <string name="tv_label_mahasiswa">Mahasiswa</string>
+    <string name="tv_label_tambah_dosen">Tambah Dosen</string>
+    <string name="tv_nama_mahasiswa">Mahasiswa 1</string>
+    <string name="tv_nim">NIM : </string>
+    <string name="tv_nim_mahasiswa">112009100000000</string>
+
+<!--    Tambah Dosen-->
+    <string name="tv_action_bar_tambahdosen">Tambah Dosen</string>
+    <string name="et_search_dosen">Cari Nama / NIP</string>
+    <string name="tv_nama_dosen">Dosen 1</string>
+    <string name="tv_nip">NIP : </string>
+    <string name="tv_nip_dosen">196903161999000000</string>
+
 
 </resources>

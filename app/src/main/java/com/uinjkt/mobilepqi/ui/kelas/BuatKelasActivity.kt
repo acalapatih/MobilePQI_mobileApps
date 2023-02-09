@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui
+package com.uinjkt.mobilepqi.ui.kelas
 
 import android.content.Context
 import android.content.Intent

@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation project(":core")
+    implementation "de.hdodenhof:circleimageview:$civ_version"
 }
 
 kapt {

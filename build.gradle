@@ -40,4 +40,7 @@ ext {
 
     //Navigation KTX
     navigation_ktx_version = "2.5.3"
+
+    //CircleImageView
+    civ_version = "3.1.0"
 }

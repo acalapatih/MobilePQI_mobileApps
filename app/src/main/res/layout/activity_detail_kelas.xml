@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:id="@+id/action_bar_detailkelas"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        style="@style/action_bar_blue"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/ic_back_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_back_white"
+        app:layout_constraintTop_toTopOf="@id/action_bar_detailkelas"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_detailkelas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="15dp"/>
+
+    <TextView
+        android:id="@+id/tv_action_bar_detailkelas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_action_bar_detailkelas"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/ic_back_white"
+        app:layout_constraintTop_toTopOf="@id/action_bar_detailkelas"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_detailkelas"
+        android:layout_marginStart="12dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profil"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/img_default_profil"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/black"
+        app:layout_constraintTop_toTopOf="@id/action_bar_detailkelas"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_detailkelas"
+        app:layout_constraintEnd_toEndOf="@id/action_bar_detailkelas"
+        android:layout_marginEnd="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_label_kode_kelas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_label_kode_kelas"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_detailkelas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="20dp"/>
+
+    <View
+        android:id="@+id/line_kode_kelas"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_ACACAC"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_kode_kelas"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_kode_kelas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_kode_kelas"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        android:textColor="@color/grey_636363"
+        app:layout_constraintTop_toBottomOf="@id/line_kode_kelas"
+        app:layout_constraintStart_toStartOf="@id/tv_label_kode_kelas"
+        android:layout_marginTop="10dp"/>
+
+    <ImageView
+        android:id="@+id/ic_copy_kode_kelas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_copy"
+        app:layout_constraintTop_toTopOf="@id/tv_kode_kelas"
+        app:layout_constraintBottom_toBottomOf="@id/tv_kode_kelas"
+        app:layout_constraintStart_toEndOf="@id/tv_kode_kelas"
+        android:layout_marginStart="3dp"/>
+
+    <TextView
+        android:id="@+id/tv_label_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_label_dosen"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_kode_kelas"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"/>
+
+    <View
+        android:id="@+id/line_label_dosen"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_ACACAC"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_dosen"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <ImageView
+        android:id="@+id/ic_tambah_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_tambah_dosen"
+        app:layout_constraintTop_toBottomOf="@id/line_label_dosen"
+        app:layout_constraintStart_toStartOf="@id/line_label_dosen"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_label_tambah_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_label_tambah_dosen"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        android:textColor="@color/grey_BDBDBD"
+        app:layout_constraintTop_toTopOf="@id/ic_tambah_dosen"
+        app:layout_constraintBottom_toBottomOf="@id/ic_tambah_dosen"
+        app:layout_constraintStart_toEndOf="@id/ic_tambah_dosen"
+        android:layout_marginStart="5dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profil_dosen"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/img_default_profil"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/ic_tambah_dosen"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_nama_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nama_dosen"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/img_profil_dosen"
+        app:layout_constraintStart_toEndOf="@id/img_profil_dosen"
+        android:layout_marginStart="25dp"/>
+
+    <View
+        android:id="@+id/line_dosen"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_nama_dosen"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_nip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nip"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/line_dosen"
+        app:layout_constraintStart_toStartOf="@id/tv_nama_dosen"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_nip_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nip_dosen"
+        android:fontFamily="@font/inter"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tv_nip"
+        app:layout_constraintBottom_toBottomOf="@id/tv_nip"
+        app:layout_constraintStart_toEndOf="@id/tv_nip"
+        android:layout_marginStart="2dp"/>
+
+    <TextView
+        android:id="@+id/tv_label_mahasiswa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_label_mahasiswa"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/img_profil_dosen"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"/>
+
+    <View
+        android:id="@+id/line_label_mahasiswa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_ACACAC"
+        app:layout_constraintTop_toBottomOf="@id/tv_label_mahasiswa"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profil_mahasiswa"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/img_default_profil"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/line_label_mahasiswa"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_nama_mahasiswa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nama_mahasiswa"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/img_profil_mahasiswa"
+        app:layout_constraintStart_toEndOf="@id/img_profil_mahasiswa"
+        android:layout_marginStart="25dp"/>
+
+    <View
+        android:id="@+id/line_mahasiswa"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_nama_mahasiswa"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_nim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nim"
+        android:fontFamily="@font/inter_medium"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/line_mahasiswa"
+        app:layout_constraintStart_toStartOf="@id/tv_nama_mahasiswa"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_nim_mahasiswa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tv_nip_dosen"
+        android:fontFamily="@font/inter"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/tv_nim"
+        app:layout_constraintBottom_toBottomOf="@id/tv_nim"
+        app:layout_constraintStart_toEndOf="@id/tv_nim"
+        android:layout_marginStart="2dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
