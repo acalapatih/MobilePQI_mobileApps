@@ -13,7 +13,6 @@ import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 import io.reactivex.Observable
 
-
 class SigninActivity : BaseActivity<ActivitySigninBinding>() {
     companion object {
         @JvmStatic
@@ -65,33 +64,31 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 nim.length > 6 //isi sama ketentuan
             }
         nimNipStream.subscribe { isValid ->
-            if (isValid) {
-                //Action kalo nip or nim sesuai
-            } else {
+            if (!isValid) {
                 //Action kalo nip or nim ga sesuai
+                binding.etNipNimSignin.error = "Harap Masukkan NIP/NIM yang Valid"
             }
-        }
 
-        val passwordStream = RxTextView.textChanges(binding.etPasswordSignin)
-            .skipInitialValue()
-            .map { password ->
-                password.length > 6 //Ganti sama regex disini
+            val passwordStream = RxTextView.textChanges(binding.etPasswordSignin)
+                .skipInitialValue()
+                .map { password ->
+                    password.length > 6 //Ganti sama regex disini
+                }
+            passwordStream.subscribe { isValid ->
+                if (!isValid) {
+                    //Action kalo password ga sesuai
+                    binding.etPasswordSignin.error = "Password Masih Kurang dari 6"
+                }
             }
-        passwordStream.subscribe { isValid ->
-            if (isValid) {
-                //Action kalo password sesuai
-            } else {
-                //Action kalo password ga sesuai
-            }
-        }
 
-        Observable.combineLatest(
-            nimNipStream,
-            passwordStream
-        ) { nimNipValid: Boolean, passwordValid: Boolean ->
-            nimNipValid && passwordValid
-        }.subscribe { isValid ->
-            binding.btnSignin.isEnabled = isValid //enable disable button dari sini
+            Observable.combineLatest(
+                nimNipStream,
+                passwordStream
+            ) { nimNipValid: Boolean, passwordValid: Boolean ->
+                nimNipValid && passwordValid
+            }.subscribe { isValid ->
+                binding.btnSignin.isEnabled = isValid //enable disable button dari sini
+            }
         }
     }
 }
