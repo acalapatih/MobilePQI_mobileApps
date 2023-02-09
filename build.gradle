@@ -40,4 +40,10 @@ ext {
 
     //Navigation KTX
     navigation_ktx_version = "2.5.3"
+
+    //RxBinding
+    rx_binding_version = "2.2.0"
+
+    //Datastore
+    datastore_version = "1.0.0"
 }
