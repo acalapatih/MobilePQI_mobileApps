@@ -18,6 +18,13 @@ import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
 
+    /**
+     * TODO AQIL
+     * 1. Add dependencies RxTextView
+     * 2. General function untuk Dialog
+     * 3. Datastore research and implementation
+     */
+
     private lateinit var locationService: LocationService
     private val locationPermissionCode = 99
     private var isGranted = true
