@@ -19,4 +19,11 @@
     <string name="lupa_password_deskripsi_text">Silakan masukkan email Anda pada kotak di bawah ini untuk mengatur ulang password Anda</string>
     <string name="btn_kirim_lupa_password_text">kirim</string>
     <string name="btn_location_text">Click Location</string>
+    <string name="tv_title_materi_qiroah">Materi Qiroah</string>
+    <string name="tv_title_materi_ibadah">Materi Ibadah</string>
+    <string name="hint_tambah_komentar">Tambahkan Komentar Anda</string>
+    <string name="tv_title_detail_materi_qiroah">Materi Qiroah > %1$s</string>
+    <string name="tv_title_detail_materi_ibadah">Materi Ibadah > %1$s</string>
+    <string name="tv_description_materi">Berikut adalah file materi pembelajaran %1$s</string>
+    <string name="tv_document_name_pdf">Materi %1$d</string>
 </resources>
