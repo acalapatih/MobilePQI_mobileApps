@@ -24,8 +24,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.hide()
-
         // show hide password with eye icon
         var isSelected = true
         binding.ivShowHidePassword.setOnClickListener {
