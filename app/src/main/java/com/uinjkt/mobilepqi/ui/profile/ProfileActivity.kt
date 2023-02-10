@@ -23,19 +23,19 @@ class ProfileActivity : BaseActivity<ActivityProfilBinding>() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        val close = binding.imgClose
+        val close = binding.icClose
         close.setOnClickListener {view ->
             val closeIntent = Intent(view.context, DashboardActivity::class.java)
             startActivityForResult(closeIntent, 0)
         }
 
-        val profil = binding.imgProfil
+        val profil = binding.icProfil
         profil.setOnClickListener { view ->
             val profilIntent = Intent(view.context, ProfileInfoActivity::class.java)
             startActivityForResult(profilIntent, 0)
         }
 
-        val pengaturan = binding.imgPengaturan
+        val pengaturan = binding.icPengaturan
         pengaturan.setOnClickListener { view ->
             val pengaturanIntent = Intent(view.context, ProfilePengaturan::class.java)
             startActivityForResult(pengaturanIntent, 0)

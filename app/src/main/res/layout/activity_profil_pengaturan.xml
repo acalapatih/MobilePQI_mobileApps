@@ -15,10 +15,10 @@
         android:layout_marginStart="18dp"/>
 
     <TextView
-        android:id="@+id/tv_navbar"
+        android:id="@+id/tv_action_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_navbar_pengaturan"
+        android:text="@string/tv_action_bar_pengaturan"
         android:fontFamily="@font/inter_bold"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -33,7 +33,7 @@
         android:layout_height="36dp"
         android:src="@drawable/ic_bahasa"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_navbar"
+        app:layout_constraintTop_toBottomOf="@id/tv_action_bar"
         android:layout_marginStart="40dp"
         android:layout_marginTop="78dp"/>
 

@@ -36,12 +36,12 @@ class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        binding.imgBack.setOnClickListener { view ->
+        binding.icBack.setOnClickListener { view ->
             val backIntent = Intent(view.context, ProfileActivity::class.java)
             startActivityForResult(backIntent, 0)
         }
 
-        val editText_tglahir = binding.imgEditTglahir
+        val editText_tglahir = binding.icEditTglahir
         val date =
             OnDateSetListener { _, year, month, day ->
                 myCalendar[Calendar.YEAR] = year

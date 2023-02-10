@@ -21,7 +21,7 @@ class ProfilePengaturanBahasa : BaseActivity<ActivityProfilPengaturanBahasaBindi
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        val back = binding.imgBack
+        val back = binding.icBack
         back.setOnClickListener { view ->
             val intent = Intent(view.context, ProfilePengaturan::class.java)
             startActivityForResult(intent, 0)

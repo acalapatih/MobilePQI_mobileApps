@@ -26,7 +26,7 @@ class ProfilePengaturan: BaseActivity<ActivityProfilPengaturanBinding>() {
             startActivityForResult(bahasaIntent, 0)
         }
 
-        val back = binding.imgBack
+        val back = binding.icBack
         back.setOnClickListener {view->
             val backIntent = Intent(view.context, ProfileActivity::class.java)
             startActivityForResult(backIntent, 0)

@@ -41,6 +41,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.profile.ProfileActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.profile.ProfileInfoActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.setting.ProfilePengaturan"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.setting.ProfilePengaturanBahasa"
+            android:exported="false"/>
     </application>
 
 </manifest>
