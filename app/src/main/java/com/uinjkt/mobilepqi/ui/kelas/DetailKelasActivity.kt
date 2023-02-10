@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDetailKelasBinding
-import com.uinjkt.mobilepqi.ui.tambahdosen.TambahDosenActivity
 
 class DetailKelasActivity: BaseActivity<ActivityDetailKelasBinding>() {
     companion object {

@@ -46,4 +46,7 @@ ext {
 
     //Datastore
     datastore_version = "1.0.0"
+
+    //CircleImageView
+    civ_version = "3.1.0"
 }

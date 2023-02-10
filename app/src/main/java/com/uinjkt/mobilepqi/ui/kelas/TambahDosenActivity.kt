@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.tambahdosen
+package com.uinjkt.mobilepqi.ui.kelas
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.core.view.isInvisible
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
-import com.uinjkt.mobilepqi.ui.kelas.DetailKelasActivity
 
 class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>() {
     companion object {

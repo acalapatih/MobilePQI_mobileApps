@@ -268,7 +268,7 @@
         android:id="@+id/tv_nim_mahasiswa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tv_nip_dosen"
+        android:text="@string/tv_nim_mahasiswa"
         android:fontFamily="@font/inter"
         android:textSize="15sp"
         android:textColor="@color/black"
