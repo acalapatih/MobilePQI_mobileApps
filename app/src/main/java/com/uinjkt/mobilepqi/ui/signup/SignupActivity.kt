@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import android.util.Patterns
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -27,11 +28,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     private fun namaValidate(nama: String): Boolean {
         val namaPattern = "^[a-zA-Z\\s]+\$"
         return nama.matches(namaPattern.toRegex())
-    }
-
-    private fun emailValidate(email: String): Boolean {
-        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        return email.matches(emailPattern.toRegex())
     }
 
     private fun passwordValidate(password: String): Boolean {
@@ -85,7 +81,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .skipInitialValue()
             .map { email ->
                 // regex email
-                emailValidate(email.toString()) && email.length > 5
+                Patterns.EMAIL_ADDRESS.matcher(email).matches() && email.length > 5
             }
         emailStream.subscribe { isEmailValid ->
             if (!isEmailValid) {
