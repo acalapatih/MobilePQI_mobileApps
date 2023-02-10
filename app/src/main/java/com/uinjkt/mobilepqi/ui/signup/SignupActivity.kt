@@ -123,7 +123,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         val kodeKelasStream = RxTextView.textChanges(binding.etKodeKelasSignup)
             .skipInitialValue()
             .map { kodeKelas ->
-                kodeKelas.length in 1..6
+                kodeKelas.length == 6
             }
         kodeKelasStream.subscribe { isKodeKelasValid ->
             if (!isKodeKelasValid) {
