@@ -1,6 +1,6 @@
-package com.mobilepqi.core.domain.model
+package com.mobilepqi.core.domain.model.jadwalsholat
 
-import com.mobilepqi.core.data.source.remote.response.JadwalSholatResponse
+import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

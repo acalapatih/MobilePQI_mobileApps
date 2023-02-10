@@ -1,12 +1,12 @@
-package com.mobilepqi.core.data.repository
+package com.mobilepqi.core.data.repository.jadwalsholat
 
 import com.mobilepqi.core.data.NetworkOnlyResource
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
-import com.mobilepqi.core.data.source.remote.response.JadwalSholatResponse
-import com.mobilepqi.core.domain.model.JadwalSholatModel
-import com.mobilepqi.core.domain.repository.JadwalSholatRepository
+import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
+import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
+import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
 import kotlinx.coroutines.flow.Flow
 
 class JadwalSholatRepositoryImpl(

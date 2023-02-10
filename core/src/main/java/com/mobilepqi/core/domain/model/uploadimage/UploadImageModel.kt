@@ -1,6 +1,6 @@
-package com.mobilepqi.core.domain.model
+package com.mobilepqi.core.domain.model.uploadimage
 
-import com.mobilepqi.core.data.source.remote.response.UploadImageResponse
+import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadImageResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

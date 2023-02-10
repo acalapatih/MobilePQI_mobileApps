@@ -1,8 +1,8 @@
-package com.mobilepqi.core.domain.usecase
+package com.mobilepqi.core.domain.usecase.uploadimage
 
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.UploadImageModel
-import com.mobilepqi.core.domain.repository.UploadImageRepository
+import com.mobilepqi.core.domain.model.uploadimage.UploadImageModel
+import com.mobilepqi.core.domain.repository.uploadimage.UploadImageRepository
 import java.io.File
 import kotlinx.coroutines.flow.Flow
 import okhttp3.MediaType.Companion.toMediaTypeOrNull

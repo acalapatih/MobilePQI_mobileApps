@@ -1,8 +1,8 @@
-package com.mobilepqi.core.domain.usecase
+package com.mobilepqi.core.domain.usecase.jadwalsholat
 
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.JadwalSholatModel
-import com.mobilepqi.core.domain.repository.JadwalSholatRepository
+import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
+import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
 import kotlinx.coroutines.flow.Flow
 
 class JadwalSholatInteractor(private val jadwalSholatRepository: JadwalSholatRepository) :

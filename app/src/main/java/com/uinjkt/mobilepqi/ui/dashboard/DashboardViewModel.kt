@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.JadwalSholatModel
-import com.mobilepqi.core.domain.model.UploadImageModel
-import com.mobilepqi.core.domain.usecase.JadwalSholatUsecase
-import com.mobilepqi.core.domain.usecase.UploadImageUsecase
+import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
+import com.mobilepqi.core.domain.model.uploadimage.UploadImageModel
+import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
+import com.mobilepqi.core.domain.usecase.uploadimage.UploadImageUsecase
 import java.io.File
 import kotlinx.coroutines.launch
 

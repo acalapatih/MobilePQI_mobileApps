@@ -3,8 +3,8 @@ package com.mobilepqi.core.data.source.remote
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
-import com.mobilepqi.core.data.source.remote.response.JadwalSholatResponse
-import com.mobilepqi.core.data.source.remote.response.UploadImageResponse
+import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
+import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadImageResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
