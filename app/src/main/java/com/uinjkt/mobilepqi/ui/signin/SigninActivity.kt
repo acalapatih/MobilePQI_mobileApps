@@ -65,7 +65,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
             }
         nimNipStream.subscribe { isUserValid ->
             if (!isUserValid) {
-                binding.etNipNimSignin.error = "Harap Masukkan NIDN/NIP/NIM Anda dengan benar!"
+                binding.etNipNimSignin.error = "Harap masukkan NIDN/NIP/NIM Anda dengan benar!"
             }
         }
 

@@ -26,7 +26,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         ActivitySignupBinding.inflate(layoutInflater)
 
     private fun namaValidate(nama: String): Boolean {
-        val namaPattern = "^[a-zA-Z\\s]+\$"
+        val namaPattern = "^[a-zA-Z\\s]+$"
         return nama.matches(namaPattern.toRegex())
     }
 
@@ -73,7 +73,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         namaStream.subscribe { isNamaValid ->
             if (!isNamaValid) {
-                binding.etNamaSignup.error = "Harap Masukkan Nama Anda dengan benar!"
+                binding.etNamaSignup.error = "Harap masukkan nama Anda dengan benar!"
             }
         }
 
@@ -85,7 +85,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         emailStream.subscribe { isEmailValid ->
             if (!isEmailValid) {
-                binding.etEmailSignup.error = "Harap Masukkan Email Anda dengan benar!"
+                binding.etEmailSignup.error = "Harap masukkan email Anda dengan benar!"
             }
         }
 
@@ -96,7 +96,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         nimNipStream.subscribe { isNimNipValid ->
             if (!isNimNipValid) {
-                binding.etNipNimSignup.error = "Harap Masukkan NIDN/NIP/NIM Anda dengan benar!"
+                binding.etNipNimSignup.error = "Harap masukkan NIDN/NIP/NIM Anda dengan benar!"
             }
         }
 
@@ -127,7 +127,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         kodeKelasStream.subscribe { isKodeKelasValid ->
             if (!isKodeKelasValid) {
-                binding.etKodeKelasSignup.error = "Harap Masukkan Kode Kelas Anda dengan benar!"
+                binding.etKodeKelasSignup.error = "Harap masukkan Kode Kelas Anda dengan benar!"
             }
         }
 
