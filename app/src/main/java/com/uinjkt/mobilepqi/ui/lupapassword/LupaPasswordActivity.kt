@@ -22,8 +22,6 @@ class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar?.hide()
-
         binding.ivCloseLupaPassword.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
