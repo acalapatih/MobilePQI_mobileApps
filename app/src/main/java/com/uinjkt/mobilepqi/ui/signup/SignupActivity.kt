@@ -39,7 +39,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         return password.matches(passwordPattern.toRegex())
     }
 
-    private var type:String = ""
+    private var type: String = ""
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,8 +98,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             .map { nidn_nip_nim ->
                 nidn_nip_nim.length > 5
             }
-        nimNipStream.subscribe {isNimNipValid ->
-            if(!isNimNipValid) {
+        nimNipStream.subscribe { isNimNipValid ->
+            if (!isNimNipValid) {
                 binding.etNipNimSignup.error = "Harap Masukkan NIDN/NIP/NIM Anda dengan benar!"
             }
         }
@@ -143,11 +143,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         passwordStream.subscribe { isPasswordValid ->
             if (!isPasswordValid) {
-                binding.etPasswordSignup.setError("Password harus mengandung minimal 1 huruf besar, huruf kecil, angka, dan karakter spesial", null)
+                binding.etPasswordSignup.setError(
+                    "Password harus mengandung minimal 1 huruf besar, huruf kecil, angka, dan karakter spesial",
+                    null
+                )
             }
         }
 
-        if(type == "mahasiswa") {
+        if (type == "mahasiswa") {
             Observable.combineLatest(
                 namaStream,
                 emailStream,

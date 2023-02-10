@@ -32,7 +32,8 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         }
 
         // animation for the splash screen
-        val transitionAnimation = AnimationUtils.loadAnimation(this, R.anim.splash_screen_transition)
+        val transitionAnimation =
+            AnimationUtils.loadAnimation(this, R.anim.splash_screen_transition)
         // set the animation
         binding.ivAwanBintang.animation = transitionAnimation
         binding.ivLogoPujitaklim.animation = transitionAnimation

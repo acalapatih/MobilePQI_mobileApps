@@ -61,11 +61,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         val nimNipStream = RxTextView.textChanges(binding.etNipNimSignin)
             .skipInitialValue()
             .map { nidn_nip_nim ->
-                nidn_nip_nim.length > 5 //isi sama ketentuan
+                nidn_nip_nim.length > 5
             }
         nimNipStream.subscribe { isUserValid ->
             if (!isUserValid) {
-                //Action kalo nip or nim ga sesuai
                 binding.etNipNimSignin.error = "Harap Masukkan NIDN/NIP/NIM Anda dengan benar!"
             }
         }
@@ -73,11 +72,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         val passwordStream = RxTextView.textChanges(binding.etPasswordSignin)
             .skipInitialValue()
             .map { password ->
-                password.length > 5//Ganti sama regex disini
+                password.length > 5
             }
         passwordStream.subscribe { isPasswordValid ->
             if (!isPasswordValid) {
-                //Action kalo password ga sesuai
                 binding.etPasswordSignin.setError("Harap masukkan password Anda dengan benar!", null)
             }
         }
