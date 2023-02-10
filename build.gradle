@@ -46,4 +46,7 @@ ext {
 
     //Datastore
     datastore_version = "1.0.0"
+
+    //Lifecycle version
+    lifecycle_version = "2.5.1"
 }
