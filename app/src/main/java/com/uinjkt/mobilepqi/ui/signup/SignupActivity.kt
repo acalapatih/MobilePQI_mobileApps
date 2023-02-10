@@ -155,7 +155,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, kodeKelasValid: Boolean, passwordValid: Boolean ->
                 namaValid && emailValid && nimNipValid && kodeKelasValid && passwordValid
             }.subscribe { isButtonValid ->
-                binding.btnSignup.isEnabled = isButtonValid //enable disable button dari sini
+                binding.btnSignup.isEnabled = isButtonValid
             }
         } else {
             Observable.combineLatest(
@@ -166,7 +166,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, passwordValid: Boolean ->
                 namaValid && emailValid && nimNipValid && passwordValid
             }.subscribe { isButtonValid ->
-                binding.btnSignup.isEnabled = isButtonValid //enable disable button dari sini
+                binding.btnSignup.isEnabled = isButtonValid
             }
         }
     }

@@ -45,9 +45,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         // launch the OnboardingActivity with delay 1500ms
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            // start the OnboardingActivity
             OnboardingActivity.start(this)
-            // remove this activity from the stack
             finish()
         }, 1500)
     }

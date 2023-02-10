@@ -86,7 +86,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         ) { nimNipValid: Boolean, passwordValid: Boolean ->
             nimNipValid && passwordValid
         }.subscribe { isButtonValid ->
-            binding.btnSignin.isEnabled = isButtonValid //enable disable button dari sini
+            binding.btnSignin.isEnabled = isButtonValid
         }
     }
 }
