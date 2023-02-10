@@ -11,7 +11,6 @@
     <string name="tv_belum_daftar_click_text"><u>Daftar Sekarang</u></string>
     <string name="tv_nama_text">Nama</string>
     <string name="tv_email_text">Email</string>
-    <string name="tv_deskripsi_password_text">*minimal panjang password adalah 6 karakter</string>
     <string name="tv_sudah_punya_akun_text">Sudah Punya Akun?</string>
     <string name="tv_masuk_sekarang_text"><u>Masuk Sekarang</u></string>
     <string name="tv_action_bar_lupa_password_text">Lupa Password</string>

@@ -219,18 +219,6 @@
                 app:layout_constraintStart_toStartOf="@+id/et_password_signup"
                 app:layout_constraintTop_toTopOf="@+id/et_password_signup" />
 
-            <TextView
-                android:id="@+id/tv_deskripsi_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/inter_medium"
-                android:text="@string/tv_deskripsi_password_text"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_password_signup" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_signup"
                 style="@style/ButtonBlueRounded30dp"
@@ -243,7 +231,7 @@
                 android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_deskripsi_password" />
+                app:layout_constraintTop_toBottomOf="@+id/et_password_signup" />
 
             <TextView
                 android:id="@+id/tv_sudah_daftar"

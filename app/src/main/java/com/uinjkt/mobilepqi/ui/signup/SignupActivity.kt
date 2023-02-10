@@ -31,7 +31,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     }
 
     private fun passwordValidate(password: String): Boolean {
-        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$"
+        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.*\\s).{6,}$"
         return password.matches(passwordPattern.toRegex())
     }
 
@@ -131,16 +131,15 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         }
 
-
         val passwordStream = RxTextView.textChanges(binding.etPasswordSignup)
             .skipInitialValue()
             .map { password ->
-                passwordValidate(password.toString()) && password.length > 5
+                passwordValidate(password.toString())
             }
         passwordStream.subscribe { isPasswordValid ->
             if (!isPasswordValid) {
                 binding.etPasswordSignup.setError(
-                    "Password harus mengandung minimal 1 huruf besar, huruf kecil, angka, dan karakter spesial",
+                    "Password harus mengandung minimal 6 karakter yang terdiri dari 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 karakter spesial",
                     null
                 )
             }
