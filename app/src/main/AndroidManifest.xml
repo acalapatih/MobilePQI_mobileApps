@@ -18,6 +18,9 @@
         android:theme="@style/Theme.MobilePQI"
         tools:targetApi="31">
         <activity
+            android:name=".MahasiswaSilabusActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.lupapassword.LupaPasswordActivity"
             android:exported="false" />
         <activity
