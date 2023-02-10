@@ -3,18 +3,19 @@ package com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.adapter.MenuMahasiswaMateriAdapter
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.data.DataMateri
 import com.uinjkt.mobilepqi.data.DataSourceMateriQiroah
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriBinding
+import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaMateriAdapter
 
 
 class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBinding>() {
 
-    private lateinit var newStringList: List<DataMateri>
+    private lateinit var listMateri: List<DataMateri>
 
     companion object {
         @JvmStatic
@@ -28,13 +29,12 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
 
         // Initialize data.
-        newStringList = DataSourceMateriQiroah().loadDataMenuQiroah()
+        listMateri = DataSourceMateriQiroah().loadDataMenuQiroah()
 
         // Initialize Adapter
-        val adapter = MenuMahasiswaMateriAdapter(newStringList)
+        val adapter = MenuMahasiswaMateriAdapter(listMateri)
         binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)
         binding.recycleViewMenuMahasiswa.adapter =  adapter
 
@@ -44,13 +44,17 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         // adapterOnClickListener
         adapter.setOnItemClickListener(object : MenuMahasiswaMateriAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                MahasiswaMateriDetailQiroahActivity.start(this@MahasiswaMateriQiroahActivity, newStringList[position].id_materi, newStringList[position].title_menu_name)
+                MahasiswaMateriDetailQiroahActivity.start(this@MahasiswaMateriQiroahActivity, listMateri[position].idMateri, listMateri[position].titleMenuName)
             }
         })
 
         // icon Close onClickListener
         binding.ivIconClose.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
         }
     }
 }

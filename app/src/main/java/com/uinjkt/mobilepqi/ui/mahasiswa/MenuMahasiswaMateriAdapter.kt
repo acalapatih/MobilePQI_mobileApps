@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.adapter
+package com.uinjkt.mobilepqi.ui.mahasiswa
 
 import android.view.LayoutInflater
 import android.view.View
@@ -30,7 +30,7 @@ class MenuMahasiswaMateriAdapter(private val dataset : List<DataMateri>) : Recyc
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuMahasiswaMateriAdapter.ItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val adapterLayout = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.recycle_view_list_menu_mahasiswa, parent, false)
@@ -39,7 +39,7 @@ class MenuMahasiswaMateriAdapter(private val dataset : List<DataMateri>) : Recyc
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = dataset[position]
-        holder.textView.text = currentItem.title_menu_name
+        holder.textView.text = currentItem.titleMenuName
     }
 
     override fun getItemCount(): Int = dataset.size

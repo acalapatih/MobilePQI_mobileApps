@@ -3,14 +3,14 @@ package com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.adapter.MenuMahasiswaMateriAdapter
+import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaMateriAdapter
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.data.DataMateri
 import com.uinjkt.mobilepqi.data.DataSourceMateriIbadah
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriBinding
-import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahActivity
 
 class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBinding>() {
     
@@ -28,7 +28,6 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
 
         // Initialize data.
         listMateri = DataSourceMateriIbadah().loadDataMenuIbadah()
@@ -44,13 +43,17 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         // adapterOnClickListener
         adapter.setOnItemClickListener(object : MenuMahasiswaMateriAdapter.onItemClickListener {
             override fun onItemClick(position: Int) {
-                MahasiswaMateriDetailIbadahActivity.start(this@MahasiswaMateriIbadahActivity, listMateri[position].id_materi, listMateri[position].title_menu_name)
+                MahasiswaMateriDetailIbadahActivity.start(this@MahasiswaMateriIbadahActivity, listMateri[position].idMateri, listMateri[position].titleMenuName)
             }
         })
 
         // icon Close onClickListener
         binding.ivIconClose.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
         }
         
     }
