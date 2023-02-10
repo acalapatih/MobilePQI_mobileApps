@@ -6,17 +6,34 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.JadwalSholatModel
+import com.mobilepqi.core.domain.model.UploadImageModel
 import com.mobilepqi.core.domain.usecase.JadwalSholatUsecase
+import com.mobilepqi.core.domain.usecase.UploadImageUsecase
+import java.io.File
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(private val jadwalSholatUsecase: JadwalSholatUsecase) : ViewModel() {
+class DashboardViewModel(
+    private val jadwalSholatUsecase: JadwalSholatUsecase,
+    private val uploadImageUsecase: UploadImageUsecase
+) : ViewModel() {
     private val _jadwalSholat = MutableLiveData<Resource<JadwalSholatModel>>()
     val jadwalSholat: LiveData<Resource<JadwalSholatModel>> get() = _jadwalSholat
+
+    private val _imageUploaded = MutableLiveData<Resource<UploadImageModel>>()
+    val imageUploaded: LiveData<Resource<UploadImageModel>> get() = _imageUploaded
 
     fun getJadwalSholat(latitude: String, longitude: String) {
         viewModelScope.launch {
             jadwalSholatUsecase.getJadwalSholat(latitude, longitude).collect {
                 _jadwalSholat.value = it
+            }
+        }
+    }
+
+    fun uploadImage(image: File) {
+        viewModelScope.launch {
+            uploadImageUsecase.uploadImage(image).collect {
+                _imageUploaded.value = it
             }
         }
     }
