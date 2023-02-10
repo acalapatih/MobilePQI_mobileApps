@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.addCallback
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityLupaPasswordBinding
 
@@ -28,6 +29,13 @@ class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
 
         binding.ivCloseLupaPassword.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        binding.btnKirimLupaPassword.setOnClickListener {
+            showOneActionThinFontDialog(
+                message = getString(R.string.btn_kirim_lupa_password_deksripsi_text),
+                btnMessage = getString(R.string.btn_oke_text),
+            )
         }
 
         onBackPressedDispatcher.addCallback(this) {

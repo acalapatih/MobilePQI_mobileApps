@@ -19,4 +19,6 @@
     <string name="btn_kirim_lupa_password_text">kirim</string>
     <string name="btn_location_text">Click Location</string>
     <string name="tv_kode_kelas_text">Kode Kelas</string>
+    <string name="btn_kirim_lupa_password_deksripsi_text">"Kami telah mengirim password baru ke email Anda"</string>
+    <string name="btn_oke_text">"Oke"</string>
 </resources>
