@@ -41,7 +41,7 @@ android {
 
 dependencies {
     implementation project(":core")
-    implementation "de.hdodenhof:circleimageview:$civ_version"
+    implementation "com.jakewharton.rxbinding2:rxbinding:$rx_binding_version"
 }
 
 kapt {

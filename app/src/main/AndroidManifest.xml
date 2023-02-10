@@ -18,7 +18,22 @@
         android:theme="@style/Theme.MobilePQI"
         tools:targetApi="31">
         <activity
-            android:name=".ui.kelas.DaftarKelasActivity"
+            android:name=".ui.lupapassword.LupaPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.signup.SignupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.signin.SigninActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splashscreen.OnboardingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,9 +41,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.kelas.BuatKelasActivity" />
-        <activity android:name=".ui.kelas.DetailKelasActivity"/>
-        <activity android:name=".ui.tambahdosen.TambahDosenActivity"/>
     </application>
 
 </manifest>

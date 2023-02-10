@@ -1,39 +1,21 @@
 <resources>
     <string name="app_name">MobilePQI</string>
-
-<!--    Daftar Kelas-->
-    <string name="tv_action_bar_daftarkelas">Daftar Kelas Anda</string>
-    <string name="tv_buatkelas">Buat Kelas</string>
-    <string name="tv_namakelas">PQI-2A</string>
-    <string name="tv_ruangkelas">Ruang 4.012</string>
-    <string name="tv_jadwalkelas">Senin, 07.30 – 10.00</string>
-    <string name="tv_anggotakelas">Anggota\n25</string>
-
-<!--    Buat Kelas-->
-    <string name="tv_action_bar_buatkelas">Buat Kelas</string>
-    <string name="tv_datakelas">Lengkapi Data Kelas</string>
-    <string name="tv_edit_namakelas">Nama Kelas</string>
-    <string name="tv_edit_ruangkelas">Ruangan Kelas</string>
-    <string name="tv_edit_jadwalkelas">Jadwal Kelas</string>
-    <string name="btn_simpan">Simpan</string>
-
-<!--    Detail Kelas-->
-    <string name="tv_action_bar_detailkelas">Kelas PQI-2C</string>
-    <string name="tv_label_kode_kelas">Kode Kelas</string>
-    <string name="tv_kode_kelas">Gr33DisG00d</string>
-    <string name="tv_label_dosen">Dosen</string>
-    <string name="tv_label_mahasiswa">Mahasiswa</string>
-    <string name="tv_label_tambah_dosen">Tambah Dosen</string>
-    <string name="tv_nama_mahasiswa">Mahasiswa 1</string>
-    <string name="tv_nim">NIM : </string>
-    <string name="tv_nim_mahasiswa">112009100000000</string>
-
-<!--    Tambah Dosen-->
-    <string name="tv_action_bar_tambahdosen">Tambah Dosen</string>
-    <string name="et_search_dosen">Cari Nama / NIP</string>
-    <string name="tv_nama_dosen">Dosen 1</string>
-    <string name="tv_nip">NIP : </string>
-    <string name="tv_nip_dosen">196903161999000000</string>
-
-
+    <string name="tv_deskripsi_text">E-learning untuk\nPendidikan Qiroah dan\nIbadah</string>
+    <string name="btn_mulai_text">Mulai</string>
+    <string name="tv_signin_text">Sign In</string>
+    <string name="tv_signup_text">Sign Up</string>
+    <string name="tv_nip_nim_text">NIP/NIM</string>
+    <string name="tv_password_text">Password</string>
+    <string name="tv_lupa_password_text">Lupa Password?</string>
+    <string name="tv_belum_daftar_text">Belum Punya Akun?</string>
+    <string name="tv_belum_daftar_click_text"><u>Daftar Sekarang</u></string>
+    <string name="tv_nama_text">Nama</string>
+    <string name="tv_email_text">Email</string>
+    <string name="tv_deskripsi_password_text">*minimal password mengandung 6 karakter</string>
+    <string name="tv_sudah_punya_akun_text">Sudah Punya Akun?</string>
+    <string name="tv_masuk_sekarang_text"><u>Masuk Sekarang</u></string>
+    <string name="tv_action_bar_lupa_password_text">Lupa Password</string>
+    <string name="lupa_password_deskripsi_text">Silakan masukkan email Anda pada kotak di bawah ini untuk mengatur ulang password Anda</string>
+    <string name="btn_kirim_lupa_password_text">kirim</string>
+    <string name="btn_location_text">Click Location</string>
 </resources>
