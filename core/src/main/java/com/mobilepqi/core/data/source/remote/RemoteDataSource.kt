@@ -4,7 +4,7 @@ import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
-import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadImageResponse
+import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -37,12 +37,12 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun uploadImage(
+    suspend fun uploadFileOrImage(
         file: MultipartBody.Part
-    ): Flow<ApiResponse<UploadImageResponse>> {
+    ): Flow<ApiResponse<UploadResponse>> {
         return channelFlow {
             try {
-                val response = commonService.uploadImage(file = file)
+                val response = commonService.uploadToServer(file = file)
                 if (response.status == 200) {
                     send(ApiResponse.Success(response))
                 }

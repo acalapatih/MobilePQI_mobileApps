@@ -2,7 +2,7 @@ package com.mobilepqi.core.data.source.remote.response.uploadimage
 
 import com.google.gson.annotations.SerializedName
 
-data class UploadImageResponse(
+data class UploadResponse(
 
     @field:SerializedName("data")
 	val data: Data? = null,
@@ -15,8 +15,8 @@ data class UploadImageResponse(
 ) {
 	data class Data(
 
-		@field:SerializedName("avatar")
-		val avatar: String? = null,
+		@field:SerializedName("url")
+		val url: String? = null,
 
 		@field:SerializedName("errors")
 		val error: String? = null
