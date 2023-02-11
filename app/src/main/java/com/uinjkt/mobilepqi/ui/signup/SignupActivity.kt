@@ -148,7 +148,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }.subscribe { isButtonValid ->
                 binding.btnSignup.isEnabled = isButtonValid
             }
-        } else {
+            return
+        } else if(type == "dosen") {
             Observable.combineLatest(
                 namaStream,
                 emailStream,
@@ -159,6 +160,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }.subscribe { isButtonValid ->
                 binding.btnSignup.isEnabled = isButtonValid
             }
+            return
+        } else {
+            binding.btnSignup.isEnabled = false
         }
     }
 
