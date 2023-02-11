@@ -9,7 +9,11 @@ fun Throwable.setGeneralError(): String {
 }
 
 private fun getErrorMessage(raw: String): String {
-    val obj = JSONObject(raw)
-    val obj2 = JSONObject(obj.getString("data"))
-    return obj2.getString("errors")
+    return try {
+        val obj = JSONObject(raw)
+        val obj2 = JSONObject(obj.getString("data"))
+        obj2.getString("errors")
+    } catch (e: Exception) {
+        e.message.toString()
+    }
 }
