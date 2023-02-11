@@ -1,10 +1,14 @@
 package com.mobilepqi.core.di
 
 import com.mobilepqi.core.BuildConfig
-import com.mobilepqi.core.data.repository.JadwalSholatRepositoryImpl
+import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
+import com.mobilepqi.core.data.repository.uploadimage.UploadImageRepositoryImpl
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
-import com.mobilepqi.core.domain.repository.JadwalSholatRepository
+import com.mobilepqi.core.data.source.remote.network.CommonService
+import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
+import com.mobilepqi.core.domain.repository.uploadimage.UploadImageRepository
+import com.mobilepqi.core.util.HeaderInterceptor
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,6 +25,7 @@ val networkModule = module {
         }
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(HeaderInterceptor())
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
@@ -33,9 +38,18 @@ val networkModule = module {
             .build()
         retrofit.create(ApiSholatService::class.java)
     }
+    single {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BuildConfig.ENDPOINT_API)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        retrofit.create(CommonService::class.java)
+    }
 }
 
 val repositoryModule = module {
-    single { RemoteDataSource(get()) }
+    single { RemoteDataSource(get(), get()) }
     single<JadwalSholatRepository> { JadwalSholatRepositoryImpl(get()) }
+    single<UploadImageRepository> { UploadImageRepositoryImpl(get()) }
 }
