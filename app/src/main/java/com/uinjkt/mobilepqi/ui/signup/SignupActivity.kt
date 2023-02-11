@@ -26,7 +26,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     override fun getViewBinding(): ActivitySignupBinding =
         ActivitySignupBinding.inflate(layoutInflater)
 
-    private var type: String = ""
+    private var tipeAkun: String = "dosen"
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,12 +99,15 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         cekKodeKelasStream.subscribe { length ->
             when (length) {
                 14 -> {
-                    type = "mahasiswa"
+                    tipeAkun = "mahasiswa"
+                    binding.etKodeKelasSignup.text.clear()
                     binding.tvKodeKelasSignup.isGone = false
                     binding.etKodeKelasSignup.isGone = false
+                    binding.btnSignup.isEnabled = false
                 }
                 else -> {
-                    type = "dosen"
+                    tipeAkun = "dosen"
+                    binding.etKodeKelasSignup.text.clear()
                     binding.tvKodeKelasSignup.isGone = true
                     binding.etKodeKelasSignup.isGone = true
                 }
@@ -114,7 +117,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         val kodeKelasStream = RxTextView.textChanges(binding.etKodeKelasSignup)
             .skipInitialValue()
             .map { kodeKelas ->
-                kodeKelas.length == 6
+                kodeKelas.length == 6 && kodeKelasValidate(kodeKelas.toString())
             }
         kodeKelasStream.subscribe { isKodeKelasValid ->
             if (!isKodeKelasValid) {
@@ -136,39 +139,38 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             }
         }
 
-        if (type == "mahasiswa") {
-            Observable.combineLatest(
-                namaStream,
-                emailStream,
-                nimNipStream,
-                kodeKelasStream,
-                passwordStream
-            ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, kodeKelasValid: Boolean, passwordValid: Boolean ->
-                namaValid && emailValid && nimNipValid && kodeKelasValid && passwordValid
-            }.subscribe { isButtonValid ->
-                binding.btnSignup.isEnabled = isButtonValid
-            }
-            return
-        } else if(type == "dosen") {
-            Observable.combineLatest(
-                namaStream,
-                emailStream,
-                nimNipStream,
-                passwordStream
-            ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, passwordValid: Boolean ->
-                namaValid && emailValid && nimNipValid && passwordValid
-            }.subscribe { isButtonValid ->
-                binding.btnSignup.isEnabled = isButtonValid
-            }
-            return
-        } else {
-            binding.btnSignup.isEnabled = false
+        Observable.combineLatest(
+            namaStream,
+            emailStream,
+            nimNipStream,
+            kodeKelasStream,
+            passwordStream
+        ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, kodeKelasValid: Boolean, passwordValid: Boolean ->
+            namaValid && emailValid && nimNipValid && kodeKelasValid && passwordValid
+        }.subscribe { isButtonValid ->
+            if(tipeAkun == "mahasiswa") { binding.btnSignup.isEnabled = isButtonValid }
+        }
+
+        Observable.combineLatest(
+            namaStream,
+            emailStream,
+            nimNipStream,
+            passwordStream
+        ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, passwordValid: Boolean ->
+            namaValid && emailValid && nimNipValid && passwordValid
+        }.subscribe { isButtonValid ->
+           if(tipeAkun == "dosen") { binding.btnSignup.isEnabled = isButtonValid }
         }
     }
 
     private fun namaValidate(nama: String): Boolean {
         val namaPattern = "^[a-zA-Z\\s]+$"
         return nama.matches(namaPattern.toRegex())
+    }
+
+    private fun kodeKelasValidate(kode: String): Boolean {
+        val kelasPattern = "^[\\S]+$"
+        return kode.matches(kelasPattern.toRegex())
     }
 
     private fun passwordValidate(password: String): Boolean {
