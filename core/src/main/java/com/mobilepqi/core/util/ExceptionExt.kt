@@ -5,7 +5,7 @@ import retrofit2.HttpException
 
 fun Throwable.setGeneralError(): String {
     val exception = (this as? HttpException)?.response()?.errorBody()?.string() ?: ""
-    return "${this.message} - ${getErrorMessage(exception)}"
+    return "${this.message}- ${getErrorMessage(exception)}"
 }
 
 private fun getErrorMessage(raw: String): String {
