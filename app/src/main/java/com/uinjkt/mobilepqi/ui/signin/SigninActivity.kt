@@ -60,35 +60,33 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
         val nimNipStream = RxTextView.textChanges(binding.etNipNimSignin)
             .skipInitialValue()
-            .map { nim ->
-                nim.length > 6 //isi sama ketentuan
+            .map { nidn_nip_nim ->
+                nidn_nip_nim.length > 5
             }
-        nimNipStream.subscribe { isValid ->
-            if (!isValid) {
-                //Action kalo nip or nim ga sesuai
-                binding.etNipNimSignin.error = "Harap Masukkan NIP/NIM yang Valid"
+        nimNipStream.subscribe { isUserValid ->
+            if (!isUserValid) {
+                binding.etNipNimSignin.error = "Harap masukkan NIDN/NIP/NIM Anda dengan benar!"
             }
+        }
 
-            val passwordStream = RxTextView.textChanges(binding.etPasswordSignin)
-                .skipInitialValue()
-                .map { password ->
-                    password.length > 6 //Ganti sama regex disini
-                }
-            passwordStream.subscribe { isValid ->
-                if (!isValid) {
-                    //Action kalo password ga sesuai
-                    binding.etPasswordSignin.error = "Password Masih Kurang dari 6"
-                }
+        val passwordStream = RxTextView.textChanges(binding.etPasswordSignin)
+            .skipInitialValue()
+            .map { password ->
+                password.length > 5
             }
+        passwordStream.subscribe { isPasswordValid ->
+            if (!isPasswordValid) {
+                binding.etPasswordSignin.setError("Harap masukkan password Anda dengan benar!", null)
+            }
+        }
 
-            Observable.combineLatest(
-                nimNipStream,
-                passwordStream
-            ) { nimNipValid: Boolean, passwordValid: Boolean ->
-                nimNipValid && passwordValid
-            }.subscribe { isValid ->
-                binding.btnSignin.isEnabled = isValid //enable disable button dari sini
-            }
+        Observable.combineLatest(
+            nimNipStream,
+            passwordStream
+        ) { nimNipValid: Boolean, passwordValid: Boolean ->
+            nimNipValid && passwordValid
+        }.subscribe { isButtonValid ->
+            binding.btnSignin.isEnabled = isButtonValid
         }
     }
 }
