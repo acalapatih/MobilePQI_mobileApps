@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
+import androidx.core.view.isGone
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -24,16 +25,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
     override fun getViewBinding(): ActivitySignupBinding =
         ActivitySignupBinding.inflate(layoutInflater)
-
-    private fun namaValidate(nama: String): Boolean {
-        val namaPattern = "^[a-zA-Z\\s]+$"
-        return nama.matches(namaPattern.toRegex())
-    }
-
-    private fun passwordValidate(password: String): Boolean {
-        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.*\\s).{6,}$"
-        return password.matches(passwordPattern.toRegex())
-    }
 
     private var type: String = ""
 
@@ -109,13 +100,13 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
             when (length) {
                 14 -> {
                     type = "mahasiswa"
-                    binding.tvKodeKelasSignup.visibility = android.view.View.VISIBLE
-                    binding.etKodeKelasSignup.visibility = android.view.View.VISIBLE
+                    binding.tvKodeKelasSignup.isGone = false
+                    binding.etKodeKelasSignup.isGone = false
                 }
                 else -> {
                     type = "dosen"
-                    binding.tvKodeKelasSignup.visibility = android.view.View.GONE
-                    binding.etKodeKelasSignup.visibility = android.view.View.GONE
+                    binding.tvKodeKelasSignup.isGone = true
+                    binding.etKodeKelasSignup.isGone = true
                 }
             }
         }
@@ -169,5 +160,15 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 binding.btnSignup.isEnabled = isButtonValid
             }
         }
+    }
+
+    private fun namaValidate(nama: String): Boolean {
+        val namaPattern = "^[a-zA-Z\\s]+$"
+        return nama.matches(namaPattern.toRegex())
+    }
+
+    private fun passwordValidate(password: String): Boolean {
+        val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.*\\s).{6,}$"
+        return password.matches(passwordPattern.toRegex())
     }
 }
