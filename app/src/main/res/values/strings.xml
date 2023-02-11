@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MobilePQI</string>
+    <string name="mobile_pqi">MobilePQI</string>
     <string name="tv_deskripsi_text">E-learning untuk\nPendidikan Qiroah dan\nIbadah</string>
     <string name="btn_mulai_text">Mulai</string>
     <string name="tv_signin_text">Sign In</string>
