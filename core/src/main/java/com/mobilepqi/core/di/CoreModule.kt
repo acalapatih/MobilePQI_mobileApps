@@ -3,6 +3,7 @@ package com.mobilepqi.core.di
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadImageRepositoryImpl
+import com.mobilepqi.core.data.source.local.MainPreferencesImpl
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
@@ -12,9 +13,14 @@ import com.mobilepqi.core.util.HeaderInterceptor
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
+val storageModule = module {
+    single { MainPreferencesImpl.getInstances(androidContext()) }
+}
 
 val networkModule = module {
     single {
