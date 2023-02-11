@@ -56,7 +56,6 @@ val networkModule = module {
             .build()
         retrofit.create(CommonService::class.java)
     }
-//    single { ChuckerInterceptor.Builder(androidContext()).build() }
 }
 
 val repositoryModule = module {
