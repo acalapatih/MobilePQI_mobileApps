@@ -3,6 +3,7 @@ package com.uinjkt.mobilepqi
 import android.app.Application
 import com.mobilepqi.core.di.networkModule
 import com.mobilepqi.core.di.repositoryModule
+import com.mobilepqi.core.di.storageModule
 import com.uinjkt.mobilepqi.di.useCaseModule
 import com.uinjkt.mobilepqi.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -18,6 +19,7 @@ class MyApplication : Application() {
             androidContext(this@MyApplication)
             modules(
                 listOf(
+                    storageModule,
                     networkModule,
                     repositoryModule,
                     useCaseModule,
