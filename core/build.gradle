@@ -27,9 +27,11 @@ android {
     productFlavors {
         staging {
             buildConfigField 'String', 'ENDPOINT_API', endpointProperties['ENDPOINT_API_STAGING']
+            buildConfigField 'String', 'ENDPOINT_API_JADWAL_SHOLAT', endpointProperties['ENDPOINT_API_JADWAL_SHOLAT']
         }
         production {
             buildConfigField 'String', 'ENDPOINT_API', endpointProperties['ENDPOINT_API_PRODUCTION']
+            buildConfigField 'String', 'ENDPOINT_API_JADWAL_SHOLAT', endpointProperties['ENDPOINT_API_JADWAL_SHOLAT']
         }
     }
 
@@ -57,9 +59,14 @@ dependencies {
 
     //Logging Interceptor
     implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
 
     //Gson
     implementation "com.google.code.gson:gson:$gson_version"
+
+    //Chucker
+    debugImplementation "com.github.chuckerteam.chucker:library:$chucker_version"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chucker_version"
 }
 
 kapt {

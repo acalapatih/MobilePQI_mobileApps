@@ -12,6 +12,7 @@ import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 import io.reactivex.Observable
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SigninActivity : BaseActivity<ActivitySigninBinding>() {
     companion object {
@@ -21,6 +22,8 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
             context.startActivity(starter)
         }
     }
+
+    private val viewModel by viewModel<SignInViewModel>()
 
     override fun getViewBinding(): ActivitySigninBinding =
         ActivitySigninBinding.inflate(layoutInflater)
