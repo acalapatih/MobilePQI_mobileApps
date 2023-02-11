@@ -47,6 +47,9 @@ ext {
     //Datastore
     datastore_version = "1.0.0"
 
-    //Lifecycle version
+    //Lifecycle
     lifecycle_version = "2.5.1"
+
+    //Chucker
+    chucker_version = "3.5.2"
 }

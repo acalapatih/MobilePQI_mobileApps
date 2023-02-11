@@ -63,6 +63,10 @@ dependencies {
 
     //Gson
     implementation "com.google.code.gson:gson:$gson_version"
+
+    //Chucker
+    debugImplementation "com.github.chuckerteam.chucker:library:$chucker_version"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:$chucker_version"
 }
 
 kapt {

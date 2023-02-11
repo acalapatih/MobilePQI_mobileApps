@@ -1,5 +1,6 @@
 package com.mobilepqi.core.di
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
@@ -29,8 +30,11 @@ val networkModule = module {
         } else {
             HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
         }
+        val chuckerInterceptor = ChuckerInterceptor.Builder(androidContext()).build()
+
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(chuckerInterceptor)
             .addInterceptor(HeaderInterceptor(androidContext()))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
@@ -52,6 +56,7 @@ val networkModule = module {
             .build()
         retrofit.create(CommonService::class.java)
     }
+//    single { ChuckerInterceptor.Builder(androidContext()).build() }
 }
 
 val repositoryModule = module {
