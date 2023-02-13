@@ -1,73 +1,34 @@
 <resources>
-    <string name="app_name">MobilePQI</string>
+    <string name="mobile_pqi">MobilePQI</string>
     <string name="tv_deskripsi_text">E-learning untuk\nPendidikan Qiroah dan\nIbadah</string>
     <string name="btn_mulai_text">Mulai</string>
     <string name="tv_signin_text">Sign In</string>
     <string name="tv_signup_text">Sign Up</string>
-    <string name="tv_nip_nim_text">NIP/NIM</string>
+    <string name="tv_nip_nim_text">NIDN/NIP/NIM</string>
     <string name="tv_password_text">Password</string>
     <string name="tv_lupa_password_text">Lupa Password?</string>
     <string name="tv_belum_daftar_text">Belum Punya Akun?</string>
     <string name="tv_belum_daftar_click_text"><u>Daftar Sekarang</u></string>
     <string name="tv_nama_text">Nama</string>
     <string name="tv_email_text">Email</string>
-    <string name="tv_deskripsi_password_text">*minimal password mengandung 6 karakter</string>
     <string name="tv_sudah_punya_akun_text">Sudah Punya Akun?</string>
     <string name="tv_masuk_sekarang_text"><u>Masuk Sekarang</u></string>
     <string name="tv_action_bar_lupa_password_text">Lupa Password</string>
     <string name="lupa_password_deskripsi_text">Silakan masukkan email Anda pada kotak di bawah ini untuk mengatur ulang password Anda</string>
     <string name="btn_kirim_lupa_password_text">kirim</string>
     <string name="btn_location_text">Click Location</string>
-
-    <!--    Dashboard-->
-    <string name="tv_salam">Assalamu\'alaikum</string>
-    <string name="tv_kelas">PQI-2C</string>
-    <string name="tv_sholat">Sholat Ashar</string>
-    <string name="tv_lokasi">Lokasi Anda</string>
-    <string name="tv_waktu">15:06 WIB</string>
-    <string name="tv_daerah">Cawang</string>
-    <string name="tv_silabus">Silabus</string>
-    <string name="tv_ibadah">Ibadah</string>
-    <string name="tv_qiroah">Qiroah</string>
-    <string name="tv_tugas">Tugas</string>
-    <string name="tv_judul">Praktikum Qiroah dan Ibadah</string>
-    <string name="tv_update">Anda memposting tugas baru</string>
-    <string name="tv_tanggal_tugas">29 November 2022</string>
-    <string name="tv_nama_tugas">Tugas 6</string>
-    <string name="tv_deadline_tugas">Tenggat waktu : 30 Desember 2022</string>
-    <string name="tv_tanggal_hafalan">29 November 2022</string>
-    <string name="tv_nama_hafalan">Surah An-Naba</string>
-    <string name="tv_deadline_hafalan">Tenggat waktu : 30 Desember 2022</string>
-
-    <!--    Profil-->
-    <string name="tv_action_bar_profil">Profil</string>
-    <string name="tv_nama">Dosen</string>
-    <string name="tv_nomor_induk">196903161999000000</string>
-    <string name="tv_profil">Edit Profil</string>
-    <string name="tv_pengaturan">Pengaturan</string>
-    <string name="tv_logout">Log Out</string>
-
-    <!--    Profil Informasi Pribadi-->
-    <string name="tv_action_bar_informasi">Profil > Informasi Pribadi</string>
-    <string name="tv_fakultas">Fakultas</string>
-    <string name="tv_prodi">Program Studi</string>
-    <string name="tv_email">saepul@mhs.uinjkt.ac.id</string>
-    <string name="tv_password">Password</string>
-    <string name="tv_tglahir">Tanggal Lahir</string>
-    <string name="tv_nohp">No. Hp</string>
-    <string name="tv_alamat">Alamat</string>
-    <string name="btn_simpan">Simpan</string>
-
-    <!--    Profil Pengaturan -->
-    <string name="tv_action_bar_pengaturan">Profil > Pengaturan</string>
-    <string name="tv_bahasa">Bahasa</string>
-    <string name="btn_bahasa">Ubah</string>
-    <string name="tv_camera">Camera</string>
-    <string name="tv_about">About</string>
-    <string name="tv_bantuan">Bantuan</string>
-
-    <!--Profil Pengaturan Bahasa-->
-    <string name="tv_action_bar_pengaturan_bahasa">Profil > Pengaturan > Bahasa</string>
-    <string name="tv_bahasa_indo">Bahasa Indonesia</string>
-    <string name="btn_terapkan">Terapkan</string>
+    <string name="tv_kode_kelas_text">Kode Kelas</string>
+    <string name="btn_kirim_lupa_password_deksripsi_text">"Kami telah mengirim password baru ke email Anda"</string>
+    <string name="btn_oke_text">"Oke"</string>
+    <string name="tv_title_materi_qiroah">Materi Qiroah</string>
+    <string name="tv_title_materi_ibadah">Materi Ibadah</string>
+    <string name="hint_tambah_komentar">Tambahkan Komentar Anda</string>
+    <string name="tv_title_detail_materi_qiroah">Materi Qiroah > %1$s</string>
+    <string name="tv_title_detail_materi_ibadah">Materi Ibadah > %1$s</string>
+    <string name="tv_description_materi">Berikut adalah file materi pembelajaran %1$s</string>
+    <string name="tv_document_name_pdf">Materi %1$d.pdf</string>
+    <string name="tv_comment">Komentar</string>
+    <string name="tv_title_menu_materi_detail"><![CDATA[Materi Qiroah > Hukum Non Sukun dan Tanwin]]></string>
+    <string name="tv_description_menu_detail">Berikut adalah file materi pembelajaran Hukum Nun Sukun dan tanwin.</string>
+    <string name="tv_name_document">Materi 1.pdf</string>
 </resources>
