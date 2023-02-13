@@ -72,7 +72,7 @@
         tools:ignore="TouchTargetSizeCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ll_documents_uploaded"
+        android:id="@+id/cl_documents_uploaded"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -127,6 +127,6 @@
         android:text="@string/btn_simpan_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll_documents_uploaded" />
+        app:layout_constraintTop_toBottomOf="@+id/cl_documents_uploaded" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
