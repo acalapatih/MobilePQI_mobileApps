@@ -5,60 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-        android:id="@+id/action_bar_daftarkelas"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        style="@style/action_bar_blue"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_action_bar_daftarkelas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_action_bar_daftarkelas"
-        android:fontFamily="@font/inter_bold"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/action_bar_daftarkelas"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar_daftarkelas"
-        android:layout_marginStart="30dp"/>
-
     <ImageView
-        android:id="@+id/ic_buatkelas"
+        android:id="@+id/img_daftarkelas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_buat_kelas"
-        app:layout_constraintTop_toBottomOf="@id/action_bar_daftarkelas"
+        android:src="@drawable/img_daftar_kelas"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="15dp"
-        android:layout_marginStart="10dp"/>
-
-    <TextView
-        android:id="@+id/tv_buatkelas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tv_buatkelas"
-        android:fontFamily="@font/inter_medium"
-        android:textSize="16sp"
-        android:textColor="@color/black_090A0A"
-        app:layout_constraintTop_toTopOf="@id/ic_buatkelas"
-        app:layout_constraintBottom_toBottomOf="@id/ic_buatkelas"
-        app:layout_constraintStart_toEndOf="@id/ic_buatkelas"
-        android:layout_marginStart="3dp"/>
-
-    <ImageView
-    android:id="@+id/img_daftarkelas"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/img_daftar_kelas"
-    app:layout_constraintTop_toBottomOf="@+id/ic_buatkelas"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="15dp"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"/>
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
 
     <ImageView
         android:id="@+id/ic_detail_kelas"
