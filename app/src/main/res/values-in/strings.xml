@@ -40,4 +40,5 @@
     <string name="btn_batal_text">Batal</string>
     <string name="tv_tambah_file_silabus_dialog">Silabus berhasil disimpan</string>
     <string name="tv_hapus_file_silabus_dialog">Yakin menghapus file silabus?</string>
+    <string name="tv_empty_silabus_text">Dokumen Belum Diunggah</string>
 </resources>
