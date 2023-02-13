@@ -32,4 +32,9 @@
     <string name="tv_title_menu_materi_detail"><![CDATA[Materi Qiroah > Hukum Non Sukun dan Tanwin]]></string>
     <string name="tv_description_menu_detail">Berikut adalah file materi pembelajaran Hukum Nun Sukun dan tanwin.</string>
     <string name="tv_name_document">Materi 1.pdf</string>
+    <string name="tv_silabus_text">Silabus</string>
+    <string name="btn_tambah_file_text">Tambah File</string>
+    <string name="btn_hapus_file_text">Hapus File</string>
+    <string name="tv_silabus_pdf_text">Silabus.pdf</string>
+    <string name="btn_simpan_text">Simpan</string>
 </resources>
