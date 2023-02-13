@@ -49,16 +49,16 @@
         android:layout_marginStart="3dp"/>
 
     <ImageView
-    android:id="@+id/img_daftarkelas"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/img_daftar_kelas"
-    app:layout_constraintTop_toBottomOf="@+id/ic_buatkelas"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    android:layout_marginTop="15dp"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"/>
+        android:id="@+id/img_daftarkelas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_daftar_kelas"
+        app:layout_constraintTop_toBottomOf="@+id/ic_buatkelas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"/>
 
     <ImageView
         android:id="@+id/ic_detail_kelas"
