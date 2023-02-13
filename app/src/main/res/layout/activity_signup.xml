@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:text="@string/app_name"
+        android:text="@string/mobile_pqi"
         android:textColor="@color/black"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,10 +112,42 @@
                 android:hint="@string/tv_nip_nim_text"
                 android:inputType="numberSigned"
                 android:maxLength="20"
-                app:layout_constraintBottom_toTopOf="@+id/tv_email_signup"
+                app:layout_constraintBottom_toTopOf="@+id/tv_kode_kelas_signup"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_nip_nim_signup" />
+
+            <TextView
+                android:id="@+id/tv_kode_kelas_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/tv_kode_kelas_text"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_nip_nim_signup" />
+
+            <EditText
+                android:id="@+id/et_kode_kelas_signup"
+                style="@style/FieldRounded10dp"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="20dp"
+                android:autofillHints="@string/tv_kode_kelas_text"
+                android:hint="@string/tv_kode_kelas_text"
+                android:inputType="text"
+                android:maxLength="6"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/tv_email_signup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_kode_kelas_signup" />
 
             <TextView
                 android:id="@+id/tv_email_signup"
@@ -128,7 +160,7 @@
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_nip_nim_signup" />
+                app:layout_constraintTop_toBottomOf="@+id/et_kode_kelas_signup" />
 
             <EditText
                 android:id="@+id/et_email_signup"
@@ -187,18 +219,6 @@
                 app:layout_constraintStart_toStartOf="@+id/et_password_signup"
                 app:layout_constraintTop_toTopOf="@+id/et_password_signup" />
 
-            <TextView
-                android:id="@+id/tv_deskripsi_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="21dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/inter_medium"
-                android:text="@string/tv_deskripsi_password_text"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/et_password_signup" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_signup"
                 style="@style/ButtonBlueRounded30dp"
@@ -208,9 +228,10 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="30dp"
                 android:text="@string/tv_signup_text"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_deskripsi_password" />
+                app:layout_constraintTop_toBottomOf="@+id/et_password_signup" />
 
             <TextView
                 android:id="@+id/tv_sudah_daftar"
