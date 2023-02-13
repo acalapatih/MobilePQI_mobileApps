@@ -41,7 +41,7 @@ class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
             startActivityForResult(backIntent, 0)
         }
 
-        val editText_tglahir = binding.icEditTglahir
+        val editTextTglahir = binding.icEditTglahir
         val date =
             OnDateSetListener { _, year, month, day ->
                 myCalendar[Calendar.YEAR] = year
@@ -50,7 +50,7 @@ class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
                 updateLabel()
             }
 
-        editText_tglahir.setOnClickListener {
+        editTextTglahir.setOnClickListener {
             DatePickerDialog(
                 this@ProfileInfoActivity, date,
                 myCalendar[Calendar.YEAR],
