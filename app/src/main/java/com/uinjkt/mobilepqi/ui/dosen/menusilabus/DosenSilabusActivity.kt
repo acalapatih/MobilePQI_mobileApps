@@ -12,7 +12,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context) {
-            val starter = Intent(context,ActivityDosenSilabusBinding::class.java)
+            val starter = Intent(context, ActivityDosenSilabusBinding::class.java)
             context.startActivity(starter)
         }
     }
@@ -22,7 +22,6 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dosen_silabus)
 
         binding.ivCloseSilabusDosen.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -30,6 +29,23 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
 
         onBackPressedDispatcher.addCallback(this) {
             finish()
+        }
+
+        binding.btnTambahFile.setOnClickListener {
+            showOneActionDialog(
+                message = getString(R.string.tv_tambah_file_silabus_dialog),
+                btnMessage = getString(R.string.btn_oke_text),
+            )
+        }
+
+        binding.btnHapusFile.setOnClickListener {
+            showTwoActionDialog(
+                message = getString(R.string.tv_hapus_file_silabus_dialog),
+                btnPositiveMessage = getString(R.string.btn_oke_text),
+                btnNegativeMessage = getString(R.string.btn_batal_text),
+                onPositiveButtonClicked = {
+                }
+            )
         }
     }
 }

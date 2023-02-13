@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
@@ -39,16 +40,16 @@
             android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuibadah.MahasiswaMateriDetailIbadahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />
