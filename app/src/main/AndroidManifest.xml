@@ -7,7 +7,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -26,6 +31,18 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.mahasiswa.menuibadah.MahasiswaMateriDetailIbadahActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />

@@ -32,7 +32,8 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         }
 
         // animation for the splash screen
-        val transitionAnimation = AnimationUtils.loadAnimation(this, R.anim.splash_screen_transition)
+        val transitionAnimation =
+            AnimationUtils.loadAnimation(this, R.anim.splash_screen_transition)
         // set the animation
         binding.ivAwanBintang.animation = transitionAnimation
         binding.ivLogoPujitaklim.animation = transitionAnimation
@@ -44,9 +45,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         // launch the OnboardingActivity with delay 1500ms
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            // start the OnboardingActivity
             OnboardingActivity.start(this)
-            // remove this activity from the stack
             finish()
         }, 1500)
     }
