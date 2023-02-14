@@ -39,6 +39,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
     private fun initWebView() {
         with(binding.wvSilabusPdf) {
             settings.javaScriptEnabled = true
+            settings.builtInZoomControls = true
             loadUrl("https://docs.google.com/gview?embedded=true&url=" + "https://www.orimi.com/pdf-test.pdf")
             webViewClient= object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
