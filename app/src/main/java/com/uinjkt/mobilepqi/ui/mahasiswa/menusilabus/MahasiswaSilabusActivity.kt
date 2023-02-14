@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,6 +28,9 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
         super.onCreate(savedInstanceState)
         initWebView()
 
+        //check is initwebview is null
+        
+
         binding.ivCloseSilabusMahasiswa.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -36,6 +40,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
         }
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun initWebView() {
         with(binding.wvSilabusPdf) {
             settings.loadWithOverviewMode = true
