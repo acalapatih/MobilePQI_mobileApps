@@ -7,6 +7,7 @@ import androidx.activity.addCallback
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaSilabusBinding
 
+
 class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>() {
     companion object {
         @JvmStatic
@@ -29,5 +30,8 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+
+        binding.wvSilabusPdf.settings.builtInZoomControls = true
+        binding.wvSilabusPdf.loadUrl("https://docs.google.com/gview?embedded=true&url=" + "https://www.orimi.com/pdf-test.pdf");
     }
 }
