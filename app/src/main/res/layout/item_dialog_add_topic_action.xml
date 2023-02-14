@@ -28,11 +28,11 @@
         android:textColor="@color/black_090A0A"
         android:textSize="16sp"
         android:hint="@string/hint_et_insert_topic_materi"
-        android:background="@null"
+        android:background="@drawable/bg_rectangle_greywhitestroke_8dp"
         android:inputType="textNoSuggestions"
         android:paddingHorizontal="16dp"
         android:importantForAutofill="no"
-        android:layout_marginVertical="24dp"/>
+        android:layout_marginVertical="24dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_tambahkan_materi_dosen"
@@ -46,9 +46,10 @@
 
     <TextView
         android:id="@+id/tv_batal_tambahkan_materi_dosen"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:gravity="center"
+        android:layout_gravity="center_horizontal"
         android:fontFamily="@font/inter_medium"
         android:textColor="@color/purple_6b4eff"
         android:text="@string/tv_batal_tambahkan_materi_dosen"
