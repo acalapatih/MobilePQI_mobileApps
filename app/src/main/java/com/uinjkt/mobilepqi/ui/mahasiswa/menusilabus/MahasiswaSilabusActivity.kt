@@ -26,8 +26,9 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         initWebView()
-        
+
         binding.ivCloseSilabusMahasiswa.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
