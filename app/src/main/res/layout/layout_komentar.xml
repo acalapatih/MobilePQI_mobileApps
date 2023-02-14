@@ -19,23 +19,26 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/img_profil"
-        tools:layout_editor_absoluteY="9dp" />
+        tools:layout_editor_absoluteY="9dp"
+        android:contentDescription="@string/desc_ic_image_profile"/>
 
     <EditText
         android:id="@+id/et_insert_comments"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
+        android:layout_marginHorizontal="14dp"
         android:autofillHints="Tambahkan Komentar Anda"
         android:background="@null"
         android:fontFamily="@font/inter_medium"
         android:gravity="center_vertical"
         android:hint="@string/hint_tambah_komentar"
-        android:inputType="text"
+        android:inputType="textMultiLine"
+        android:maxLines="4"
         android:labelFor="@id/cl_comment_box"
         android:textColor="@color/black_090A0A"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_icon_send"
         app:layout_constraintStart_toEndOf="@id/ic_image_profile"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Tambahkan komentar anda" />
@@ -47,6 +50,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_sent" />
+        app:srcCompat="@drawable/ic_sent"
+        android:contentDescription="@string/desc_iv_icon_send"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

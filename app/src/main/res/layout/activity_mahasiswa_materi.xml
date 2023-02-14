@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <View
         android:id="@+id/action_bar_menu_mahasiswa"
@@ -18,13 +18,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:fontFamily="@font/inter_bold"
-        tools:text="Materi Qiroah"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/action_bar_menu_mahasiswa"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_menu_mahasiswa"
         app:layout_constraintStart_toStartOf="@id/action_bar_menu_mahasiswa"
         app:layout_constraintTop_toTopOf="@id/action_bar_menu_mahasiswa"
-        app:layout_constraintWidth_percent="0.7" />
+        app:layout_constraintWidth_percent="0.7"
+        tools:text="Materi Qiroah" />
 
     <ImageView
         android:id="@+id/iv_icon_close"
@@ -34,14 +34,17 @@
         android:src="@drawable/ic_close"
         app:layout_constraintBottom_toBottomOf="@id/action_bar_menu_mahasiswa"
         app:layout_constraintEnd_toEndOf="@id/action_bar_menu_mahasiswa"
-        app:layout_constraintTop_toTopOf="@id/action_bar_menu_mahasiswa" />
+        app:layout_constraintTop_toTopOf="@id/action_bar_menu_mahasiswa"
+        android:contentDescription="@string/desc_iv_icon_close"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view_menu_mahasiswa"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_height="0dp"
+        android:paddingBottom="72dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/action_bar_menu_mahasiswa"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        tools:listitem="@layout/recycle_view_list_menu_mahasiswa" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
