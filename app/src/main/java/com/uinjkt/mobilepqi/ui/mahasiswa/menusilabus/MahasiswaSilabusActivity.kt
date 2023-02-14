@@ -31,7 +31,8 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
             finish()
         }
 
+        binding.wvSilabusPdf.settings.javaScriptEnabled = true
         binding.wvSilabusPdf.settings.builtInZoomControls = true
-        binding.wvSilabusPdf.loadUrl("https://docs.google.com/gview?embedded=true&url=" + "https://www.orimi.com/pdf-test.pdf");
+        binding.wvSilabusPdf.loadUrl("https://docs.google.com/gview?embedded=true&url=" + "https://www.orimi.com/pdf-test.pdf")
     }
 }
