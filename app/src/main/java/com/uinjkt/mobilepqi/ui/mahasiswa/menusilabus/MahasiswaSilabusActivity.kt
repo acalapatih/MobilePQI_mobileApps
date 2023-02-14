@@ -3,6 +3,9 @@ package com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.activity.addCallback
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaSilabusBinding
@@ -22,6 +25,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initWebView()
 
         binding.ivCloseSilabusMahasiswa.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -30,9 +34,21 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
 
-        binding.wvSilabusPdf.settings.javaScriptEnabled = true
-        binding.wvSilabusPdf.settings.builtInZoomControls = true
-        binding.wvSilabusPdf.loadUrl("https://docs.google.com/gview?embedded=true&url=" + "https://www.orimi.com/pdf-test.pdf")
+    private fun initWebView() {
+        with(binding.wvSilabusPdf) {
+            settings.javaScriptEnabled = true
+            loadUrl("https://docs.google.com/gview?embedded=true&url=" + "https://www.orimi.com/pdf-test.pdf")
+            webViewClient= object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(
+                    view: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    view?.loadUrl(request?.url.toString())
+                    return true
+                }
+            }
+        }
     }
 }
