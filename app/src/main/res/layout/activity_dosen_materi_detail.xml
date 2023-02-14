@@ -149,9 +149,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_marginHorizontal="75dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/et_desc_detail_materi_dosen"
         app:layout_constraintStart_toStartOf="@id/et_desc_detail_materi_dosen"
@@ -177,7 +178,6 @@
             android:layout_marginBottom="20dp"
             android:textColor="@color/blue_06283d"
             />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_posting_materi_dosen"
             style="@style/ButtonSimpanHapusPostingMateriDosen"

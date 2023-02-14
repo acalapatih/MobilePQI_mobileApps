@@ -70,11 +70,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycle_view_menu_dosen"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_icon_add_topic"
                 tools:itemCount="20"
                 tools:listitem="@layout/recycle_view_list_menu_dosen" />
