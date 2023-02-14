@@ -14,4 +14,8 @@
     <color name="black_06283D">#06283D </color>
     <color name="red_ff414c">#FF414C</color>
     <color name="grey_acacac">#ACACAC</color>
+    <color name="white_f5f5f5">#F5F5F5</color>
+    <color name="red_c30d0d">#C30D0D</color>
+    <color name="purple_6b4eff">#6b4eff</color>
+    <color name="white_e3e5e5">#E3E5E5</color>
 </resources>

@@ -13,9 +13,10 @@ import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaMateriAdapter
 
 
-class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBinding>() {
+class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBinding>(), MenuMahasiswaMateriAdapter.OnUserClickListener {
 
-    private lateinit var listMateri: List<DataMateri>
+    private lateinit var listMateri: MutableList<DataMateri>
+    private lateinit var mahasiswaMateriAdapter: MenuMahasiswaMateriAdapter
 
     companion object {
         @JvmStatic
@@ -34,19 +35,14 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         listMateri = DataSourceMateriQiroah().loadDataMenuQiroah()
 
         // Initialize Adapter
-        val adapter = MenuMahasiswaMateriAdapter(listMateri)
-        binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)
-        binding.recycleViewMenuMahasiswa.adapter =  adapter
+        mahasiswaMateriAdapter = MenuMahasiswaMateriAdapter(this, listMateri, this)
+        binding.recycleViewMenuMahasiswa.adapter =  mahasiswaMateriAdapter
 
         // Initialize Title
         binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_qiroah)
 
-        // adapterOnClickListener
-        adapter.setOnItemClickListener(object : MenuMahasiswaMateriAdapter.onItemClickListener {
-            override fun onItemClick(position: Int) {
-                MahasiswaMateriDetailQiroahActivity.start(this@MahasiswaMateriQiroahActivity, listMateri[position].idMateri, listMateri[position].titleMenuName)
-            }
-        })
+        binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)
+
 
         // icon Close onClickListener
         binding.ivIconClose.setOnClickListener {
@@ -56,5 +52,9 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
+
+    override fun onUserClicked(position: Int) {
+        MahasiswaMateriDetailQiroahActivity.start(this@MahasiswaMateriQiroahActivity, listMateri[position].idMateri, listMateri[position].titleMenuName)
     }
 }
