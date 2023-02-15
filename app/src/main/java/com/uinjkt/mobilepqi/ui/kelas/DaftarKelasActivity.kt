@@ -3,8 +3,12 @@ package com.uinjkt.mobilepqi.ui.kelas
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.common.BaseActivity
+import com.uinjkt.mobilepqi.data.DataKelas
+import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityDaftarKelasBinding
+import com.uinjkt.mobilepqi.ui.kelas.adapter.DaftarKelasAdapter
 
 class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>() {
     companion object{
@@ -20,21 +24,21 @@ class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        val buatkelas = binding.icBuatkelas
-        buatkelas.setOnClickListener {view ->
-            val buatkelasIntent = Intent(view.context, BuatKelasActivity::class.java)
-            startActivityForResult(buatkelasIntent, 0)
-        }
-        val buatkelas2 = binding.tvBuatkelas
-        buatkelas2.setOnClickListener {view ->
-            val buatkelasIntent = Intent(view.context, BuatKelasActivity::class.java)
-            startActivityForResult(buatkelasIntent, 0)
+        val buatkelas = binding.tvBuatkelas
+        buatkelas.setOnClickListener {
+            BuatKelasActivity.start(this)
         }
 
-        val detailKelasIcon = binding.icDetailKelas
-        detailKelasIcon.setOnClickListener{view ->
-            val detailKelasIntent = Intent(view.context, DetailKelasActivity::class.java)
-            startActivityForResult(detailKelasIntent, 0)
+        val detailKelasIcon = binding.recycleViewKelas
+        detailKelasIcon.setOnClickListener {
+            start(this)
         }
+
+        val listKelas = DataSourceKelasDosenMahasiswa().dataKelas()
+
+        val daftarKelasAdapter =
+            DaftarKelasAdapter(this, listKelas as MutableList<DataKelas>, listener = null)
+        binding.recycleViewKelas.layoutManager = LinearLayoutManager(this)
+        binding.recycleViewKelas.adapter = daftarKelasAdapter
     }
 }

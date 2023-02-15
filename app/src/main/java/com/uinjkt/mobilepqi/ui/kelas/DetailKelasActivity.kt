@@ -3,6 +3,7 @@ package com.uinjkt.mobilepqi.ui.kelas
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.addCallback
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDetailKelasBinding
 
@@ -22,21 +23,16 @@ class DetailKelasActivity: BaseActivity<ActivityDetailKelasBinding>() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         val backIcon = binding.icBackWhite
-        backIcon.setOnClickListener {view ->
-            val backIntent = Intent(view.context, DaftarKelasActivity::class.java)
-            startActivityForResult(backIntent, 0)
-        }
-
-        val tambahDosenIcon = binding.icTambahDosen
-        tambahDosenIcon.setOnClickListener {view ->
-            val tambahDosenIntent = Intent(view.context, TambahDosenActivity::class.java)
-            startActivityForResult(tambahDosenIntent, 0)
+        backIcon.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+            onBackPressedDispatcher.addCallback(this) {
+                finish()
+            }
         }
 
         val tambahDosenText = binding.tvLabelTambahDosen
-        tambahDosenText.setOnClickListener {view ->
-            val tambahDosenIntent = Intent(view.context, TambahDosenActivity::class.java)
-            startActivityForResult(tambahDosenIntent, 0)
+        tambahDosenText.setOnClickListener {
+            TambahDosenActivity.start(this)
         }
     }
 }

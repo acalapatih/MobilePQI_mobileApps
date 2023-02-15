@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profil_mahasiswa"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/img_default_profil"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_nama_mahasiswa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/tv_nama_mahasiswa"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/img_profil_mahasiswa"
+            app:layout_constraintStart_toEndOf="@id/img_profil_mahasiswa"
+            android:layout_marginStart="25dp"/>
+
+        <View
+            android:id="@+id/line_mahasiswa"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_mahasiswa"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginEnd="20dp"/>
+
+        <TextView
+            android:id="@+id/tv_nim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tv_nim"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/line_mahasiswa"
+            app:layout_constraintStart_toStartOf="@id/tv_nama_mahasiswa"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/tv_nim_mahasiswa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@string/tv_nim_mahasiswa"
+            android:fontFamily="@font/inter"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="@id/tv_nim"
+            app:layout_constraintBottom_toBottomOf="@id/tv_nim"
+            app:layout_constraintStart_toEndOf="@id/tv_nim"
+            android:layout_marginStart="2dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
