@@ -62,7 +62,9 @@
         <activity
             android:name=".ui.dosen.menuibadah.DosenMateriDetailIbadahActivity"
             android:exported="false"/>
-
+        <activity
+            android:name=".ui.mahasiswa.menutugas.MahasiswaTugasActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />

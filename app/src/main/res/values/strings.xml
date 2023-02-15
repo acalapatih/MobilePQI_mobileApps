@@ -61,4 +61,6 @@
     <string name="desc_iv_icon_send">Icon Send</string>
     <string name="desc_iv_icon_close">Icon Close</string>
     <string name="desc_btn_menu_detail">Icon Right Arrow</string>
+    <string name="btn_jenis_tugas">Jenis Tugas</string>
+    <string name="tv_titleappbar_tugas">Tugas</string>
 </resources>
