@@ -114,6 +114,7 @@
             android:layout_height="30dp"
             android:background="@color/white"
             android:src="@drawable/ic_edit"
+            android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/input_fakultas"
             app:layout_constraintBottom_toBottomOf="@id/input_fakultas"
             app:layout_constraintEnd_toEndOf="@id/input_fakultas"/>
@@ -147,6 +148,7 @@
             android:layout_height="24dp"
             android:background="@color/white"
             android:src="@drawable/ic_edit"
+            android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/input_prodi"
             app:layout_constraintBottom_toBottomOf="@id/input_prodi"
             app:layout_constraintEnd_toEndOf="@id/input_prodi"/>
@@ -181,6 +183,7 @@
             android:layout_height="24dp"
             android:background="@color/white"
             android:src="@drawable/ic_edit"
+            android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/input_password"
             app:layout_constraintBottom_toBottomOf="@id/input_password"
             app:layout_constraintEnd_toEndOf="@id/input_password"/>
@@ -209,12 +212,13 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/ic_edit_tglahir"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
             android:src="@drawable/ic_edit"
+            android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/input_tglahir"
             app:layout_constraintBottom_toBottomOf="@id/input_tglahir"
             app:layout_constraintEnd_toEndOf="@id/input_tglahir"/>
@@ -243,12 +247,13 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/ic_edit_nohp"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
             android:src="@drawable/ic_edit"
+            android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/input_nohp"
             app:layout_constraintBottom_toBottomOf="@id/input_nohp"
             app:layout_constraintEnd_toEndOf="@id/input_nohp"/>
@@ -276,12 +281,13 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"/>
 
-        <ImageView
+        <ImageButton
             android:id="@+id/ic_edit_alamat"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@color/white"
             android:src="@drawable/ic_edit"
+            android:importantForAccessibility="no"
             app:layout_constraintTop_toTopOf="@id/input_alamat"
             app:layout_constraintBottom_toBottomOf="@id/input_alamat"
             app:layout_constraintEnd_toEndOf="@id/input_alamat"/>
