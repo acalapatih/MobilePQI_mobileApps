@@ -9,7 +9,9 @@ class DataSourceKelasDosenMahasiswa {
 
     fun dataDosen() : MutableList<DataDosen> {
         return mutableListOf(
-            DataDosen(1, "Dosen1", "NIP", 196903161999000000)
+            DataDosen(1, "Dosen 1", "NIP", 196903161999000000),
+            DataDosen(2, "Dosen 2", "NIP", 196903162999000000),
+            DataDosen(3, "Dosen 3", "NIP", 196903163999000000)
         )
     }
 

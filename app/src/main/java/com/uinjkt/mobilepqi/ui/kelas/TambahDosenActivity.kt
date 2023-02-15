@@ -3,7 +3,6 @@ package com.uinjkt.mobilepqi.ui.kelas
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.R
@@ -16,6 +15,8 @@ import com.uinjkt.mobilepqi.ui.kelas.adapter.TambahDosenAdapter
 class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>(){
     private lateinit var listDosen: MutableList<DataDosen>
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
+
+    private val listDosenSelected: MutableList<DataDosen> = mutableListOf()
 
     companion object {
         @JvmStatic
@@ -30,14 +31,10 @@ class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
 
         val backIcon = binding.icBackWhite
         backIcon.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-            onBackPressedDispatcher.addCallback(this) {
-                finish()
-            }
         }
 
         binding.rvTambahDosen.setOnClickListener{
@@ -53,9 +50,17 @@ class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>(){
 
         listDosen = DataSourceKelasDosenMahasiswa().dataDosen()
 
-        val tambahDosenAdapter =
-            TambahDosenAdapter(this, listDosen)
+        tambahDosenAdapter = TambahDosenAdapter(this, listDosen)
         binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
         binding.rvTambahDosen.adapter = tambahDosenAdapter
+
+        tambahDosenAdapter.onDosenSelected = { data ->
+            if (listDosenSelected.contains(data)) {
+                listDosenSelected.remove(data)
+            } else {
+                listDosenSelected.add(data)
+            }
+            binding.icTambahDosen.isVisible = listDosenSelected.isNotEmpty()
+        }
     }
 }

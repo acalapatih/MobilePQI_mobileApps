@@ -15,6 +15,8 @@ class TambahDosenAdapter(
     private val dataset : MutableList<DataDosen>,
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
+    var onDosenSelected: ((data: DataDosen) -> Unit)? = null
+
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTambahDosenBinding.bind(view)
         fun bindItem(tambahdosen: DataDosen) {
@@ -24,6 +26,7 @@ class TambahDosenAdapter(
 
             binding.cvTambahDosen.setOnClickListener {
                 binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
+                onDosenSelected?.invoke(tambahdosen)
             }
         }
     }
