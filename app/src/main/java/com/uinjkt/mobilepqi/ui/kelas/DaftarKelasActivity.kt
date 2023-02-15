@@ -10,7 +10,10 @@ import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityDaftarKelasBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.DaftarKelasAdapter
 
-class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>() {
+class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>(), DaftarKelasAdapter.OnUserClickListener {
+    private lateinit var listKelas: MutableList<DataKelas>
+    private lateinit var daftarKelasAdapter: DaftarKelasAdapter
+
     companion object{
         @JvmStatic
         fun start(context: Context) {
@@ -29,16 +32,22 @@ class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>() {
             BuatKelasActivity.start(this)
         }
 
-        val detailKelasIcon = binding.recycleViewKelas
-        detailKelasIcon.setOnClickListener {
-            start(this)
-        }
-
-        val listKelas = DataSourceKelasDosenMahasiswa().dataKelas()
+        listKelas = DataSourceKelasDosenMahasiswa().dataKelas()
 
         val daftarKelasAdapter =
-            DaftarKelasAdapter(this, listKelas as MutableList<DataKelas>, listener = null)
-        binding.recycleViewKelas.layoutManager = LinearLayoutManager(this)
-        binding.recycleViewKelas.adapter = daftarKelasAdapter
+            DaftarKelasAdapter(this, listKelas, this)
+        binding.rvDaftarKelas.layoutManager = LinearLayoutManager(this)
+        binding.rvDaftarKelas.adapter = daftarKelasAdapter
+
+
+    }
+
+    override fun onUserClicked(position: Int, clicked: String) {
+        if (clicked == "anggota") {
+            DetailKelasActivity.start(this)
+        }
+        else {
+            BuatKelasActivity.start(this)
+        }
     }
 }

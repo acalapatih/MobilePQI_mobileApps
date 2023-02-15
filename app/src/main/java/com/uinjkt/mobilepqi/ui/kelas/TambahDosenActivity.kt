@@ -4,12 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
-import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
+import com.uinjkt.mobilepqi.data.DataDosen
+import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
+import com.uinjkt.mobilepqi.ui.kelas.adapter.TambahDosenAdapter
 
-class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>() {
+class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>(){
+    private lateinit var listDosen: MutableList<DataDosen>
+    private lateinit var tambahDosenAdapter: TambahDosenAdapter
+
     companion object {
         @JvmStatic
         fun start(context: Context) {
@@ -33,16 +40,8 @@ class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>() {
             }
         }
 
-        val tambahDosenIcon = binding.icTambahDosen
-        tambahDosenIcon.isInvisible = true
-
-//        val pilihDosenIcon = binding.icPilihDosen
-//        pilihDosenIcon.isInvisible = true
-
-        val dosen = binding.rvTambahDosen
-        dosen.setOnClickListener {
-            tambahDosenIcon.isInvisible = false
-//            pilihDosenIcon.isInvisible = false
+        binding.rvTambahDosen.setOnClickListener{
+            binding.icTambahDosen.isVisible = !binding.icTambahDosen.isVisible
         }
 
         binding.icTambahDosen.setOnClickListener {
@@ -51,5 +50,12 @@ class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>() {
                 btnMessage = getString(R.string.btnMessage_tambah_dosen)
             )
         }
+
+        listDosen = DataSourceKelasDosenMahasiswa().dataDosen()
+
+        val tambahDosenAdapter =
+            TambahDosenAdapter(this, listDosen)
+        binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
+        binding.rvTambahDosen.adapter = tambahDosenAdapter
     }
 }

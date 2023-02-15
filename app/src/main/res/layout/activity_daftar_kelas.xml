@@ -50,7 +50,7 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycle_view_kelas"
+                android:id="@+id/rv_daftar_kelas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/recycle_view_daftar_kelas"

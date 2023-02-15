@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/recycle_view_tambah_dosen"
-                tools:itemCount="2"/>
+                tools:itemCount="7"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

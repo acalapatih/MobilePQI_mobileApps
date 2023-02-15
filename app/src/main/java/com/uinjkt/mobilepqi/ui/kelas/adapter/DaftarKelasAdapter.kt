@@ -14,13 +14,6 @@ class DaftarKelasAdapter(
     private val dataset: MutableList<DataKelas>,
     val listener: OnUserClickListener? = null
 ) : RecyclerView.Adapter<DaftarKelasAdapter.ViewHolder>() {
-    private lateinit var mListener : DaftarKelasAdapter.OnItemClickListener
-    interface OnItemClickListener {
-        fun onItemClick()
-    }
-    fun setOnItemClickListener(listener : DaftarKelasAdapter.OnItemClickListener) {
-        mListener = listener
-    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewDaftarKelasBinding.bind(view)
@@ -29,6 +22,13 @@ class DaftarKelasAdapter(
             binding.tvRuangkelas.text = kelas.ruangKelas
             binding.tvJadwalkelas.text = kelas.jadwalKelas
             binding.tvJumlahAnggotakelas.text = kelas.anggotaKelas.toString()
+
+            binding.tvJumlahAnggotakelas.setOnClickListener {
+                listener?.onUserClicked(kelas.idKelas-1, "anggota")
+            }
+            binding.icDetailKelas.setOnClickListener {
+                listener?.onUserClicked(kelas.idKelas-1, "detailkelas")
+            }
         }
     }
 
@@ -49,8 +49,7 @@ class DaftarKelasAdapter(
     override fun getItemCount(): Int = dataset.size
 
     interface OnUserClickListener {
-        fun onUserClicked(position: Int)
+        fun onUserClicked(position: Int, clicked: String)
     }
 
-    companion object
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.data.DataDosen
@@ -12,7 +13,6 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
 class TambahDosenAdapter(
     private val context: Context,
     private val dataset : MutableList<DataDosen>,
-    val listener: OnUserClickListener? = null
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -21,6 +21,10 @@ class TambahDosenAdapter(
             binding.tvNamaDosen.text = tambahdosen.nama
             binding.tvNip.text = tambahdosen.nip
             binding.tvNipDosen.text = tambahdosen.nipdosen.toString()
+
+            binding.cvTambahDosen.setOnClickListener {
+                binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
+            }
         }
     }
 
@@ -39,8 +43,4 @@ class TambahDosenAdapter(
     }
 
     override fun getItemCount(): Int = dataset.size
-
-    interface OnUserClickListener {
-        fun onUserClicked(position: Int)
-    }
 }
