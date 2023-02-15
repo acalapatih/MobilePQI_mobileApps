@@ -93,7 +93,7 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
                 val getText = etInsertTopicText.text.toString()
                 DataSourceMateriIbadah().addDataMenuIbadah(getText)
                 dialog.dismiss()
-                showOneActionThinFontDialog("Materi Berhasil Ditambahkan", "Okay")
+                showOneActionDialog("Materi Berhasil Ditambahkan", "Okay")
             }
 
             tvBatalTambahkanMateriDosen.setOnClickListener {

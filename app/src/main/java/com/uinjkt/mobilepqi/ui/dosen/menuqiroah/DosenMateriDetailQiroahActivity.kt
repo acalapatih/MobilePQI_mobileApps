@@ -43,7 +43,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         }
 
         binding.btnSimpanMateriDosen.setOnClickListener {
-            showOneActionThinFontDialog("Materi Berhasil Disimpan", "Okay")
+            showOneActionDialog("Materi Berhasil Disimpan", "Okay")
         }
 
         binding.btnHapusMateriDosen.setOnClickListener {
@@ -54,7 +54,10 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 "Ya",
                 "Tidak",
                 onPositiveButtonClicked = {
-                    showOneActionThinFontDialog("Materi Berhasil Dihapus", "Okay")
+                    showOneActionDialogWithInvoke("Materi Berhasil Dihapus", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
+
                 })
         }
 
