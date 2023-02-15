@@ -62,19 +62,35 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/rv_list_tugas_mahasiswa_semua"
                 tools:listitem="@layout/recycle_view_jenis_tugas" />
+
+            <TextView
+                android:id="@+id/tv_tugas_praktikum_qiroah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_mahasiswa_semua"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:text="Praktikum Qiroah"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="@font/inter_bold"
+                android:paddingVertical="14dp"
+                android:layout_marginHorizontal="16dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list_tugas_mahasiswa_semua"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_mahasiswa_semua"
+                app:layout_constraintTop_toBottomOf="@id/tv_tugas_praktikum_qiroah"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 tools:listitem="@layout/recycle_view_list_menu_dosen"
                 android:scrollbarThumbVertical="@null"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
