@@ -1,12 +1,17 @@
 package com.uinjkt.mobilepqi.ui.dosen.menuibadah
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.view.ViewGroup
+import android.view.Window
 import androidx.activity.addCallback
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenMateriDetailBinding
+import com.uinjkt.mobilepqi.databinding.ItemDialogOneActionThinFontBinding
 
 class DosenMateriDetailIbadahActivity : BaseActivity<ActivityDosenMateriDetailBinding>() {
     companion object {
@@ -53,9 +58,39 @@ class DosenMateriDetailIbadahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 "Ya",
                 "Tidak",
                 onPositiveButtonClicked = {
-                    showOneActionThinFontDialog("Materi Berhasil Dihapus", "Okay")
+                    showOneActionThinFontDialogInvoke("Materi Berhasil Dihapus", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                 })
         }
 
+    }
+
+    private fun showOneActionThinFontDialogInvoke(message: String, btnMessage: String, onButtonClicked: () -> Unit) {
+        val dialog = Dialog(this)
+        val dialogBinding = ItemDialogOneActionThinFontBinding.inflate(layoutInflater)
+        val window = dialog.window
+
+        window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(dialogBinding.root)
+
+        val deviceWidth: Int = Resources.getSystem().displayMetrics.widthPixels
+        val margin = (60 * Resources.getSystem().displayMetrics.density).toInt()
+        val width: Int = deviceWidth - margin
+        window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.setCancelable(false)
+
+        with(dialogBinding) {
+            tvMessage.text = message
+            btnOkay.text = btnMessage
+            btnOkay.setOnClickListener {
+                onButtonClicked.invoke()
+                dialog.dismiss()
+            }
+
+        }
+
+        dialog.show()
     }
 }
