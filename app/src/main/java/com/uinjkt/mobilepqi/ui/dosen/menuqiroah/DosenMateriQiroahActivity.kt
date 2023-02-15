@@ -94,7 +94,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                 val getText = etInsertTopicText.text.toString()
                 Log.d("TestPrint", getText)
                 DataSourceMateriQiroah().addDataMenuQiroah(getText)
-                showOneActionThinFontDialog("Materi Berhasil Ditambahkan", "Okay")
+                showOneActionDialog("Materi Berhasil Ditambahkan", "Okay")
                 dialog.dismiss()
             }
 
