@@ -8,7 +8,8 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
@@ -23,6 +24,12 @@
         android:theme="@style/Theme.MobilePQI"
         tools:targetApi="31">
         <activity
+            android:name=".ui.dosen.menusilabus.DosenSilabusActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mahasiswa.menusilabus.MahasiswaSilabusActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.lupapassword.LupaPasswordActivity"
             android:exported="false" />
         <activity
@@ -33,16 +40,29 @@
             android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".ui.mahasiswa.menuibadah.MahasiswaMateriDetailIbadahActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.dosen.menuqiroah.DosenMateriQiroahActivity"
             android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menuqiroah.DosenMateriDetailQiroahActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menuibadah.DosenMateriIbadahActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menuibadah.DosenMateriDetailIbadahActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />
@@ -52,15 +72,15 @@
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
+        </activity>
+        <activity
+            android:name=".ui.dashboard.DashboardActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ui.dashboard.DashboardActivity"
-            android:exported="true">
         </activity>
         <activity
             android:name=".ui.profile.ProfileActivity"
