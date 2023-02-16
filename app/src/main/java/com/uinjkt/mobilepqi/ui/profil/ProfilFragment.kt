@@ -14,7 +14,7 @@ class ProfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val close = binding.icClose
+//        val close = binding.icClose
 //        close.setOnClickListener {view ->
 //            DashboardFragment.start(this)
 //        }

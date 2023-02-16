@@ -4,28 +4,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/ic_back"
-        android:layout_width="34dp"
-        android:layout_height="32dp"
-        android:src="@drawable/ic_arrow_circle_left_bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="18dp"/>
+    <View
+        android:id="@+id/action_bar_pengaturan"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        style="@style/action_bar_blue"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tv_action_bar"
+        android:id="@+id/tv_action_bar_pengaturan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tv_action_bar_pengaturan"
         android:fontFamily="@font/inter_bold"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@id/ic_back"
-        app:layout_constraintTop_toTopOf="@id/ic_back"
-        app:layout_constraintBottom_toBottomOf="@id/ic_back"
-        android:layout_marginStart="5dp"/>
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/action_bar_pengaturan"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_pengaturan"
+        android:layout_marginStart="30dp"/>
+
 
     <ImageView
         android:id="@+id/ic_bahasa"
@@ -33,7 +31,7 @@
         android:layout_height="36dp"
         android:src="@drawable/ic_bahasa"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_action_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_action_bar_pengaturan"
         android:layout_marginStart="40dp"
         android:layout_marginTop="78dp"/>
 

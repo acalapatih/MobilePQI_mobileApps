@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -21,6 +22,14 @@ import com.uinjkt.mobilepqi.databinding.ActivityMainBinding
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
+    companion object {
+        @JvmStatic
+        fun start(context: Context, value: String) {
+            val starter = Intent(context, MainActivity::class.java)
+                .putExtra("action", value)
+            context.startActivity(starter)
+        }
+    }
 
     private lateinit var locationService: LocationService
     private val locationPermissionCode = 99
@@ -31,7 +40,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
         locationService = LocationService(this)
         requestAccess()
 
@@ -43,6 +51,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
 
         navController = findNavController(R.id.nav_host_fragment_activity_home)
         navView.setupWithNavController(navController)
+
+        when (intent.getStringExtra("action")) {
+            "profil" -> {navView.selectedItemId = R.id.navigation_profil}
+            "setting" -> {navView.selectedItemId = R.id.navigation_pengaturan}
+        }
     }
 
     private fun requestAccess() {
@@ -65,9 +78,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
         Geocoder(this, Locale.getDefault()).getAddress(
             latitude, longitude
         ) {
-            if (it != null) {
-                binding.tvLocation.text = it.locality
-            }
+//            if (it != null) {
+//                binding.tvLocation.text = it.locality
+//            }
         }
     }
 
@@ -100,7 +113,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
-            binding.tvLocation.text = "-"
+//            binding.tvLocation.text = "-"
         }
         alertDialog.show()
     }

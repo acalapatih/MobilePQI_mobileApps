@@ -42,7 +42,7 @@ class ProfileActivity : BaseActivity<ActivityProfilBinding>() {
                 message = getString(R.string.message_logout),
                 btnPositiveMessage = getString(R.string.btnPositive_logout),
                 btnNegativeMessage = getString(R.string.btnNegative_logout),
-                onPositiveButtonClicked = {System.exit(0)}
+                onPositiveButtonClicked = {}
             )
         }
     }

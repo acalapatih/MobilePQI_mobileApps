@@ -85,7 +85,7 @@
     <string name="btnMessage_profilInfo">Okay</string>
 
     <!--    Profil Pengaturan -->
-    <string name="tv_action_bar_pengaturan">Profil > Pengaturan</string>
+    <string name="tv_action_bar_pengaturan">Pengaturan</string>
     <string name="tv_bahasa">Bahasa</string>
     <string name="btn_bahasa">Ubah</string>
     <string name="tv_camera">Camera</string>

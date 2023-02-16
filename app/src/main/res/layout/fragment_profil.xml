@@ -25,15 +25,6 @@
         app:layout_constraintBottom_toBottomOf="@id/action_bar_profil"
         android:layout_marginStart="30dp"/>
 
-    <ImageView
-        android:id="@+id/ic_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_close"
-        app:layout_constraintTop_toTopOf="@id/action_bar_profil"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar_profil"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="20dp"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_user"
