@@ -54,7 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
 
         when (intent.getStringExtra("action")) {
             "profil" -> {navView.selectedItemId = R.id.navigation_profil}
-            "setting" -> {navView.selectedItemId = R.id.navigation_pengaturan}
+            "pengaturan" -> {navView.selectedItemId = R.id.navigation_pengaturan}
         }
     }
 

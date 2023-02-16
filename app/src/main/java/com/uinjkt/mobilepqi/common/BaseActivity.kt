@@ -89,7 +89,7 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         dialog.show()
     }
 
-    protected fun showTwoActionDialog(
+    fun showTwoActionDialog(
         message: String,
         bodyMessage: String = "",
         isBodyMessageVisible: Boolean = false,

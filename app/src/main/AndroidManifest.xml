@@ -38,11 +38,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity"
@@ -77,19 +72,14 @@
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.dashboard.DashboardActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".ui.profil.ProfileActivity"
-            android:exported="false"/>
         <activity
             android:name=".ui.profil.ProfileInfoActivity"
-            android:exported="false"/>
-        <activity
-            android:name=".ui.pengaturan.ProfilePengaturanActivity"
             android:exported="false"/>
         <activity
             android:name=".ui.pengaturan.ProfilePengaturanBahasaActivity"

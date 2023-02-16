@@ -20,12 +20,12 @@ import io.reactivex.Observable
 import java.util.*
 
 
-class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
+class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     /**
      * Called when the activity is first created.
      */
 
-    companion object{
+    companion object {
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, ProfileInfoActivity::class.java)
@@ -33,10 +33,12 @@ class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
-    override fun getViewBinding(): ActivityProfilInformasiBinding = ActivityProfilInformasiBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityProfilInformasiBinding =
+        ActivityProfilInformasiBinding.inflate(layoutInflater)
 
     @RequiresApi(Build.VERSION_CODES.N)
     val myCalendar: Calendar = Calendar.getInstance()
+
     @SuppressLint("CheckResult")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,28 +68,28 @@ class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
             ).show()
         }
 
-        binding.btnSimpanProfil.setOnClickListener{
+        binding.btnSimpanProfil.setOnClickListener {
             val tgLahir = binding.etTglahir.text.toString()
             Log.v("tgLahir", tgLahir)
         }
 
-        binding.icEditFakultas.setOnClickListener{
+        binding.icEditFakultas.setOnClickListener {
             binding.etFakultas.isEnabled = true
         }
 
-        binding.icEditProdi.setOnClickListener{
+        binding.icEditProdi.setOnClickListener {
             binding.etProdi.isEnabled = true
         }
 
-        binding.icEditPassword.setOnClickListener{
+        binding.icEditPassword.setOnClickListener {
             binding.etPassword.isEnabled = true
         }
 
-        binding.icEditNohp.setOnClickListener{
+        binding.icEditNohp.setOnClickListener {
             binding.etNohp.isEnabled = true
         }
 
-        binding.icEditAlamat.setOnClickListener{
+        binding.icEditAlamat.setOnClickListener {
             binding.etAlamat.isEnabled = true
         }
 
@@ -168,13 +170,13 @@ class ProfileInfoActivity: BaseActivity<ActivityProfilInformasiBinding>() {
             nohpStream,
             alamatStream
         ) { fakultasValid: Boolean, prodiValid: Boolean, passwordValid: Boolean,
-            tglahirValid: Boolean, nohpValid: Boolean, alamatValid: Boolean->
+            tglahirValid: Boolean, nohpValid: Boolean, alamatValid: Boolean ->
             fakultasValid && prodiValid && passwordValid && tglahirValid && nohpValid && alamatValid
         }.subscribe { isButtonValid ->
             binding.btnSimpanProfil.isEnabled = isButtonValid
         }
 
-        binding.btnSimpanProfil.setOnClickListener{
+        binding.btnSimpanProfil.setOnClickListener {
             showOneActionDialog(
                 message = getString(R.string.message_profilInfo),
                 btnMessage = getString(R.string.btnMessage_profilInfo)

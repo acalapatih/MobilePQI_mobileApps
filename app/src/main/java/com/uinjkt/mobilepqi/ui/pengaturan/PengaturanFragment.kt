@@ -14,23 +14,16 @@ class PengaturanFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding.btnBahasa.setOnClickListener {
-//            ProfilePengaturanBahasaActivity.start(this)
-//        }
-//
-//        binding.icBack.setOnClickListener {
-//            onBackPressedDispatcher.onBackPressed()
-//        }
-//        onBackPressedDispatcher.addCallback(this) {
-//            finish()
-//        }
+        binding.btnBahasa.setOnClickListener {
+            ProfilePengaturanBahasaActivity.start(requireContext())
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Retrieve and inflate the layout for this fragment
         _binding = FragmentPengaturanBinding.inflate(inflater, container, false)
         return binding.root
