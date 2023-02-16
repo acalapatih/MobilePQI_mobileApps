@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDashboardBinding
-import com.uinjkt.mobilepqi.ui.profile.ProfileActivity
+import com.uinjkt.mobilepqi.ui.profil.ProfileActivity
 
 class DashboardActivity: BaseActivity<ActivityDashboardBinding>() {
     companion object {
@@ -23,8 +23,7 @@ class DashboardActivity: BaseActivity<ActivityDashboardBinding>() {
         supportActionBar?.hide()
         val user = binding.imgUser
         user.setOnClickListener { view ->
-            val userIntent = Intent(view.context, ProfileActivity::class.java)
-            startActivityForResult(userIntent, 0)
+            ProfileActivity.start(this)
         }
     }
 }

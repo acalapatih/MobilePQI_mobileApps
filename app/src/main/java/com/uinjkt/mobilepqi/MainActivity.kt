@@ -11,6 +11,10 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mobilepqi.core.util.LocationService
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMainBinding
@@ -21,12 +25,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
     private lateinit var locationService: LocationService
     private val locationPermissionCode = 99
     private var isGranted = true
+
+    private lateinit var navController: NavController
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
         locationService = LocationService(this)
         requestAccess()
+
+        initBottomNav()
+    }
+
+    private fun initBottomNav() {
+        val navView: BottomNavigationView = binding.navView
+
+        navController = findNavController(R.id.nav_host_fragment_activity_home)
+        navView.setupWithNavController(navController)
     }
 
     private fun requestAccess() {

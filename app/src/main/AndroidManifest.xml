@@ -37,7 +37,13 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity"
             android:exported="false" />
@@ -62,7 +68,6 @@
         <activity
             android:name=".ui.dosen.menuibadah.DosenMateriDetailIbadahActivity"
             android:exported="false"/>
-
         <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />
@@ -76,23 +81,18 @@
         <activity
             android:name=".ui.dashboard.DashboardActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
-            android:name=".ui.profile.ProfileActivity"
+            android:name=".ui.profil.ProfileActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.profile.ProfileInfoActivity"
+            android:name=".ui.profil.ProfileInfoActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.setting.ProfilePengaturan"
+            android:name=".ui.pengaturan.ProfilePengaturanActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.setting.ProfilePengaturanBahasa"
+            android:name=".ui.pengaturan.ProfilePengaturanBahasaActivity"
             android:exported="false"/>
     </application>
 

@@ -51,12 +51,17 @@
     <string name="tv_tanggal_hafalan">29 November 2022</string>
     <string name="tv_nama_hafalan">Surah An-Naba</string>
     <string name="tv_deadline_hafalan">Tenggat waktu : 30 Desember 2022</string>
+    <string name="tv_dashboard">Dashboard</string>
+    <string name="tv_profil">Profil</string>
+    <string name="message_logout">Yakin Log Out?</string>
+    <string name="btnPositive_logout">Yes</string>
+    <string name="btnNegative_logout">No</string>
 
     <!--    Profil-->
     <string name="tv_action_bar_profil">Profil</string>
     <string name="tv_nama">Dosen</string>
     <string name="tv_nomor_induk">196903161999000000</string>
-    <string name="tv_profil">Edit Profil</string>
+    <string name="tv_editProfil">Edit Profil</string>
     <string name="tv_pengaturan">Pengaturan</string>
     <string name="tv_logout">Log Out</string>
 
@@ -70,6 +75,14 @@
     <string name="tv_nohp">No. Hp</string>
     <string name="tv_alamat">Alamat</string>
     <string name="btn_simpan">Simpan</string>
+    <string name="hint_fakultas">Sains dan Teknologi</string>
+    <string name="hint_prodi">Teknik Informatika</string>
+    <string name="hint_password">********</string>
+    <string name="hint_tglahir">17–08–1945</string>
+    <string name="hint_nohp">08xxxxxxxxxx</string>
+    <string name="hint_alamat">Jl. Ir H. Juanda No.95, Cemp. Putih</string>
+    <string name="message_profilInfo">Perubahan berhasil disimpan</string>
+    <string name="btnMessage_profilInfo">Okay</string>
 
     <!--    Profil Pengaturan -->
     <string name="tv_action_bar_pengaturan">Profil > Pengaturan</string>
@@ -83,6 +96,10 @@
     <string name="tv_action_bar_pengaturan_bahasa">Profil > Pengaturan > Bahasa</string>
     <string name="tv_bahasa_indo">Bahasa Indonesia</string>
     <string name="btn_terapkan">Terapkan</string>
+    <string name="message_btnTerapkan">Perubahan berhasil disimpan</string>
+    <string name="btnMessage_btnTerapkan">Okay</string>
+
+
     <string name="tv_silabus_text">Silabus</string>
     <string name="btn_tambah_file_text">Tambah File</string>
     <string name="btn_hapus_file_text">Hapus File</string>
@@ -113,4 +130,6 @@
     <string name="desc_iv_icon_send">Icon Send</string>
     <string name="desc_iv_icon_close">Icon Close</string>
     <string name="desc_btn_menu_detail">Icon Right Arrow</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

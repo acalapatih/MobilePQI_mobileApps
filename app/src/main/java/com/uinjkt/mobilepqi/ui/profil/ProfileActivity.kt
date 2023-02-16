@@ -1,12 +1,13 @@
-package com.uinjkt.mobilepqi.ui.profile
+package com.uinjkt.mobilepqi.ui.profil
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityProfilBinding
 import com.uinjkt.mobilepqi.ui.dashboard.DashboardActivity
-import com.uinjkt.mobilepqi.ui.setting.ProfilePengaturan
+import com.uinjkt.mobilepqi.ui.pengaturan.ProfilePengaturanActivity
 
 class ProfileActivity : BaseActivity<ActivityProfilBinding>() {
     /** Called when the activity is first created.  */
@@ -25,20 +26,23 @@ class ProfileActivity : BaseActivity<ActivityProfilBinding>() {
         supportActionBar?.hide()
         val close = binding.icClose
         close.setOnClickListener {view ->
-            val closeIntent = Intent(view.context, DashboardActivity::class.java)
-            startActivityForResult(closeIntent, 0)
+            DashboardActivity.start(this)
         }
 
-        val profil = binding.icProfil
-        profil.setOnClickListener { view ->
-            val profilIntent = Intent(view.context, ProfileInfoActivity::class.java)
-            startActivityForResult(profilIntent, 0)
+        binding.tvProfil.setOnClickListener { view ->
+            ProfileInfoActivity.start(this)
         }
 
-        val pengaturan = binding.icPengaturan
-        pengaturan.setOnClickListener { view ->
-            val pengaturanIntent = Intent(view.context, ProfilePengaturan::class.java)
-            startActivityForResult(pengaturanIntent, 0)
+        binding.tvPengaturan.setOnClickListener { view ->
+            ProfilePengaturanActivity.start(this)
+        }
+
+        binding.tvLogout.setOnClickListener{
+            showTwoActionDialog(
+                message = getString(R.string.message_logout),
+                btnPositiveMessage = getString(R.string.btnPositive_logout),
+                btnNegativeMessage = getString(R.string.btnNegative_logout)
+            )
         }
     }
 }
