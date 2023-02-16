@@ -16,6 +16,9 @@ class TambahDosenAdapter(
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
     var onDosenSelected: ((data: DataDosen) -> Unit)? = null
+    var dosenSelected: ((data: DataDosen) -> Unit)? = null
+
+    val listDosen: MutableList<DataDosen> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTambahDosenBinding.bind(view)
@@ -25,8 +28,16 @@ class TambahDosenAdapter(
             binding.tvNipDosen.text = tambahdosen.nipdosen.toString()
 
             binding.cvTambahDosen.setOnClickListener {
-                binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                 onDosenSelected?.invoke(tambahdosen)
+                dosenSelected = { data ->
+                    if (listDosen.contains(data)) {
+                        listDosen.remove(data)
+                        binding.icPilihDosen.isVisible = false
+                    } else {
+                        listDosen.add(data)
+                        binding.icPilihDosen.isVisible = true
+                    }
+                }
             }
         }
     }

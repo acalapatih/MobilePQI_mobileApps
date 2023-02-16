@@ -23,7 +23,7 @@ class DaftarKelasAdapter(
             binding.tvJadwalkelas.text = kelas.jadwalKelas
             binding.tvJumlahAnggotakelas.text = kelas.anggotaKelas.toString()
 
-            binding.tvJumlahAnggotakelas.setOnClickListener {
+            binding.llDetailKelas.setOnClickListener {
                 listener?.onUserClicked(kelas.idKelas-1, "anggota")
             }
             binding.icDetailKelas.setOnClickListener {

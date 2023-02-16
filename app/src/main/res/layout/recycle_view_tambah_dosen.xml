@@ -27,7 +27,7 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:src="@drawable/ic_sukses_tambah_dosen"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/img_profil_dosen"
             app:layout_constraintStart_toEndOf="@id/img_profil_dosen"
             android:layout_marginStart="-10dp"/>

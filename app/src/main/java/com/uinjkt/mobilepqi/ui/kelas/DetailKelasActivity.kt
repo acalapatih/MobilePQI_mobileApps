@@ -1,8 +1,11 @@
 package com.uinjkt.mobilepqi.ui.kelas
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -39,6 +42,16 @@ class DetailKelasActivity: BaseActivity<ActivityDetailKelasBinding>() {
             onBackPressedDispatcher.addCallback(this) {
                 finish()
             }
+        }
+
+        binding.icCopyKodeKelas.setOnClickListener {
+            val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Kode Kelas", binding.tvKodeKelas.text)
+            clipboard.setPrimaryClip(clip)
+
+            clip.description
+
+            Toast.makeText(this@DetailKelasActivity, "Copied.", Toast.LENGTH_SHORT).show()
         }
 
         val tambahDosenText = binding.tvLabelTambahDosen
