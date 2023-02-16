@@ -63,4 +63,7 @@
     <string name="desc_btn_menu_detail">Icon Right Arrow</string>
     <string name="btn_jenis_tugas">Jenis Tugas</string>
     <string name="tv_titleappbar_tugas">Tugas</string>
+    <string name="desc_iv_task_tugas">Icon Task Tugas</string>
+    <string name="tv_nama_task_tugas">Tugas 1</string>
+    <string name="tv_tenggat_waktu_tugas">Tenggat Waktu : 30 Desember 2022 \n(23:59)</string>
 </resources>

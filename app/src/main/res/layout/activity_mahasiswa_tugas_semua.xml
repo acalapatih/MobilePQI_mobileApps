@@ -66,30 +66,56 @@
 
             <TextView
                 android:id="@+id/tv_tugas_praktikum_qiroah"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_mahasiswa_semua"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="20dp"
                 android:text="Praktikum Qiroah"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:fontFamily="@font/inter_bold"
-                android:paddingVertical="14dp"
-                android:layout_marginHorizontal="16dp"/>
+                android:gravity="center_vertical"
+                android:paddingVertical="5dp"
+                android:layout_marginHorizontal="16dp" />
+
+            <View
+                android:id="@+id/vw_line_break"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="#6199C1"
+                app:layout_constraintTop_toBottomOf="@id/tv_tugas_praktikum_qiroah"
+                app:layout_constraintStart_toStartOf="@id/tv_tugas_praktikum_qiroah"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="56dp"/>
+            
+            <TextView
+                android:id="@+id/tv_belum_ada_tugas_qiroah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/vw_line_break"
+                app:layout_constraintStart_toStartOf="@id/vw_line_break"
+                app:layout_constraintEnd_toEndOf="@id/vw_line_break"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter"
+                android:textSize="16sp"
+                android:text="Belum ada tugas praktikum qiroah"
+                android:textColor="@color/black"
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list_tugas_mahasiswa_semua"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_tugas_praktikum_qiroah"
+                app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_qiroah"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/recycle_view_list_menu_dosen"
-                android:scrollbarThumbVertical="@null"/>
+                tools:listitem="@layout/recycle_view_list_tugas_qiroah"
+                android:scrollbarThumbVertical="@null"
+                android:layout_marginTop="32dp"
+                android:layout_marginHorizontal="16dp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
