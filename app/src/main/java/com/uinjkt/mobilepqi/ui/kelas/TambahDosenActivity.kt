@@ -3,6 +3,7 @@ package com.uinjkt.mobilepqi.ui.kelas
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.R
@@ -12,7 +13,7 @@ import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.TambahDosenAdapter
 
-class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>(){
+class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private lateinit var listDosen: MutableList<DataDosen>
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
@@ -36,21 +37,25 @@ class TambahDosenActivity: BaseActivity<ActivityTambahDosenBinding>(){
         backIcon.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
+        }
 
-        binding.rvTambahDosen.setOnClickListener{
+        binding.rvTambahDosen.setOnClickListener {
             binding.icTambahDosen.isVisible = !binding.icTambahDosen.isVisible
         }
 
         binding.icTambahDosen.setOnClickListener {
-            showOneActionDialog(
+            showOneActionDialogWithInvoke(
                 message = getString(R.string.message_tambah_dosen),
-                btnMessage = getString(R.string.btnMessage_tambah_dosen)
+                btnMessage = getString(R.string.btnMessage_tambah_dosen),
+                onButtonClicked = { onBackPressedDispatcher.onBackPressed() }
             )
         }
 
         listDosen = DataSourceKelasDosenMahasiswa().dataDosen()
 
-        tambahDosenAdapter = TambahDosenAdapter(this, listDosen)
+        tambahDosenAdapter = TambahDosenAdapter(this, listDosen, 2)
         binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
         binding.rvTambahDosen.adapter = tambahDosenAdapter
 

@@ -12,7 +12,7 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewMahasiswaBinding
 class MahasiswaAdapter(
     private val context: Context,
     private val dataset: MutableList<DataMahasiswa>
-) : RecyclerView.Adapter<MahasiswaAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<MahasiswaAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewMahasiswaBinding.bind(view)

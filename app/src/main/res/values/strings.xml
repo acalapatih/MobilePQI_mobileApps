@@ -103,4 +103,5 @@
     <string name="desc_iv_icon_send">Icon Send</string>
     <string name="desc_iv_icon_close">Icon Close</string>
     <string name="desc_btn_menu_detail">Icon Right Arrow</string>
+    <string name="desc_ic_copy">Icon Copy</string>
 </resources>

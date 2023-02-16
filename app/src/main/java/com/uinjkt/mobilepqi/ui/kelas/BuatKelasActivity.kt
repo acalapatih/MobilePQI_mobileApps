@@ -10,8 +10,8 @@ import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityBuatKelasBinding
 import io.reactivex.Observable
 
-class BuatKelasActivity: BaseActivity<ActivityBuatKelasBinding>() {
-    companion object{
+class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
+    companion object {
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, BuatKelasActivity::class.java)
@@ -19,7 +19,8 @@ class BuatKelasActivity: BaseActivity<ActivityBuatKelasBinding>() {
         }
     }
 
-    override fun getViewBinding(): ActivityBuatKelasBinding = ActivityBuatKelasBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityBuatKelasBinding =
+        ActivityBuatKelasBinding.inflate(layoutInflater)
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {

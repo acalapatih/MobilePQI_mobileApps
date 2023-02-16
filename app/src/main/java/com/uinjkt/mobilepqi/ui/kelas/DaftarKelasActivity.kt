@@ -10,11 +10,11 @@ import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityDaftarKelasBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.DaftarKelasAdapter
 
-class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>(), DaftarKelasAdapter.OnUserClickListener {
+class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
+    DaftarKelasAdapter.OnUserClickListener {
     private lateinit var listKelas: MutableList<DataKelas>
-    private lateinit var daftarKelasAdapter: DaftarKelasAdapter
 
-    companion object{
+    companion object {
         @JvmStatic
         fun start(context: Context) {
             val starter = Intent(context, DaftarKelasActivity::class.java)
@@ -22,7 +22,8 @@ class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>(), DaftarKel
         }
     }
 
-    override fun getViewBinding(): ActivityDaftarKelasBinding = ActivityDaftarKelasBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityDaftarKelasBinding =
+        ActivityDaftarKelasBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,8 +45,7 @@ class DaftarKelasActivity: BaseActivity<ActivityDaftarKelasBinding>(), DaftarKel
     override fun onUserClicked(position: Int, clicked: String) {
         if (clicked == "anggota") {
             DetailKelasActivity.start(this)
-        }
-        else {
+        } else {
             BuatKelasActivity.start(this)
         }
     }

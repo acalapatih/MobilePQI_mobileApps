@@ -5,7 +5,6 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -16,12 +15,11 @@ import com.uinjkt.mobilepqi.databinding.ActivityDetailKelasBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.DosenAdapter
 import com.uinjkt.mobilepqi.ui.kelas.adapter.MahasiswaAdapter
 
-class DetailKelasActivity: BaseActivity<ActivityDetailKelasBinding>() {
+class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     private lateinit var listDosen: MutableList<DataDosen>
-    private lateinit var dosenAdapter: DosenAdapter
 
     private lateinit var listMahasiswa: MutableList<DataMahasiswa>
-    private lateinit var mahasiswaAdapter: MahasiswaAdapter
+
     companion object {
         @JvmStatic
         fun start(context: Context) {
@@ -35,13 +33,12 @@ class DetailKelasActivity: BaseActivity<ActivityDetailKelasBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         val backIcon = binding.icBackWhite
         backIcon.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-            onBackPressedDispatcher.addCallback(this) {
-                finish()
-            }
+        }
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
         }
 
         binding.icCopyKodeKelas.setOnClickListener {
@@ -51,7 +48,7 @@ class DetailKelasActivity: BaseActivity<ActivityDetailKelasBinding>() {
 
             clip.description
 
-            Toast.makeText(this@DetailKelasActivity, "Copied.", Toast.LENGTH_SHORT).show()
+            showToast("Copied")
         }
 
         val tambahDosenText = binding.tvLabelTambahDosen

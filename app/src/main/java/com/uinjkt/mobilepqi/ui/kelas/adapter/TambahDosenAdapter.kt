@@ -12,7 +12,8 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
 
 class TambahDosenAdapter(
     private val context: Context,
-    private val dataset : MutableList<DataDosen>,
+    private val dataset: MutableList<DataDosen>,
+    private val kuota: Int
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
     var onDosenSelected: ((data: DataDosen) -> Unit)? = null
@@ -32,7 +33,7 @@ class TambahDosenAdapter(
                     binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                     onDosenSelected?.invoke(datadosen)
                 } else {
-                    if (tempList.size < 2) {
+                    if (tempList.size < kuota) {
                         tempList.add(datadosen)
                         binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                         onDosenSelected?.invoke(datadosen)
