@@ -16,26 +16,26 @@ class TambahDosenAdapter(
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
     var onDosenSelected: ((data: DataDosen) -> Unit)? = null
-    var dosenSelected: ((data: DataDosen) -> Unit)? = null
 
-    val listDosen: MutableList<DataDosen> = mutableListOf()
+    val tempList: MutableList<DataDosen> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTambahDosenBinding.bind(view)
-        fun bindItem(tambahdosen: DataDosen) {
-            binding.tvNamaDosen.text = tambahdosen.nama
-            binding.tvNip.text = tambahdosen.nip
-            binding.tvNipDosen.text = tambahdosen.nipdosen.toString()
+        fun bindItem(datadosen: DataDosen) {
+            binding.tvNamaDosen.text = datadosen.nama
+            binding.tvNip.text = datadosen.nip
+            binding.tvNipDosen.text = datadosen.nipdosen.toString()
 
             binding.cvTambahDosen.setOnClickListener {
-                onDosenSelected?.invoke(tambahdosen)
-                dosenSelected = { data ->
-                    if (listDosen.contains(data)) {
-                        listDosen.remove(data)
-                        binding.icPilihDosen.isVisible = false
-                    } else {
-                        listDosen.add(data)
-                        binding.icPilihDosen.isVisible = true
+                if (tempList.contains(datadosen)) {
+                    tempList.remove(datadosen)
+                    binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
+                    onDosenSelected?.invoke(datadosen)
+                } else {
+                    if (tempList.size < 2) {
+                        tempList.add(datadosen)
+                        binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
+                        onDosenSelected?.invoke(datadosen)
                     }
                 }
             }
