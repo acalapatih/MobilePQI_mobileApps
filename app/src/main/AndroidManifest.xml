@@ -82,7 +82,7 @@
             android:name=".ui.profil.ProfileInfoActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.pengaturan.ProfilePengaturanBahasaActivity"
+            android:name=".ui.pengaturan.ProfilPengaturanBahasaActivity"
             android:exported="false"/>
     </application>
 
