@@ -80,4 +80,34 @@
         <item name="android:gravity">center</item>
         <item name="textAllCaps">false</item>
     </style>
+
+    <style name="TextNormalMobilePQI">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextNormal16spMobilePQI">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextNormal14spMobilePQI">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/inter_medium</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextBold20spMobilePQI">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/inter_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextRegular20spMobilePQI">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/inter</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

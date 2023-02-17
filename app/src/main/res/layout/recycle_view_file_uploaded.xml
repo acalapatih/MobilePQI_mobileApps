@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_6199C1">
+
+        <ImageView
+            android:id="@+id/iv_logo_file_mahasiswa_terlampir"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="12dp"
+            android:layout_marginStart="14dp"
+            android:contentDescription="@string/desc_iv_logo_file_terlampir"
+            android:src="@drawable/ic_documentwithtext_margined"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_nama_file_mahasiswa_terlampir"
+            style="@style/TextNormal16spMobilePQI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="18dp"
+            android:text="@string/tv_nama_file_mahasiswa_terlampir"
+            app:layout_constraintStart_toEndOf="@id/iv_logo_file_mahasiswa_terlampir"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/vw_line_break"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@id/iv_icon_close_download_file"
+            android:background="@color/black"
+            app:layout_constraintStart_toEndOf="@id/iv_logo_file_mahasiswa_terlampir"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama_file_mahasiswa_terlampir" />
+
+        <TextView
+            android:id="@+id/tv_date_file_mahasiswa_terlampir"
+            style="@style/TextNormal14spMobilePQI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/tv_date_file_mahasiswa_terlampir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_logo_file_mahasiswa_terlampir"
+            app:layout_constraintTop_toBottomOf="@id/vw_line_break" />
+
+        <ImageView
+            android:id="@+id/iv_icon_close_download_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/vw_line_break"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_download_white"
+            android:padding="10dp"
+            android:layout_marginEnd="12dp"
+            android:contentDescription="@string/desc_iv_icon_close_download_file" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
