@@ -13,27 +13,25 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewJenisTugasBinding
 class MenuMahasiswaJenisTugasAdapter(
     private val context: Context,
     private val dataset: MutableList<DataJenisTugas>,
-    private val listener: OnUserClickListener? = null
+    private val listener: OnUserClickJenisTugasListener? = null
 ) : RecyclerView.Adapter<MenuMahasiswaJenisTugasAdapter.ViewHolder>() {
 
-    interface OnUserClickListener {
-        fun onUserClicked(position: Int)
+    interface OnUserClickJenisTugasListener {
+        fun onUserJenisTugasClicked(data : DataJenisTugas)
     }
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewJenisTugasBinding.bind(view)
 
         fun bindItem(jenisTugas: DataJenisTugas) {
-            with(binding) {
-                btnJenisTugas.text = jenisTugas.titleJenisTugas
-                if (jenisTugas.statusJenisTugas) {
-                    btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_06283d))
-                } else {
-                    btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.light_blue_0078ce))
-                }
-                itemView.setOnClickListener {
-                    listener?.onUserClicked(jenisTugas.idJenisTugas-1)
-                }
+            binding.btnJenisTugas.text = jenisTugas.titleJenisTugas
+            if (jenisTugas.statusJenisTugas) {
+                binding.btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_06283d))
+            } else {
+                binding.btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.light_blue_0078ce))
+            }
+            binding.btnJenisTugas.setOnClickListener {
+                listener?.onUserJenisTugasClicked(jenisTugas)
             }
         }
     }

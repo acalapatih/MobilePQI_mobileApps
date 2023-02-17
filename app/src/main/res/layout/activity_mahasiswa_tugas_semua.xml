@@ -6,14 +6,14 @@
     android:layout_height="match_parent">
 
     <View
-        android:id="@+id/action_bar_tugas_mahasiswa"
+        android:id="@+id/action_bar_tugas_mahasiswa_semua"
         style="@style/action_bar_blue"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_title_app_bar_mahasiswa"
+        android:id="@+id/tv_title_app_bar_mahasiswa_semua"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -21,9 +21,9 @@
         android:text="@string/tv_titleappbar_tugas"
         android:textColor="@color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar_tugas_mahasiswa"
-        app:layout_constraintStart_toStartOf="@id/action_bar_tugas_mahasiswa"
-        app:layout_constraintTop_toTopOf="@id/action_bar_tugas_mahasiswa"
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_tugas_mahasiswa_semua"
+        app:layout_constraintStart_toStartOf="@id/action_bar_tugas_mahasiswa_semua"
+        app:layout_constraintTop_toTopOf="@id/action_bar_tugas_mahasiswa_semua"
         app:layout_constraintWidth_percent="0.7" />
 
     <ImageView
@@ -33,9 +33,9 @@
         android:layout_marginEnd="25dp"
         android:contentDescription="@string/desc_iv_icon_close"
         android:src="@drawable/ic_close"
-        app:layout_constraintBottom_toBottomOf="@id/action_bar_tugas_mahasiswa"
-        app:layout_constraintEnd_toEndOf="@id/action_bar_tugas_mahasiswa"
-        app:layout_constraintTop_toTopOf="@id/action_bar_tugas_mahasiswa" />
+        app:layout_constraintBottom_toBottomOf="@id/action_bar_tugas_mahasiswa_semua"
+        app:layout_constraintEnd_toEndOf="@id/action_bar_tugas_mahasiswa_semua"
+        app:layout_constraintTop_toTopOf="@id/action_bar_tugas_mahasiswa_semua" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -43,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/action_bar_tugas_mahasiswa">
+        app:layout_constraintTop_toBottomOf="@id/action_bar_tugas_mahasiswa_semua">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -68,54 +68,216 @@
                 android:id="@+id/tv_tugas_praktikum_qiroah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_mahasiswa_semua"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="20dp"
-                android:text="Praktikum Qiroah"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
                 android:fontFamily="@font/inter_bold"
                 android:gravity="center_vertical"
                 android:paddingVertical="5dp"
-                android:layout_marginHorizontal="16dp" />
+                android:text="@string/tv_tugas_praktikum_qiroah"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_mahasiswa_semua" />
 
             <View
-                android:id="@+id/vw_line_break"
+                android:id="@+id/vw_line_break_qiroah"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
+                android:layout_marginEnd="56dp"
                 android:background="#6199C1"
-                app:layout_constraintTop_toBottomOf="@id/tv_tugas_praktikum_qiroah"
-                app:layout_constraintStart_toStartOf="@id/tv_tugas_praktikum_qiroah"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="56dp"/>
-            
+                app:layout_constraintStart_toStartOf="@id/tv_tugas_praktikum_qiroah"
+                app:layout_constraintTop_toBottomOf="@id/tv_tugas_praktikum_qiroah" />
+
             <TextView
                 android:id="@+id/tv_belum_ada_tugas_qiroah"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/vw_line_break"
-                app:layout_constraintStart_toStartOf="@id/vw_line_break"
-                app:layout_constraintEnd_toEndOf="@id/vw_line_break"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/inter"
-                android:textSize="16sp"
-                android:text="Belum ada tugas praktikum qiroah"
+                android:text="@string/tv_belum_ada_tugas_qiroah"
                 android:textColor="@color/black"
-                android:visibility="gone"/>
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/vw_line_break_qiroah"
+                app:layout_constraintStart_toStartOf="@id/vw_line_break_qiroah"
+                app:layout_constraintTop_toBottomOf="@id/vw_line_break_qiroah" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_list_tugas_mahasiswa_semua"
+                android:id="@+id/rv_list_tugas_mahasiswa_qiroah"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_qiroah"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/recycle_view_list_tugas_qiroah"
-                android:scrollbarThumbVertical="@null"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginHorizontal="16dp"/>
+                android:scrollbarThumbVertical="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_qiroah"
+                tools:itemCount="2"
+                tools:listitem="@layout/recycle_view_list_tugas" />
+
+            <TextView
+                android:id="@+id/tv_tugas_praktikum_ibadah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:paddingVertical="5dp"
+                android:text="@string/tv_tugas_praktikum_ibadah"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_list_tugas_mahasiswa_qiroah" />
+
+            <View
+                android:id="@+id/vw_line_break_ibadah"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="56dp"
+                android:background="#6199C1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_tugas_praktikum_ibadah"
+                app:layout_constraintTop_toBottomOf="@id/tv_tugas_praktikum_ibadah" />
+
+            <TextView
+                android:id="@+id/tv_belum_ada_tugas_ibadah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/tv_belum_ada_tugas_ibadah"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/vw_line_break_ibadah"
+                app:layout_constraintStart_toStartOf="@id/vw_line_break_ibadah"
+                app:layout_constraintTop_toBottomOf="@id/vw_line_break_ibadah" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_tugas_mahasiswa_ibadah"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:scrollbarThumbVertical="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_ibadah"
+                tools:itemCount="2"
+                tools:listitem="@layout/recycle_view_list_tugas" />
+
+            <TextView
+                android:id="@+id/tv_tugas_hafalan_surah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:paddingVertical="5dp"
+                android:text="@string/tv_tugas_hafalan_surah"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_list_tugas_mahasiswa_ibadah" />
+
+            <View
+                android:id="@+id/vw_line_break_surah"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="56dp"
+                android:background="@color/blue_6199C1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_tugas_hafalan_surah"
+                app:layout_constraintTop_toBottomOf="@id/tv_tugas_hafalan_surah" />
+
+            <TextView
+                android:id="@+id/tv_belum_ada_tugas_hafalan_surah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/tv_belum_ada_tugas_surah"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/vw_line_break_surah"
+                app:layout_constraintStart_toStartOf="@id/vw_line_break_surah"
+                app:layout_constraintTop_toBottomOf="@id/vw_line_break_surah" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_tugas_mahasiswa_hafalan_surah"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:scrollbarThumbVertical="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_hafalan_surah"
+                tools:itemCount="2"
+                tools:listitem="@layout/recycle_view_list_tugas" />
+
+            <TextView
+                android:id="@+id/tv_tugas_hafalan_doa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/inter_bold"
+                android:gravity="center_vertical"
+                android:paddingVertical="5dp"
+                android:text="@string/tv_tugas_hafalan_doa"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_list_tugas_mahasiswa_hafalan_surah" />
+
+            <View
+                android:id="@+id/vw_line_break_hafalan_doa"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="56dp"
+                android:background="@color/blue_6199C1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_tugas_hafalan_doa"
+                app:layout_constraintTop_toBottomOf="@id/tv_tugas_hafalan_doa" />
+
+            <TextView
+                android:id="@+id/tv_belum_ada_tugas_hafalan_doa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/inter"
+                android:text="@string/tv_belum_ada_tugas_hafalan_doa"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/vw_line_break_hafalan_doa"
+                app:layout_constraintStart_toStartOf="@id/vw_line_break_hafalan_doa"
+                app:layout_constraintTop_toBottomOf="@id/vw_line_break_hafalan_doa" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list_tugas_mahasiswa_hafalan_doa"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:nestedScrollingEnabled="false"
+                android:scrollbarThumbVertical="@null"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_hafalan_doa"
+                tools:itemCount="2"
+                tools:listitem="@layout/recycle_view_list_tugas" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
