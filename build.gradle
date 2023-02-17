@@ -52,4 +52,7 @@ ext {
 
     //Chucker
     chucker_version = "3.5.2"
+
+    //CircleImageView
+    civ_version = "3.1.0"
 }
