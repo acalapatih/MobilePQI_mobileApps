@@ -27,7 +27,6 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         binding.tvBuatkelas.setOnClickListener {
             BuatKelasActivity.start(this)
         }

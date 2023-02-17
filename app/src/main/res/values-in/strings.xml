@@ -104,4 +104,5 @@
     <string name="message_tambah_dosen">Dosen berhasil ditambahkan</string>
     <string name="btnMessage_tambah_dosen">Okay</string>
     <string name="desc_ic_copy">Icon Copy</string>
+    <string name="desc_ic_detail_kelas">Logo Detail Kelas</string>
 </resources>

@@ -25,13 +25,12 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         val backIntent = binding.icClose
         backIntent.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
-            onBackPressedDispatcher.addCallback(this) {
-                finish()
-            }
+        }
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
         }
 
         val btnSimpan = binding.btnSimpanDatakelas
