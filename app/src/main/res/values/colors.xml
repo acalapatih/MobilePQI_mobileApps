@@ -12,6 +12,12 @@
     <color name="light_blue_0078ce">#0078ce</color>
     <color name="black_090A0A">#090A0A</color>
     <color name="black_06283D">#06283D </color>
+    <color name="navy_06283D">#06283D</color>
+    <color name="grey_BDBDBD">#BDBDBD</color>
+    <color name="grey_DCE2E2">#DCE2E2</color>
+    <color name="grey_636363">#636363</color>
+    <color name="grey_8B9596">#8B9596</color>
+    <color name="grey_ACACAC">#ACACAC</color>
     <color name="red_ff414c">#FF414C</color>
     <color name="grey_acacac">#ACACAC</color>
     <color name="white_f5f5f5">#F5F5F5</color>
