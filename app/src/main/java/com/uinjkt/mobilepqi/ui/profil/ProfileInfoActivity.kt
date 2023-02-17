@@ -43,7 +43,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         binding.icBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

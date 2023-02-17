@@ -8,11 +8,11 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityProfilPengaturanBahasaBinding
 
-class ProfilePengaturanBahasaActivity : BaseActivity<ActivityProfilPengaturanBahasaBinding>() {
+class ProfilPengaturanBahasaActivity : BaseActivity<ActivityProfilPengaturanBahasaBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context) {
-            val starter = Intent(context, ProfilePengaturanBahasaActivity::class.java)
+            val starter = Intent(context, ProfilPengaturanBahasaActivity::class.java)
             context.startActivity(starter)
         }
     }
@@ -22,7 +22,6 @@ class ProfilePengaturanBahasaActivity : BaseActivity<ActivityProfilPengaturanBah
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportActionBar?.hide()
         binding.icBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

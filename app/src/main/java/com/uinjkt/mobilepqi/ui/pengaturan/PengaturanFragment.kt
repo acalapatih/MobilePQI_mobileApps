@@ -15,7 +15,7 @@ class PengaturanFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.btnBahasa.setOnClickListener {
-            ProfilePengaturanBahasaActivity.start(requireContext())
+            ProfilPengaturanBahasaActivity.start(requireContext())
         }
     }
 
