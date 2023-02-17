@@ -31,6 +31,48 @@
     <string name="tv_title_menu_materi_detail"><![CDATA[Materi Qiroah > Hukum Non Sukun dan Tanwin]]></string>
     <string name="tv_description_menu_detail">Berikut adalah file materi pembelajaran Hukum Nun Sukun dan tanwin.</string>
     <string name="tv_name_document">Materi 1.pdf</string>
+    <string name="btn_simpan">Simpan</string>
+
+    <!--    Daftar Kelas-->
+    <string name="tv_action_bar_daftarkelas">Daftar Kelas</string>
+    <string name="tv_buatkelas">Buat Kelas</string>
+    <string name="tv_namakelas">PQI-2C</string>
+    <string name="tv_label_ruangkelas">Ruang</string>
+    <string name="tv_ruangkelas">4.001</string>
+    <string name="tv_jadwalkelas">Senin, 07.30 – 10.00</string>
+    <string name="tv_anggotakelas"><u>Anggota</u></string>
+    <string name="tv_jumlah_anggotakelas">25</string>
+
+    <!--    Buat Kelas-->
+    <string name="tv_action_bar_buatkelas">Buat Kelas</string>
+    <string name="tv_datakelas">Lengkapi Data Kelas</string>
+    <string name="tv_edit_namakelas">Nama Kelas</string>
+    <string name="tv_edit_ruangkelas">Ruang Kelas</string>
+    <string name="tv_edit_jadwalkelas">Jadwal Kelas</string>
+    <string name="et_hint_namakelas">PQ!-1A</string>
+    <string name="et_hint_ruangkelas">4.001</string>
+    <string name="et_hint_jadwalkelas">Senin, 07.30 – 10.00</string>
+
+    <!--    Detail Kelas-->
+    <string name="tv_action_bar_detailkelas">Kelas </string>
+    <string name="tv_action_bar_namakelas">PQI-2C</string>
+    <string name="tv_label_kode_kelas">Kode Kelas</string>
+    <string name="tv_kode_kelas">Gr33DisG00d</string>
+    <string name="tv_label_dosen">Dosen</string>
+    <string name="tv_label_tambah_dosen">Tambah Dosen</string>
+    <string name="tv_nama_dosen">Dosen 1</string>
+    <string name="tv_nip">NIP</string>
+    <string name="tv_nip_dosen">196903161999000000</string>
+    <string name="tv_label_mahasiswa">Mahasiswa</string>
+    <string name="tv_nama_mahasiswa">Mahasiswa 1</string>
+    <string name="tv_nim">NIM</string>
+    <string name="tv_nim_mahasiswa">11200910000000</string>
+
+    <!--    Tambah Dosen-->
+    <string name="tv_action_bar_tambahdosen">Tambah Dosen</string>
+    <string name="et_search_dosen">Cari Nama / NIM</string>
+    <string name="message_tambah_dosen">Dosen berhasil ditambahkan</string>
+    <string name="btnMessage_tambah_dosen">Okay</string>
 
     <!--    Dashboard-->
     <string name="tv_salam">Assalamu\'alaikum</string>
@@ -145,4 +187,29 @@
     <string name="desc_iv_logo_about">Logo About</string>
     <string name="desc_iv_logo_bantuan">Logo Bantuan</string>
     <string name="desc_iv_logo_editprofil">Logo Edit Profil</string>
+    <string name="btn_jenis_tugas">Jenis Tugas</string>
+    <string name="tv_titleappbar_tugas">Tugas</string>
+    <string name="desc_iv_task_tugas">Icon Task Tugas</string>
+    <string name="tv_nama_task_tugas">Tugas 1</string>
+    <string name="tv_tenggat_waktu_tugas">Tenggat Waktu : 30 Desember 2022 \n(23:59)</string>
+    <string name="tv_tugas_praktikum_qiroah">Praktikum Qiroah</string>
+    <string name="tv_belum_ada_tugas_qiroah">Belum ada tugas praktikum qiroah</string>
+    <string name="tv_tugas_praktikum_ibadah">Praktikum Ibadah</string>
+    <string name="tv_belum_ada_tugas_ibadah">Belum ada tugas praktikum ibadah</string>
+    <string name="tv_tugas_hafalan_surah">Hafalan Surah</string>
+    <string name="tv_belum_ada_tugas_surah">Belum ada tugas Hafalan Surah</string>
+    <string name="tv_tugas_hafalan_doa">Hafalan Doa</string>
+    <string name="tv_belum_ada_tugas_hafalan_doa">Belum ada tugas Hafalan Doa</string>
+    <string name="tv_title_tugas_detail_mahasiswa"><![CDATA[Tugas > Praktikum Ibadah > Tugas 6]]></string>
+    <string name="desc_iv_logo_file_terlampir">Logo File Terlampir</string>
+    <string name="tv_silahkan_upload_file">Silahkan Upload File Tugas Anda</string>
+    <string name="btn_tambah_file_upload">Tambah File +</string>
+    <string name="btn_kirim_file_upload">Kirim</string>
+    <string name="tv_title_jenis_tugas_mahasiswa"><![CDATA[Tugas > Praktikum Qiroah]]></string>
+    <string name="tv_date_file_mahasiswa_terlampir">Diupload pada 29 Desember 2022 \n(20.00)</string>
+    <string name="tv_nama_file_mahasiswa_terlampir">File Jawaban Tugas 4</string>
+    <string name="desc_iv_icon_close_download_file">Icon Download atau Delete</string>
+    <string name="tv_description_tugas_detail">Berikut adalah file tugas 6 Praktikum Ibadah, harap diisi dan dikumpulkan sebelum deadline yang telah ditentukan</string>
+    <string name="desc_ic_copy">Icon Copy</string>
+    <string name="desc_ic_detail_kelas">Logo Detail Kelas</string>
 </resources>

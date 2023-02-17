@@ -64,6 +64,15 @@
             android:name=".ui.dosen.menuibadah.DosenMateriDetailIbadahActivity"
             android:exported="false"/>
         <activity
+            android:name=".ui.mahasiswa.menutugas.MahasiswaTugasActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.mahasiswa.menutugas.MahasiswaDetailTugasActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.mahasiswa.menutugas.MahasiswaTugasFilterActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />
         <activity
@@ -84,6 +93,19 @@
         <activity
             android:name=".ui.pengaturan.ProfilPengaturanBahasaActivity"
             android:exported="false"/>
+        <activity
+            android:name=".ui.kelas.DaftarKelasActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".ui.kelas.BuatKelasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kelas.DetailKelasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.kelas.TambahDosenActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

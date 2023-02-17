@@ -63,6 +63,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
     implementation "de.hdodenhof:circleimageview:$civ_version"
+
+    //CircleImageView
+    implementation "de.hdodenhof:circleimageview:$civ_version"
 }
 
 kapt {
