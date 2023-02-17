@@ -85,6 +85,7 @@
     <string name="tv_nama_file_mahasiswa_terlampir">File Jawaban Tugas 4</string>
     <string name="desc_iv_icon_close_download_file">Icon Download atau Delete</string>
     <string name="tv_description_tugas_detail">Berikut adalah file tugas 6 Praktikum Ibadah, harap diisi dan dikumpulkan sebelum deadline yang telah ditentukan</string>
+    <string name="btn_simpan">Simpan</string>
 
     <!--    Daftar Kelas-->
     <string name="tv_action_bar_daftarkelas">Daftar Kelas</string>
