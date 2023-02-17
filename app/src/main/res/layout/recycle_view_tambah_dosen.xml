@@ -14,7 +14,7 @@
             android:id="@+id/img_profil_dosen"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/img_default_profil"
+            android:src="@drawable/img_user"
             app:civ_border_width="1dp"
             app:civ_border_color="@color/black"
             app:layout_constraintTop_toTopOf="parent"
