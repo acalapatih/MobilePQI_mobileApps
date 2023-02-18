@@ -175,7 +175,7 @@
     <string name="tv_tglahir">Tanggal Lahir</string>
     <string name="tv_nohp">No. Hp</string>
     <string name="tv_alamat">Alamat</string>
-    <string name="btn_simpan">Simpan</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_fakultas">Sains dan Teknologi</string>
     <string name="hint_prodi">Teknik Informatika</string>
     <string name="hint_password">********</string>
@@ -209,4 +209,9 @@
     <string name="desc_iv_logo_about">Logo About</string>
     <string name="desc_iv_logo_bantuan">Logo Bantuan</string>
     <string name="desc_iv_logo_editprofil">Logo Edit Profil</string>
+    <string name="tv_title_menu_buat_tugas_dosen"><![CDATA[Tugas > Buat Tugas Baru]]></string>
+    <string name="et_desc_judul_buat_tugas_dosen">Tugas 6</string>
+    <string name="tv_deskripsi_buat_tugas_dosen">Deskripsi (Opsional)</string>
+    <string name="et_desc_deskripsi_buat_tugas_dosen">Berikut adalah file tugas 4 Praktikum Qiroah, harap diisi dan dikumpulkan sebelum deadline yang telah ditentukan</string>
+    <string name="tv_judul_buat_tugas_dosen">Judul Tugas</string>
 </resources>
