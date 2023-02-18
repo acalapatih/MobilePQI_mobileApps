@@ -50,7 +50,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             finish()
         }
 
-        val editTextTglahir = binding.icEditTglahir
         val date =
             OnDateSetListener { _, year, month, day ->
                 myCalendar[Calendar.YEAR] = year
@@ -59,12 +58,20 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 updateLabel()
             }
 
-        editTextTglahir.setOnClickListener {
-            DatePickerDialog(
+        binding.icEditTglahir.setOnClickListener {
+            with(binding.etTglahir) {
+                isEnabled = true
+                inputType = 0
+                setTextIsSelectable(true)
+                isFocusable = false
+            }
+            val datePicker = DatePickerDialog(
                 this@ProfileInfoActivity, date,
                 myCalendar[Calendar.YEAR],
                 myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
-            ).show()
+            )
+            datePicker.datePicker.maxDate = System.currentTimeMillis()
+            datePicker.show()
         }
 
         binding.btnSimpanProfil.setOnClickListener {
