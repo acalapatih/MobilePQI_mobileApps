@@ -110,7 +110,7 @@
                 android:layout_marginBottom="20dp"
                 android:autofillHints="@string/tv_nip_nim_text"
                 android:hint="@string/tv_nip_nim_text"
-                android:inputType="numberSigned"
+                android:inputType="number"
                 android:maxLength="20"
                 app:layout_constraintBottom_toTopOf="@+id/tv_kode_kelas_signup"
                 app:layout_constraintEnd_toEndOf="parent"
