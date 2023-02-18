@@ -50,6 +50,8 @@
     <string name="desc_iv_mic_attach">Record Voices</string>
     <string name="desc_iv_logo_back_circle_dosen">Tombol Back Materi Dosen</string>
     <string name="desc_iv_logo_documents">Logo Document</string>
+    <string name="desc_iv_logo_tugas">Logo Tugas</string>
+    <string name="desc_iv_logo_header">Logo Header</string>
     <string name="desc_iv_logo_close">Logo Close/Remove items</string>
     <string name="desc_tv_desc_title_materi_dosen">Deskripsi (Opsional)</string>
     <string name="tv_btn_simpan_materi_dosen">Simpan</string>
@@ -129,4 +131,82 @@
     <string name="btnMessage_tambah_dosen">Okay</string>
     <string name="desc_ic_copy">Icon Copy</string>
     <string name="desc_ic_detail_kelas">Logo Detail Kelas</string>
+    <string name="desc_iv_logo_kelas">Logo Kelas</string>
+
+    <!--    Dashboard-->
+    <string name="tv_salam">Assalamu\'alaikum</string>
+    <string name="tv_kelas">PQI-2C</string>
+    <string name="tv_sholat">Sholat Ashar</string>
+    <string name="tv_lokasi">Lokasi Anda</string>
+    <string name="tv_waktu">15:06 WIB</string>
+    <string name="tv_daerah">Cawang</string>
+    <string name="tv_silabus">Silabus</string>
+    <string name="tv_ibadah">Ibadah</string>
+    <string name="tv_qiroah">Qiroah</string>
+    <string name="tv_tugas">Tugas</string>
+    <string name="tv_judul">Praktikum Qiroah dan Ibadah</string>
+    <string name="tv_update">Anda memposting tugas baru</string>
+    <string name="tv_tanggal_tugas">29 November 2022</string>
+    <string name="tv_nama_tugas">Tugas 6</string>
+    <string name="tv_deadline_tugas">Tenggat waktu : 30 Desember 2022</string>
+    <string name="tv_tanggal_hafalan">29 November 2022</string>
+    <string name="tv_nama_hafalan">Surah An-Naba</string>
+    <string name="tv_deadline_hafalan">Tenggat waktu : 30 Desember 2022</string>
+    <string name="tv_dashboard">Dashboard</string>
+    <string name="tv_profil">Profil</string>
+    <string name="message_logout">Yakin Log Out?</string>
+    <string name="btnPositive_logout">Yes</string>
+    <string name="btnNegative_logout">No</string>
+
+    <!--    Profil-->
+    <string name="tv_action_bar_profil">Profil</string>
+    <string name="tv_nama">Dosen</string>
+    <string name="tv_nomor_induk">196903161999000000</string>
+    <string name="tv_editProfil">Edit Profil</string>
+    <string name="tv_pengaturan">Pengaturan</string>
+    <string name="tv_logout">Log Out</string>
+
+    <!--    Profil Informasi Pribadi-->
+    <string name="tv_action_bar_informasi">Profil > Informasi Pribadi</string>
+    <string name="tv_fakultas">Fakultas</string>
+    <string name="tv_prodi">Program Studi</string>
+    <string name="tv_email">saepul@mhs.uinjkt.ac.id</string>
+    <string name="tv_password">Password</string>
+    <string name="tv_tglahir">Tanggal Lahir</string>
+    <string name="tv_nohp">No. Hp</string>
+    <string name="tv_alamat">Alamat</string>
+    <string name="btn_simpan">Simpan</string>
+    <string name="hint_fakultas">Sains dan Teknologi</string>
+    <string name="hint_prodi">Teknik Informatika</string>
+    <string name="hint_password">********</string>
+    <string name="hint_tglahir">17–08–1945</string>
+    <string name="hint_nohp">08xxxxxxxxxx</string>
+    <string name="hint_alamat">Jl. Ir H. Juanda No.95, Cemp. Putih</string>
+    <string name="message_profilInfo">Perubahan berhasil disimpan</string>
+    <string name="btnMessage_profilInfo">Okay</string>
+
+    <!--    Profil Pengaturan -->
+    <string name="tv_action_bar_pengaturan">Pengaturan</string>
+    <string name="tv_bahasa">Bahasa</string>
+    <string name="btn_bahasa">Ubah</string>
+    <string name="tv_camera">Camera</string>
+    <string name="tv_about">About</string>
+    <string name="tv_bantuan">Bantuan</string>
+
+    <!--Profil Pengaturan Bahasa-->
+    <string name="tv_action_bar_pengaturan_bahasa">Profil > Pengaturan > Bahasa</string>
+    <string name="tv_bahasa_indo">Bahasa Indonesia</string>
+    <string name="btn_terapkan">Terapkan</string>
+    <string name="message_btnTerapkan">Perubahan berhasil disimpan</string>
+    <string name="btnMessage_btnTerapkan">Okay</string>
+    <string name="desc_iv_logo_waktu">Logo Waktu</string>
+    <string name="desc_iv_logo_lokasi">Logo Lokasi</string>
+    <string name="desc_iv_logo_ibadah">Logo Ibadah</string>
+    <string name="desc_iv_logo_silabus">Logo Silabus</string>
+    <string name="desc_iv_logo_qiroah">Logo Qiroah</string>
+    <string name="desc_iv_logo_bahasa">Logo Bahasa</string>
+    <string name="desc_iv_logo_camera">Logo Camera</string>
+    <string name="desc_iv_logo_about">Logo About</string>
+    <string name="desc_iv_logo_bantuan">Logo Bantuan</string>
+    <string name="desc_iv_logo_editprofil">Logo Edit Profil</string>
 </resources>

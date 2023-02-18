@@ -37,7 +37,8 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true">
+        </activity>
         <activity
             android:name=".ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity"
             android:exported="false" />
@@ -86,6 +87,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.profil.ProfileInfoActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.pengaturan.ProfilPengaturanBahasaActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.kelas.DaftarKelasActivity"
             android:exported="false">

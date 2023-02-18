@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="34dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="@string/desc_iv_logo_back_circle_dosen"
+            android:src="@drawable/ic_arrow_circle_left_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_action_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/tv_action_bar_informasi"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/ic_back"
+            app:layout_constraintStart_toEndOf="@id/ic_back"
+            app:layout_constraintTop_toTopOf="@id/ic_back" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profil"
+            android:layout_width="90dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/img_user"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="1dp"
+            app:layout_constraintStart_toStartOf="@id/tv_action_bar"
+            app:layout_constraintTop_toBottomOf="@id/tv_action_bar" />
+
+        <ImageView
+            android:id="@+id/ic_edit_profil"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="75dp"
+            android:contentDescription="@string/desc_iv_logo_editprofil"
+            android:src="@drawable/ic_edit_profil"
+            app:layout_constraintEnd_toEndOf="@id/img_profil"
+            app:layout_constraintStart_toStartOf="@id/img_profil"
+            app:layout_constraintTop_toBottomOf="@id/tv_action_bar" />
+
+        <TextView
+            android:id="@+id/tv_nama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/inter_bold"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/img_profil"
+            app:layout_constraintTop_toBottomOf="@id/tv_action_bar"
+            tools:text="@string/tv_nama" />
+
+        <TextView
+            android:id="@+id/tv_nomor_induk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/tv_nama"
+            app:layout_constraintTop_toBottomOf="@id/tv_nama"
+            tools:text="@string/tv_nomor_induk" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="@id/tv_nomor_induk"
+            app:layout_constraintTop_toBottomOf="@id/tv_nomor_induk"
+            tools:text="@string/tv_email" />
+
+        <TextView
+            android:id="@+id/tv_fakultas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_fakultas"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ic_edit_profil" />
+
+        <EditText
+            android:id="@+id/et_fakultas"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autofillHints=""
+            android:enabled="false"
+            android:hint="@string/hint_fakultas"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_fakultas" />
+
+        <ImageButton
+            android:id="@+id/ic_edit_fakultas"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/et_fakultas"
+            app:layout_constraintEnd_toEndOf="@id/et_fakultas"
+            app:layout_constraintTop_toTopOf="@id/et_fakultas" />
+
+        <TextView
+            android:id="@+id/tv_prodi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_prodi"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_fakultas" />
+
+        <EditText
+            android:id="@+id/et_prodi"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autofillHints=""
+            android:enabled="false"
+            android:hint="@string/hint_prodi"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_prodi" />
+
+        <ImageButton
+            android:id="@+id/ic_edit_prodi"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/et_prodi"
+            app:layout_constraintEnd_toEndOf="@id/et_prodi"
+            app:layout_constraintTop_toTopOf="@id/et_prodi" />
+
+        <TextView
+            android:id="@+id/tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_password"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_prodi" />
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autofillHints=""
+            android:enabled="false"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_password" />
+
+        <ImageButton
+            android:id="@+id/ic_edit_password"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/et_password"
+            app:layout_constraintEnd_toEndOf="@id/et_password"
+            app:layout_constraintTop_toTopOf="@id/et_password" />
+
+        <TextView
+            android:id="@+id/tv_tglahir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_tglahir"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_password" />
+
+        <EditText
+            android:id="@+id/et_tglahir"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autofillHints=""
+            android:enabled="false"
+            android:hint="@string/hint_tglahir"
+            android:inputType="date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_tglahir" />
+
+        <ImageButton
+            android:id="@+id/ic_edit_tglahir"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/et_tglahir"
+            app:layout_constraintEnd_toEndOf="@id/et_tglahir"
+            app:layout_constraintTop_toTopOf="@id/et_tglahir" />
+
+        <TextView
+            android:id="@+id/tv_nohp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_nohp"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_tglahir" />
+
+        <EditText
+            android:id="@+id/et_nohp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autofillHints=""
+            android:enabled="false"
+            android:hint="@string/hint_nohp"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_nohp" />
+
+        <ImageButton
+            android:id="@+id/ic_edit_nohp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/et_nohp"
+            app:layout_constraintEnd_toEndOf="@id/et_nohp"
+            app:layout_constraintTop_toTopOf="@id/et_nohp" />
+
+        <TextView
+            android:id="@+id/tv_alamat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/tv_alamat"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_nohp" />
+
+        <EditText
+            android:id="@+id/et_alamat"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:autofillHints=""
+            android:enabled="false"
+            android:hint="@string/hint_alamat"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_alamat" />
+
+        <ImageButton
+            android:id="@+id/ic_edit_alamat"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="@id/et_alamat"
+            app:layout_constraintEnd_toEndOf="@id/et_alamat"
+            app:layout_constraintTop_toTopOf="@id/et_alamat" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_simpan_profil"
+            style="@style/btn_navy_rounded"
+            android:layout_width="195dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="120dp"
+            android:layout_marginBottom="60dp"
+            android:text="@string/btn_simpan"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_alamat" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

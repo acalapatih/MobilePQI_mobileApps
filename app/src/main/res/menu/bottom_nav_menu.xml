@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_profil"
+        android:icon="@drawable/ic_bot_profil_selected"
+        android:title="@string/tv_profil" />
+
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/ic_bot_dashboard_selected"
+        android:title="@string/tv_dashboard" />
+
+    <item
+        android:id="@+id/navigation_pengaturan"
+        android:icon="@drawable/ic_bot_pengaturan_selected"
+        android:title="@string/tv_pengaturan" />
+</menu>

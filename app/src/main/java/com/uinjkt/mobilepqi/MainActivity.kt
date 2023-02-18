@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Address
@@ -11,22 +12,50 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mobilepqi.core.util.LocationService
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMainBinding
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
+    companion object {
+        @JvmStatic
+        fun start(context: Context, value: String) {
+            val starter = Intent(context, MainActivity::class.java)
+                .putExtra("action", value)
+            context.startActivity(starter)
+        }
+    }
 
     private lateinit var locationService: LocationService
     private val locationPermissionCode = 99
     private var isGranted = true
+
+    private lateinit var navController: NavController
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         locationService = LocationService(this)
         requestAccess()
+
+        initBottomNav()
+    }
+
+    private fun initBottomNav() {
+        val navView: BottomNavigationView = binding.navView
+
+        navController = findNavController(R.id.nav_host_fragment_activity_home)
+        navView.setupWithNavController(navController)
+
+        when (intent.getStringExtra("action")) {
+            "profil" -> {navView.selectedItemId = R.id.navigation_profil}
+            "pengaturan" -> {navView.selectedItemId = R.id.navigation_pengaturan}
+        }
     }
 
     private fun requestAccess() {
@@ -49,9 +78,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
         Geocoder(this, Locale.getDefault()).getAddress(
             latitude, longitude
         ) {
-            if (it != null) {
-                binding.tvLocation.text = it.locality
-            }
+//            if (it != null) {
+//                binding.tvLocation.text = it.locality
+//            }
         }
     }
 
@@ -84,7 +113,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLoc
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
-            binding.tvLocation.text = "-"
+//            binding.tvLocation.text = "-"
         }
         alertDialog.show()
     }
