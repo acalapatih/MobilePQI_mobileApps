@@ -12,6 +12,13 @@ class DataSourceTugas {
         DataTugas(7, "Tugas 7", "Tenggat Waktu : \n30 Desember 2022 (23:59)", false),
     )
 
+    val dataMahasiswa : MutableList<DataTugasMahasiswa> = mutableListOf(
+        DataTugasMahasiswa(1, "Riandi Nandaputra", "NIM : 11200910000062", true),
+        DataTugasMahasiswa(2, "Mahasiswa 2", "NIM : 11200910000052", false),
+        DataTugasMahasiswa(3, "Mahasiswa 3", "NIM : 11200910000028", false),
+        DataTugasMahasiswa(4, "Mahasiswa 4", "NIM : 11200910000019", false),
+    )
+
     fun getDataUploadTugas() : MutableList<DataTugas> {
         return mutableListOf(dataTugas[0])
     }

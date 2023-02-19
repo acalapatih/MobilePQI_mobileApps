@@ -8,6 +8,10 @@
                     <corners android:radius="8dp" />
                 </shape>
             </item>
+            <item
+                android:drawable="@drawable/ic_baseline_arrow_drop_down_24"
+                android:gravity="end">
+            </item>
         </layer-list>
     </item>
 

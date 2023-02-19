@@ -107,6 +107,7 @@
     <string name="et_hint_namakelas">PQ!-1A</string>
     <string name="et_hint_ruangkelas">4.001</string>
     <string name="et_hint_jadwalkelas">Senin, 07.30 – 10.00</string>
+    <string name="btn_simpan">Simpan</string>
 
     <!--    Detail Kelas-->
     <string name="tv_action_bar_detailkelas">Kelas </string>
@@ -211,6 +212,21 @@
     <string name="tv_title_menu_buat_tugas_dosen"><![CDATA[Tugas > Buat Tugas Baru]]></string>
     <string name="et_desc_judul_buat_tugas_dosen">Tugas 6</string>
     <string name="tv_deskripsi_buat_tugas_dosen">Deskripsi (Opsional)</string>
-    <string name="et_desc_deskripsi_buat_tugas_dosen">Berikut adalah file tugas 4 Praktikum Qiroah, harap diisi dan dikumpulkan sebelum deadline yang telah ditentukan</string>
+    <string name="et_hint_deskripsi_buat_tugas_dosen">Deskripsi</string>
     <string name="tv_judul_buat_tugas_dosen">Judul Tugas</string>
+    <string name="tv_deadline_spinner_dosen">Deadline</string>
+    <string name="tv_jenis_tugas_spinner_dosen">Jenis Tugas</string>
+    <string name="tv_topik_spinner_dosen">Topik</string>
+    <string name="btn_posting_tugas_baru_dosen">Posting</string>
+    <string name="spinner_deadline_tugas">Deadline Tugas</string>
+    <string name="tv_icon_add_tugas">Buat Tugas Baru</string>
+    <string name="tv_icon_unduh_nilai">Unduh Nilai</string>
+    <string name="btn_edit_tugas_dosen">Edit Tugas</string>
+    <string name="btn_cek_tugas_mahasiswa">Cek Tugas Mahasiswa</string>
+    <string name="nim_detail_mahasiswa">NIM : 11200910000077</string>
+    <string name="et_input_nilai_tugas_mahasiswa">0</string>
+    <string name="et_input_nilai_seratus">100</string>
+    <string name="btn_beri_nilai">Beri Nilai</string>
+    <string name="tv_nilai">Nilai</string>
+    <string name="tv_title_menu_edit_tugas_dosen"><![CDATA[Tugas > Praktikum Ibadah > Tugas 6 > Edit Tugas]]></string>
 </resources>
