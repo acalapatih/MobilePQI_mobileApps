@@ -178,7 +178,7 @@
     <string name="hint_fakultas">Sains dan Teknologi</string>
     <string name="hint_prodi">Teknik Informatika</string>
     <string name="hint_password">********</string>
-    <string name="hint_tglahir">17–08–1945</string>
+    <string name="hint_tglahir">17/08/1945</string>
     <string name="hint_nohp">08xxxxxxxxxx</string>
     <string name="hint_alamat">Jl. Ir H. Juanda No.95, Cemp. Putih</string>
     <string name="message_profilInfo">Perubahan berhasil disimpan</string>
