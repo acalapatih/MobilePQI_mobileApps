@@ -17,13 +17,15 @@
             app:civ_border_width="1dp"
             app:civ_border_color="@color/black"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_marginStart="20dp"/>
 
         <TextView
             android:id="@+id/tv_nama_mahasiswa"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="@string/tv_nama_mahasiswa"
             android:fontFamily="@font/inter_medium"
@@ -31,6 +33,7 @@
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="@id/img_profil_mahasiswa"
             app:layout_constraintStart_toEndOf="@id/img_profil_mahasiswa"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="25dp"/>
 
         <View
@@ -57,7 +60,7 @@
 
         <TextView
             android:id="@+id/tv_nim_mahasiswa"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="@string/tv_nim_mahasiswa"
             android:fontFamily="@font/inter"
@@ -66,6 +69,7 @@
             app:layout_constraintTop_toTopOf="@id/tv_nim"
             app:layout_constraintBottom_toBottomOf="@id/tv_nim"
             app:layout_constraintStart_toEndOf="@id/tv_nim"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="2dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
