@@ -134,10 +134,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
     private fun actionAfterLogin(data: SigninModel) {
         viewModel.setToken(data.token)
-        if (data.role == "dosen") {
-            DaftarKelasActivity.start(this)
-        } else {
+        if (data.role == "mahasiswa") {
             MainActivity.start(this, "")
+        } else {
+            DaftarKelasActivity.start(this)
         }
     }
 
