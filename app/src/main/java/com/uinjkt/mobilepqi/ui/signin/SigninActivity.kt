@@ -152,5 +152,6 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
+        binding.btnSignin.isEnabled = value
     }
 }
