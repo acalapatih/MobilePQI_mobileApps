@@ -122,7 +122,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    actionAfterLogin(model.data !!)
+                    model.data?.let { actionAfterLogin(it) }
                 }
                 is Resource.Error -> {
                     showLoading(false)
