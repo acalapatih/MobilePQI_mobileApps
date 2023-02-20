@@ -73,6 +73,24 @@
             android:name=".ui.mahasiswa.menutugas.MahasiswaTugasFilterActivity"
             android:exported="false"/>
         <activity
+            android:name=".ui.dosen.menutugas.DosenBuatEditTugasActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menutugas.DosenTugasActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menutugas.DosenTugasFilterActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menutugas.DosenDetailTugasActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menutugas.DosenCekTugasMahasiswaActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".ui.dosen.menutugas.DosenBeriNilaiTugasMahasiswaActivity"
+            android:exported="false"/>
+        <activity
             android:name=".ui.signin.SigninActivity"
             android:exported="false" />
         <activity

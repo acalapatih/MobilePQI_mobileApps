@@ -44,7 +44,7 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         mahasiswaJenisTugasAdapter = MenuMahasiswaJenisTugasAdapter(this, listJenisTugas, this)
         binding.rvJenisTugasMahasiswaFilter.adapter = mahasiswaJenisTugasAdapter
 
-        // Initialize Adapter Tugas Qiroah
+        // Initialize Adapter Tugas Filter
         mahasiswaTugasFilterAdapter = ListMahasiswaTugasAdapter(this, listTugas, this)
         binding.rvListTugasMahasiswaFilter.adapter = mahasiswaTugasFilterAdapter
 
