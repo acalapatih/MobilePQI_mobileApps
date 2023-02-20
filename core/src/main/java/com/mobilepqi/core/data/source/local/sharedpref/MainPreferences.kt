@@ -1,4 +1,4 @@
-package com.mobilepqi.core.data.source.local
+package com.mobilepqi.core.data.source.local.sharedpref
 
 interface MainPreferences {
     fun setToken(token: String)

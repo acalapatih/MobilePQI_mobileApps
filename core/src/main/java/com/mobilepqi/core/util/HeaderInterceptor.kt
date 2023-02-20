@@ -1,8 +1,8 @@
 package com.mobilepqi.core.util
 
 import android.content.Context
-import com.mobilepqi.core.data.source.local.MainPreferences
-import com.mobilepqi.core.data.source.local.MainPreferencesImpl
+import com.mobilepqi.core.data.source.local.sharedpref.MainPreferences
+import com.mobilepqi.core.data.source.local.sharedpref.MainPreferencesImpl
 import okhttp3.Interceptor
 import okhttp3.Response
 

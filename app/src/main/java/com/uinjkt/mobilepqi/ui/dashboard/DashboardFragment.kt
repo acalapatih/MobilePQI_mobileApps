@@ -10,6 +10,7 @@ import com.uinjkt.mobilepqi.MainActivity
 import com.uinjkt.mobilepqi.data.DataSourceTugasDashboard
 import com.uinjkt.mobilepqi.data.DataTugasDashboard
 import com.uinjkt.mobilepqi.databinding.FragmentDashboardBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
 
@@ -19,17 +20,31 @@ class DashboardFragment : Fragment() {
     private lateinit var listTugasDashboard: MutableList<DataTugasDashboard>
     private lateinit var tugasDashboardAdapter: DashboardAdapter
 
+    private val viewModel by viewModel<DashboardViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.imgUser.setOnClickListener {
-            MainActivity.start(requireContext(), "profil")
-        }
+        initView()
+        initListener()
+        initObserver()
+    }
 
+    private fun initObserver() {
+
+    }
+
+    private fun initView() {
         listTugasDashboard = DataSourceTugasDashboard().dataTugasDashboard
 
         tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
         binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+    }
+
+    private fun initListener() {
+        binding.imgUser.setOnClickListener {
+            MainActivity.start(requireContext(), "profil")
+        }
     }
 
     override fun onCreateView(

@@ -5,10 +5,16 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
+import androidx.core.view.isVisible
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
+import com.mobilepqi.core.domain.model.signin.SigninModel
+import com.uinjkt.mobilepqi.MainActivity
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
+import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 import io.reactivex.Observable
@@ -28,10 +34,15 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
     override fun getViewBinding(): ActivitySigninBinding =
         ActivitySigninBinding.inflate(layoutInflater)
 
-    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initView()
+        initObserver()
+        initListener()
+    }
+
+    private fun initView() {
         // show hide password with eye icon
         var isSelected = true
         binding.ivShowHidePassword.setOnClickListener {
@@ -51,7 +62,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 isSelected = true
             }
         }
+    }
 
+    @SuppressLint("CheckResult")
+    private fun initListener() {
         binding.tvBelumDaftarClick.setOnClickListener {
             SignupActivity.start(this)
             finish()
@@ -59,6 +73,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
         binding.tvLupaPassword.setOnClickListener {
             LupaPasswordActivity.start(this)
+        }
+
+        binding.btnSignin.setOnClickListener {
+            login()
         }
 
         val nimNipStream = RxTextView.textChanges(binding.etNipNimSignin)
@@ -79,7 +97,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
             }
         passwordStream.subscribe { isPasswordValid ->
             if (!isPasswordValid) {
-                binding.etPasswordSignin.setError("Harap masukkan password Anda dengan benar!", null)
+                binding.etPasswordSignin.setError(
+                    "Harap masukkan password Anda dengan benar!",
+                    null
+                )
             }
         }
 
@@ -91,5 +112,45 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         }.subscribe { isButtonValid ->
             binding.btnSignin.isEnabled = isButtonValid
         }
+    }
+
+    private fun initObserver() {
+        viewModel.login.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    actionAfterLogin(model.data !!)
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "")
+                }
+            }
+        }
+    }
+
+    private fun actionAfterLogin(data: SigninModel) {
+        viewModel.setToken(data.token)
+        if (data.role == "dosen") {
+            DaftarKelasActivity.start(this)
+        } else {
+            MainActivity.start(this, "")
+        }
+    }
+
+    private fun login() {
+        viewModel.login(
+            SigninPayload(
+                nim = binding.etNipNimSignin.text.toString(),
+                password = binding.etPasswordSignin.text.toString()
+            )
+        )
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.progressBar.isVisible = value
     }
 }
