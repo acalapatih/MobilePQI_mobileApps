@@ -3,12 +3,16 @@ package com.mobilepqi.core.di
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
+import com.mobilepqi.core.data.repository.signin.SigninReposityImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
-import com.mobilepqi.core.data.source.local.MainPreferencesImpl
+import com.mobilepqi.core.data.source.local.LocalDataSource
+import com.mobilepqi.core.data.source.local.sharedpref.MainPreferencesImpl
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
+import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
+import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
 import java.util.concurrent.TimeUnit
@@ -56,10 +60,20 @@ val networkModule = module {
             .build()
         retrofit.create(CommonService::class.java)
     }
+    single {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BuildConfig.ENDPOINT_API)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(get())
+            .build()
+        retrofit.create(MobilePqiService::class.java)
+    }
 }
 
 val repositoryModule = module {
-    single { RemoteDataSource(get(), get()) }
+    single { RemoteDataSource(get(), get(), get()) }
+    single { LocalDataSource(get()) }
     single<JadwalSholatRepository> { JadwalSholatRepositoryImpl(get()) }
     single<UploadFileOrImageRepository> { UploadFileOrImageRepositoryImpl(get()) }
+    single<SigninRepository> { SigninReposityImpl(get(), get()) }
 }

@@ -1,4 +1,4 @@
-package com.mobilepqi.core.data.source.local
+package com.mobilepqi.core.data.source.local.sharedpref
 
 import android.content.Context
 import android.content.SharedPreferences
