@@ -29,7 +29,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         }
     }
 
-    private val viewModel by viewModel<SignInViewModel>()
+    private val viewModel by viewModel<SigninViewModel>()
 
     override fun getViewBinding(): ActivitySigninBinding =
         ActivitySigninBinding.inflate(layoutInflater)

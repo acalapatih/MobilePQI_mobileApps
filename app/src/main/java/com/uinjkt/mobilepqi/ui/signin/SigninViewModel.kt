@@ -10,7 +10,7 @@ import com.mobilepqi.core.domain.model.signin.SigninModel
 import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import kotlinx.coroutines.launch
 
-class SignInViewModel(private val useCase: SigninUsecase) : ViewModel() {
+class SigninViewModel(private val useCase: SigninUsecase) : ViewModel() {
     private val _login = MutableLiveData<Resource<SigninModel>>()
     val login: LiveData<Resource<SigninModel>> get() = _login
 

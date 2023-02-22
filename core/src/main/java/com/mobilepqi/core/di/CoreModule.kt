@@ -3,7 +3,7 @@ package com.mobilepqi.core.di
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
-import com.mobilepqi.core.data.repository.signin.SigninReposityImpl
+import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
 import com.mobilepqi.core.data.source.local.LocalDataSource
 import com.mobilepqi.core.data.source.local.sharedpref.MainPreferencesImpl
@@ -75,5 +75,5 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single<JadwalSholatRepository> { JadwalSholatRepositoryImpl(get()) }
     single<UploadFileOrImageRepository> { UploadFileOrImageRepositoryImpl(get()) }
-    single<SigninRepository> { SigninReposityImpl(get(), get()) }
+    single<SigninRepository> { SigninRepositoryImpl(get(), get()) }
 }

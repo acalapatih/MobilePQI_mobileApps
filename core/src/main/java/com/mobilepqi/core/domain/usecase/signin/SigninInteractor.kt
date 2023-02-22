@@ -6,7 +6,7 @@ import com.mobilepqi.core.domain.model.signin.SigninModel
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import kotlinx.coroutines.flow.Flow
 
-class SigninIntercator(
+class SigninInteractor(
     private val repository: SigninRepository
 ) : SigninUsecase {
     override fun signin(request: SigninPayload): Flow<Resource<SigninModel>> =

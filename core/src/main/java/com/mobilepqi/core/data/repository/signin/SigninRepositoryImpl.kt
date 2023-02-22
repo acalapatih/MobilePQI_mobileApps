@@ -11,7 +11,7 @@ import com.mobilepqi.core.domain.model.signin.SigninModel
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import kotlinx.coroutines.flow.Flow
 
-class SigninReposityImpl(
+class SigninRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : SigninRepository {
