@@ -136,8 +136,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         viewModel.setToken(data.token)
         if (data.role == "mahasiswa") {
             MainActivity.start(this, "")
+            finish()
         } else {
             DaftarKelasActivity.start(this)
+            finish()
         }
     }
 
