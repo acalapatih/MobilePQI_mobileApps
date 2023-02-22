@@ -11,13 +11,13 @@ import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import kotlinx.coroutines.launch
 
 class SigninViewModel(private val useCase: SigninUsecase) : ViewModel() {
-    private val _login = MutableLiveData<Resource<SigninModel>>()
-    val login: LiveData<Resource<SigninModel>> get() = _login
+    private val _signin = MutableLiveData<Resource<SigninModel>>()
+    val signin: LiveData<Resource<SigninModel>> get() = _signin
 
-    fun login(request: SigninPayload) {
+    fun signin(request: SigninPayload) {
         viewModelScope.launch {
             useCase.signin(request).collect {
-                _login.value = it
+                _signin.value = it
             }
         }
     }

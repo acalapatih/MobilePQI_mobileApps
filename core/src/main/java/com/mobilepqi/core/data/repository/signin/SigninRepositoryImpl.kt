@@ -15,13 +15,13 @@ class SigninRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource
 ) : SigninRepository {
-    override fun login(request: SigninPayload): Flow<Resource<SigninModel>> =
+    override fun signin(request: SigninPayload): Flow<Resource<SigninModel>> =
         object : NetworkOnlyResource<SigninModel, SigninResponse>() {
             override fun loadFromNetwork(data: SigninResponse): Flow<SigninModel> =
                 SigninModel.mapResponseToModel(data)
 
             override suspend fun createCall(): Flow<ApiResponse<SigninResponse>> =
-                remoteDataSource.login(request)
+                remoteDataSource.signin(request)
 
         }.asFlow()
 

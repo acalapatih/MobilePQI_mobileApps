@@ -38,8 +38,8 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         super.onCreate(savedInstanceState)
 
         initView()
-        initObserver()
         initListener()
+        initObserver()
     }
 
     private fun initView() {
@@ -76,7 +76,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         }
 
         binding.btnSignin.setOnClickListener {
-            login()
+            signin()
         }
 
         val nimNipStream = RxTextView.textChanges(binding.etNipNimSignin)
@@ -115,14 +115,14 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
     }
 
     private fun initObserver() {
-        viewModel.login.observe(this) { model ->
+        viewModel.signin.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    model.data?.let { actionAfterLogin(it) }
+                    model.data?.let { actionAfterSignin(it) }
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -132,7 +132,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         }
     }
 
-    private fun actionAfterLogin(data: SigninModel) {
+    private fun actionAfterSignin(data: SigninModel) {
         viewModel.setToken(data.token)
         if (data.role == "mahasiswa") {
             MainActivity.start(this, "")
@@ -141,8 +141,8 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         }
     }
 
-    private fun login() {
-        viewModel.login(
+    private fun signin() {
+        viewModel.signin(
             SigninPayload(
                 nim = binding.etNipNimSignin.text.toString(),
                 password = binding.etPasswordSignin.text.toString()

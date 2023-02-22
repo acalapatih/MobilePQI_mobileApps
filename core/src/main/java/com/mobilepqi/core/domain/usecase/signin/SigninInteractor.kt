@@ -10,7 +10,7 @@ class SigninInteractor(
     private val repository: SigninRepository
 ) : SigninUsecase {
     override fun signin(request: SigninPayload): Flow<Resource<SigninModel>> =
-        repository.login(request)
+        repository.signin(request)
 
     override fun setToken(token: String) {
         repository.setToken(token)

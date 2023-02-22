@@ -7,12 +7,16 @@ import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySignupBinding
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 import io.reactivex.Observable
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     companion object {
@@ -23,6 +27,8 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         }
     }
 
+    private val viewModel by viewModel<SignupViewModel>()
+
     override fun getViewBinding(): ActivitySignupBinding =
         ActivitySignupBinding.inflate(layoutInflater)
 
@@ -32,6 +38,12 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initView()
+        initListener()
+        initObserver()
+    }
+
+    private fun initView() {
         // show hide password with eye icon
         var isSelected = true
         binding.ivShowHidePassword.setOnClickListener {
@@ -51,10 +63,17 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 isSelected = true;
             }
         }
+    }
 
+    @SuppressLint("CheckResult")
+    private fun initListener() {
         binding.tvSudahDaftarClick.setOnClickListener {
             SigninActivity.start(this)
             finish()
+        }
+
+        binding.btnSignup.setOnClickListener {
+            signup()
         }
 
         val namaStream = RxTextView.textChanges(binding.etNamaSignup)
@@ -148,7 +167,9 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, kodeKelasValid: Boolean, passwordValid: Boolean ->
             namaValid && emailValid && nimNipValid && kodeKelasValid && passwordValid
         }.subscribe { isButtonValid ->
-            if(tipeAkun == "mahasiswa") { binding.btnSignup.isEnabled = isButtonValid }
+            if (tipeAkun == "mahasiswa") {
+                binding.btnSignup.isEnabled = isButtonValid
+            }
         }
 
         Observable.combineLatest(
@@ -159,7 +180,27 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
         ) { namaValid: Boolean, emailValid: Boolean, nimNipValid: Boolean, passwordValid: Boolean ->
             namaValid && emailValid && nimNipValid && passwordValid
         }.subscribe { isButtonValid ->
-           if(tipeAkun == "dosen") { binding.btnSignup.isEnabled = isButtonValid }
+            if (tipeAkun == "dosen") {
+                binding.btnSignup.isEnabled = isButtonValid
+            }
+        }
+    }
+
+    private fun initObserver() {
+        viewModel.signup.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    model.data?.let { actionAfterSignup() }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "")
+                }
+            }
         }
     }
 
@@ -176,5 +217,28 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     private fun passwordValidate(password: String): Boolean {
         val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.*\\s).{6,}$"
         return password.matches(passwordPattern.toRegex())
+    }
+
+    private fun actionAfterSignup() {
+        showToast("Berhasil mendaftar! Silakan aktivasi akun melalui email.")
+        SigninActivity.start(this)
+        finish()
+    }
+
+    private fun signup() {
+        viewModel.signup(
+            SignupPayload(
+                name = binding.etNamaSignup.text.toString(),
+                nim = binding.etNipNimSignup.text.toString(),
+                email = binding.etEmailSignup.text.toString(),
+                password = binding.etPasswordSignup.text.toString(),
+                classCode = binding.etKodeKelasSignup.text.toString()
+            )
+        )
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.progressBar.isVisible = value
+        binding.btnSignup.isEnabled = value
     }
 }
