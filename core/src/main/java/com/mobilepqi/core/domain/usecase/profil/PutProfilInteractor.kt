@@ -10,5 +10,5 @@ class PutProfilInteractor(
     private val repository: PutProfilRepository
 ): PutProfilUsecase {
     override fun putprofil(request: PutProfilPayload): Flow<Resource<PutProfilModel>> =
-        repository.putprofil()
+        repository.putprofil(request)
 }
