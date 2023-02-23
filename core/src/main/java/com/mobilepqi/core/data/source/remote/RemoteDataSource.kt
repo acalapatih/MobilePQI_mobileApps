@@ -7,6 +7,8 @@ import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
+import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
+import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -56,10 +58,23 @@ class RemoteDataSource(
         }
     }
 
-    suspend fun login(request: SigninPayload): Flow<ApiResponse<SigninResponse>> {
+    suspend fun signin(request: SigninPayload): Flow<ApiResponse<SigninResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.signin(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun signup(request: SignupPayload): Flow<ApiResponse<SignupResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.signup(request)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
