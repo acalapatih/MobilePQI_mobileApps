@@ -2,7 +2,6 @@ package com.uinjkt.mobilepqi.ui.profil
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
@@ -13,6 +12,7 @@ import android.util.Log
 import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.profil.ProfilModel
@@ -45,12 +45,13 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     @RequiresApi(Build.VERSION_CODES.N)
     val myCalendar: Calendar = Calendar.getInstance()
 
-    @SuppressLint("CheckResult")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        initView()
+        initListener()
         initObserver()
+        viewModel.profil()
 
         binding.icBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -58,56 +59,10 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
 
-        val date =
-            OnDateSetListener { _, year, month, day ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = month
-                myCalendar[Calendar.DAY_OF_MONTH] = day
-                updateLabel()
-            }
-
-        binding.icEditTglahir.setOnClickListener {
-            with(binding.etTglahir) {
-                isEnabled = true
-                inputType = 0
-                setTextIsSelectable(true)
-                isFocusable = false
-            }
-            val datePicker = DatePickerDialog(
-                this@ProfileInfoActivity, date,
-                myCalendar[Calendar.YEAR],
-                myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
-            )
-            datePicker.datePicker.maxDate = System.currentTimeMillis()
-            datePicker.show()
-        }
-
-        binding.btnSimpanProfil.setOnClickListener {
-            val tgLahir = binding.etTglahir.text.toString()
-            Log.v("tgLahir", tgLahir)
-        }
-
-        binding.icEditFakultas.setOnClickListener {
-            binding.etFakultas.isEnabled = true
-        }
-
-        binding.icEditProdi.setOnClickListener {
-            binding.etProdi.isEnabled = true
-        }
-
-        binding.icEditPassword.setOnClickListener {
-            binding.etPassword.isEnabled = true
-        }
-
-        binding.icEditNohp.setOnClickListener {
-            binding.etNohp.isEnabled = true
-        }
-
-        binding.icEditAlamat.setOnClickListener {
-            binding.etAlamat.isEnabled = true
-        }
-
+    @SuppressLint("CheckResult")
+    private fun initListener() {
         val fakultasStream = RxTextView.textChanges(binding.etFakultas)
             .skipInitialValue()
             .map { fakultas ->
@@ -204,15 +159,74 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
-    private fun bindText(data: ProfilModel) {
-        binding.tvNama.text = data.name
-        binding.tvEmail.text = data.email
-        binding.tvNomorInduk.text = data.nim
-        binding.etFakultas.setText(data.faculty)
-        binding.etProdi.setText(data.major)
-        binding.etTglahir.setText(data.birth)
-        binding.etNohp.setText(data.phone)
-        binding.etAlamat.setText(data.address)
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun initView() {
+        val date =
+            DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                myCalendar[Calendar.YEAR] = year
+                myCalendar[Calendar.MONTH] = month
+                myCalendar[Calendar.DAY_OF_MONTH] = day
+                updateLabel()
+            }
+
+        binding.icEditTglahir.setOnClickListener {
+            with(binding.etTglahir) {
+                isEnabled = true
+                inputType = 0
+                setTextIsSelectable(true)
+                isFocusable = false
+            }
+            val datePicker = DatePickerDialog(
+                this@ProfileInfoActivity, date,
+                myCalendar[Calendar.YEAR],
+                myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
+            )
+            datePicker.datePicker.maxDate = System.currentTimeMillis()
+            datePicker.show()
+        }
+
+        binding.btnSimpanProfil.setOnClickListener {
+            val tgLahir = binding.etTglahir.text.toString()
+            Log.v("tgLahir", tgLahir)
+        }
+
+        binding.icEditFakultas.setOnClickListener {
+            binding.etFakultas.isEnabled = true
+        }
+
+        binding.icEditProdi.setOnClickListener {
+            binding.etProdi.isEnabled = true
+        }
+
+        binding.icEditPassword.setOnClickListener {
+            binding.etPassword.isEnabled = true
+        }
+
+        binding.icEditNohp.setOnClickListener {
+            binding.etNohp.isEnabled = true
+        }
+
+        binding.icEditAlamat.setOnClickListener {
+            binding.etAlamat.isEnabled = true
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun showData(data: ProfilModel) {
+        with(binding) {
+            Glide.with(this@ProfileInfoActivity)
+                .load(data.avatar)
+                .into(imgProfil)
+
+            tvNama.text = data.name
+            tvEmail.text = data.email
+            tvNomorInduk.text = data.nim
+            etFakultas.setText(data.faculty)
+            etProdi.setText(data.major)
+            etTglahir.setText(data.birth)
+            etNohp.setText(data.phone)
+            etAlamat.setText(data.address)
+        }
     }
 
     private fun initObserver() {
@@ -223,7 +237,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    model.data?.let { bindText(it) }
+                    model.data?.let { showData(it) }
                 }
                 is Resource.Error -> {
                     showLoading(false)
