@@ -11,15 +11,21 @@ import android.view.animation.AnimationUtils
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
+import com.uinjkt.mobilepqi.ui.signin.SigninActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
+
+    private val viewModel by viewModel<SplashOnboardingViewModel>()
 
     override fun getViewBinding(): ActivitySplashScreenBinding =
         ActivitySplashScreenBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.getShowOnboardingStatus()
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -45,8 +51,17 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         // launch the OnboardingActivity with delay 1500ms
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
+            redirectPage()
+        }, 1500)
+    }
+
+    private fun redirectPage() {
+        if (viewModel.showOnboardingStatus.value == true) {
             OnboardingActivity.start(this)
             finish()
-        }, 1500)
+        } else {
+            SigninActivity.start(this)
+            finish()
+        }
     }
 }
