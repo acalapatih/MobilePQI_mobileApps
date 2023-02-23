@@ -2,12 +2,12 @@ package com.uinjkt.mobilepqi.di
 
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
+import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
+import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 import com.mobilepqi.core.domain.usecase.signin.SigninInteractor
 import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import com.mobilepqi.core.domain.usecase.signup.SignupInteractor
 import com.mobilepqi.core.domain.usecase.signup.SignupUsecase
-import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
-import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.DashboardViewModel
