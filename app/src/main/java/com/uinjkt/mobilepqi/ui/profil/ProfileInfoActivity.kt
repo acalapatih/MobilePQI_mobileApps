@@ -12,11 +12,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.profil.ProfilModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityProfilInformasiBinding
 import io.reactivex.Observable
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 
@@ -33,6 +37,8 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
+    private val viewModel by viewModel<ProfilViewModel>()
+
     override fun getViewBinding(): ActivityProfilInformasiBinding =
         ActivityProfilInformasiBinding.inflate(layoutInflater)
 
@@ -43,6 +49,9 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initObserver()
+
         binding.icBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -195,6 +204,39 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
+    private fun bindText(data: ProfilModel) {
+        binding.tvNama.text = data.name
+        binding.tvEmail.text = data.email
+        binding.tvNomorInduk.text = data.nim
+        binding.etFakultas.setText(data.faculty)
+        binding.etProdi.setText(data.major)
+        binding.etTglahir.setText(data.birth)
+        binding.etNohp.setText(data.phone)
+        binding.etAlamat.setText(data.address)
+    }
+
+    private fun initObserver() {
+        viewModel.profil.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> { 
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    model.data?.let { bindText(it) }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "")
+                }
+            }
+        }
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.progressBar.isVisible = value
+    }
+
     @RequiresApi(Build.VERSION_CODES.N)
     private fun updateLabel() {
         val myFormat = "dd/MM/yyyy"
@@ -207,6 +249,5 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.*\\s).{6,}$"
         return password.matches(passwordPattern.toRegex())
     }
-
 
 }
