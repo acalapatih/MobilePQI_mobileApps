@@ -239,6 +239,6 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
 
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
-        binding.btnSignup.isEnabled = value
+        binding.btnSignup.isEnabled = !value
     }
 }
