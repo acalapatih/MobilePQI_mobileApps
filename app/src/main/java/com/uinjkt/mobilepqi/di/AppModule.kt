@@ -4,6 +4,8 @@ import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
 import com.mobilepqi.core.domain.usecase.profil.ProfilInteractor
 import com.mobilepqi.core.domain.usecase.profil.ProfilUsecase
+import com.mobilepqi.core.domain.usecase.profil.PutProfilInteractor
+import com.mobilepqi.core.domain.usecase.profil.PutProfilUsecase
 import com.mobilepqi.core.domain.usecase.signin.SigninIntercator
 import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
@@ -19,10 +21,11 @@ val useCaseModule = module {
     factory<UploadFileOrImageUsecase> { UploadFileOrImageInteractor(get()) }
     factory<SigninUsecase> { SigninIntercator(get()) }
     factory<ProfilUsecase> { ProfilInteractor(get()) }
+    factory<PutProfilUsecase> { PutProfilInteractor(get()) }
 }
 
 val viewModelModule = module {
     viewModel { DashboardViewModel(get(), get()) }
     viewModel { SignInViewModel(get()) }
-    viewModel { ProfilViewModel(get()) }
+    viewModel { ProfilViewModel(get(), get()) }
 }

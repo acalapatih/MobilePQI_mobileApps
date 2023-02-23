@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
 import com.mobilepqi.core.domain.model.profil.ProfilModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -147,6 +148,8 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
 
         binding.btnSimpanProfil.setOnClickListener {
+            updateProfil()
+
             showOneActionDialog(
                 message = getString(R.string.message_profilInfo),
                 btnMessage = getString(R.string.btnMessage_profilInfo)
@@ -157,6 +160,19 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             binding.etNohp.isEnabled = false
             binding.etAlamat.isEnabled = false
         }
+    }
+
+    private fun updateProfil() {
+        viewModel.putprofil(
+            PutProfilPayload(
+                faculty = binding.etFakultas.text.toString(),
+                major = binding.etProdi.text.toString(),
+                phone = binding.etNohp.text.toString(),
+                address = binding.etAlamat.text.toString(),
+                birth = binding.etTglahir.text.toString(),
+                avatar = ""
+            )
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -238,6 +254,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     model.data?.let { showData(it) }
+                    model.data?.let { updateData() }
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -245,6 +262,10 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
             }
         }
+    }
+
+    private fun updateData() {
+        start(this)
     }
 
     private fun showLoading(value: Boolean) {

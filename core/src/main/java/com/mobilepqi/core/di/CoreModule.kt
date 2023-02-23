@@ -4,6 +4,7 @@ import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.ProfilRepositoryImpl
+import com.mobilepqi.core.data.repository.profil.PutProfilRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninReposityImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
 import com.mobilepqi.core.data.source.local.LocalDataSource
@@ -14,6 +15,7 @@ import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
 import com.mobilepqi.core.domain.repository.profil.ProfilRepository
+import com.mobilepqi.core.domain.repository.profil.PutProfilRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
@@ -79,4 +81,5 @@ val repositoryModule = module {
     single<UploadFileOrImageRepository> { UploadFileOrImageRepositoryImpl(get()) }
     single<SigninRepository> { SigninReposityImpl(get(), get()) }
     single<ProfilRepository> { ProfilRepositoryImpl(get()) }
+    single<PutProfilRepository> { PutProfilRepositoryImpl(get()) }
 }

@@ -6,6 +6,8 @@ import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import com.mobilepqi.core.data.source.remote.response.profil.ProfilResponse
+import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
+import com.mobilepqi.core.data.source.remote.response.profil.PutProfilResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
@@ -74,6 +76,19 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.profil()
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun putprofil(request: PutProfilPayload): Flow<ApiResponse<PutProfilResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.putprofil(request)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

@@ -8,5 +8,6 @@ import kotlinx.coroutines.flow.Flow
 class ProfilInteractor(
     private val repository: ProfilRepository
 ): ProfilUsecase {
-    override fun profil(): Flow<Resource<ProfilModel>> = repository.profil()
+    override fun profil(): Flow<Resource<ProfilModel>> =
+        repository.profil()
 }
