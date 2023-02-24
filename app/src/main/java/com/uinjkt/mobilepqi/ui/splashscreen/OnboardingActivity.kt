@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityOnboardingBinding
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>() {
     companion object {
@@ -23,6 +24,7 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>() {
     }
 
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
+    private val viewModel by viewModel<SplashOnboardingViewModel>()
 
     override fun getViewBinding(): ActivityOnboardingBinding =
         ActivityOnboardingBinding.inflate(layoutInflater)
@@ -46,6 +48,7 @@ class OnboardingActivity : BaseActivity<ActivityOnboardingBinding>() {
         }
 
         binding.btnMulai.setOnClickListener {
+            viewModel.setShowOnboardingStatus(false)
             SigninActivity.start(this)
             finish()
         }
