@@ -254,6 +254,21 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     model.data?.let { showData(it) }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "")
+                }
+            }
+        }
+
+        viewModel.putprofil.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let { updateData() }
                 }
                 is Resource.Error -> {
