@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.uinjkt.mobilepqi.MainActivity
+import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.FragmentProfilBinding
 
@@ -22,10 +22,10 @@ class ProfilFragment : Fragment() {
         }
 
         binding.tvPengaturan.setOnClickListener {
-            MainActivity.start(requireContext(), "pengaturan")
+            DashboardActivity.start(requireContext(), "pengaturan")
         }
 
-        val baseActivity = activity as MainActivity
+        val baseActivity = activity as DashboardActivity
         binding.tvLogout.setOnClickListener {
             baseActivity.showTwoActionDialog(
                 message = getString(R.string.message_logout),
