@@ -112,9 +112,11 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
         Geocoder(this, Locale.getDefault()).getAddress(
             latitude, longitude
         ) {
-            sharedViewModel.location.value = it?.subLocality ?: ""
-            sharedViewModel.latitude.value = latitude
-            sharedViewModel.longitude.value = longitude
+            if (it != null) {
+                sharedViewModel.location.value = it.subLocality ?: ""
+                sharedViewModel.latitude.value = latitude
+                sharedViewModel.longitude.value = longitude
+            }
         }
     }
 
