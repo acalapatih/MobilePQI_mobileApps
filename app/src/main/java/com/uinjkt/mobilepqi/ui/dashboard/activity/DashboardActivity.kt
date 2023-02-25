@@ -149,10 +149,15 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
         }
         alertDialog.setNegativeButton("Cancel") { dialog, _ ->
             dialog.cancel()
-            sharedViewModel.latitude.value = 0.0
-            sharedViewModel.longitude.value = 0.0
+            setDefaultValueSharedViewModel()
         }
         alertDialog.show()
+    }
+
+    private fun setDefaultValueSharedViewModel() {
+        sharedViewModel.latitude.value = 0.0
+        sharedViewModel.longitude.value = 0.0
+        sharedViewModel.location.value = "-"
     }
 
     override fun gpsOn() {
@@ -175,11 +180,12 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                showToast("Permission Granted")
+                showToast("Access Location Permission Granted")
                 requestAccess()
             } else {
-                showToast("Permission Denied")
+                showToast("Access Location Permission Denied")
                 isGranted = false
+                setDefaultValueSharedViewModel()
             }
         }
     }

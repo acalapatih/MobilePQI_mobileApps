@@ -52,6 +52,11 @@ class DashboardFragment : Fragment() {
         initView()
         initListener()
         initObserver()
+
+        if (latitude.isEmpty() && longitude.isEmpty()) {
+            binding.tvSholat.text = "-"
+            binding.tvWaktu.text = "-"
+        }
     }
 
     private fun initObserver() {
@@ -76,14 +81,14 @@ class DashboardFragment : Fragment() {
 
         sharedViewModel.longitude.observe(viewLifecycleOwner) { value ->
             longitude = value.toString()
-            if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
+            if (latitude.isNotEmpty() && longitude.isNotEmpty() && latitude != "0.0" && longitude != "0.0") {
                 viewModel.getJadwalSholat(currentTimestamp, latitude, longitude)
             }
         }
 
         sharedViewModel.latitude.observe(viewLifecycleOwner) { value ->
             latitude = value.toString()
-            if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
+            if (latitude.isNotEmpty() && longitude.isNotEmpty() && latitude != "0.0" && longitude != "0.0") {
                 viewModel.getJadwalSholat(currentTimestamp, latitude, longitude)
             }
         }
@@ -93,6 +98,7 @@ class DashboardFragment : Fragment() {
                 binding.tvDaerah.text = value
             } else {
                 binding.tvDaerah.text = "-"
+                binding.tvSholat.text = "-"
             }
         }
     }
@@ -166,10 +172,15 @@ class DashboardFragment : Fragment() {
     private fun showLoading(state: Boolean) {
         with(binding) {
             if (state) {
+                tvSholatLoading.isVisible = true
+                tvSholat.isVisible = false
+                tvWaktu.isVisible = false
                 tvSholatLoading.startShimmer()
             } else {
-                tvSholatLoading.stopShimmer()
+                tvSholat.isVisible = true
+                tvWaktu.isVisible = true
                 tvSholatLoading.isVisible = false
+                tvSholatLoading.stopShimmer()
             }
         }
     }
