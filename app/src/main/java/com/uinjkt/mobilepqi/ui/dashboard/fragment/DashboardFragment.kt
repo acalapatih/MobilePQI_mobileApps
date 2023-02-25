@@ -25,11 +25,23 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var listTugasDashboard: MutableList<DataTugasDashboard>
-    private lateinit var tugasDashboardAdapter: DashboardAdapter
-
     private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by activityViewModel<DashboardSharedViewModel>()
+
+    private lateinit var listTugasDashboard: MutableList<DataTugasDashboard>
+    private lateinit var tugasDashboardAdapter: DashboardAdapter
+    private var latitude = ""
+    private var longitude = ""
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        // Retrieve and inflate the layout for this fragment
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,22 +65,6 @@ class DashboardFragment : Fragment() {
                 }
             }
         }
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun setupJadwalSholat(data: JadwalSholatModel) {
-        binding.tvWaktu.text = "${data.subuh} WIB"
-    }
-
-    private fun initView() {
-        listTugasDashboard = DataSourceTugasDashboard().dataTugasDashboard
-
-        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
-        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTugasDashboard.adapter = tugasDashboardAdapter
-
-        var latitude = ""
-        var longitude = ""
 
         sharedViewModel.longitude.observe(viewLifecycleOwner) { value ->
             longitude = value.toString()
@@ -93,19 +89,22 @@ class DashboardFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun setupJadwalSholat(data: JadwalSholatModel) {
+        binding.tvWaktu.text = "${data.subuh} WIB"
+    }
+
+    private fun initView() {
+        listTugasDashboard = DataSourceTugasDashboard().dataTugasDashboard
+
+        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
+        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+    }
+
     private fun initListener() {
         binding.imgUser.setOnClickListener {
             DashboardActivity.start(requireContext(), "profil")
         }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Retrieve and inflate the layout for this fragment
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        return binding.root
     }
 }
