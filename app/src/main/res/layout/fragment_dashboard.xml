@@ -112,7 +112,7 @@
             app:layout_constraintBottom_toBottomOf="@id/ic_waktu"
             app:layout_constraintStart_toEndOf="@id/ic_waktu"
             app:layout_constraintTop_toTopOf="@id/ic_waktu"
-            tools:text="@string/tv_sholat" />
+            tools:text="@string/sholat_ashar" />
 
         <ImageView
             android:id="@+id/ic_lokasi"

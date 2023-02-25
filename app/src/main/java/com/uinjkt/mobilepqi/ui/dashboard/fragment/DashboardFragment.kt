@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
+import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.data.DataSourceTugasDashboard
 import com.uinjkt.mobilepqi.data.DataTugasDashboard
 import com.uinjkt.mobilepqi.databinding.FragmentDashboardBinding
@@ -106,20 +107,25 @@ class DashboardFragment : Fragment() {
         val jadwalIsya = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.isya}")?.time ?: 0
 
         if (currentTimestamp < jadwalSubuh) {
+            binding.tvSholat.text = getString(R.string.sholat_subuh)
             binding.tvWaktu.text = "${data.subuh} WIB"
         } else if (currentTimestamp in (jadwalSubuh + 1) until jadwalZuhur) {
+            binding.tvSholat.text = getString(R.string.sholat_zuhur)
             binding.tvWaktu.text = "${data.zuhur} WIB"
         } else if (currentTimestamp in (jadwalZuhur + 1) until jadwalAsar) {
+            binding.tvSholat.text = getString(R.string.sholat_ashar)
             binding.tvWaktu.text = "${data.ashar} WIB"
         } else if (currentTimestamp in (jadwalAsar + 1) until jadwalMaghrib) {
+            binding.tvSholat.text = getString(R.string.sholat_maghrib)
             binding.tvWaktu.text = "${data.maghrib} WIB"
         } else if (currentTimestamp in (jadwalMaghrib + 1) until jadwalIsya) {
+            binding.tvSholat.text = getString(R.string.sholat_isya)
             binding.tvWaktu.text = "${data.isya} WIB"
         } else if (currentTimestamp > jadwalIsya) {
             //val calendar = Calendar.getInstance()
             //calendar.add(Calendar.DAY_OF_YEAR, 1)
             //val tomorrowDate = Timestamp(calendar.time.time).toString()
-
+            binding.tvSholat.text = getString(R.string.sholat_subuh)
             binding.tvWaktu.text = "${data.subuh} WIB"
         }
 
