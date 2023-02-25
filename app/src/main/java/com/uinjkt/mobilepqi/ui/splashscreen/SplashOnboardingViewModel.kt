@@ -15,6 +15,9 @@ class SplashOnboardingViewModel(
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
+    private val _userRole = MutableLiveData<String>()
+    val userRole: LiveData<String> get() = _userRole
+
     fun setShowOnboardingStatus(value: Boolean) {
         onboardingUsecase.setShowOnboardingStatus(value)
     }
@@ -25,6 +28,10 @@ class SplashOnboardingViewModel(
 
     fun getToken() {
         _token.value = onboardingUsecase.getToken()
+    }
+
+    fun getUserRole() {
+        _userRole.value = onboardingUsecase.getUserRole()
     }
 
 }

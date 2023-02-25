@@ -12,4 +12,5 @@ class OnboardingRepositoryImpl(
 
     override fun getOnboardingStatus(): Boolean = localDataSource.getOnboardingStatus()
     override fun getToken(): String = localDataSource.getToken()
+    override fun getUserRole(): String = localDataSource.getUserRole()
 }

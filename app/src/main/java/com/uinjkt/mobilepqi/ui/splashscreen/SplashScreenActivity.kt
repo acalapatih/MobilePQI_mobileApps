@@ -12,6 +12,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
 import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
+import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,6 +29,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
 
         viewModel.getShowOnboardingStatus()
         viewModel.getToken()
+        viewModel.getUserRole()
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -66,8 +68,13 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                 SigninActivity.start(this)
                 finish()
             } else {
-                DashboardActivity.start(this, "")
-                finish()
+                if (viewModel.userRole.value?.equals("mahasiswa") == true) {
+                    DashboardActivity.start(this, "")
+                    finish()
+                } else {
+                    DaftarKelasActivity.start(this)
+                    finish()
+                }
             }
         }
     }

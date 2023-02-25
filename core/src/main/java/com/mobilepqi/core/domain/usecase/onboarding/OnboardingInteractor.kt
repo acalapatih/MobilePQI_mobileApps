@@ -7,5 +7,6 @@ class OnboardingInteractor(private val repository: OnboardingRepository): Onboar
 
     override fun getOnboardingStatus(): Boolean = repository.getOnboardingStatus()
     override fun getToken(): String = repository.getToken()
+    override fun getUserRole(): String = repository.getUserRole()
 
 }

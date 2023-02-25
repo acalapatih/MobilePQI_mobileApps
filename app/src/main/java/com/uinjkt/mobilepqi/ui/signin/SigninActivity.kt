@@ -134,6 +134,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
     private fun actionAfterSignin(data: SigninModel) {
         viewModel.setToken(data.token)
+        viewModel.setUserRole(data.role)
         if (data.role == "mahasiswa") {
             DashboardActivity.start(this, "")
             finish()
