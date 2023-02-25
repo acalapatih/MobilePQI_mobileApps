@@ -5,15 +5,20 @@ import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenBuatTugasBaruBinding
+import com.uinjkt.mobilepqi.util.openFileManagerPdf
+import com.uinjkt.mobilepqi.util.openGallery
+import com.uinjkt.mobilepqi.util.uriToFile
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,6 +44,8 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initListener()
 
         val behavior = intent.getStringExtra(BEHAVIOR)
 
@@ -131,11 +138,53 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         }
     }
 
+    private fun initListener() {
+        with(binding) {
+            ivAttachFile.setOnClickListener {
+                openFileManagerPdf(launcherIntentFile)
+            }
+
+            ivImageAttach.setOnClickListener {
+                openGallery(launcherIntentGallery)
+            }
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.N)
     private fun updatelabel() {
         val myFormat = "dd/MM/yyyy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         val textView = binding.tvDeadlineTugas
         textView.text = dateFormat.format(myCalendar.time)
+    }
+
+    private val launcherIntentFile = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedFile: Uri = result.data?.data as Uri
+
+            val myFile = uriToFile(selectedFile, this, "pdf")
+
+            /*
+            TODO
+            trigger viewmodel disini, parameter file masukin aja myFile
+             */
+        }
+    }
+
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedFile: Uri = result.data?.data as Uri
+
+            val myFile = uriToFile(selectedFile, this, "image")
+
+            /*
+            TODO
+            trigger viewmodel disini, parameter file masukin aja myFile
+             */
+        }
     }
 }
