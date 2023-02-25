@@ -65,7 +65,7 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
                 return@addCallback
             }
             doubleBackToExitPressedOnce = true
-            showToast("Click Back Again to Exit")
+            showToast("Press Back Again to Exit")
             Handler(Looper.getMainLooper()).postDelayed(
                 { doubleBackToExitPressedOnce = false },
                 2000
