@@ -5,10 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 
-class SplashOnboardingViewModel(private val onboardingUsecase: OnboardingUsecase) : ViewModel() {
+class SplashOnboardingViewModel(
+    private val onboardingUsecase: OnboardingUsecase
+) : ViewModel() {
 
     private val _showOnboardingStatus = MutableLiveData<Boolean>()
     val showOnboardingStatus: LiveData<Boolean> get() = _showOnboardingStatus
+
+    private val _token = MutableLiveData<String>()
+    val token: LiveData<String> get() = _token
 
     fun setShowOnboardingStatus(value: Boolean) {
         onboardingUsecase.setShowOnboardingStatus(value)
@@ -16,6 +21,10 @@ class SplashOnboardingViewModel(private val onboardingUsecase: OnboardingUsecase
 
     fun getShowOnboardingStatus() {
         _showOnboardingStatus.value = onboardingUsecase.getOnboardingStatus()
+    }
+
+    fun getToken() {
+        _token.value = onboardingUsecase.getToken()
     }
 
 }

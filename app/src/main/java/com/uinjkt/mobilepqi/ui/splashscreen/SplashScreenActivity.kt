@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
+import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -60,8 +61,13 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
             OnboardingActivity.start(this)
             finish()
         } else {
-            SigninActivity.start(this)
-            finish()
+            if (viewModel.token.value?.isEmpty() == true) {
+                SigninActivity.start(this)
+                finish()
+            } else {
+                DashboardActivity.start(this, "")
+                finish()
+            }
         }
     }
 }
