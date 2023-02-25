@@ -123,7 +123,7 @@
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="@id/tv_sholat"
             app:layout_constraintTop_toBottomOf="@id/tv_sholat"
-            tools:text="@string/tv_waktu" />
+            tools:text="@string/waktu_sholat" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/tv_sholat_loading"

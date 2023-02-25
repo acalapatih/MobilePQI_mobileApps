@@ -140,8 +140,9 @@
     <string name="sholat_zuhur">Sholat Zuhur</string>
     <string name="sholat_ashar">Sholat Ashar</string>
     <string name="sholat_maghrib">Sholat Maghrib</string>
-    <string name="sholat_isya">Sholat Isya</string>    <string name="tv_lokasi">Lokasi Anda</string>
-    <string name="tv_waktu">15:06 WIB</string>
+    <string name="sholat_isya">Sholat Isya</string>
+    <string name="tv_lokasi">Lokasi Anda</string>
+    <string name="waktu_sholat">%s WIB</string>
     <string name="tv_daerah">Cawang</string>
     <string name="tv_silabus">Silabus</string>
     <string name="tv_ibadah">Ibadah</string>
