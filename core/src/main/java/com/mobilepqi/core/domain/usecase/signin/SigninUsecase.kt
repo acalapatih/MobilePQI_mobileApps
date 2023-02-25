@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface SigninUsecase {
     fun signin(request: SigninPayload): Flow<Resource<SigninModel>>
     fun setToken(token: String)
+    fun setUserRole(role: String)
 }

@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.dashboard
+package com.uinjkt.mobilepqi.ui.dashboard.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,9 +23,9 @@ class DashboardViewModel(
     private val _imageUploaded = MutableLiveData<Resource<UploadModel>>()
     val imageUploaded: LiveData<Resource<UploadModel>> get() = _imageUploaded
 
-    fun getJadwalSholat(latitude: String, longitude: String) {
+    fun getJadwalSholat(timestamp: String, latitude: String, longitude: String) {
         viewModelScope.launch {
-            jadwalSholatUsecase.getJadwalSholat(latitude, longitude).collect {
+            jadwalSholatUsecase.getJadwalSholat(timestamp, latitude, longitude).collect {
                 _jadwalSholat.value = it
             }
         }

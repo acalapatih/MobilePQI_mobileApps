@@ -6,6 +6,9 @@ import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImp
 import com.mobilepqi.core.data.repository.profil.ProfilRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.PutProfilRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninReposityImpl
+import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
+import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
+import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
 import com.mobilepqi.core.data.source.local.LocalDataSource
 import com.mobilepqi.core.data.source.local.sharedpref.MainPreferencesImpl
@@ -17,6 +20,8 @@ import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
 import com.mobilepqi.core.domain.repository.profil.ProfilRepository
 import com.mobilepqi.core.domain.repository.profil.PutProfilRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
+import com.mobilepqi.core.domain.repository.signup.SignupRepository
+import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
 import okhttp3.OkHttpClient
@@ -79,6 +84,9 @@ val repositoryModule = module {
     single { LocalDataSource(get()) }
     single<JadwalSholatRepository> { JadwalSholatRepositoryImpl(get()) }
     single<UploadFileOrImageRepository> { UploadFileOrImageRepositoryImpl(get()) }
+    single<SigninRepository> { SigninRepositoryImpl(get(), get()) }
+    single<SignupRepository> { SignupRepositoryImpl(get()) }
+    single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<SigninRepository> { SigninReposityImpl(get(), get()) }
     single<ProfilRepository> { ProfilRepositoryImpl(get()) }
     single<PutProfilRepository> { PutProfilRepositoryImpl(get()) }

@@ -10,6 +10,8 @@ import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
+import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
+import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -25,13 +27,17 @@ class RemoteDataSource(
     private val mobilePqiService: MobilePqiService
 ) {
     suspend fun getJadwalSholat(
+        timestamp: String,
         latitude: String,
         longitude: String
     ): Flow<ApiResponse<JadwalSholatResponse>> {
         return flow {
             try {
-                val response =
-                    apiSholatService.getJadwalSholat(latitude = latitude, longitude = longitude)
+                val response = apiSholatService.getJadwalSholat(
+                    timestamp = timestamp,
+                    latitude = latitude,
+                    longitude = longitude
+                )
                 val code = response.code
                 if (code == 200) {
                     emit(ApiResponse.Success(response))
@@ -59,7 +65,7 @@ class RemoteDataSource(
         }
     }
 
-    suspend fun login(request: SigninPayload): Flow<ApiResponse<SigninResponse>> {
+    suspend fun signin(request: SigninPayload): Flow<ApiResponse<SigninResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.signin(request)
@@ -89,6 +95,19 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.putprofil(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun signup(request: SignupPayload): Flow<ApiResponse<SignupResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.signup(request)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

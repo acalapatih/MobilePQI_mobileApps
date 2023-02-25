@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.dashboard
+package com.uinjkt.mobilepqi.ui.dashboard.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

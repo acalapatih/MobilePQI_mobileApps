@@ -9,8 +9,10 @@ class JadwalSholatInteractor(private val jadwalSholatRepository: JadwalSholatRep
     JadwalSholatUsecase {
 
     override fun getJadwalSholat(
+        timestamp: String,
         latitude: String,
         longitude: String
-    ): Flow<Resource<JadwalSholatModel>> = jadwalSholatRepository.getJadwalSholat(latitude, longitude)
+    ): Flow<Resource<JadwalSholatModel>> =
+        jadwalSholatRepository.getJadwalSholat(timestamp, latitude, longitude)
 
 }
