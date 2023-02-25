@@ -100,11 +100,26 @@ class DashboardFragment : Fragment() {
         val sdf = SimpleDateFormat(FORMAT_DATE, Locale.getDefault())
         val currentDate = sdf.format(Date())
 
-        val jadwalSubuh = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.subuh}")?.time ?: 0
-        val jadwalZuhur = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.zuhur}")?.time ?: 0
-        val jadwalAsar = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.ashar}")?.time ?: 0
-        val jadwalMaghrib = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.maghrib}")?.time ?: 0
-        val jadwalIsya = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.isya}")?.time ?: 0
+        val jadwalSubuh = SimpleDateFormat(
+            FORMAT_DATE_TIME,
+            Locale.getDefault()
+        ).parse("$currentDate ${data.subuh}")?.time ?: 0
+        val jadwalZuhur = SimpleDateFormat(
+            FORMAT_DATE_TIME,
+            Locale.getDefault()
+        ).parse("$currentDate ${data.zuhur}")?.time ?: 0
+        val jadwalAsar = SimpleDateFormat(
+            FORMAT_DATE_TIME,
+            Locale.getDefault()
+        ).parse("$currentDate ${data.ashar}")?.time ?: 0
+        val jadwalMaghrib = SimpleDateFormat(
+            FORMAT_DATE_TIME,
+            Locale.getDefault()
+        ).parse("$currentDate ${data.maghrib}")?.time ?: 0
+        val jadwalIsya = SimpleDateFormat(
+            FORMAT_DATE_TIME,
+            Locale.getDefault()
+        ).parse("$currentDate ${data.isya}")?.time ?: 0
 
         if (currentTimestamp < jadwalSubuh) {
             binding.tvSholat.text = getString(R.string.sholat_subuh)
