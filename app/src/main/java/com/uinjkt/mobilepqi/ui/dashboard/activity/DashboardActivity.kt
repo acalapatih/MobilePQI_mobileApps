@@ -8,7 +8,10 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.Settings
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -41,6 +44,7 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
     private lateinit var locationService: LocationService
     private lateinit var navController: NavController
     private val locationPermissionCode = 99
+    private var doubleBackToExitPressedOnce = false
 
     private var isGranted = true
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -51,6 +55,22 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
         requestAccess()
 
         initBottomNav()
+        handleOnBackPressed()
+    }
+
+    private fun handleOnBackPressed() {
+        onBackPressedDispatcher.addCallback(this) {
+            if (doubleBackToExitPressedOnce) {
+                finish()
+                return@addCallback
+            }
+            doubleBackToExitPressedOnce = true
+            showToast("Click Back Again to Exit")
+            Handler(Looper.getMainLooper()).postDelayed(
+                { doubleBackToExitPressedOnce = false },
+                2000
+            )
+        }
     }
 
     private fun initBottomNav() {
