@@ -148,11 +148,10 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
 
         binding.btnSimpanProfil.setOnClickListener {
-            updateProfil()
-
-            showOneActionDialog(
+            showOneActionDialogWithInvoke(
                 message = getString(R.string.message_profilInfo),
-                btnMessage = getString(R.string.btnMessage_profilInfo)
+                btnMessage = getString(R.string.btnMessage_profilInfo),
+                onButtonClicked = { updateProfil() }
             )
             binding.etFakultas.isEnabled = false
             binding.etProdi.isEnabled = false
@@ -245,6 +244,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     private fun initObserver() {
         viewModel.profil.observe(this) { model ->
             when (model) {
@@ -253,6 +253,12 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
+                    DatePickerDialog.OnDateSetListener { _, year, month, day ->
+                        myCalendar[Calendar.YEAR] = year
+                        myCalendar[Calendar.MONTH] = month
+                        myCalendar[Calendar.DAY_OF_MONTH] = day
+                        updateLabel()
+                    }
                     model.data?.let { showData(it) }
                 }
                 is Resource.Error -> {
@@ -280,7 +286,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     }
 
     private fun updateData() {
-        start(this)
+        finish()
     }
 
     private fun showLoading(value: Boolean) {
