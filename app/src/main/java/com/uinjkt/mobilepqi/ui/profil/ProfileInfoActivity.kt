@@ -149,10 +149,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
 
         binding.btnSimpanProfil.setOnClickListener {
             updateProfil()
-            showOneActionDialog(
-                message = getString(R.string.message_profilInfo),
-                btnMessage = getString(R.string.btnMessage_profilInfo)
-            )
             binding.etFakultas.isEnabled = false
             binding.etProdi.isEnabled = false
             binding.etPassword.isEnabled = false
@@ -226,8 +222,11 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")
     private fun showData(data: ProfilModel) {
+        val myFormat = "dd/MM/yyyy"
+        val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         with(binding) {
             Glide.with(this@ProfileInfoActivity)
                 .load(data.avatar)
@@ -239,6 +238,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             etFakultas.setText(data.faculty)
             etProdi.setText(data.major)
             etTglahir.setText(data.birth)
+            etTglahir.setText(dateFormat.format(myCalendar.time))
             etNohp.setText(data.phone)
             etAlamat.setText(data.address)
         }
@@ -253,10 +253,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    val myFormat = "dd/MM/yyyy"
-                    val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-                    val editText = binding.etTglahir
-                    editText.setText(dateFormat.format(myCalendar.time))
                     model.data?.let { showData(it) }
                 }
                 is Resource.Error -> {
@@ -273,7 +269,11 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    model.data?.let { updateData() }
+                    showOneActionDialogWithInvoke(
+                        message = getString(R.string.message_profilInfo),
+                        btnMessage = getString(R.string.btnMessage_profilInfo),
+                        onButtonClicked = { viewModel.profil }
+                    )
                 }
                 is Resource.Error -> {
                     showLoading(false)
