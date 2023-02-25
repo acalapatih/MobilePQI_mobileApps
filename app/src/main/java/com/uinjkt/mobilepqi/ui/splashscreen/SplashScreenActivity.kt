@@ -27,6 +27,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
         super.onCreate(savedInstanceState)
 
         viewModel.getShowOnboardingStatus()
+        viewModel.getToken()
 
         @Suppress("DEPRECATION")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
