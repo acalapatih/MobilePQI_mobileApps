@@ -117,11 +117,11 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getDetailMateriQiroah(): Flow<ApiResponse<GetDetailMateriQiroahResponse>> {
+    suspend fun getDetailMateriQiroah(id: Int): Flow<ApiResponse<GetDetailMateriQiroahResponse>> {
         return flow {
             try {
                 val response =
-                    mobilePqiService.getDetailMateriQiroah(1)
+                    mobilePqiService.getDetailMateriQiroah(id)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

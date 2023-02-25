@@ -6,9 +6,11 @@ import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetDetailMateriQiroahResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetMateriQiroahResponse
+import com.mobilepqi.core.domain.model.menuqiroah.CreateMateriQiroahModel
+import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
-import com.mobilepqi.core.domain.model.menuqiroah.MenuQiroahModel
 import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -17,10 +19,10 @@ class MenuQiroahRepositoryImpl(
 ) : MenuQiroahRepository {
     override fun createMateriQiroah(
         request: CreateMateriQiroahPayload
-    ): Flow<Resource<MenuQiroahModel>> =
-        object : NetworkOnlyResource<MenuQiroahModel, CreateMateriQiroahResponse>() {
-            override fun loadFromNetwork(data: CreateMateriQiroahResponse): Flow<MenuQiroahModel> =
-                MenuQiroahModel.mapResponseToModel(data)
+    ): Flow<Resource<CreateMateriQiroahModel>> =
+        object : NetworkOnlyResource<CreateMateriQiroahModel, CreateMateriQiroahResponse>() {
+            override fun loadFromNetwork(data: CreateMateriQiroahResponse): Flow<CreateMateriQiroahModel> =
+                CreateMateriQiroahModel.mapResponseToModel(data)
 
             override suspend fun createCall(): Flow<ApiResponse<CreateMateriQiroahResponse>> =
                 remoteDataSource.createMateriQiroah(request)
@@ -33,5 +35,14 @@ class MenuQiroahRepositoryImpl(
 
             override suspend fun createCall(): Flow<ApiResponse<GetMateriQiroahResponse>> =
                 remoteDataSource.getMateriQiroah()
+        }.asFlow()
+
+    override fun getDetailMateriQiroah(): Flow<Resource<GetDetailMateriQiroahModel>> =
+        object : NetworkOnlyResource<GetDetailMateriQiroahModel, GetDetailMateriQiroahResponse>() {
+            override fun loadFromNetwork(data: GetDetailMateriQiroahResponse): Flow<GetDetailMateriQiroahModel> =
+                GetDetailMateriQiroahModel.mapResponseToModel(data)
+
+            override suspend fun createCall(): Flow<ApiResponse<GetDetailMateriQiroahResponse>> =
+                remoteDataSource.getDetailMateriQiroah(2)
         }.asFlow()
 }

@@ -15,6 +15,9 @@ data class GetDetailMateriQiroahResponse(
 ) {
 	data class Data(
 
+		@field:SerializedName("errors")
+		val error: String? = null,
+
 		@field:SerializedName("file")
 		val file: List<FileItem?>? = null,
 
@@ -43,7 +46,6 @@ data class GetDetailMateriQiroahResponse(
 		val createdBy: String? = null
 	) {
 		data class FileItem(
-
 			@field:SerializedName("url")
 			val url: String? = null
 		)

@@ -25,6 +25,4 @@ interface MobilePqiService {
     suspend fun getDetailMateriQiroah(
         @Path("idMateri") idMateri: Int
     ) : GetDetailMateriQiroahResponse
-
-
 }
