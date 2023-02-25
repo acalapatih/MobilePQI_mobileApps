@@ -45,8 +45,8 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
     private lateinit var navController: NavController
     private val locationPermissionCode = 99
     private var doubleBackToExitPressedOnce = false
-
     private var isGranted = true
+
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
