@@ -113,7 +113,7 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
             latitude, longitude
         ) {
             if (it != null) {
-                sharedViewModel.location.value = it.locality
+                sharedViewModel.location.value = it.subLocality
                 sharedViewModel.latitude.value = latitude
                 sharedViewModel.longitude.value = longitude
             }

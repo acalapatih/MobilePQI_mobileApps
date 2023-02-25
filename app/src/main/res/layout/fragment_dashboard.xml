@@ -199,101 +199,137 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/img_dashboard" />
 
-        <ImageView
-            android:id="@+id/ic_silabus"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_silabus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/desc_iv_logo_silabus"
-            android:src="@drawable/ic_silabus"
+            app:layout_constraintEnd_toStartOf="@id/cl_ibadah"
             app:layout_constraintStart_toStartOf="@id/img_dashboard"
-            app:layout_constraintTop_toTopOf="@+id/view_line" />
+            app:layout_constraintTop_toTopOf="@+id/view_line">
 
-        <TextView
-            android:id="@+id/tv_silabus"
+            <ImageView
+                android:id="@+id/ic_silabus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/desc_iv_logo_silabus"
+                android:src="@drawable/ic_silabus"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_silabus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/tv_silabus"
+                android:textColor="@color/grey_636363"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/ic_silabus"
+                app:layout_constraintStart_toStartOf="@id/ic_silabus"
+                app:layout_constraintTop_toBottomOf="@id/ic_silabus" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_ibadah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/inter_medium"
-            android:text="@string/tv_silabus"
-            android:textColor="@color/grey_636363"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@id/ic_silabus"
-            app:layout_constraintStart_toStartOf="@id/ic_silabus"
-            app:layout_constraintTop_toBottomOf="@id/ic_silabus" />
+            app:layout_constraintEnd_toStartOf="@id/cl_qiroah"
+            app:layout_constraintStart_toEndOf="@id/cl_silabus"
+            app:layout_constraintTop_toTopOf="@+id/view_line">
 
-        <ImageView
-            android:id="@+id/ic_ibadah"
+            <ImageView
+                android:id="@+id/ic_ibadah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/desc_iv_logo_ibadah"
+                android:src="@drawable/ic_ibadah"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_ibadah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/tv_ibadah"
+                android:textColor="@color/grey_636363"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/ic_ibadah"
+                app:layout_constraintStart_toStartOf="@id/ic_ibadah"
+                app:layout_constraintTop_toBottomOf="@id/ic_ibadah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_qiroah"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/desc_iv_logo_ibadah"
-            android:src="@drawable/ic_ibadah"
-            app:layout_constraintStart_toEndOf="@id/ic_silabus"
-            app:layout_constraintTop_toTopOf="@+id/view_line" />
+            app:layout_constraintEnd_toStartOf="@id/cl_tugas"
+            app:layout_constraintStart_toEndOf="@id/cl_ibadah"
+            app:layout_constraintTop_toTopOf="@id/view_line">
 
-        <TextView
-            android:id="@+id/tv_ibadah"
+            <ImageView
+                android:id="@+id/ic_qiroah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/desc_iv_logo_qiroah"
+                android:src="@drawable/ic_qiroah"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_qiroah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/tv_qiroah"
+                android:textColor="@color/grey_636363"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/ic_qiroah"
+                app:layout_constraintStart_toStartOf="@id/ic_qiroah"
+                app:layout_constraintTop_toBottomOf="@id/ic_qiroah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_tugas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/inter_medium"
-            android:text="@string/tv_ibadah"
-            android:textColor="@color/grey_636363"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@id/ic_ibadah"
-            app:layout_constraintStart_toStartOf="@id/ic_ibadah"
-            app:layout_constraintTop_toBottomOf="@id/ic_ibadah" />
+            app:layout_constraintEnd_toEndOf="@id/img_dashboard"
+            app:layout_constraintStart_toEndOf="@id/cl_qiroah"
+            app:layout_constraintTop_toTopOf="@+id/view_line">
 
-        <ImageView
-            android:id="@+id/ic_qiroah"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/desc_iv_logo_qiroah"
-            android:src="@drawable/ic_qiroah"
-            app:layout_constraintStart_toEndOf="@id/ic_ibadah"
-            app:layout_constraintTop_toTopOf="@+id/view_line" />
+            <ImageView
+                android:id="@+id/ic_tugas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:contentDescription="@string/desc_iv_logo_tugas"
+                android:src="@drawable/ic_tugas"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_qiroah"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/inter_medium"
-            android:text="@string/tv_qiroah"
-            android:textColor="@color/grey_636363"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@id/ic_qiroah"
-            app:layout_constraintStart_toStartOf="@id/ic_qiroah"
-            app:layout_constraintTop_toBottomOf="@id/ic_qiroah" />
+            <TextView
+                android:id="@+id/tv_tugas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/tv_tugas"
+                android:textColor="@color/grey_636363"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="@id/ic_tugas"
+                app:layout_constraintStart_toStartOf="@id/ic_tugas"
+                app:layout_constraintTop_toBottomOf="@id/ic_tugas" />
 
-        <ImageView
-            android:id="@+id/ic_tugas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="32dp"
-            android:contentDescription="@string/desc_iv_logo_tugas"
-            android:src="@drawable/ic_tugas"
-            app:layout_constraintStart_toEndOf="@id/ic_qiroah"
-            app:layout_constraintTop_toTopOf="@+id/view_line" />
-
-        <TextView
-            android:id="@+id/tv_tugas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/inter_medium"
-            android:text="@string/tv_tugas"
-            android:textColor="@color/grey_636363"
-            android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@id/ic_tugas"
-            app:layout_constraintStart_toStartOf="@id/ic_tugas"
-            app:layout_constraintTop_toBottomOf="@id/ic_tugas" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/tv_judul"
