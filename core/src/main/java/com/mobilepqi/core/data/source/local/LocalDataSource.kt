@@ -27,4 +27,16 @@ class LocalDataSource(private val sharedPref: MainPreferences) {
     fun clearOnboardingStatus() {
         return sharedPref.clearOnboardingStatus()
     }
+
+    fun setUserRole(role: String) {
+        sharedPref.setUserRole(role)
+    }
+
+    fun getUserRole(): String {
+        return sharedPref.getUserRole() ?: ""
+    }
+
+    fun clearUserRole() {
+        return sharedPref.clearUserRole()
+    }
 }

@@ -15,4 +15,8 @@ class SigninInteractor(
     override fun setToken(token: String) {
         repository.setToken(token)
     }
+
+    override fun setUserRole(role: String) {
+        repository.setUserRole(role)
+    }
 }

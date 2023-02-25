@@ -10,7 +10,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.domain.model.signin.SigninModel
-import com.uinjkt.mobilepqi.MainActivity
+import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
@@ -134,8 +134,9 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
 
     private fun actionAfterSignin(data: SigninModel) {
         viewModel.setToken(data.token)
+        viewModel.setUserRole(data.role)
         if (data.role == "mahasiswa") {
-            MainActivity.start(this, "")
+            DashboardActivity.start(this, "")
             finish()
         } else {
             DaftarKelasActivity.start(this)

@@ -27,4 +27,10 @@ class SigninViewModel(private val useCase: SigninUsecase) : ViewModel() {
             useCase.setToken(token)
         }
     }
+
+    fun setUserRole(role: String) {
+        viewModelScope.launch {
+            useCase.setUserRole(role)
+        }
+    }
 }

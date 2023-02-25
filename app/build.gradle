@@ -64,6 +64,9 @@ dependencies {
 
     //CircleImageView
     implementation "de.hdodenhof:circleimageview:$civ_version"
+
+    //Shimmer
+    implementation "com.facebook.shimmer:shimmer:$shimmer_version"
 }
 
 kapt {
