@@ -9,7 +9,7 @@ import java.io.FileOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
-import java.util.Locale
+import java.util.*
 
 private const val FILENAME_FORMAT = "dd-MMM-yyyy"
 
@@ -18,14 +18,29 @@ val timeStamp: String = SimpleDateFormat(
     Locale.US
 ).format(System.currentTimeMillis())
 
-fun createCustomTempFile(context: Context): File {
+fun createCustomTempImageFile(context: Context): File {
     val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
     return File.createTempFile(timeStamp, ".jpg", storageDir)
 }
 
-fun uriToFile(selectedImg: Uri, context: Context): File {
+fun createCustomTempPdfFile(context: Context): File {
+    val storageDir: File? = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
+    return File.createTempFile(timeStamp, ".pdf", storageDir)
+}
+
+fun uriToFile(selectedImg: Uri, context: Context, type: String): File {
     val contentResolver: ContentResolver = context.contentResolver
-    val myFile = createCustomTempFile(context)
+    val myFile: File = when (type) {
+        "file" -> {
+            createCustomTempPdfFile(context)
+        }
+        "pdf" -> {
+            createCustomTempPdfFile(context)
+        }
+        else -> {
+            createCustomTempImageFile(context)
+        }
+    }
 
     val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
     val outputStream: OutputStream = FileOutputStream(myFile)

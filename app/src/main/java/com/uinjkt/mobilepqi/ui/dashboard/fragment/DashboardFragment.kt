@@ -18,6 +18,14 @@ import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.ui.dashboard.adapter.DashboardAdapter
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahActivity
+import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahActivity
+import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusActivity
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasActivity
+import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivity
+import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
+import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -49,6 +57,9 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.getUserRole()
+
         initView()
         initListener()
         initObserver()
@@ -164,8 +175,58 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initListener() {
-        binding.imgUser.setOnClickListener {
-            DashboardActivity.start(requireContext(), "profil")
+        with(binding) {
+            imgUser.setOnClickListener {
+                DashboardActivity.start(requireContext(), "profil")
+            }
+
+            clSilabus.setOnClickListener {
+                redirectToMenuSilabus()
+            }
+
+            clIbadah.setOnClickListener {
+                redirectToMenuIbadah()
+            }
+
+            clQiroah.setOnClickListener {
+                redirectToMenuQiroah()
+            }
+
+            clTugas.setOnClickListener {
+                redirectToMenuTugas()
+            }
+        }
+    }
+
+    private fun redirectToMenuSilabus() {
+        if (viewModel.userRole.value.equals("mahasiswa")) {
+            MahasiswaSilabusActivity.start(requireContext())
+        } else {
+            DosenSilabusActivity.start(requireContext())
+        }
+    }
+
+    private fun redirectToMenuIbadah() {
+        if (viewModel.userRole.value.equals("mahasiswa")) {
+            MahasiswaMateriIbadahActivity.start(requireContext())
+        } else {
+            DosenMateriIbadahActivity.start(requireContext())
+        }
+    }
+
+    private fun redirectToMenuQiroah() {
+        if (viewModel.userRole.value.equals("mahasiswa")) {
+            MahasiswaMateriQiroahActivity.start(requireContext())
+        } else {
+            DosenMateriQiroahActivity.start(requireContext())
+        }
+    }
+
+    private fun redirectToMenuTugas() {
+        if (viewModel.userRole.value.equals("mahasiswa")) {
+            MahasiswaTugasActivity.start(requireContext())
+        } else {
+            DosenTugasActivity.start(requireContext())
         }
     }
 

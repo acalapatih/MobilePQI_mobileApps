@@ -16,7 +16,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
     companion object {
         @JvmStatic
         fun start(context: Context) {
-            val starter = Intent(context, ActivityMahasiswaSilabusBinding::class.java)
+            val starter = Intent(context, MahasiswaSilabusActivity::class.java)
             context.startActivity(starter)
         }
     }
