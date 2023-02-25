@@ -17,6 +17,9 @@ import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.ui.dashboard.adapter.DashboardAdapter
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.*
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,6 +35,7 @@ class DashboardFragment : Fragment() {
     private lateinit var tugasDashboardAdapter: DashboardAdapter
     private var latitude = ""
     private var longitude = ""
+    private var currentTimestamp = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,14 +73,14 @@ class DashboardFragment : Fragment() {
         sharedViewModel.longitude.observe(viewLifecycleOwner) { value ->
             longitude = value.toString()
             if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
-                viewModel.getJadwalSholat(latitude, longitude)
+                viewModel.getJadwalSholat(currentTimestamp, latitude, longitude)
             }
         }
 
         sharedViewModel.latitude.observe(viewLifecycleOwner) { value ->
             latitude = value.toString()
             if (latitude.isNotEmpty() && longitude.isNotEmpty()) {
-                viewModel.getJadwalSholat(latitude, longitude)
+                viewModel.getJadwalSholat(currentTimestamp, latitude, longitude)
             }
         }
 
@@ -91,10 +95,38 @@ class DashboardFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun setupJadwalSholat(data: JadwalSholatModel) {
-        binding.tvWaktu.text = "${data.subuh} WIB"
+        val currentTimestamp = System.currentTimeMillis()
+        val sdf = SimpleDateFormat(FORMAT_DATE, Locale.getDefault())
+        val currentDate = sdf.format(Date())
+
+        val jadwalSubuh = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.subuh}")?.time ?: 0
+        val jadwalZuhur = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.zuhur}")?.time ?: 0
+        val jadwalAsar = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.ashar}")?.time ?: 0
+        val jadwalMaghrib = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.maghrib}")?.time ?: 0
+        val jadwalIsya = SimpleDateFormat(FORMAT_DATE_TIME, Locale.getDefault()).parse("$currentDate ${data.isya}")?.time ?: 0
+
+        if (currentTimestamp < jadwalSubuh) {
+            binding.tvWaktu.text = "${data.subuh} WIB"
+        } else if (currentTimestamp in (jadwalSubuh + 1) until jadwalZuhur) {
+            binding.tvWaktu.text = "${data.zuhur} WIB"
+        } else if (currentTimestamp in (jadwalZuhur + 1) until jadwalAsar) {
+            binding.tvWaktu.text = "${data.ashar} WIB"
+        } else if (currentTimestamp in (jadwalAsar + 1) until jadwalMaghrib) {
+            binding.tvWaktu.text = "${data.maghrib} WIB"
+        } else if (currentTimestamp in (jadwalMaghrib + 1) until jadwalIsya) {
+            binding.tvWaktu.text = "${data.isya} WIB"
+        } else if (currentTimestamp > jadwalIsya) {
+            //val calendar = Calendar.getInstance()
+            //calendar.add(Calendar.DAY_OF_YEAR, 1)
+            //val tomorrowDate = Timestamp(calendar.time.time).toString()
+
+            binding.tvWaktu.text = "${data.subuh} WIB"
+        }
+
     }
 
     private fun initView() {
+        currentTimestamp = Timestamp(System.currentTimeMillis()).toString()
         listTugasDashboard = DataSourceTugasDashboard().dataTugasDashboard
 
         tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
@@ -106,5 +138,10 @@ class DashboardFragment : Fragment() {
         binding.imgUser.setOnClickListener {
             DashboardActivity.start(requireContext(), "profil")
         }
+    }
+
+    companion object {
+        private const val FORMAT_DATE = "dd/MM/yyyy"
+        private const val FORMAT_DATE_TIME = "dd/MM/yyyy HH:mm"
     }
 }

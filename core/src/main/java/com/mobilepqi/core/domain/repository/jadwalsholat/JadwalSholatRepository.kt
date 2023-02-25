@@ -5,5 +5,9 @@ import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import kotlinx.coroutines.flow.Flow
 
 interface JadwalSholatRepository {
-    fun getJadwalSholat(latitude: String, longitude: String): Flow<Resource<JadwalSholatModel>>
+    fun getJadwalSholat(
+        timestamp: String,
+        latitude: String,
+        longitude: String
+    ): Flow<Resource<JadwalSholatModel>>
 }
