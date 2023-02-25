@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
@@ -43,7 +44,6 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Retrieve and inflate the layout for this fragment
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -58,11 +58,15 @@ class DashboardFragment : Fragment() {
     private fun initObserver() {
         viewModel.jadwalSholat.observe(viewLifecycleOwner) { model ->
             when (model) {
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let { setupJadwalSholat(it) }
                 }
                 is Resource.Error -> {
+                    showLoading(false)
                     model.message?.let {
                         Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         binding.tvWaktu.text = "-"
@@ -158,6 +162,17 @@ class DashboardFragment : Fragment() {
     private fun initListener() {
         binding.imgUser.setOnClickListener {
             DashboardActivity.start(requireContext(), "profil")
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        with(binding) {
+            if (state) {
+                tvSholatLoading.startShimmer()
+            } else {
+                tvSholatLoading.stopShimmer()
+                tvSholatLoading.isVisible = false
+            }
         }
     }
 
