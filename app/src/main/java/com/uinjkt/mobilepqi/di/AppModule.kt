@@ -27,7 +27,7 @@ val useCaseModule = module {
 }
 
 val viewModelModule = module {
-    viewModel { DashboardViewModel(get(), get()) }
+    viewModel { DashboardViewModel(get(), get(), get()) }
     viewModel { SigninViewModel(get()) }
     viewModel { SignupViewModel(get()) }
     viewModel { SplashOnboardingViewModel(get()) }
