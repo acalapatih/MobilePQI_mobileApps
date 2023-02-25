@@ -1,6 +1,5 @@
 package com.uinjkt.mobilepqi.ui.dashboard.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -98,7 +97,6 @@ class DashboardFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun setupJadwalSholat(data: JadwalSholatModel) {
         val currentTimestamp = System.currentTimeMillis()
         val sdf = SimpleDateFormat(FORMAT_DATE, Locale.getDefault())
@@ -127,25 +125,25 @@ class DashboardFragment : Fragment() {
 
         if (currentTimestamp < jadwalSubuh) {
             binding.tvSholat.text = getString(R.string.sholat_subuh)
-            binding.tvWaktu.text = "${data.subuh} WIB"
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.subuh)
         } else if (currentTimestamp in (jadwalSubuh + 1) until jadwalZuhur) {
             binding.tvSholat.text = getString(R.string.sholat_zuhur)
-            binding.tvWaktu.text = "${data.zuhur} WIB"
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.zuhur)
         } else if (currentTimestamp in (jadwalZuhur + 1) until jadwalAsar) {
             binding.tvSholat.text = getString(R.string.sholat_ashar)
-            binding.tvWaktu.text = "${data.ashar} WIB"
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.ashar)
         } else if (currentTimestamp in (jadwalAsar + 1) until jadwalMaghrib) {
             binding.tvSholat.text = getString(R.string.sholat_maghrib)
-            binding.tvWaktu.text = "${data.maghrib} WIB"
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.maghrib)
         } else if (currentTimestamp in (jadwalMaghrib + 1) until jadwalIsya) {
             binding.tvSholat.text = getString(R.string.sholat_isya)
-            binding.tvWaktu.text = "${data.isya} WIB"
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.maghrib)
         } else if (currentTimestamp > jadwalIsya) {
             //val calendar = Calendar.getInstance()
             //calendar.add(Calendar.DAY_OF_YEAR, 1)
             //val tomorrowDate = Timestamp(calendar.time.time).toString()
             binding.tvSholat.text = getString(R.string.sholat_subuh)
-            binding.tvWaktu.text = "${data.subuh} WIB"
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.subuh)
         }
 
     }
