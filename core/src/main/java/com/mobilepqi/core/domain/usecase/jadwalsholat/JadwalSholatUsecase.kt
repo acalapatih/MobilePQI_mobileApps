@@ -6,6 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface JadwalSholatUsecase {
 
-    fun getJadwalSholat(latitude: String, longitude: String): Flow<Resource<JadwalSholatModel>>
+    fun getJadwalSholat(
+        timestamp: String,
+        latitude: String,
+        longitude: String
+    ): Flow<Resource<JadwalSholatModel>>
 
 }

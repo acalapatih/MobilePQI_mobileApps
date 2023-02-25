@@ -17,6 +17,7 @@ class MainPreferencesImpl(private val sharedPreferences: SharedPreferences) : Ma
         private const val PREFERENCES_NAME = "MOBILEPQI_SHARED_PREFERENCES"
         private const val PREF_TOKEN_AUTH = "PREF_TOKEN_AUTH"
         private const val PREF_ONBOARDING_STATUS = "PREF_ONBOARDING_STATUS"
+        private const val PREF_USER_ROLE = "PREF_USER_ROLE"
     }
 
     override fun setToken(token: String) {
@@ -41,5 +42,17 @@ class MainPreferencesImpl(private val sharedPreferences: SharedPreferences) : Ma
 
     override fun clearOnboardingStatus() {
         sharedPreferences.edit().remove(PREF_ONBOARDING_STATUS).apply()
+    }
+
+    override fun setUserRole(role: String) {
+        sharedPreferences.edit().putString(PREF_USER_ROLE, role).apply()
+    }
+
+    override fun getUserRole(): String? {
+        return sharedPreferences.getString(PREF_USER_ROLE, "")
+    }
+
+    override fun clearUserRole() {
+        sharedPreferences.edit().remove(PREF_USER_ROLE).apply()
     }
 }

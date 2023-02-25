@@ -55,4 +55,7 @@ ext {
 
     //CircleImageView
     civ_version = "3.1.0"
+
+    //Shimmer
+    shimmer_version = "0.5.0"
 }

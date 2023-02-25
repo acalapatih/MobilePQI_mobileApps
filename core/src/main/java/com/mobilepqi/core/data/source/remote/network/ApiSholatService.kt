@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface ApiSholatService {
     @GET("v1/timings/{timestamp}")
     suspend fun getJadwalSholat(
-        @Path("timestamp") timestamp: String = Timestamp(System.currentTimeMillis()).toString(),
+        @Path("timestamp") timestamp: String,
         @Query("latitude") latitude: String,
         @Query("longitude") longitude: String,
         @Query("method") method: String = "11"

@@ -14,6 +14,7 @@ class JadwalSholatRepositoryImpl(
 ) : JadwalSholatRepository {
 
     override fun getJadwalSholat(
+        timestamp: String,
         latitude: String,
         longitude: String
     ): Flow<Resource<JadwalSholatModel>> =
@@ -22,7 +23,7 @@ class JadwalSholatRepositoryImpl(
                 JadwalSholatModel.mapResponseToModel(data)
 
             override suspend fun createCall(): Flow<ApiResponse<JadwalSholatResponse>> =
-                remoteDataSource.getJadwalSholat(latitude, longitude)
+                remoteDataSource.getJadwalSholat(timestamp, latitude, longitude)
 
         }.asFlow()
 }

@@ -28,13 +28,17 @@ class RemoteDataSource(
     private val mobilePqiService: MobilePqiService
 ) {
     suspend fun getJadwalSholat(
+        timestamp: String,
         latitude: String,
         longitude: String
     ): Flow<ApiResponse<JadwalSholatResponse>> {
         return flow {
             try {
-                val response =
-                    apiSholatService.getJadwalSholat(latitude = latitude, longitude = longitude)
+                val response = apiSholatService.getJadwalSholat(
+                    timestamp = timestamp,
+                    latitude = latitude,
+                    longitude = longitude
+                )
                 val code = response.code
                 if (code == 200) {
                     emit(ApiResponse.Success(response))

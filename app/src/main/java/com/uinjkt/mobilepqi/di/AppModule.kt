@@ -14,6 +14,8 @@ import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.DashboardViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
+import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
+import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -35,4 +37,5 @@ val viewModelModule = module {
     viewModel { SignupViewModel(get()) }
     viewModel { DosenMateriQiroahViewModel(get()) }
     viewModel { SplashOnboardingViewModel(get()) }
+    viewModel { DashboardSharedViewModel() }
 }
