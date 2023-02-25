@@ -13,7 +13,7 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewFileUploadedByDosenBinding
 class MahasiswaFileUploadedByAdapter(
     private val context: Context,
     private val dataset: MutableList<DataTugas>,
-    private val uploadBy: String = "dosen",
+    private val setIcon: String = "download",
     private val listener: OnUserClickListener? = null
 ) : RecyclerView.Adapter<MahasiswaFileUploadedByAdapter.ViewHolder>() {
 
@@ -26,7 +26,7 @@ class MahasiswaFileUploadedByAdapter(
         private val binding = RecycleViewFileUploadedByDosenBinding.bind(view)
         fun bindItem(listTugas : DataTugas) {
             binding.tvNamaFileMahasiswaTerlampir.text = listTugas.titleNameTugas
-            if (uploadBy == "mhs") {
+            if (setIcon == "delete") {
                 binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_close_delete_file)
                 binding.ivIconCloseOrDownloadFile.setOnClickListener {
                     Log.d("testPrint","Print DELETE")

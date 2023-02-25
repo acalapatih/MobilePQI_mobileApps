@@ -14,7 +14,7 @@ import com.uinjkt.mobilepqi.MainActivity
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
-import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
+import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 import io.reactivex.Observable
@@ -138,7 +138,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
             MainActivity.start(this, "")
             finish()
         } else {
-            DaftarKelasActivity.start(this)
+            DosenMateriQiroahActivity.start(this)
             finish()
         }
     }
