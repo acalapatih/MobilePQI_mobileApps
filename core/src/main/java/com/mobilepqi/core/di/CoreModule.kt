@@ -3,12 +3,11 @@ package com.mobilepqi.core.di
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
+import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.ProfilRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.PutProfilRepositoryImpl
-import com.mobilepqi.core.data.repository.signin.SigninReposityImpl
 import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
-import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
 import com.mobilepqi.core.data.source.local.LocalDataSource
 import com.mobilepqi.core.data.source.local.sharedpref.MainPreferencesImpl
@@ -17,11 +16,11 @@ import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
+import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.profil.ProfilRepository
 import com.mobilepqi.core.domain.repository.profil.PutProfilRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.signup.SignupRepository
-import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
 import okhttp3.OkHttpClient
@@ -87,7 +86,7 @@ val repositoryModule = module {
     single<SigninRepository> { SigninRepositoryImpl(get(), get()) }
     single<SignupRepository> { SignupRepositoryImpl(get()) }
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
-    single<SigninRepository> { SigninReposityImpl(get(), get()) }
+    single<SigninRepository> { SigninRepositoryImpl(get(), get()) }
     single<ProfilRepository> { ProfilRepositoryImpl(get()) }
     single<PutProfilRepository> { PutProfilRepositoryImpl(get()) }
 }

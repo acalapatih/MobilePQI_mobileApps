@@ -148,10 +148,10 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
 
         binding.btnSimpanProfil.setOnClickListener {
-            showOneActionDialogWithInvoke(
+            updateProfil()
+            showOneActionDialog(
                 message = getString(R.string.message_profilInfo),
-                btnMessage = getString(R.string.btnMessage_profilInfo),
-                onButtonClicked = { updateProfil() }
+                btnMessage = getString(R.string.btnMessage_profilInfo)
             )
             binding.etFakultas.isEnabled = false
             binding.etProdi.isEnabled = false
@@ -253,12 +253,10 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                        myCalendar[Calendar.YEAR] = year
-                        myCalendar[Calendar.MONTH] = month
-                        myCalendar[Calendar.DAY_OF_MONTH] = day
-                        updateLabel()
-                    }
+                    val myFormat = "dd/MM/yyyy"
+                    val dateFormat = SimpleDateFormat(myFormat, Locale.US)
+                    val editText = binding.etTglahir
+                    editText.setText(dateFormat.format(myCalendar.time))
                     model.data?.let { showData(it) }
                 }
                 is Resource.Error -> {
