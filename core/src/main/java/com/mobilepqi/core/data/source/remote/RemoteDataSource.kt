@@ -9,6 +9,8 @@ import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQir
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetDetailMateriQiroahResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -130,6 +132,19 @@ class RemoteDataSource(
                     emit(ApiResponse.Success(response))
                 }
             } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun lupaPassword(request: LupaPasswordPayload): Flow<ApiResponse<LupaPasswordResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.lupaPassword(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.setGeneralError()))
             }
         }.flowOn(Dispatchers.IO)

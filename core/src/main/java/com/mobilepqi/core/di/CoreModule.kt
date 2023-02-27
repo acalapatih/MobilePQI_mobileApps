@@ -5,6 +5,8 @@ import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
 import com.mobilepqi.core.data.repository.menuqiroah.MenuQiroahRepositoryImpl
 import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
+import com.mobilepqi.core.data.repository.lupapassword.LupaPasswordRepositoryImpl
+import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
@@ -15,6 +17,8 @@ import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
+import com.mobilepqi.core.domain.repository.lupapassword.LupaPasswordRepository
+import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
 import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
@@ -85,4 +89,5 @@ val repositoryModule = module {
     single<SignupRepository> { SignupRepositoryImpl(get()) }
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<MenuQiroahRepository> { MenuQiroahRepositoryImpl(get()) }
+    single<LupaPasswordRepository> { LupaPasswordRepositoryImpl(get()) }
 }

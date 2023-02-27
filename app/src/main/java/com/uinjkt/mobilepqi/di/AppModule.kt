@@ -4,6 +4,8 @@ import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
 import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahInteractor
 import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahUsecase
+import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordInteractor
+import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 import com.mobilepqi.core.domain.usecase.signin.SigninInteractor
@@ -18,6 +20,7 @@ import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
+import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -31,6 +34,7 @@ val useCaseModule = module {
     factory<SignupUsecase> { SignupInteractor(get()) }
     factory<MenuQiroahUsecase> { MenuQiroahInteractor(get()) }
     factory<OnboardingUsecase> { OnboardingInteractor(get()) }
+    factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
 }
 
 val viewModelModule = module {
@@ -43,4 +47,5 @@ val viewModelModule = module {
     viewModel { DashboardSharedViewModel() }
     viewModel { MahasiswaMateriQiroahViewModel(get()) }
     viewModel { MahasiswaMateriDetailQiroahViewModel(get()) }
+    viewModel { LupaPasswordViewModel(get()) }
 }

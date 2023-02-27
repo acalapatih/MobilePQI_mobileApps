@@ -194,7 +194,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    model.data?.let { actionAfterSignup() }
+                    actionAfterSignup()
                 }
                 is Resource.Error -> {
                     showLoading(false)
