@@ -5,6 +5,8 @@ import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -79,6 +81,19 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.signup(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun lupaPassword(request: LupaPasswordPayload): Flow<ApiResponse<LupaPasswordResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.lupaPassword(request)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
