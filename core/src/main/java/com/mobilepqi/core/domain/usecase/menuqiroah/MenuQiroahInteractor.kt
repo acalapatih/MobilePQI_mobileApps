@@ -16,5 +16,5 @@ class MenuQiroahInteractor(
         repository.createMateriQiroah(request)
 
     override fun getMateriQiroah(): Flow<Resource<GetMateriQiroahModel>> = repository.getMateriQiroah()
-    override fun getDetailMateriQiroah(): Flow<Resource<GetDetailMateriQiroahModel>> = repository.getDetailMateriQiroah()
+    override fun getDetailMateriQiroah(id: Int): Flow<Resource<GetDetailMateriQiroahModel>> = repository.getDetailMateriQiroah(id)
 }

@@ -37,12 +37,12 @@ class MenuQiroahRepositoryImpl(
                 remoteDataSource.getMateriQiroah()
         }.asFlow()
 
-    override fun getDetailMateriQiroah(): Flow<Resource<GetDetailMateriQiroahModel>> =
+    override fun getDetailMateriQiroah(id: Int): Flow<Resource<GetDetailMateriQiroahModel>> =
         object : NetworkOnlyResource<GetDetailMateriQiroahModel, GetDetailMateriQiroahResponse>() {
             override fun loadFromNetwork(data: GetDetailMateriQiroahResponse): Flow<GetDetailMateriQiroahModel> =
                 GetDetailMateriQiroahModel.mapResponseToModel(data)
 
             override suspend fun createCall(): Flow<ApiResponse<GetDetailMateriQiroahResponse>> =
-                remoteDataSource.getDetailMateriQiroah(2)
+                remoteDataSource.getDetailMateriQiroah(id)
         }.asFlow()
 }

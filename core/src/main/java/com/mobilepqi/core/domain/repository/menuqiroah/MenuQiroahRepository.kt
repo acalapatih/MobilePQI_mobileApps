@@ -10,5 +10,5 @@ import kotlinx.coroutines.flow.Flow
 interface MenuQiroahRepository {
     fun createMateriQiroah(request: CreateMateriQiroahPayload): Flow<Resource<CreateMateriQiroahModel>>
     fun getMateriQiroah(): Flow<Resource<GetMateriQiroahModel>>
-    fun getDetailMateriQiroah(): Flow<Resource<GetDetailMateriQiroahModel>>
+    fun getDetailMateriQiroah(id: Int): Flow<Resource<GetDetailMateriQiroahModel>>
 }

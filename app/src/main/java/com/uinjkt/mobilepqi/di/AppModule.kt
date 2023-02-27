@@ -12,10 +12,12 @@ import com.mobilepqi.core.domain.usecase.signup.SignupInteractor
 import com.mobilepqi.core.domain.usecase.signup.SignupUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
-import com.uinjkt.mobilepqi.ui.dashboard.DashboardViewModel
-import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -36,6 +38,9 @@ val viewModelModule = module {
     viewModel { SigninViewModel(get()) }
     viewModel { SignupViewModel(get()) }
     viewModel { DosenMateriQiroahViewModel(get()) }
+    viewModel { DosenMateriDetailQiroahViewModel(get()) }
     viewModel { SplashOnboardingViewModel(get()) }
     viewModel { DashboardSharedViewModel() }
+    viewModel { MahasiswaMateriQiroahViewModel(get()) }
+    viewModel { MahasiswaMateriDetailQiroahViewModel(get()) }
 }

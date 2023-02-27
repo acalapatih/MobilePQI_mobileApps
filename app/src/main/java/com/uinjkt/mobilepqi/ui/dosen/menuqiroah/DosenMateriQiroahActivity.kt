@@ -27,6 +27,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
     private lateinit var dosenMateriAdapter: MenuDosenMateriAdapterList
     private val viewModel by viewModel<DosenMateriQiroahViewModel>()
     private lateinit var dialogBinding: ItemDialogAddTopicActionBinding
+    private lateinit var listMateri: List<GetMateriQiroahModel.DataMateri>
 
 
     companion object {
@@ -83,8 +84,9 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
 
     }
 
-    private fun actionAfterGetMateri(listMateri: List<GetMateriQiroahModel.DataMateri>) {
+    private fun actionAfterGetMateri(getMateri: List<GetMateriQiroahModel.DataMateri>) {
         // Initialize Adapter & Layout
+        listMateri = getMateri
         dosenMateriAdapter = MenuDosenMateriAdapterList(this, listMateri, this)
         binding.recycleViewMenuDosen.adapter = dosenMateriAdapter
     }
@@ -123,7 +125,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
 
     override fun onUserClicked(position: Int) {
         DosenMateriDetailQiroahActivity.start(
-            this@DosenMateriQiroahActivity, 0, "test"
+            this@DosenMateriQiroahActivity, listMateri[position].id
         )
     }
 
