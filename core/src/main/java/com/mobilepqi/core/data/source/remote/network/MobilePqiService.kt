@@ -1,10 +1,14 @@
 package com.mobilepqi.core.data.source.remote.network
 
+import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
+import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.TambahDosenResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface MobilePqiService {
@@ -15,4 +19,9 @@ interface MobilePqiService {
     @POST("v1/mobilepqi/users")
     suspend fun signup(@Body payload: SignupPayload): SignupResponse
 
+    @GET("v1/mobilepqi/kelas/1/dosen")
+    suspend fun tambahdosen(): TambahDosenResponse
+
+    @POST("v1/mobilepqi/kelas")
+    suspend fun buatkelas(@Body payload: BuatKelasPayload): BuatKelasResponse
 }

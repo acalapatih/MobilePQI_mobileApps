@@ -5,10 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityBuatKelasBinding
+import com.uinjkt.mobilepqi.ui.kelas.viewModel.BuatKelasViewModel
 import io.reactivex.Observable
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
     companion object {
@@ -19,25 +24,64 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
         }
     }
 
+    private val viewModel by viewModel<BuatKelasViewModel>()
+
     override fun getViewBinding(): ActivityBuatKelasBinding =
         ActivityBuatKelasBinding.inflate(layoutInflater)
 
-    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val backIntent = binding.icClose
-        backIntent.setOnClickListener {
+        initView()
+        initListener()
+        initObserver()
+    }
+
+    private fun initObserver() {
+        viewModel.buatkelas.observe(this) {model ->
+            when(model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "")
+                }
+            }
+        }
+    }
+
+    private fun buatkelas() {
+        viewModel.buatkelas(
+            BuatKelasPayload(
+                name = binding.etEditNamakelas.text.toString(),
+                ruang = binding.etEditRuangkelas.text.toString(),
+                jadwal = binding.etEditJadwalkelas.text.toString()
+            )
+        )
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.progressBar.isVisible = value
+    }
+
+    private fun initListener() {
+        binding.icClose.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
-
-        val btnSimpan = binding.btnSimpanDatakelas
-        btnSimpan.setOnClickListener {
-            DaftarKelasActivity.start(this)
+        binding.btnSimpanDatakelas.setOnClickListener {
+            buatkelas()
+            finish()
         }
+    }
 
+    @SuppressLint("CheckResult")
+    private fun initView() {
         val namakelasStream = RxTextView.textChanges(binding.etEditNamakelas)
             .skipInitialValue()
             .map { namakelas ->

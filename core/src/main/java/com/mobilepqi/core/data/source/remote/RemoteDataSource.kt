@@ -4,11 +4,14 @@ import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
+import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
+import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.TambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -79,6 +82,32 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.signup(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun tambahdosen(): Flow<ApiResponse<TambahDosenResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.tambahdosen()
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun buatkelas(request: BuatKelasPayload): Flow<ApiResponse<BuatKelasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.buatkelas(request)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
