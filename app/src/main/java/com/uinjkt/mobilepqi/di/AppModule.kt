@@ -18,6 +18,7 @@ import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -42,4 +43,5 @@ val viewModelModule = module {
     viewModel { DashboardSharedViewModel() }
     viewModel { LupaPasswordViewModel(get()) }
     viewModel { DosenSilabusViewModel(get(), get()) }
+    viewModel { MahasiswaSilabusViewModel(get())}
 }

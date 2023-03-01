@@ -11,8 +11,8 @@ import android.view.animation.AnimationUtils
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
-import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusActivity
-import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
+import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
+import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -69,10 +69,10 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                 finish()
             } else {
                 if (viewModel.userRole.value?.equals("mahasiswa") == true) {
-                    MahasiswaSilabusActivity.start(this)
+                    DashboardActivity.start(this, "")
                     finish()
                 } else {
-                    DosenSilabusActivity.start(this)
+                    DaftarKelasActivity.start(this)
                     finish()
                 }
             }
