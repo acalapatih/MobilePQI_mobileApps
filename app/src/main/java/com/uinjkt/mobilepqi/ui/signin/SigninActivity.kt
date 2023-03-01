@@ -10,12 +10,12 @@ import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.domain.model.signin.SigninModel
-import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
-import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
+import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusActivity
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
+import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
 import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -136,10 +136,10 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         viewModel.setToken(data.token)
         viewModel.setUserRole(data.role)
         if (data.role == "mahasiswa") {
-            DashboardActivity.start(this, "")
+            MahasiswaSilabusActivity.start(this)
             finish()
         } else {
-            DaftarKelasActivity.start(this)
+            DosenSilabusActivity.start(this)
             finish()
         }
     }
