@@ -22,13 +22,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     companion object {
         @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, DosenSilabusActivity::class.java)
+        fun start(context: Context, idKelas: Int) {
+            val starter = Intent(context, DosenSilabusActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
 
     private val viewModel by viewModel<DosenSilabusViewModel>()
+
+    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
 
     override fun getViewBinding(): ActivityDosenSilabusBinding =
         ActivityDosenSilabusBinding.inflate(layoutInflater)
@@ -44,7 +46,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     }
 
     private fun initView() {
-        getSilabus(1)
+        getSilabus(classId)
     }
 
     private fun initListener() {
@@ -61,11 +63,11 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
         }
 
         binding.btnSimpanSilabusDosen.setOnClickListener {
-            createSilabus(1)
+            createSilabus(classId)
             showOneActionDialogWithInvoke(
                 message = getString(R.string.tv_tambah_file_silabus_dialog),
                 btnMessage = getString(R.string.btn_oke_text),
-                onButtonClicked = { getSilabus(1) }
+                onButtonClicked = { getSilabus(classId) }
             )
         }
 
@@ -74,7 +76,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 message = getString(R.string.tv_hapus_file_silabus_dialog),
                 btnPositiveMessage = getString(R.string.btn_oke_text),
                 btnNegativeMessage = getString(R.string.btn_batal_text),
-                onPositiveButtonClicked = { deleteSilabus(1) },
+                onPositiveButtonClicked = { deleteSilabus(classId) },
             )
         }
     }
@@ -112,7 +114,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    getSilabus(1)
+                    getSilabus(classId)
                     with(binding) {
                         btnTambahFile.isEnabled = false
                         btnSimpanSilabusDosen.isEnabled = false
@@ -169,7 +171,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    getSilabus(1)
+                    getSilabus(classId)
                     urlSilabus = ""
                     with(binding) {
                         btnTambahFile.isEnabled = true
@@ -201,16 +203,16 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
             CreateSilabusPayload(
                 silabus = urlSilabus
             ),
-            idKelas = 1
+            classId
         )
     }
 
     private fun getSilabus(idKelas: Int) {
-        viewModel.getSilabus(idKelas = 1)
+        viewModel.getSilabus(idKelas)
     }
 
     private fun deleteSilabus(idKelas: Int) {
-        viewModel.deleteSilabus(idKelas = 1)
+        viewModel.deleteSilabus(idKelas)
     }
 
     private fun showLoading(value: Boolean) {

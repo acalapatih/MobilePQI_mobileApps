@@ -19,8 +19,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>() {
     companion object {
         @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, MahasiswaSilabusActivity::class.java)
+        fun start(context: Context, idKelas: Int) {
+            val starter = Intent(context, MahasiswaSilabusActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
@@ -29,6 +29,8 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
         ActivityMahasiswaSilabusBinding.inflate(layoutInflater)
 
     private val viewModel by viewModel<MahasiswaSilabusViewModel>()
+
+    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
 
     private var urlSilabus = ""
 
@@ -41,7 +43,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
     }
 
     private fun initView() {
-        getSilabus(1)
+        getSilabus(classId)
     }
 
     private fun initListener() {
@@ -80,7 +82,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
     }
 
     private fun getSilabus(idKelas: Int) {
-        viewModel.getSilabus(idKelas = 1)
+        viewModel.getSilabus(idKelas)
     }
 
     private fun showLoading(value: Boolean) {
