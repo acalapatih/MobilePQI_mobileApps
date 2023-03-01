@@ -1,6 +1,7 @@
-package com.uinjkt.mobilepqi.ui.kelas
+package com.uinjkt.mobilepqi.ui.kelas.buatkelas
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,16 +12,15 @@ import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityBuatKelasBinding
-import com.uinjkt.mobilepqi.ui.kelas.viewModel.BuatKelasViewModel
 import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
     companion object {
         @JvmStatic
-        fun start(context: Context) {
+        fun start(context: Context): Intent {
             val starter = Intent(context, BuatKelasActivity::class.java)
-            context.startActivity(starter)
+            return starter
         }
     }
 
@@ -44,6 +44,8 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
+                    setResult(Activity.RESULT_OK)
+                    finish()
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -76,7 +78,6 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
         }
         binding.btnSimpanDatakelas.setOnClickListener {
             buatkelas()
-            finish()
         }
     }
 

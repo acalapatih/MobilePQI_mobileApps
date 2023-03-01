@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.kelas
+package com.uinjkt.mobilepqi.ui.kelas.detailkelas
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -14,6 +14,7 @@ import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityDetailKelasBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.DosenAdapter
 import com.uinjkt.mobilepqi.ui.kelas.adapter.MahasiswaAdapter
+import com.uinjkt.mobilepqi.ui.kelas.tambahdosen.TambahDosenActivity
 
 class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     private lateinit var listDosen: MutableList<DataDosen>

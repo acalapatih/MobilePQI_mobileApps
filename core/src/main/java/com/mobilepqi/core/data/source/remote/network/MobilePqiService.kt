@@ -2,6 +2,8 @@ package com.mobilepqi.core.data.source.remote.network
 
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
+import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
+import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -24,4 +26,10 @@ interface MobilePqiService {
 
     @POST("v1/mobilepqi/kelas")
     suspend fun buatkelas(@Body payload: BuatKelasPayload): BuatKelasResponse
+
+    @GET("v1/mobilepqi/kelas")
+    suspend fun daftarkelas(): DaftarKelasResponse
+
+    @GET("v1/mobilepqi/kelas/1")
+    suspend fun detailkelas(): DetailKelasResponse
 }

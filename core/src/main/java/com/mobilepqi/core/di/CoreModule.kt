@@ -3,6 +3,8 @@ package com.mobilepqi.core.di
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.buatkelas.BuatKelasRepositoryImpl
+import com.mobilepqi.core.data.repository.daftarkelas.DaftarKelasRepositoryImpl
+import com.mobilepqi.core.data.repository.detailkelas.DetailKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
 import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
@@ -16,6 +18,8 @@ import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.domain.repository.buatkelas.BuatKelasRepository
+import com.mobilepqi.core.domain.repository.daftarkelas.DaftarKelasRepository
+import com.mobilepqi.core.domain.repository.detailkelas.DetailKelasRepository
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
 import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
@@ -88,4 +92,6 @@ val repositoryModule = module {
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<TambahDosenRepository> { TambahDosenRepositoryImpl(get()) }
     single<BuatKelasRepository> { BuatKelasRepositoryImpl(get()) }
+    single<DaftarKelasRepository> { DaftarKelasRepositoryImpl(get()) }
+    single<DetailKelasRepository> { DetailKelasRepositoryImpl(get()) }
 }

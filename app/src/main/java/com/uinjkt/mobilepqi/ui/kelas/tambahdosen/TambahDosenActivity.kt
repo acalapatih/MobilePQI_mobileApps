@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.kelas
+package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
 import android.content.Context
 import android.content.Intent
@@ -11,12 +11,10 @@ import com.mobilepqi.core.domain.model.tambahdosen.TambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
-import com.uinjkt.mobilepqi.ui.kelas.adapter.TambahDosenAdapter
-import com.uinjkt.mobilepqi.ui.kelas.viewModel.TambahDosenViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
-    private var listDosen: MutableList<TambahDosenModel.TambahDosen> = mutableListOf()
+    private var listDosen: List<TambahDosenModel.TambahDosen> = listOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
     private val listDosenSelected: MutableList<TambahDosenModel.TambahDosen> = mutableListOf()
@@ -50,6 +48,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
+                    listDosen = model.data?.list ?: emptyList()
                     tambahDosenAdapter = TambahDosenAdapter(this, listDosen, 2)
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter

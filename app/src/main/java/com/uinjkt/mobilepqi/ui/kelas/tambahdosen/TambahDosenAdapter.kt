@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.kelas.adapter
+package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
 
 class TambahDosenAdapter(
     private val context: Context,
-    private val dataset: MutableList<TambahDosenModel.TambahDosen>,
+    private val dataset: List<TambahDosenModel.TambahDosen>,
     private val kuota: Int
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 

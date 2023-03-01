@@ -1,4 +1,4 @@
-package com.uinjkt.mobilepqi.ui.kelas.viewModel
+package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

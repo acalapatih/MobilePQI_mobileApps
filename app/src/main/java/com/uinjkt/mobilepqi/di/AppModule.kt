@@ -2,6 +2,10 @@ package com.uinjkt.mobilepqi.di
 
 import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasIteractor
 import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasUsecase
+import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasInteractor
+import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasUsecase
+import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasInteractor
+import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasUsecase
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
@@ -16,8 +20,10 @@ import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
-import com.uinjkt.mobilepqi.ui.kelas.viewModel.BuatKelasViewModel
-import com.uinjkt.mobilepqi.ui.kelas.viewModel.TambahDosenViewModel
+import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasViewModel
+import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasViewModel
+import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasViewModel
+import com.uinjkt.mobilepqi.ui.kelas.tambahdosen.TambahDosenViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -32,6 +38,8 @@ val useCaseModule = module {
     factory<OnboardingUsecase> { OnboardingInteractor(get()) }
     factory<TambahDosenUsecase> { TambahDosenInteractor(get()) }
     factory<BuatKelasUsecase> { BuatKelasIteractor(get()) }
+    factory<DaftarKelasUsecase> { DaftarKelasInteractor(get()) }
+    factory<DetailKelasUsecase> { DetailKelasInteractor(get()) }
 }
 
 val viewModelModule = module {
@@ -42,4 +50,6 @@ val viewModelModule = module {
     viewModel { DashboardSharedViewModel() }
     viewModel { TambahDosenViewModel(get()) }
     viewModel { BuatKelasViewModel(get()) }
+    viewModel { DaftarKelasViewModel(get()) }
+    viewModel { DetailKelasViewModel(get()) }
 }

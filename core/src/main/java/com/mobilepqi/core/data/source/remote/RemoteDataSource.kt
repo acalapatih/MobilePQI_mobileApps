@@ -6,6 +6,8 @@ import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
+import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
+import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
@@ -108,6 +110,32 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.buatkelas(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun daftarkelas(): Flow<ApiResponse<DaftarKelasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.daftarkelas()
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun detailkelas(): Flow<ApiResponse<DetailKelasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.detailkelas()
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
