@@ -2,11 +2,17 @@ package com.uinjkt.mobilepqi.ui.dosen.menusilabus
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenSilabusBinding
+import com.uinjkt.mobilepqi.util.Constant
+import com.uinjkt.mobilepqi.util.openFileManagerPdf
+import com.uinjkt.mobilepqi.util.uriToFile
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     companion object {
@@ -16,6 +22,8 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
             context.startActivity(starter)
         }
     }
+
+    private val viewModel by viewModel<DosenSilabusViewModel>()
 
     override fun getViewBinding(): ActivityDosenSilabusBinding =
         ActivityDosenSilabusBinding.inflate(layoutInflater)
@@ -32,6 +40,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
         }
 
         binding.btnTambahFile.setOnClickListener {
+            openFileManagerPdf(launcherIntentFile)
             showOneActionDialog(
                 message = getString(R.string.tv_tambah_file_silabus_dialog),
                 btnMessage = getString(R.string.btn_oke_text),
@@ -46,6 +55,16 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 onPositiveButtonClicked = {
                 }
             )
+        }
+    }
+
+    private val launcherIntentFile = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedFile: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedFile, this, "pdf")
+            viewModel.uploadFilePDF(Constant.UPLOAD_KEY.SILABUS, Constant.UPLOAD_TYPE.FILE, myFile)
         }
     }
 }

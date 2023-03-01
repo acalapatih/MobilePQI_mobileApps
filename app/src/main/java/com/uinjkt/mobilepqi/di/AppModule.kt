@@ -10,10 +10,13 @@ import com.mobilepqi.core.domain.usecase.signin.SigninInteractor
 import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import com.mobilepqi.core.domain.usecase.signup.SignupInteractor
 import com.mobilepqi.core.domain.usecase.signup.SignupUsecase
+import com.mobilepqi.core.domain.usecase.silabus.SilabusInteractor
+import com.mobilepqi.core.domain.usecase.silabus.SilabusUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
@@ -28,6 +31,7 @@ val useCaseModule = module {
     factory<SignupUsecase> { SignupInteractor(get()) }
     factory<OnboardingUsecase> { OnboardingInteractor(get()) }
     factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
+    factory<SilabusUsecase> { SilabusInteractor(get()) }
 }
 
 val viewModelModule = module {
@@ -37,4 +41,5 @@ val viewModelModule = module {
     viewModel { SplashOnboardingViewModel(get()) }
     viewModel { DashboardSharedViewModel() }
     viewModel { LupaPasswordViewModel(get()) }
+    viewModel { DosenSilabusViewModel(get(), get()) }
 }

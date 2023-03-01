@@ -6,8 +6,11 @@ import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
-import retrofit2.http.Body
-import retrofit2.http.POST
+import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusPayload
+import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusResponse
+import com.mobilepqi.core.data.source.remote.response.silabus.DeleteSilabusResponse
+import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
+import retrofit2.http.*
 
 interface MobilePqiService {
 
@@ -20,4 +23,19 @@ interface MobilePqiService {
     @POST("v1/mobilepqi/users/password")
     suspend fun lupaPassword(@Body payload: LupaPasswordPayload): LupaPasswordResponse
 
+    @POST("v1/mobilepqi/kelas/{idKelas}/silabus")
+    suspend fun createSilabus(
+        @Body payload: CreateSilabusPayload,
+        @Path("idKelas") idKelas: Int
+    ): CreateSilabusResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/silabus")
+    suspend fun getSilabus(
+        @Path("idKelas") idKelas: Int
+    ): GetSilabusResponse
+
+    @DELETE("v1/mobilepqi/kelas/{idKelas}/silabus")
+    suspend fun deleteSilabus(
+        @Path("idKelas") idKelas: Int
+    ): DeleteSilabusResponse
 }
