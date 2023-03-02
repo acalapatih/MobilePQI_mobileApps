@@ -6,20 +6,23 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.detailkelas.DetailKelasModel
 import com.uinjkt.mobilepqi.common.BaseActivity
-import com.uinjkt.mobilepqi.data.DataDosen
-import com.uinjkt.mobilepqi.data.DataMahasiswa
-import com.uinjkt.mobilepqi.data.DataSourceKelasDosenMahasiswa
 import com.uinjkt.mobilepqi.databinding.ActivityDetailKelasBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.DosenAdapter
 import com.uinjkt.mobilepqi.ui.kelas.adapter.MahasiswaAdapter
 import com.uinjkt.mobilepqi.ui.kelas.tambahdosen.TambahDosenActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
-    private lateinit var listDosen: MutableList<DataDosen>
+    private var listDosen: List<DetailKelasModel.ListDosen> = listOf()
+    private var listMahasiswa: List<DetailKelasModel.ListMahasiswa> = listOf()
 
-    private lateinit var listMahasiswa: MutableList<DataMahasiswa>
+    private lateinit var dosenAdapter: DosenAdapter
+    private lateinit var mahasiswaAdapter: MahasiswaAdapter
 
     companion object {
         @JvmStatic
@@ -29,13 +32,52 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
         }
     }
 
+    private val viewModel by viewModel<DetailKelasViewModel>()
+
     override fun getViewBinding(): ActivityDetailKelasBinding =
         ActivityDetailKelasBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val backIcon = binding.icBackWhite
-        backIcon.setOnClickListener {
+        initListener()
+        initObserver()
+        viewModel.detailkelas()
+    }
+
+    private fun initObserver() {
+        viewModel.detailkelas.observe(this) {model ->
+            when(model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    binding.tvKodeKelas.text = model.data?.code
+
+                    listDosen = model.data?.listdosen ?: emptyList()
+                    dosenAdapter = DosenAdapter(this, listDosen)
+                    binding.rvProfilDosen.layoutManager = LinearLayoutManager(this)
+                    binding.rvProfilDosen.adapter = dosenAdapter
+
+                    listMahasiswa = model.data?.listmahasiswa ?: emptyList()
+                    mahasiswaAdapter = MahasiswaAdapter(this, listMahasiswa)
+                    binding.rvProfilMahasiswa.layoutManager = LinearLayoutManager(this)
+                    binding.rvProfilMahasiswa.adapter = mahasiswaAdapter
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "")
+                }
+            }
+        }
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.progressBar.isVisible = value
+    }
+
+    private fun initListener() {
+        binding.icBackWhite.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
         onBackPressedDispatcher.addCallback(this) {
@@ -52,23 +94,8 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
             showToast("Copied")
         }
 
-        val tambahDosenText = binding.tvLabelTambahDosen
-        tambahDosenText.setOnClickListener {
+        binding.tvLabelTambahDosen.setOnClickListener {
             TambahDosenActivity.start(this)
         }
-
-        listDosen = DataSourceKelasDosenMahasiswa().dataDosen()
-
-        val dosenAdapter =
-            DosenAdapter(this, listDosen)
-        binding.rvProfilDosen.layoutManager = LinearLayoutManager(this)
-        binding.rvProfilDosen.adapter = dosenAdapter
-
-        listMahasiswa = DataSourceKelasDosenMahasiswa().dataMahasiswa()
-
-        val mahasiswaAdapter =
-            MahasiswaAdapter(this, listMahasiswa)
-        binding.rvProfilMahasiswa.layoutManager = LinearLayoutManager(this)
-        binding.rvProfilMahasiswa.adapter = mahasiswaAdapter
     }
 }

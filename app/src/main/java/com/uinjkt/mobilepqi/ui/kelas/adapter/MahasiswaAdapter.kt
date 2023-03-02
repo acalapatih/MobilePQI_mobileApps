@@ -5,22 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mobilepqi.core.domain.model.detailkelas.DetailKelasModel
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataMahasiswa
 import com.uinjkt.mobilepqi.databinding.RecycleViewMahasiswaBinding
 
 class MahasiswaAdapter(
     private val context: Context,
-    private val dataset: MutableList<DataMahasiswa>
+    private val dataset: List<DetailKelasModel.ListMahasiswa>
 ) : RecyclerView.Adapter<MahasiswaAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewMahasiswaBinding.bind(view)
 
-        fun bindItem(mahasiswa: DataMahasiswa) {
-            binding.tvNamaMahasiswa.text = mahasiswa.nama
-            binding.tvNim.text = mahasiswa.nim
-            binding.tvNimMahasiswa.text = mahasiswa.nimmahasiswa.toString()
+        fun bindItem(mahasiswa: DetailKelasModel.ListMahasiswa) {
+            binding.tvNamaMahasiswa.text = mahasiswa.name
+            binding.tvNim.text = R.string.tv_nim.toString()
+            binding.tvNimMahasiswa.text = mahasiswa.nim
         }
     }
 
