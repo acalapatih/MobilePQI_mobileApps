@@ -2,10 +2,10 @@ package com.uinjkt.mobilepqi.di
 
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
-import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahInteractor
-import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahUsecase
 import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordInteractor
 import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordUsecase
+import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahInteractor
+import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 import com.mobilepqi.core.domain.usecase.signin.SigninInteractor
@@ -20,10 +20,10 @@ import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
-import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
-import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
@@ -54,5 +54,5 @@ val viewModelModule = module {
     viewModel { MahasiswaMateriDetailQiroahViewModel(get()) }
     viewModel { LupaPasswordViewModel(get()) }
     viewModel { DosenSilabusViewModel(get(), get()) }
-    viewModel { MahasiswaSilabusViewModel(get())}
+    viewModel { MahasiswaSilabusViewModel(get()) }
 }
