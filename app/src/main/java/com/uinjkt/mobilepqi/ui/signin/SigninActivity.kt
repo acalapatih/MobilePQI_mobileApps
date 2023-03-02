@@ -126,7 +126,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
                 }
             }
         }

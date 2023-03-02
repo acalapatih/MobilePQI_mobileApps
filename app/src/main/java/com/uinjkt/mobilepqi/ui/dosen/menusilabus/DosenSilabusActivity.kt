@@ -203,7 +203,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
             CreateSilabusPayload(
                 silabus = urlSilabus
             ),
-            classId
+            idKelas
         )
     }
 

@@ -198,7 +198,7 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
                 }
             }
         }
