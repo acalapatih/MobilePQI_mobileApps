@@ -20,6 +20,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
     private val viewModel by viewModel<DosenMateriDetailQiroahViewModel>()
     private lateinit var listFileAttached: List<GetDetailMateriQiroahModel.FileItem>
+    private val idMateri by lazy { intent.getIntExtra(ID, 0) }
 
     companion object {
         @JvmStatic
@@ -30,6 +31,8 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         }
         private const val ID = "id"
     }
+
+
 
     override fun getViewBinding(): ActivityDosenMateriDetailBinding = ActivityDosenMateriDetailBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,8 +47,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     }
 
     private fun getDetailMateriQiroah() {
-        val idMateriDetailQiroah = intent.getIntExtra(ID, 0)
-        viewModel.getDetailMateriQiroah(idMateriDetailQiroah)
+        viewModel.getDetailMateriQiroah(idMateri)
     }
 
 
@@ -71,11 +73,16 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 "Tidak",
                 onPositiveButtonClicked = {
                     showOneActionDialogWithInvoke("Materi Berhasil Dihapus", "Okay") {
+                        deleteMateriQiroah(idMateri)
                         onBackPressedDispatcher.onBackPressed()
                     }
 
                 })
         }
+    }
+
+    private fun deleteMateriQiroah(idMateri: Int) {
+        viewModel.deletemateriQiroah(idMateri)
     }
 
     private fun initObserver() {
@@ -95,6 +102,31 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                     showLoading(false)
                 }
             }
+        }
+
+        viewModel.deleteMateri.observe(this) { model ->
+            when(model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        actionAfterDeleteMateri()
+                    }
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
+                }
+            }
+        }
+    }
+
+    private fun actionAfterDeleteMateri() {
+        onBackPressedDispatcher.onBackPressed()
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
         }
     }
 
