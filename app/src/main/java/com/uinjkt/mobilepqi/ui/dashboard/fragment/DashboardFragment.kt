@@ -200,9 +200,11 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuSilabus() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaSilabusActivity.start(requireContext())
+            MahasiswaSilabusActivity.start(requireContext(), 1)
+            //TODO idKelas jangan lupa mir nanti disesuaikan
         } else {
-            DosenSilabusActivity.start(requireContext())
+            DosenSilabusActivity.start(requireContext(), 1)
+            //TODO idKelas jangan lupa mir nanti disesuaikan
         }
     }
 

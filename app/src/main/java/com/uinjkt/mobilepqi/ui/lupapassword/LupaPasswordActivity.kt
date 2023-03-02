@@ -77,7 +77,7 @@ class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
                 }
             }
         }
