@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
@@ -33,20 +34,20 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     override fun getViewBinding(): ActivityDosenMateriDetailBinding = ActivityDosenMateriDetailBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getDetailMateriQiroah()
         initView()
         initListener()
         initObserver()
     }
 
+    private fun initView() {
+        getDetailMateriQiroah()
+    }
+
     private fun getDetailMateriQiroah() {
-        val idMateriDetailQiroah = intent.getIntExtra(ID, 1)
+        val idMateriDetailQiroah = intent.getIntExtra(ID, 0)
         viewModel.getDetailMateriQiroah(idMateriDetailQiroah)
     }
 
-    private fun initView() {
-        binding.rvFileUploadByDosen.layoutManager = LinearLayoutManager(this)
-    }
 
     private fun initListener() {
         binding.ivLogoBackCircleButtonDosen.setOnClickListener {
@@ -81,18 +82,25 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         viewModel.getDetailMateri.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
-                    showToast("loading")
+                    showLoading(true)
                 }
                 is Resource.Success -> {
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
+                    showLoading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(true)
                 }
             }
         }
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.nsvContentDetail.isVisible = !value
     }
 
     private fun actionAfterGetMateri(materi: GetDetailMateriQiroahModel) {
@@ -100,6 +108,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         // Initialize Adapter List Tugas Upload By Dosen
         fileUploadedByDosenAdapter = MahasiswaFileUploadedByAdapterList(this, listFileAttached, "delete",this)
         binding.rvFileUploadByDosen.adapter = fileUploadedByDosenAdapter
+        binding.rvFileUploadByDosen.layoutManager = LinearLayoutManager(this)
 
         binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title)
         binding.etDescDetailMateriDosen.setText(materi.description)

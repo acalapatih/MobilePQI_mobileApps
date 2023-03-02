@@ -18,23 +18,24 @@ class MenuQiroahRepositoryImpl(
     private val remoteDataSource: RemoteDataSource
 ) : MenuQiroahRepository {
     override fun createMateriQiroah(
-        request: CreateMateriQiroahPayload
+        request: CreateMateriQiroahPayload,
+        idKelas: Int
     ): Flow<Resource<CreateMateriQiroahModel>> =
         object : NetworkOnlyResource<CreateMateriQiroahModel, CreateMateriQiroahResponse>() {
             override fun loadFromNetwork(data: CreateMateriQiroahResponse): Flow<CreateMateriQiroahModel> =
                 CreateMateriQiroahModel.mapResponseToModel(data)
 
             override suspend fun createCall(): Flow<ApiResponse<CreateMateriQiroahResponse>> =
-                remoteDataSource.createMateriQiroah(request)
+                remoteDataSource.createMateriQiroah(request, idKelas)
         }.asFlow()
 
-    override fun getMateriQiroah(): Flow<Resource<GetMateriQiroahModel>> =
+    override fun getMateriQiroah(idKelas: Int): Flow<Resource<GetMateriQiroahModel>> =
         object : NetworkOnlyResource<GetMateriQiroahModel, GetMateriQiroahResponse>() {
             override fun loadFromNetwork(data: GetMateriQiroahResponse): Flow<GetMateriQiroahModel> =
                 GetMateriQiroahModel.mapResponseToModel(data)
 
             override suspend fun createCall(): Flow<ApiResponse<GetMateriQiroahResponse>> =
-                remoteDataSource.getMateriQiroah()
+                remoteDataSource.getMateriQiroah(idKelas)
         }.asFlow()
 
     override fun getDetailMateriQiroah(id: Int): Flow<Resource<GetDetailMateriQiroahModel>> =

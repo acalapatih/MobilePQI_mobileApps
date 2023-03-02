@@ -13,9 +13,9 @@ class MahasiswaMateriQiroahViewModel(private val useCase: MenuQiroahUsecase) : V
     private val _getMateri = MutableLiveData<Resource<GetMateriQiroahModel>>()
     val getMateri: LiveData<Resource<GetMateriQiroahModel>> get() = _getMateri
 
-    fun getMateriQiroah(){
+    fun getMateriQiroah(idKelas: Int){
         viewModelScope.launch {
-            useCase.getMateriQiroah().collect {
+            useCase.getMateriQiroah(idKelas).collect {
                 _getMateri.value = it
             }
         }

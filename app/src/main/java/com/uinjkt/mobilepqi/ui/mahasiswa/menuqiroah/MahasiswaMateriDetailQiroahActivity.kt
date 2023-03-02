@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
@@ -62,18 +63,25 @@ class MahasiswaMateriDetailQiroahActivity : BaseActivity<ActivityMahasiswaMateri
         viewModel.getDetailMateri.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
-                    showToast("loading")
+                    showLoading(true)
                 }
                 is Resource.Success -> {
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
+                    showLoading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
                 }
             }
         }
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.nsvContentDetail.isVisible = !value
     }
 
     private fun actionAfterGetMateri(materi: GetDetailMateriQiroahModel) {

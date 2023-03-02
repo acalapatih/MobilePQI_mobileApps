@@ -31,6 +31,13 @@
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_dosen"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_menu_detail_dosen"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_content_detail"

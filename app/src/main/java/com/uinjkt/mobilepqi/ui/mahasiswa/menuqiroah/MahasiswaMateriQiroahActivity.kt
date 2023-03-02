@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
@@ -22,17 +23,19 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
+        fun start(context: Context, idKelas: Int) {
             val starter = Intent(context, MahasiswaMateriQiroahActivity::class.java)
+                .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
+        private const val ID_KELAS = "idKelas"
     }
 
     override fun getViewBinding(): ActivityMahasiswaMateriBinding = ActivityMahasiswaMateriBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getMateriQiroah()
+
         initView()
         initListener()
         initObserver()
@@ -50,28 +53,34 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
-        // Initialize Title
+        getMateriQiroah(intent.getIntExtra(ID_KELAS, 0))
         binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_qiroah)
-        binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)
     }
 
     private fun initObserver() {
         viewModel.getMateri.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
-                    showToast("loading")
+                    showLoading(true)
                 }
                 is Resource.Success -> {
                     model.data?.let {
                         actionAfterGetMateri(it.materi)
                     }
+                    showLoading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
                 }
             }
         }
 
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.recycleViewMenuMahasiswa.isVisible = !value
     }
 
     private fun actionAfterGetMateri(materi: List<GetMateriQiroahModel.DataMateri>) {
@@ -81,10 +90,11 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         // Initialize Adapter
         mahasiswaMateriAdapter = MenuMahasiswaMateriAdapterList(this, listMateri, this)
         binding.recycleViewMenuMahasiswa.adapter =  mahasiswaMateriAdapter
+        binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun getMateriQiroah() {
-        viewModel.getMateriQiroah()
+    private fun getMateriQiroah(idKelas: Int) {
+        viewModel.getMateriQiroah(idKelas)
     }
 
     override fun onUserClicked(position: Int) {

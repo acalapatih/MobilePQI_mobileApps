@@ -12,9 +12,9 @@ class MenuQiroahInteractor(
     private val repository: MenuQiroahRepository
 ) : MenuQiroahUsecase {
 
-    override fun createMateriQiroah(request: CreateMateriQiroahPayload): Flow<Resource<CreateMateriQiroahModel>> =
-        repository.createMateriQiroah(request)
+    override fun createMateriQiroah(request: CreateMateriQiroahPayload, idKelas: Int): Flow<Resource<CreateMateriQiroahModel>> =
+        repository.createMateriQiroah(request, idKelas)
 
-    override fun getMateriQiroah(): Flow<Resource<GetMateriQiroahModel>> = repository.getMateriQiroah()
+    override fun getMateriQiroah(idKelas: Int): Flow<Resource<GetMateriQiroahModel>> = repository.getMateriQiroah(idKelas)
     override fun getDetailMateriQiroah(id: Int): Flow<Resource<GetDetailMateriQiroahModel>> = repository.getDetailMateriQiroah(id)
 }

@@ -20,16 +20,16 @@ class DosenMateriQiroahViewModel(private val useCase: MenuQiroahUsecase) : ViewM
     val getMateri: LiveData<Resource<GetMateriQiroahModel>> get() = _getMateri
 
 
-    fun createMateriQiroah(request: CreateMateriQiroahPayload){
+    fun createMateriQiroah(request: CreateMateriQiroahPayload, idKelas: Int){
         viewModelScope.launch {
-            useCase.createMateriQiroah(request).collect {
+            useCase.createMateriQiroah(request, idKelas).collect {
                 _createMateri.value = it
             }
         }
     }
-    fun getMateriQiroah(){
+    fun getMateriQiroah(idKelas: Int){
         viewModelScope.launch {
-            useCase.getMateriQiroah().collect {
+            useCase.getMateriQiroah(idKelas).collect {
                 _getMateri.value = it
             }
         }

@@ -8,7 +8,7 @@ import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
 import kotlinx.coroutines.flow.Flow
 
 interface MenuQiroahUsecase {
-    fun createMateriQiroah(request: CreateMateriQiroahPayload): Flow<Resource<CreateMateriQiroahModel>>
-    fun getMateriQiroah() : Flow<Resource<GetMateriQiroahModel>>
+    fun createMateriQiroah(request: CreateMateriQiroahPayload, idKelas: Int): Flow<Resource<CreateMateriQiroahModel>>
+    fun getMateriQiroah(idKelas: Int) : Flow<Resource<GetMateriQiroahModel>>
     fun getDetailMateriQiroah(id: Int): Flow<Resource<GetDetailMateriQiroahModel>>
 }

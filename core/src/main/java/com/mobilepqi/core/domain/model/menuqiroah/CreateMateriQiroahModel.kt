@@ -16,7 +16,7 @@ data class CreateMateriQiroahModel (
                 CreateMateriQiroahModel(
                     id = response.data?.id ?:0,
                     createdBy = response.data?.createdBy ?:"",
-                    type = response.data?.type ?:"qiroah",
+                    type = response.data?.type ?:"",
                     title = response.data?.title ?:"",
                 )
             )

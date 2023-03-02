@@ -57,7 +57,6 @@ class MahasiswaFileUploadedByAdapterList(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         holder.bindItem(dataset[position])
     }
 

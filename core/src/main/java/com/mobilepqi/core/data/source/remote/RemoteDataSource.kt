@@ -5,12 +5,12 @@ import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetDetailMateriQiroahResponse
 import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetMateriQiroahResponse
-import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
-import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -95,11 +95,12 @@ class RemoteDataSource(
     }
 
     suspend fun createMateriQiroah(
-        request: CreateMateriQiroahPayload
+        request: CreateMateriQiroahPayload,
+        idKelas: Int
     ): Flow<ApiResponse<CreateMateriQiroahResponse>> {
         return flow {
             try {
-                val response = mobilePqiService.createMateriQiroah(request)
+                val response = mobilePqiService.createMateriQiroah(request, idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
@@ -109,11 +110,11 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getMateriQiroah(): Flow<ApiResponse<GetMateriQiroahResponse>> {
+    suspend fun getMateriQiroah(idKelas : Int): Flow<ApiResponse<GetMateriQiroahResponse>> {
         return flow {
             try {
                 val response =
-                    mobilePqiService.getMateriQiroah()
+                    mobilePqiService.getMateriQiroah(idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
