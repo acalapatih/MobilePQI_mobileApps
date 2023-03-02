@@ -110,9 +110,6 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                     showLoading(true)
                 }
                 is Resource.Success -> {
-                    model.data?.let {
-                        actionAfterDeleteMateri()
-                    }
                     showLoading(false)
                 }
                 is Resource.Error -> {
@@ -120,13 +117,6 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                     showLoading(false)
                 }
             }
-        }
-    }
-
-    private fun actionAfterDeleteMateri() {
-        onBackPressedDispatcher.onBackPressed()
-        onBackPressedDispatcher.addCallback(this) {
-            finish()
         }
     }
 
