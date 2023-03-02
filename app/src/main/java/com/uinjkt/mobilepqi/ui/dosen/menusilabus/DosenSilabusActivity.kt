@@ -76,7 +76,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 message = getString(R.string.tv_hapus_file_silabus_dialog),
                 btnPositiveMessage = getString(R.string.btn_oke_text),
                 btnNegativeMessage = getString(R.string.btn_batal_text),
-                onPositiveButtonClicked = { deleteSilabus(classId) },
+                onPositiveButtonClicked = { deleteSilabus(classId) }
             )
         }
     }
