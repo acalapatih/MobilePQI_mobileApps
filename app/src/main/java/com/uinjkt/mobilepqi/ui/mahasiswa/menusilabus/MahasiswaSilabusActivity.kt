@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -67,7 +66,6 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
                     if (model.data?.silabus?.isNotEmpty() == true) {
                         urlSilabus = model.data?.silabus ?: ""
                         binding.tvEmptySilabus.isVisible = false
-                        Log.d("urlSilabus", urlSilabus)
                         initWebView()
                     } else {
                         binding.tvEmptySilabus.isVisible = true
