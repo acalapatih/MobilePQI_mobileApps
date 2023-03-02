@@ -47,7 +47,7 @@ val viewModelModule = module {
     viewModel { SigninViewModel(get()) }
     viewModel { SignupViewModel(get()) }
     viewModel { DosenMateriQiroahViewModel(get()) }
-    viewModel { DosenMateriDetailQiroahViewModel(get()) }
+    viewModel { DosenMateriDetailQiroahViewModel(get(), get()) }
     viewModel { SplashOnboardingViewModel(get()) }
     viewModel { DashboardSharedViewModel() }
     viewModel { MahasiswaMateriQiroahViewModel(get()) }

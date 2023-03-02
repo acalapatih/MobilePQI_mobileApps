@@ -1,25 +1,26 @@
 package com.uinjkt.mobilepqi.ui.mahasiswa
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewFileUploadedByDosenBinding
+import com.uinjkt.mobilepqi.ui.dosen.FileUploadedUtils
 
 class MahasiswaFileUploadedByAdapterList(
     private val context: Context,
-    private val dataset: List<Any>,
+    private var dataset: MutableList<Any>,
     private val setIcon: String = "download",
     private val listener: OnUserClickListener? = null
 ) : RecyclerView.Adapter<MahasiswaFileUploadedByAdapterList.ViewHolder>() {
 
 
     interface OnUserClickListener {
-        fun onUserClickListener(action: String)
+        fun onUserClickListener(action: String, position: Int)
     }
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -31,18 +32,15 @@ class MahasiswaFileUploadedByAdapterList(
                         listTugas.url.substring(listTugas.url.lastIndexOf('/')+1)
                 }
             }
-
             if (setIcon == "delete") {
                 binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_close_delete_file)
                 binding.ivIconCloseOrDownloadFile.setOnClickListener {
-                    Log.d("testPrint","Print DELETE")
-                    listener?.onUserClickListener("delete")
+                    listener?.onUserClickListener("delete", adapterPosition)
                 }
             } else {
                 binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_download_blue)
                 binding.ivIconCloseOrDownloadFile.setOnClickListener {
-                    Log.d("testPrint","Print DOWNLOAD")
-                    listener?.onUserClickListener("download")
+                    listener?.onUserClickListener("download", adapterPosition)
                 }
             }
         }
@@ -61,4 +59,14 @@ class MahasiswaFileUploadedByAdapterList(
     }
 
     override fun getItemCount(): Int = dataset.size
+
+    fun setData(newDataset: List<Any>) {
+        val diffUtil = FileUploadedUtils(dataset, newDataset)
+        val diffResult = DiffUtil.calculateDiff(diffUtil)
+        dataset.clear()
+        dataset.addAll(newDataset)
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+
 }

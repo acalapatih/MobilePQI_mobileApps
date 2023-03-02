@@ -153,6 +153,19 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun updateDetailMateriQiroah(request: UpdateDetailMateriQiroahPayload, idMateri: Int): Flow<ApiResponse<UpdateDetailMateriQiroahResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.updateDetailMateriQiroah(request, idMateri)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     suspend fun lupaPassword(request: LupaPasswordPayload): Flow<ApiResponse<LupaPasswordResponse>> {
         return flow {
             try {
