@@ -6,26 +6,32 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.RecycleViewFileUploadedByDosenBinding
 
-class MahasiswaFileUploadedByAdapter(
+class MahasiswaFileUploadedByAdapterList(
     private val context: Context,
-    private val dataset: MutableList<DataTugas>,
+    private val dataset: List<Any>,
     private val setIcon: String = "download",
     private val listener: OnUserClickListener? = null
-) : RecyclerView.Adapter<MahasiswaFileUploadedByAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MahasiswaFileUploadedByAdapterList.ViewHolder>() {
+
 
     interface OnUserClickListener {
         fun onUserClickListener(action: String)
     }
 
-
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         private val binding = RecycleViewFileUploadedByDosenBinding.bind(view)
-        fun bindItem(listTugas : DataTugas) {
-            binding.tvNamaFileMahasiswaTerlampir.text = listTugas.titleNameTugas
+        fun bindItem(listTugas : Any) {
+            when(listTugas) {
+                is GetDetailMateriQiroahModel.FileItem -> {
+                    binding.tvNamaFileMahasiswaTerlampir.text =
+                        listTugas.url.substring(listTugas.url.lastIndexOf('/')+1)
+                }
+            }
+
             if (setIcon == "delete") {
                 binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_close_delete_file)
                 binding.ivIconCloseOrDownloadFile.setOnClickListener {
