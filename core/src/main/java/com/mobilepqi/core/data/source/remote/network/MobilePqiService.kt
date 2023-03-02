@@ -2,10 +2,12 @@ package com.mobilepqi.core.data.source.remote.network
 
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
+import retrofit2.http.*
 import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusPayload
 import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.DeleteSilabusResponse
@@ -23,6 +25,21 @@ interface MobilePqiService {
     @POST("v1/mobilepqi/users/password")
     suspend fun lupaPassword(@Body payload: LupaPasswordPayload): LupaPasswordResponse
 
+    @POST("v1/mobilepqi/kelas/{idKelas}/materi/qiroah")
+    suspend fun createMateriQiroah(
+        @Body payload: CreateMateriQiroahPayload,
+        @Path("idKelas") idKelas: Int
+    ) : CreateMateriQiroahResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/materi/qiroah")
+    suspend fun getMateriQiroah(
+        @Path("idKelas") idKelas: Int
+    ) : GetMateriQiroahResponse
+
+    @GET("v1/mobilepqi/kelas/materi/{idMateri}")
+    suspend fun getDetailMateriQiroah(
+        @Path("idMateri") idMateri: Int
+    ) : GetDetailMateriQiroahResponse
     @POST("v1/mobilepqi/kelas/{idKelas}/silabus")
     suspend fun createSilabus(
         @Body payload: CreateSilabusPayload,

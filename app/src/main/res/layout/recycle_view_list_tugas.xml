@@ -4,15 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="30dp"
-    app:cardElevation="3dp"
+    app:cardElevation="10dp"
     app:cardCornerRadius="12dp"
-    app:layout_goneMarginBottom="12dp">
+    app:layout_goneMarginBottom="12dp"
+    android:layout_marginHorizontal="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_task_tugas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blue_6199C1"
+        android:background="@color/white"
         android:paddingHorizontal="16dp">
 
         <ImageView

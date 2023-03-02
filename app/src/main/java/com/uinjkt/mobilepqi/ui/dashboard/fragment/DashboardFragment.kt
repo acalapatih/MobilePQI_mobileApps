@@ -218,9 +218,11 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuQiroah() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaMateriQiroahActivity.start(requireContext())
+            MahasiswaMateriQiroahActivity.start(requireContext(), 1)
+            // TODO: parameter idKelas disesuaikan dengan input user
         } else {
-            DosenMateriQiroahActivity.start(requireContext())
+            DosenMateriQiroahActivity.start(requireContext(), 1)
+            // TODO: parameter idKelas disesuaikan dengan input user
         }
     }
 
