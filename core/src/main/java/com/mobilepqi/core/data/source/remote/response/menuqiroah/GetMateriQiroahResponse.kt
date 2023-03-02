@@ -15,6 +15,9 @@ data class GetMateriQiroahResponse(
 ) {
 	data class Data(
 
+		@field:SerializedName("errors")
+		val error: String? = null,
+
 		@field:SerializedName("materi")
 		val materi: List<MateriItem?>? = null,
 
