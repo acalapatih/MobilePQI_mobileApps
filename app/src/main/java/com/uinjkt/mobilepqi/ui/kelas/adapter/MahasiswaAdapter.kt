@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mobilepqi.core.domain.model.detailkelas.DetailKelasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewMahasiswaBinding
@@ -21,6 +22,9 @@ class MahasiswaAdapter(
             binding.tvNamaMahasiswa.text = mahasiswa.name
             binding.tvNim.text = R.string.tv_nim.toString()
             binding.tvNimMahasiswa.text = mahasiswa.nim
+            Glide.with(context)
+                .load(mahasiswa.avatar)
+                .into(binding.imgProfilMahasiswa)
         }
     }
 

@@ -12,11 +12,11 @@ import kotlinx.coroutines.flow.Flow
 class DetailKelasRepositoryImpl(
     private val remoteDataSource: RemoteDataSource
 ): DetailKelasRepository {
-    override fun detailkelas(): Flow<Resource<DetailKelasModel>> =
+    override fun detailkelas(idKelas: Int): Flow<Resource<DetailKelasModel>> =
         object : NetworkOnlyResource<DetailKelasModel, DetailKelasResponse>() {
             override fun loadFromNetwork(data: DetailKelasResponse): Flow<DetailKelasModel> =
                 DetailKelasModel.mapResponseToModel(data)
             override suspend fun createCall(): Flow<ApiResponse<DetailKelasResponse>> =
-                remoteDataSource.detailkelas()
+                remoteDataSource.detailkelas(idKelas)
         }.asFlow()
 }

@@ -13,9 +13,9 @@ class TambahDosenViewModel(private val usecase: TambahDosenUsecase): ViewModel()
     private val _tambahdosen = MutableLiveData<Resource<TambahDosenModel>>()
     val tambahdosen: LiveData<Resource<TambahDosenModel>> get() = _tambahdosen
 
-    fun tambahdosen() {
+    fun tambahdosen(idKelas: Int) {
         viewModelScope.launch {
-            usecase.tambahdosen().collect {
+            usecase.tambahdosen(idKelas).collect {
                 _tambahdosen.value = it
             }
         }

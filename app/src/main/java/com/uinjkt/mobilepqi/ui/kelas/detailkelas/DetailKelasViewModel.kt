@@ -13,9 +13,9 @@ class DetailKelasViewModel(private val usecase: DetailKelasUsecase): ViewModel()
     private val _detailkelas = MutableLiveData<Resource<DetailKelasModel>>()
     val detailkelas: LiveData<Resource<DetailKelasModel>> get() = _detailkelas
 
-    fun detailkelas() {
+    fun detailkelas(idKelas: Int) {
         viewModelScope.launch {
-            usecase.detailkelas().collect {
+            usecase.detailkelas(idKelas).collect {
                 _detailkelas.value = it
             }
         }

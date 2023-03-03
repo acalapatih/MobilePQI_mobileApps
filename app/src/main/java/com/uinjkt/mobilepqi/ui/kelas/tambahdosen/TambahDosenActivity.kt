@@ -22,22 +22,32 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, TambahDosenActivity::class.java)
+        fun start(context: Context, idKelas: Int) {
+            val starter = Intent(context, TambahDosenActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
 
     private val viewModel by viewModel<TambahDosenViewModel>()
 
+    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
+
     override fun getViewBinding(): ActivityTambahDosenBinding =
         ActivityTambahDosenBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
         initListener()
         initObserver()
-        viewModel.tambahdosen()
+    }
+
+    private fun initView() {
+        getTambahDosen(classId)
+    }
+
+    private fun getTambahDosen(idKelas: Int) {
+        viewModel.tambahdosen(idKelas)
     }
 
     private fun initObserver() {

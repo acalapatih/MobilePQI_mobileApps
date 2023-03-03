@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mobilepqi.core.domain.model.tambahdosen.TambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
@@ -26,6 +27,9 @@ class TambahDosenAdapter(
             binding.tvNamaDosen.text = data.name
             binding.tvNip.text = R.string.tv_nip.toString()
             binding.tvNipDosen.text = data.nim
+            Glide.with(context)
+                .load(data.avatar)
+                .into(binding.imgProfilDosen)
 
             binding.cvTambahDosen.setOnClickListener {
                 if (tempList.contains(data)) {

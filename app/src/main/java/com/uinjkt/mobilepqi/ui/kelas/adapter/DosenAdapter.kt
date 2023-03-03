@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mobilepqi.core.domain.model.detailkelas.DetailKelasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewDosenBinding
@@ -20,6 +21,9 @@ class DosenAdapter(
             binding.tvNamaDosen.text = dosen.name
             binding.tvNip.text = R.string.tv_nip.toString()
             binding.tvNipDosen.text = dosen.nim
+            Glide.with(context)
+                .load(dosen.avatar)
+                .into(binding.imgProfilDosen)
         }
     }
 

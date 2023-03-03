@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 class DetailKelasInteractor(
     private val repository: DetailKelasRepository
 ): DetailKelasUsecase {
-    override fun detailkelas(): Flow<Resource<DetailKelasModel>> = repository.detailkelas()
+    override fun detailkelas(idKelas: Int): Flow<Resource<DetailKelasModel>> = repository.detailkelas(idKelas)
 }

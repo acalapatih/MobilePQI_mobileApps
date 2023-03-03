@@ -26,22 +26,32 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
-            val starter = Intent(context, DetailKelasActivity::class.java)
+        fun start(context: Context, idKelas: Int) {
+            val starter = Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
 
     private val viewModel by viewModel<DetailKelasViewModel>()
 
+    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
+
     override fun getViewBinding(): ActivityDetailKelasBinding =
         ActivityDetailKelasBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
         initListener()
         initObserver()
-        viewModel.detailkelas()
+    }
+
+    private fun initView() {
+        getDetailKelas(classId)
+    }
+
+    private fun getDetailKelas(idKelas: Int) {
+        viewModel.detailkelas(idKelas)
     }
 
     private fun initObserver() {
@@ -95,7 +105,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
         }
 
         binding.tvLabelTambahDosen.setOnClickListener {
-            TambahDosenActivity.start(this)
+            TambahDosenActivity.start(this, 12)
         }
     }
 }

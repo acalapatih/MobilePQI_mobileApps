@@ -8,5 +8,5 @@ import kotlinx.coroutines.flow.Flow
 class TambahDosenInteractor(
     private val repository: TambahDosenRepository
 ): TambahDosenUsecase {
-    override fun tambahdosen(): Flow<Resource<TambahDosenModel>> = repository.tambahdosen()
+    override fun tambahdosen(idKelas: Int): Flow<Resource<TambahDosenModel>> = repository.tambahdosen(idKelas)
 }

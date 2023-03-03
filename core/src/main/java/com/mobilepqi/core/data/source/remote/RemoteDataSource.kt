@@ -93,10 +93,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun tambahdosen(): Flow<ApiResponse<TambahDosenResponse>> {
+    suspend fun tambahdosen(idKelas: Int): Flow<ApiResponse<TambahDosenResponse>> {
         return flow {
             try {
-                val response = mobilePqiService.tambahdosen()
+                val response = mobilePqiService.tambahdosen(idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
@@ -132,10 +132,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun detailkelas(): Flow<ApiResponse<DetailKelasResponse>> {
+    suspend fun detailkelas(idKelas: Int): Flow<ApiResponse<DetailKelasResponse>> {
         return flow {
             try {
-                val response = mobilePqiService.detailkelas()
+                val response = mobilePqiService.detailkelas(idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

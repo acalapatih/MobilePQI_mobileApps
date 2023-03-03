@@ -11,6 +11,7 @@ import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.daftarkelas.DaftarKelasModel
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDaftarKelasBinding
+import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasActivity
 import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,8 +41,12 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
         initListener()
         initObserver()
+    }
+
+    private fun initView() {
         viewModel.daftarkelas()
     }
 
@@ -77,11 +82,15 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
         }
     }
 
+    private fun getIdKelas(data: DaftarKelasModel.DaftarKelas): Int {
+        return data.id
+    }
+
     override fun onUserClicked(position: Int, clicked: String) {
-        if (clicked == "anggota") {
-            DetailKelasActivity.start(this)
+        if (clicked == "detailkelas") {
+            DetailKelasActivity.start(this, 12)
         } else {
-            BuatKelasActivity.start(this)
+            DashboardActivity.start(this, "dashboard")
         }
     }
 }
