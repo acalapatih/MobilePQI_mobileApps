@@ -108,4 +108,9 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
             showToast("Copied")
         }
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        initView()
+    }
 }

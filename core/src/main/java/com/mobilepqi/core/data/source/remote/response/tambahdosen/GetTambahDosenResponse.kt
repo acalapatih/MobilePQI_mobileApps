@@ -2,7 +2,7 @@ package com.mobilepqi.core.data.source.remote.response.tambahdosen
 
 import com.google.gson.annotations.SerializedName
 
-data class TambahDosenResponse(
+data class GetTambahDosenResponse(
 
 	@field:SerializedName("data")
 	val data: Data? = null,

@@ -13,7 +13,9 @@ import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.TambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -93,10 +95,23 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun tambahdosen(idKelas: Int): Flow<ApiResponse<TambahDosenResponse>> {
+    suspend fun getTambahDosen(idKelas: Int): Flow<ApiResponse<GetTambahDosenResponse>> {
         return flow {
             try {
-                val response = mobilePqiService.tambahdosen(idKelas)
+                val response = mobilePqiService.getTambahDosen(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun postTambahDosen(request: PostTambahDosenPayload, idKelas: Int): Flow<ApiResponse<PostTambahDosenResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.postTambahdosen(request, idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

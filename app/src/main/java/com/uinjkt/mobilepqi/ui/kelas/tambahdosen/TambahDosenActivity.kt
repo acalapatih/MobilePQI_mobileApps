@@ -7,18 +7,18 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.tambahdosen.TambahDosenModel
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
+import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
-    private var listDosen: List<TambahDosenModel.TambahDosen> = listOf()
+    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
-    private val listDosenSelected: MutableList<TambahDosenModel.TambahDosen> = mutableListOf()
-
+    private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
 
     companion object {
         @JvmStatic
@@ -46,20 +46,28 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         getTambahDosen(classId)
     }
 
+    private fun postTambahDosen(idKelas: Int, dosen: MutableList<GetTambahDosenModel.GetTambahDosen>) {
+        viewModel.postTambahDosen(PostTambahDosenPayload(
+            dosen = dosen.map {
+                PostTambahDosenPayload.DosenItem(nim = it.nim)
+            }
+        ), idKelas)
+    }
+
     private fun getTambahDosen(idKelas: Int) {
-        viewModel.tambahdosen(idKelas)
+        viewModel.getTambahDosen(idKelas)
     }
 
     private fun initObserver() {
-        viewModel.tambahdosen.observe(this) { model ->
+        viewModel.getTambahdosen.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    listDosen = model.data?.list ?: emptyList()
-                    tambahDosenAdapter = TambahDosenAdapter(this, listDosen, 2)
+                    getListDosen = model.data?.list ?: emptyList()
+                    tambahDosenAdapter = TambahDosenAdapter(this, getListDosen, 2)
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter
 
@@ -94,6 +102,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         }
 
         binding.icTambahDosen.setOnClickListener {
+            postTambahDosen(classId, listDosenSelected)
             showOneActionDialogWithInvoke(
                 message = getString(R.string.message_tambah_dosen),
                 btnMessage = getString(R.string.btnMessage_tambah_dosen),

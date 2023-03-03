@@ -21,7 +21,7 @@ data class DaftarKelasModel(
                 DaftarKelasModel(
                     kelascount = response.data?.kelasCount ?: 0,
                     list = response.data?.kelas?.map {
-                        DaftarKelasModel.DaftarKelas(
+                        DaftarKelas(
                             id = it?.id ?: 0,
                             name = it?.name ?: "",
                             ruang = it?.ruang ?: "",

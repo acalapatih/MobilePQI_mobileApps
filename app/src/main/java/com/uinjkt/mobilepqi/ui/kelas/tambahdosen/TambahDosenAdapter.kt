@@ -7,23 +7,23 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.mobilepqi.core.domain.model.tambahdosen.TambahDosenModel
+import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
 
 class TambahDosenAdapter(
     private val context: Context,
-    private val dataset: List<TambahDosenModel.TambahDosen>,
+    private val dataset: List<GetTambahDosenModel.GetTambahDosen>,
     private val kuota: Int
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
-    var onDosenSelected: ((data: TambahDosenModel.TambahDosen) -> Unit)? = null
+    var onDosenSelected: ((data: GetTambahDosenModel.GetTambahDosen) -> Unit)? = null
 
-    val tempList: MutableList<TambahDosenModel.TambahDosen> = mutableListOf()
+    val tempList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTambahDosenBinding.bind(view)
-        fun bindItem(data: TambahDosenModel.TambahDosen) {
+        fun bindItem(data: GetTambahDosenModel.GetTambahDosen) {
             binding.tvNamaDosen.text = data.name
             binding.tvNip.text = R.string.tv_nip.toString()
             binding.tvNipDosen.text = data.nim

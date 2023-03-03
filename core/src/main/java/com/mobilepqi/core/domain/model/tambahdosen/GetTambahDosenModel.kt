@@ -1,24 +1,26 @@
 package com.mobilepqi.core.domain.model.tambahdosen
 
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.TambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-data class TambahDosenModel(
+data class GetTambahDosenModel(
     val dosencount: Int,
-    val list: List<TambahDosen>
+    val dosenregistered: Int,
+    val list: List<GetTambahDosen>
 ) {
-    data class TambahDosen(
+    data class GetTambahDosen(
         val name: String,
         val avatar: String,
         val nim: String
     ) companion object {
-        fun mapResponseToModel(response: TambahDosenResponse): Flow<TambahDosenModel> {
+        fun mapResponseToModel(response: GetTambahDosenResponse): Flow<GetTambahDosenModel> {
             return flowOf(
-                TambahDosenModel(
+                GetTambahDosenModel(
                     dosencount = response.data?.dosenCount ?: 0,
+                    dosenregistered = response.data?.dosenRegistered ?: 0,
                     list = response.data?.dosens?.map {
-                        TambahDosen(
+                        GetTambahDosen(
                             name = it?.name ?: "",
                             avatar = it?.avatar ?: "",
                             nim = it?.nim ?: ""

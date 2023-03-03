@@ -8,7 +8,9 @@ import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.TambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -23,7 +25,10 @@ interface MobilePqiService {
     suspend fun signup(@Body payload: SignupPayload): SignupResponse
 
     @GET("v1/mobilepqi/kelas/{idKelas}/dosen")
-    suspend fun tambahdosen(@Path("idKelas")idKelas: Int): TambahDosenResponse
+    suspend fun getTambahDosen(@Path("idKelas")idKelas: Int): GetTambahDosenResponse
+
+    @POST("v1/mobilepqi/kelas/{idKelas}/dosen")
+    suspend fun postTambahdosen(@Body payload: PostTambahDosenPayload, @Path("idKelas")idKelas: Int): PostTambahDosenResponse
 
     @POST("v1/mobilepqi/kelas")
     suspend fun buatkelas(@Body payload: BuatKelasPayload): BuatKelasResponse

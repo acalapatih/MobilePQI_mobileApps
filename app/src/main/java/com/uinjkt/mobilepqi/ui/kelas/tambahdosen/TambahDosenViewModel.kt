@@ -5,18 +5,31 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.tambahdosen.TambahDosenModel
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
+import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
+import com.mobilepqi.core.domain.model.tambahdosen.PostTambahDosenModel
 import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenUsecase
 import kotlinx.coroutines.launch
 
 class TambahDosenViewModel(private val usecase: TambahDosenUsecase): ViewModel() {
-    private val _tambahdosen = MutableLiveData<Resource<TambahDosenModel>>()
-    val tambahdosen: LiveData<Resource<TambahDosenModel>> get() = _tambahdosen
+    private val _getTambahDosen = MutableLiveData<Resource<GetTambahDosenModel>>()
+    val getTambahdosen: LiveData<Resource<GetTambahDosenModel>> get() = _getTambahDosen
 
-    fun tambahdosen(idKelas: Int) {
+    private val _postTambahDosen = MutableLiveData<Resource<PostTambahDosenModel>>()
+    val postTambahdosen: LiveData<Resource<PostTambahDosenModel>> get() = _postTambahDosen
+
+    fun getTambahDosen(idKelas: Int) {
         viewModelScope.launch {
-            usecase.tambahdosen(idKelas).collect {
-                _tambahdosen.value = it
+            usecase.getTambahDosen(idKelas).collect {
+                _getTambahDosen.value = it
+            }
+        }
+    }
+
+    fun postTambahDosen(request: PostTambahDosenPayload, idKelas: Int) {
+        viewModelScope.launch {
+            usecase.postTambahDosen(request, idKelas).collect {
+                _postTambahDosen.value = it
             }
         }
     }
