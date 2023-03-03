@@ -57,7 +57,7 @@ class DosenMateriDetailQiroahViewModel(
         }
     }
 
-    fun uploadFilePDF(key: String, type: String, file: File) {
+    fun uploadFileOrImage(key: String, type: String, file: File) {
         /**
          * @see Constant.UPLOAD_KEY for the key
          * @see Constant.UPLOAD_TYPE for the type

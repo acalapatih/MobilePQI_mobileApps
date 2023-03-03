@@ -25,22 +25,41 @@ class MahasiswaFileUploadedByAdapterList(
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         private val binding = RecycleViewFileUploadedByDosenBinding.bind(view)
+        private lateinit var getTypeFile: String
+        private val listTypeImageFile = listOf("img","png","bmp","gif","svg","jpg")
         fun bindItem(listTugas : Any) {
             when(listTugas) {
                 is GetDetailMateriQiroahModel.FileItem -> {
                     binding.tvNamaFileMahasiswaTerlampir.text =
                         listTugas.url.substring(listTugas.url.lastIndexOf('/')+1)
+                    getTypeFile = listTugas.url.substring(listTugas.url.lastIndexOf(".")+1)
                 }
             }
+
+            when(getTypeFile) {
+                in listTypeImageFile -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_image_file_type)
+                else -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_documentwithtext_margined)
+            }
+
             if (setIcon == "delete") {
-                binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_close_delete_file)
-                binding.ivIconCloseOrDownloadFile.setOnClickListener {
-                    listener?.onUserClickListener("delete", adapterPosition)
+                with(binding.ivIconCloseOrDownloadFile) {
+                    setImageResource(R.drawable.ic_close_with_margin)
+                    // Resize drawable size
+                    scaleX = 1.3f
+                    scaleY = 1.3f
+                    setOnClickListener {
+                        listener?.onUserClickListener("delete", adapterPosition)
+                    }
                 }
             } else {
-                binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_download_blue)
-                binding.ivIconCloseOrDownloadFile.setOnClickListener {
-                    listener?.onUserClickListener("download", adapterPosition)
+                with(binding.ivIconCloseOrDownloadFile) {
+                    setImageResource(R.drawable.ic_download_blue)
+                    // Resize drawable size
+                    scaleX = 1.0f
+                    scaleY = 1.0f
+                    setOnClickListener {
+                        listener?.onUserClickListener("download", adapterPosition)
+                    }
                 }
             }
         }
@@ -63,8 +82,7 @@ class MahasiswaFileUploadedByAdapterList(
     fun setData(newDataset: List<Any>) {
         val diffUtil = FileUploadedUtils(dataset, newDataset)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
-        dataset.clear()
-        dataset.addAll(newDataset)
+        dataset = newDataset.toMutableList()
         diffResult.dispatchUpdatesTo(this)
     }
 

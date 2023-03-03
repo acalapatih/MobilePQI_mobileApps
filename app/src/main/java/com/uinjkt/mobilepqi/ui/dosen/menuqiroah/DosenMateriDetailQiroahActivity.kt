@@ -18,6 +18,7 @@ import com.uinjkt.mobilepqi.databinding.ActivityDosenMateriDetailBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
 import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
+import com.uinjkt.mobilepqi.util.openGallery
 import com.uinjkt.mobilepqi.util.uriToFile
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -68,11 +69,20 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 openFileManagerPdf(launcherIntentFile)
             }
 
+            ivInsertLink.setOnClickListener {
+                // TODO("Masukkan Link")
+            }
+
+            ivImageAttach.setOnClickListener {
+                openGallery(launcherIntentGallery)
+            }
+
+            ivMicAttach.setOnClickListener {
+                // TODO("Rekam Suara")
+            }
+
             btnSimpanMateriDosen.setOnClickListener {
-                showOneActionDialogWithInvoke("Materi Berhasil Disimpan", "Okay") {
-                    updateDetailMaterQiroah(listFileAttached, etDescDetailMateriDosen.text?.toString() ?:"", idMateri)
-                    onBackPressedDispatcher.onBackPressed()
-                }
+                updateDetailMaterQiroah(listFileAttached, etDescDetailMateriDosen.text?.toString() ?:"", idMateri)
             }
 
             btnHapusMateriDosen.setOnClickListener {
@@ -83,17 +93,9 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                     "Ya",
                     "Tidak",
                     onPositiveButtonClicked = {
-                        showOneActionDialogWithInvoke("Materi Berhasil Dihapus", "Okay") {
-                            deleteMateriQiroah(idMateri)
-                            onBackPressedDispatcher.onBackPressed()
-                        }
-
+                        deleteMateriQiroah(idMateri)
                     })
             }
-        }
-
-        onBackPressedDispatcher.addCallback(this) {
-            finish()
         }
     }
 
@@ -136,19 +138,19 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         viewModel.fileUploaded.observe(this) { model ->
             when(model) {
                 is Resource.Loading -> {
-                    showFileLoading(true)
+                    binding.pbFileLoading.isVisible = true
                 }
                 is Resource.Success -> {
                     model.data?.fileUrl?.let {
                         urlFile = it
-                        listFileAttached.add(GetDetailMateriQiroahModel.FileItem(urlFile))
+                        listFileAttached.add(0,GetDetailMateriQiroahModel.FileItem(urlFile))
                         fileUploadedByDosenAdapter.setData(listFileAttached)
                     }
-                    showFileLoading(false)
+                    binding.pbFileLoading.isVisible = false
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
-                    showFileLoading(false)
+                    binding.pbFileLoading.isVisible = false
                 }
             }
         }
@@ -156,14 +158,17 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         viewModel.updateDetailMateri.observe(this) { model ->
             when(model) {
                 is Resource.Loading -> {
-                    showLoading(true)
+                    binding.pbLoadingScreen.isVisible = true
                 }
                 is Resource.Success -> {
-                    showLoading(false)
+                    binding.pbLoadingScreen.isVisible = false
+                    showOneActionDialogWithInvoke("Materi Berhasil Disimpan", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
-                    showLoading(false)
+                    binding.pbLoadingScreen.isVisible = false
                 }
             }
         }
@@ -175,6 +180,9 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 }
                 is Resource.Success -> {
                     showLoading(false)
+                    showOneActionDialogWithInvoke("Materi Berhasil Dihapus", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -182,12 +190,12 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 }
             }
         }
+
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
+        }
     }
 
-    private fun showFileLoading(value: Boolean) {
-        binding.pbFileLoading.isVisible = value
-        binding.rvFileUploadByDosen.isVisible = !value
-    }
 
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
@@ -214,7 +222,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedFile, this, "pdf")
-            viewModel.uploadFilePDF(Constant.UPLOAD_KEY.MATERI, Constant.UPLOAD_TYPE.FILE, myFile)
+            viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.MATERI, Constant.UPLOAD_TYPE.FILE, myFile)
         }
     }
 
@@ -223,20 +231,14 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-
             val myFile = uriToFile(selectedFile, this, "image")
-
-            /*
-            TODO
-            trigger viewmodel disini, parameter file masukin aja myFile
-             */
+            viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.MATERI, Constant.UPLOAD_TYPE.IMAGE, myFile)
         }
     }
 
     override fun onUserClickListener(action: String, position: Int) {
         if (action == "delete") {
             listFileAttached.removeAt(position)
-//            Log.d("TEST_TEST_TEST", "position : $position \nsize: ${fileUploadedByDosenAdapter.itemCount}")
             fileUploadedByDosenAdapter.setData(listFileAttached)
         } else {
             showToast("File Downloaded", Toast.LENGTH_SHORT)
