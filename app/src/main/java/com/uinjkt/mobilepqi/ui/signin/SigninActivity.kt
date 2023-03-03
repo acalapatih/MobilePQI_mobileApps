@@ -14,6 +14,8 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySigninBinding
 import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
+import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
+import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.lupapassword.LupaPasswordActivity
 import com.uinjkt.mobilepqi.ui.signup.SignupActivity
@@ -126,7 +128,7 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
                 }
             }
         }

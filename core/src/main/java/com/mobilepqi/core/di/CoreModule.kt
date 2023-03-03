@@ -6,9 +6,13 @@ import com.mobilepqi.core.data.repository.buatkelas.BuatKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.daftarkelas.DaftarKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.detailkelas.DetailKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
+import com.mobilepqi.core.data.repository.menuqiroah.MenuQiroahRepositoryImpl
+import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
+import com.mobilepqi.core.data.repository.lupapassword.LupaPasswordRepositoryImpl
 import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
+import com.mobilepqi.core.data.repository.silabus.SilabusRepositoryImpl
 import com.mobilepqi.core.data.repository.tambahdosen.TambahDosenRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
 import com.mobilepqi.core.data.source.local.LocalDataSource
@@ -21,9 +25,13 @@ import com.mobilepqi.core.domain.repository.buatkelas.BuatKelasRepository
 import com.mobilepqi.core.domain.repository.daftarkelas.DaftarKelasRepository
 import com.mobilepqi.core.domain.repository.detailkelas.DetailKelasRepository
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
+import com.mobilepqi.core.domain.repository.lupapassword.LupaPasswordRepository
+import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
+import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
 import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.signup.SignupRepository
+import com.mobilepqi.core.domain.repository.silabus.SilabusRepository
 import com.mobilepqi.core.domain.repository.tambahdosen.TambahDosenRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
@@ -90,6 +98,9 @@ val repositoryModule = module {
     single<SigninRepository> { SigninRepositoryImpl(get(), get()) }
     single<SignupRepository> { SignupRepositoryImpl(get()) }
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
+    single<MenuQiroahRepository> { MenuQiroahRepositoryImpl(get()) }
+    single<LupaPasswordRepository> { LupaPasswordRepositoryImpl(get()) }
+    single<SilabusRepository> { SilabusRepositoryImpl(get()) }
     single<TambahDosenRepository> { TambahDosenRepositoryImpl(get()) }
     single<BuatKelasRepository> { BuatKelasRepositoryImpl(get()) }
     single<DaftarKelasRepository> { DaftarKelasRepositoryImpl(get()) }

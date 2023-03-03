@@ -118,7 +118,6 @@
                 android:id="@+id/rv_list_tugas_dosen_filter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
                 android:nestedScrollingEnabled="false"
                 android:scrollbarThumbVertical="@null"

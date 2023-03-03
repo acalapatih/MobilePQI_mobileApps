@@ -41,12 +41,12 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
 
 
         // Initialize Adapter List Tugas Upload By Dosen
-        mahasiswaFileUploadedByAdapter = MahasiswaFileUploadedByAdapter(this, listTugasDosen, "dosen",this)
+        mahasiswaFileUploadedByAdapter = MahasiswaFileUploadedByAdapter(this, listTugasDosen, "download",this)
         binding.rvFileUploadByDosen.adapter = mahasiswaFileUploadedByAdapter
         binding.rvFileUploadByDosen.layoutManager = LinearLayoutManager(this)
 
         // Initialize Adapter List Tugas Upload By Mhs
-        dosenFileUploadedByAdapter = MahasiswaFileUploadedByAdapter(this, listTugasMhs, "mhs",this)
+        dosenFileUploadedByAdapter = MahasiswaFileUploadedByAdapter(this, listTugasMhs, "delete",this)
         binding.rvFileUpload.adapter = dosenFileUploadedByAdapter
         binding.rvFileUpload.layoutManager = LinearLayoutManager(this)
 

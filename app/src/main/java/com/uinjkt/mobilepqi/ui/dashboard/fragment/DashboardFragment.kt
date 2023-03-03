@@ -26,11 +26,11 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivit
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
 
@@ -200,9 +200,11 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuSilabus() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaSilabusActivity.start(requireContext())
+            MahasiswaSilabusActivity.start(requireContext(), 1)
+            //TODO idKelas jangan lupa mir nanti disesuaikan
         } else {
-            DosenSilabusActivity.start(requireContext())
+            DosenSilabusActivity.start(requireContext(), 1)
+            //TODO idKelas jangan lupa mir nanti disesuaikan
         }
     }
 
@@ -216,9 +218,11 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuQiroah() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaMateriQiroahActivity.start(requireContext())
+            MahasiswaMateriQiroahActivity.start(requireContext(), 1)
+            // TODO: parameter idKelas disesuaikan dengan input user
         } else {
-            DosenMateriQiroahActivity.start(requireContext())
+            DosenMateriQiroahActivity.start(requireContext(), 1)
+            // TODO: parameter idKelas disesuaikan dengan input user
         }
     }
 

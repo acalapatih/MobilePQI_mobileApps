@@ -11,13 +11,13 @@ import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.data.DataSourceTugas
 import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.ActivityDosenBeriNilaiTugasMahasiswaBinding
-import com.uinjkt.mobilepqi.ui.dosen.FileUploadedByMahasiswaAdapter
+import com.uinjkt.mobilepqi.ui.dosen.DosenFileUploadedByMahasiswaAdapter
 
 
 class DosenBeriNilaiTugasMahasiswaActivity : BaseActivity<ActivityDosenBeriNilaiTugasMahasiswaBinding>() {
 
     private lateinit var listTugas: MutableList<DataTugas>
-    private lateinit var fileUploadedByMahasiswaAdapter: FileUploadedByMahasiswaAdapter
+    private lateinit var dosenFileUploadedByMahasiswaAdapter: DosenFileUploadedByMahasiswaAdapter
 
     companion object {
         @JvmStatic
@@ -41,8 +41,8 @@ class DosenBeriNilaiTugasMahasiswaActivity : BaseActivity<ActivityDosenBeriNilai
         val dataMahasiswa = DataSourceTugas().dataMahasiswa[getPositionMahasiswaId]
 
         // Initialize Adapter
-        fileUploadedByMahasiswaAdapter = FileUploadedByMahasiswaAdapter(this, listTugas)
-        binding.rvFileUpload.adapter = fileUploadedByMahasiswaAdapter
+        dosenFileUploadedByMahasiswaAdapter = DosenFileUploadedByMahasiswaAdapter(this, listTugas)
+        binding.rvFileUpload.adapter = dosenFileUploadedByMahasiswaAdapter
 
         // Set Layout Manager
         binding.rvFileUpload.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

@@ -9,6 +9,12 @@ import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasRespons
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetDetailMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetMateriQiroahResponse
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -16,6 +22,10 @@ import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusPayload
+import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusResponse
+import com.mobilepqi.core.data.source.remote.response.silabus.DeleteSilabusResponse
+import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -151,6 +161,102 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.detailkelas(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun createMateriQiroah(
+        request: CreateMateriQiroahPayload,
+        idKelas: Int
+    ): Flow<ApiResponse<CreateMateriQiroahResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.createMateriQiroah(request, idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getMateriQiroah(idKelas : Int): Flow<ApiResponse<GetMateriQiroahResponse>> {
+        return flow {
+            try {
+                val response =
+                    mobilePqiService.getMateriQiroah(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getDetailMateriQiroah(id: Int): Flow<ApiResponse<GetDetailMateriQiroahResponse>> {
+        return flow {
+            try {
+                val response =
+                    mobilePqiService.getDetailMateriQiroah(id)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun lupaPassword(request: LupaPasswordPayload): Flow<ApiResponse<LupaPasswordResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.lupaPassword(request)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun createSilabus(request: CreateSilabusPayload, idKelas: Int): Flow<ApiResponse<CreateSilabusResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.createSilabus(request, idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getSilabus(idKelas: Int): Flow<ApiResponse<GetSilabusResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getSilabus(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun deleteSilabus(idKelas: Int): Flow<ApiResponse<DeleteSilabusResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.deleteSilabus(idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

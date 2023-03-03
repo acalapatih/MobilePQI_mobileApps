@@ -10,10 +10,10 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.RecycleViewFileSentByMahasiswaBinding
 
-class FileUploadedByMahasiswaAdapter(
+class DosenFileUploadedByMahasiswaAdapter(
     private val context : Context,
     private val dataset: MutableList<DataTugas>
-) : RecyclerView.Adapter<FileUploadedByMahasiswaAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<DosenFileUploadedByMahasiswaAdapter.ViewHolder>(){
 
     interface OnUserClickListener {
         fun onUserClickListener(position: Int)
