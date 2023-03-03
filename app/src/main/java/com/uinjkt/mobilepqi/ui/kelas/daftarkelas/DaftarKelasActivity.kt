@@ -82,13 +82,9 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
         }
     }
 
-    private fun getIdKelas(data: DaftarKelasModel.DaftarKelas): Int {
-        return data.id
-    }
-
     override fun onUserClicked(position: Int, clicked: String) {
         if (clicked == "detailkelas") {
-            DetailKelasActivity.start(this, 12)
+            DetailKelasActivity.start(this, position)
         } else {
             DashboardActivity.start(this, "dashboard")
         }

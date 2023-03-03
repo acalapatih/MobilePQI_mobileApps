@@ -37,9 +37,11 @@ class DosenAdapter(
         )
     }
 
-    override fun getItemCount(): Int = dataset.size
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(dataset[position])
     }
+
+    override fun getItemCount(): Int = dataset.size
+
+
 }

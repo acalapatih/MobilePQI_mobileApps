@@ -73,6 +73,10 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                     mahasiswaAdapter = MahasiswaAdapter(this, listMahasiswa)
                     binding.rvProfilMahasiswa.layoutManager = LinearLayoutManager(this)
                     binding.rvProfilMahasiswa.adapter = mahasiswaAdapter
+
+                    binding.tvLabelTambahDosen.setOnClickListener {
+                        model.data?.let { it1 -> TambahDosenActivity.start(this, it1.id) }
+                    }
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -102,10 +106,6 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
             clip.description
 
             showToast("Copied")
-        }
-
-        binding.tvLabelTambahDosen.setOnClickListener {
-            TambahDosenActivity.start(this, 12)
         }
     }
 }
