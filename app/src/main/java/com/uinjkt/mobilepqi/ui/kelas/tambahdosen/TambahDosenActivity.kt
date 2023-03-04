@@ -68,7 +68,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     getListDosen = model.data?.list ?: emptyList()
-                    tambahDosenAdapter = TambahDosenAdapter(this, getListDosen, 2)
+                    tambahDosenAdapter = model.data?.let { TambahDosenAdapter(this, getListDosen, it.dosenregistered) }!!
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter
 
@@ -83,7 +83,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something Went Wrong")
                 }
             }
         }
