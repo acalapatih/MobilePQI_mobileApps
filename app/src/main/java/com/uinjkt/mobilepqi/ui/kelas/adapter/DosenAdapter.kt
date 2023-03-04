@@ -19,8 +19,7 @@ class DosenAdapter(
 
         fun bindItem(dosen: DetailKelasModel.ListDosen) {
             binding.tvNamaDosen.text = dosen.name
-            binding.tvNip.text = R.string.tv_nip.toString()
-            binding.tvNipDosen.text = dosen.nim
+            binding.tvNipDosen.text = dosen.nip
             Glide.with(context)
                 .load(dosen.avatar)
                 .into(binding.imgProfilDosen)

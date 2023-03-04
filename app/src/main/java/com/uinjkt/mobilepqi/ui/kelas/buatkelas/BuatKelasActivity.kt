@@ -41,6 +41,7 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
             when(model) {
                 is Resource.Loading -> {
                     showLoading(true)
+                    binding.btnSimpanDatakelas.isVisible = false
                 }
                 is Resource.Success -> {
                     showLoading(false)

@@ -25,8 +25,7 @@ class TambahDosenAdapter(
         private val binding = RecycleViewTambahDosenBinding.bind(view)
         fun bindItem(data: GetTambahDosenModel.GetTambahDosen) {
             binding.tvNamaDosen.text = data.name
-            binding.tvNip.text = R.string.tv_nip.toString()
-            binding.tvNipDosen.text = data.nim
+            binding.tvNipDosen.text = data.nip
             Glide.with(context)
                 .load(data.avatar)
                 .into(binding.imgProfilDosen)

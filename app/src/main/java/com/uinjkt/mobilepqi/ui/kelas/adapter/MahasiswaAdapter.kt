@@ -20,7 +20,6 @@ class MahasiswaAdapter(
 
         fun bindItem(mahasiswa: DetailKelasModel.ListMahasiswa) {
             binding.tvNamaMahasiswa.text = mahasiswa.name
-            binding.tvNim.text = R.string.tv_nim.toString()
             binding.tvNimMahasiswa.text = mahasiswa.nim
             Glide.with(context)
                 .load(mahasiswa.avatar)

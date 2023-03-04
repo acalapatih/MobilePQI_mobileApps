@@ -17,7 +17,7 @@ data class DetailKelasModel(
     data class ListDosen(
         val name: String,
         val avatar: String,
-        val nim: String
+        val nip: String
     )
     data class ListMahasiswa(
         val name: String,
@@ -37,7 +37,7 @@ data class DetailKelasModel(
                         ListDosen(
                             name = it?.name ?: "",
                             avatar = it?.avatar ?: "",
-                            nim = it?.nim ?: ""
+                            nip = it?.nim ?: ""
                         )
                     } ?: emptyList(),
                     listmahasiswa = response.data?.listMahasiswa?.map {

@@ -49,7 +49,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private fun postTambahDosen(idKelas: Int, dosen: MutableList<GetTambahDosenModel.GetTambahDosen>) {
         viewModel.postTambahDosen(PostTambahDosenPayload(
             dosen = dosen.map {
-                PostTambahDosenPayload.DosenItem(nim = it.nim)
+                PostTambahDosenPayload.DosenItem(nim = it.nip)
             }
         ), idKelas)
     }
@@ -63,6 +63,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
             when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
+                    binding.icTambahDosen.isVisible = false
                 }
                 is Resource.Success -> {
                     showLoading(false)

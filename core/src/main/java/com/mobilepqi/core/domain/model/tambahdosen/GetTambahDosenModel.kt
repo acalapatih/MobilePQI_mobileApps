@@ -12,7 +12,7 @@ data class GetTambahDosenModel(
     data class GetTambahDosen(
         val name: String,
         val avatar: String,
-        val nim: String
+        val nip: String
     ) companion object {
         fun mapResponseToModel(response: GetTambahDosenResponse): Flow<GetTambahDosenModel> {
             return flowOf(
@@ -23,7 +23,7 @@ data class GetTambahDosenModel(
                         GetTambahDosen(
                             name = it?.name ?: "",
                             avatar = it?.avatar ?: "",
-                            nim = it?.nim ?: ""
+                            nip = it?.nim ?: ""
                         )
                     } ?: emptyList()
                 )

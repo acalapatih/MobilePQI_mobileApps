@@ -80,7 +80,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something when wrong")
                 }
             }
         }
