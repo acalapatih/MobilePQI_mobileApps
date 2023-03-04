@@ -87,14 +87,14 @@ class MahasiswaMateriDetailQiroahActivity : BaseActivity<ActivityMahasiswaMateri
     private fun actionAfterGetMateri(materi: GetDetailMateriQiroahModel) {
         listFileAttached = materi.file
         // Initialize Adapter List Tugas Upload By Dosen
-        fileUploadedByDosenAdapter = MahasiswaFileUploadedByAdapterList(this, listFileAttached, "download",this)
+        fileUploadedByDosenAdapter = MahasiswaFileUploadedByAdapterList(this, listFileAttached.toMutableList(), "download",this)
         binding.rvFileUploadByDosen.adapter = fileUploadedByDosenAdapter
 
         binding.tvTitleMenuDetailQiroah.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title)
         binding.tvDescriptionMenuDetail.text = materi.description
     }
 
-    override fun onUserClickListener(action: String) {
+    override fun onUserClickListener(action: String, position: Int) {
         if (action == "delete") {
             showToast("File Deleted", Toast.LENGTH_SHORT)
         } else {

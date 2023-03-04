@@ -4,13 +4,8 @@ import com.mobilepqi.core.data.NetworkOnlyResource
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetDetailMateriQiroahResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetMateriQiroahResponse
-import com.mobilepqi.core.domain.model.menuqiroah.CreateMateriQiroahModel
-import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
-import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
+import com.mobilepqi.core.domain.model.menuqiroah.*
 import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -45,5 +40,26 @@ class MenuQiroahRepositoryImpl(
 
             override suspend fun createCall(): Flow<ApiResponse<GetDetailMateriQiroahResponse>> =
                 remoteDataSource.getDetailMateriQiroah(id)
+        }.asFlow()
+
+    override fun deleteMateriQiroah(idMateri: Int): Flow<Resource<DeleteMateriQiroahModel>> =
+        object : NetworkOnlyResource<DeleteMateriQiroahModel, DeleteMateriQiroahResponse>() {
+            override fun loadFromNetwork(data: DeleteMateriQiroahResponse): Flow<DeleteMateriQiroahModel> =
+                DeleteMateriQiroahModel.mapResponseToModel(data)
+
+            override suspend fun createCall(): Flow<ApiResponse<DeleteMateriQiroahResponse>> =
+                remoteDataSource.deleteMateriQiroah(idMateri)
+        }.asFlow()
+
+    override fun updateDetailMateriQiroah(
+        request: UpdateDetailMateriQiroahPayload,
+        idMateri: Int
+    ): Flow<Resource<UpdateDetailMateriQiroahModel>> =
+        object : NetworkOnlyResource<UpdateDetailMateriQiroahModel, UpdateDetailMateriQiroahResponse>() {
+            override fun loadFromNetwork(data: UpdateDetailMateriQiroahResponse): Flow<UpdateDetailMateriQiroahModel> =
+                UpdateDetailMateriQiroahModel.mapResponseToModel(data)
+
+            override suspend fun createCall(): Flow<ApiResponse<UpdateDetailMateriQiroahResponse>> =
+                remoteDataSource.updateDetailMateriQiroah(request, idMateri)
         }.asFlow()
 }

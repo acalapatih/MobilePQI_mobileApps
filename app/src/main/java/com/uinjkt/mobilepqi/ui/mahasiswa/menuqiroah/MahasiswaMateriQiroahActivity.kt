@@ -97,6 +97,11 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         viewModel.getMateriQiroah(idKelas)
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        initView()
+    }
+
     override fun onUserClicked(position: Int) {
         MahasiswaMateriDetailQiroahActivity.start(this@MahasiswaMateriQiroahActivity, listMateri[position].id)
     }

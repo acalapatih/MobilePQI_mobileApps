@@ -97,7 +97,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_attach_files"
+                    android:padding="5dp"
                     android:src="@drawable/ic_baseline_attach_file" />
 
                 <ImageView
@@ -105,7 +107,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_insert_link"
+                    android:padding="5dp"
                     android:src="@drawable/ic_sharp_insert_link" />
 
                 <ImageView
@@ -114,6 +118,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/desc_iv_google_drive"
+                    android:padding="5dp"
                     android:src="@drawable/ic_google_drive"
                     android:visibility="gone" />
 
@@ -122,7 +127,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_image_attach"
+                    android:padding="5dp"
                     android:src="@drawable/ic_image_attach" />
 
                 <ImageView
@@ -130,19 +137,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_mic_attach"
+                    android:padding="5dp"
                     android:src="@drawable/ic_mic_attach" />
             </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pb_file_loading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/ll_list_logo_upload" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_file_upload_by_dosen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginVertical="24dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintBottom_toTopOf="@+id/ll_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ll_list_logo_upload"
-                tools:itemCount="10"
+                app:layout_constraintTop_toBottomOf="@id/pb_file_loading"
+                app:layout_constraintVertical_bias="0"
+                tools:itemCount="1"
                 tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
 
             <LinearLayout
@@ -187,21 +207,21 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="75dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginBottom="32dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/et_desc_detail_materi_dosen"
-                app:layout_constraintStart_toStartOf="@id/et_desc_detail_materi_dosen"
-                app:layout_constraintTop_toBottomOf="@+id/rv_file_upload_by_dosen">
+                app:layout_constraintStart_toStartOf="@id/et_desc_detail_materi_dosen">
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_simpan_materi_dosen"
                     style="@style/ButtonSimpanHapusPostingMateriDosen"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
+                    android:layout_height="53dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/bg_button_simpan_48dp"
                     android:text="@string/tv_btn_simpan_materi_dosen"
@@ -212,21 +232,9 @@
                     style="@style/ButtonSimpanHapusPostingMateriDosen"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginBottom="20dp"
                     android:background="@drawable/bg_button_hapus_48dp"
                     android:text="@string/tv_btn_hapus_materi_dosen"
                     android:textColor="@color/blue_06283d" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_posting_materi_dosen"
-                    style="@style/ButtonSimpanHapusPostingMateriDosen"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/bg_button_simpan_48dp"
-                    android:text="@string/tv_btn_posting_materi_dosen"
-                    android:textColor="@color/white"
-                    android:visibility="gone" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
