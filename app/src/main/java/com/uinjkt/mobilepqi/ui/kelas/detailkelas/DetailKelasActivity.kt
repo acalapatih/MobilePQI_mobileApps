@@ -75,7 +75,13 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                     binding.rvProfilMahasiswa.layoutManager = LinearLayoutManager(this)
                     binding.rvProfilMahasiswa.adapter = mahasiswaAdapter
 
-                    binding.tvLabelTambahDosen.isEnabled = listDosen.size < 2
+                    if (listDosen.size < 2) {
+                        binding.tvLabelTambahDosen.isEnabled = true
+                    } else {
+                        binding.tvLabelTambahDosen.isEnabled = false
+                        binding.tvLabelTambahDosen.alpha = 0.7F
+                    }
+
                     setResult(Activity.RESULT_OK)
                 }
                 is Resource.Error -> {
