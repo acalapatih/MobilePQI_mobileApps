@@ -42,7 +42,8 @@ fun uriToFile(uri: Uri, context: Context, type: String): File {
         }
         else -> {
             val fileName = DocumentFile.fromSingleUri(context, uri)?.name!!
-            createCustomTempFile(context, fileName)        }
+            createCustomTempFile(context, fileName)
+        }
     }
 
     val inputStream = contentResolver.openInputStream(uri) as InputStream
