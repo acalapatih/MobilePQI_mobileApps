@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi.ui.kelas.detailkelas
 
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -26,9 +27,9 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
 
     companion object {
         @JvmStatic
-        fun start(context: Context, idKelas: Int) {
+        fun start(context: Context, idKelas: Int): Intent {
             val starter = Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
-            context.startActivity(starter)
+            return starter
         }
     }
 
@@ -73,10 +74,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                     mahasiswaAdapter = MahasiswaAdapter(this, listMahasiswa)
                     binding.rvProfilMahasiswa.layoutManager = LinearLayoutManager(this)
                     binding.rvProfilMahasiswa.adapter = mahasiswaAdapter
-
-                    binding.tvLabelTambahDosen.setOnClickListener {
-                        model.data?.let { it1 -> TambahDosenActivity.start(this, it1.id) }
-                    }
+                    setResult(Activity.RESULT_OK)
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -106,6 +104,10 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
             clip.description
 
             showToast("Copied")
+        }
+
+        binding.tvLabelTambahDosen.setOnClickListener {
+            TambahDosenActivity.start(this, classId)
         }
     }
 

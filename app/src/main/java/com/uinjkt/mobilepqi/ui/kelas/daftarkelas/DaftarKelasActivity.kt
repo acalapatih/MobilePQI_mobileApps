@@ -84,7 +84,7 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
 
     override fun onUserClicked(position: Int, clicked: String) {
         if (clicked == "detailkelas") {
-            DetailKelasActivity.start(this, position)
+            createClassLauncher.launch(DetailKelasActivity.start(this, position))
         } else {
             DashboardActivity.start(this, "dashboard")
         }
