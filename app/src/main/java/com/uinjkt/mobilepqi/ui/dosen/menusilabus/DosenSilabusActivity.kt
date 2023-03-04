@@ -17,6 +17,7 @@ import com.uinjkt.mobilepqi.databinding.ActivityDosenSilabusBinding
 import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.uriToFile
+import java.io.File
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
@@ -29,13 +30,12 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     }
 
     private val viewModel by viewModel<DosenSilabusViewModel>()
-
     private val classId by lazy { intent.getIntExtra("idKelas", 0) }
+    private var urlSilabus = ""
+    private lateinit var myFile: File
 
     override fun getViewBinding(): ActivityDosenSilabusBinding =
         ActivityDosenSilabusBinding.inflate(layoutInflater)
-
-    private var urlSilabus = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -193,7 +193,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-            val myFile = uriToFile(selectedFile, this, "pdf")
+            myFile = uriToFile(selectedFile, this, "pdf")
             viewModel.uploadFilePDF(Constant.UPLOAD_KEY.SILABUS, Constant.UPLOAD_TYPE.FILE, myFile)
         }
     }
@@ -218,5 +218,29 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
         binding.btnSimpanSilabusDosen.isEnabled = !value
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!isChangingConfigurations) {
+            myFile.deleteRecursively()
+            deleteTempFile(cacheDir)
+        }
+    }
+
+    private fun deleteTempFile(file: File): Boolean {
+        if (file.isDirectory) {
+            val files = file.listFiles()
+            if (files != null) {
+                for (f in files) {
+                    if (f.isDirectory) {
+                        deleteTempFile(f)
+                    } else {
+                        f.delete()
+                    }
+                }
+            }
+        }
+        return file.delete()
     }
 }
