@@ -154,7 +154,7 @@ class DashboardFragment : Fragment() {
             binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.maghrib)
         } else if (currentTimestamp in (jadwalMaghrib + 1) until jadwalIsya) {
             binding.tvSholat.text = getString(R.string.sholat_isya)
-            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.maghrib)
+            binding.tvWaktu.text = String.format(getString(R.string.waktu_sholat), data.isya)
         } else if (currentTimestamp > jadwalIsya) {
             //val calendar = Calendar.getInstance()
             //calendar.add(Calendar.DAY_OF_YEAR, 1)

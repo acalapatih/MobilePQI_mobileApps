@@ -17,6 +17,7 @@ import com.uinjkt.mobilepqi.databinding.ActivityDosenSilabusBinding
 import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.uriToFile
+import java.io.File
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
@@ -29,13 +30,11 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     }
 
     private val viewModel by viewModel<DosenSilabusViewModel>()
-
     private val classId by lazy { intent.getIntExtra("idKelas", 0) }
+    private var urlSilabus = ""
 
     override fun getViewBinding(): ActivityDosenSilabusBinding =
         ActivityDosenSilabusBinding.inflate(layoutInflater)
-
-    private var urlSilabus = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -218,5 +217,28 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
         binding.btnSimpanSilabusDosen.isEnabled = !value
+    }
+
+    override fun onDestroy() {
+        if (!isChangingConfigurations) {
+            externalCacheDir?.let { deleteTempFile(it) }
+        }
+        super.onDestroy()
+    }
+
+    private fun deleteTempFile(file: File): Boolean {
+        if (file.isDirectory) {
+            val files = file.listFiles()
+            if (files != null) {
+                for (f in files) {
+                    if (f.isDirectory) {
+                        deleteTempFile(f)
+                    } else {
+                        f.delete()
+                    }
+                }
+            }
+        }
+        return file.delete()
     }
 }

@@ -20,14 +20,10 @@ import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.openGallery
 import com.uinjkt.mobilepqi.util.uriToFile
+import java.io.File
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBinding>(), MahasiswaFileUploadedByAdapterList.OnUserClickListener {
-
-    private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
-    private lateinit var listFileAttached: MutableList<GetDetailMateriQiroahModel.FileItem>
-    private val viewModel by viewModel<DosenMateriDetailQiroahViewModel>()
-    private val idMateri by lazy { intent.getIntExtra(ID, 0) }
 
     companion object {
         @JvmStatic
@@ -39,7 +35,11 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         private const val ID = "id"
     }
 
+    private val viewModel by viewModel<DosenMateriDetailQiroahViewModel>()
+    private val idMateri by lazy { intent.getIntExtra(ID, 0) }
     private var urlFile = ""
+    private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
+    private lateinit var listFileAttached: MutableList<GetDetailMateriQiroahModel.FileItem>
 
     override fun getViewBinding(): ActivityDosenMateriDetailBinding = ActivityDosenMateriDetailBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -243,6 +243,29 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         } else {
             showToast("File Downloaded", Toast.LENGTH_SHORT)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!isChangingConfigurations) {
+            externalCacheDir?.let { deleteTempFile(it) }
+        }
+    }
+
+    private fun deleteTempFile(file: File): Boolean {
+        if (file.isDirectory) {
+            val files = file.listFiles()
+            if (files != null) {
+                for (f in files) {
+                    if (f.isDirectory) {
+                        deleteTempFile(f)
+                    } else {
+                        f.delete()
+                    }
+                }
+            }
+        }
+        return file.delete()
     }
 
 }
