@@ -63,12 +63,14 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
             when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
-                    binding.icTambahDosen.isVisible = false
                 }
                 is Resource.Success -> {
                     showLoading(false)
                     getListDosen = model.data?.list ?: emptyList()
-                    tambahDosenAdapter = model.data?.let { TambahDosenAdapter(this, getListDosen, it.dosenregistered) }!!
+                    model.data?.let {
+                        getListDosen = it.list
+                        tambahDosenAdapter = TambahDosenAdapter(this, getListDosen, 2-it.dosenregistered)
+                    }
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter
 
@@ -114,6 +116,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
+        binding.icTambahDosen.isVisible = !value
     }
 }
 

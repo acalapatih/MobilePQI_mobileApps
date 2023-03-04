@@ -67,7 +67,7 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
 
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
-        binding.btnSimpanDatakelas.isVisible = value
+        binding.btnSimpanDatakelas.isVisible = !value
     }
 
     private fun initListener() {
