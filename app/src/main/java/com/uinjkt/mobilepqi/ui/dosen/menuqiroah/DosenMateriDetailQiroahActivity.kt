@@ -40,7 +40,6 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     private var urlFile = ""
     private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
     private lateinit var listFileAttached: MutableList<GetDetailMateriQiroahModel.FileItem>
-    private lateinit var myFile: File
 
     override fun getViewBinding(): ActivityDosenMateriDetailBinding = ActivityDosenMateriDetailBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -222,7 +221,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-            myFile = uriToFile(selectedFile, this, "pdf")
+            val myFile = uriToFile(selectedFile, this, "pdf")
             viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.MATERI, Constant.UPLOAD_TYPE.FILE, myFile)
         }
     }
@@ -232,7 +231,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-            myFile = uriToFile(selectedFile, this, "image")
+            val myFile = uriToFile(selectedFile, this, "image")
             viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.MATERI, Constant.UPLOAD_TYPE.IMAGE, myFile)
         }
     }
@@ -249,8 +248,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     override fun onDestroy() {
         super.onDestroy()
         if (!isChangingConfigurations) {
-            myFile.deleteRecursively()
-            deleteTempFile(cacheDir)
+            externalCacheDir?.let { deleteTempFile(it) }
         }
     }
 

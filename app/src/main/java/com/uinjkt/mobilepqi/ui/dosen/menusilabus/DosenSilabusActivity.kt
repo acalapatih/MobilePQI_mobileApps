@@ -32,7 +32,6 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     private val viewModel by viewModel<DosenSilabusViewModel>()
     private val classId by lazy { intent.getIntExtra("idKelas", 0) }
     private var urlSilabus = ""
-    private lateinit var myFile: File
 
     override fun getViewBinding(): ActivityDosenSilabusBinding =
         ActivityDosenSilabusBinding.inflate(layoutInflater)
@@ -193,7 +192,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-            myFile = uriToFile(selectedFile, this, "pdf")
+            val myFile = uriToFile(selectedFile, this, "pdf")
             viewModel.uploadFilePDF(Constant.UPLOAD_KEY.SILABUS, Constant.UPLOAD_TYPE.FILE, myFile)
         }
     }
@@ -221,11 +220,10 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         if (!isChangingConfigurations) {
-            myFile.deleteRecursively()
-            deleteTempFile(cacheDir)
+            externalCacheDir?.let { deleteTempFile(it) }
         }
+        super.onDestroy()
     }
 
     private fun deleteTempFile(file: File): Boolean {
