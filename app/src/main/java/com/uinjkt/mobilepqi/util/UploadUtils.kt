@@ -34,16 +34,15 @@ fun createCustomTempFile(context: Context, fileName: String): File {
 fun uriToFile(uri: Uri, context: Context, type: String): File {
     val contentResolver: ContentResolver = context.contentResolver
     val myFile: File = when (type) {
-        "file" -> {
-            val fileName = DocumentFile.fromSingleUri(context, uri)?.name!!
-            createCustomTempFile(context, fileName)
+        "image" -> {
+            createCustomTempImageFile(context)
         }
         "pdf" -> {
             createCustomTempPdfFile(context)
         }
         else -> {
-            createCustomTempImageFile(context)
-        }
+            val fileName = DocumentFile.fromSingleUri(context, uri)?.name!!
+            createCustomTempFile(context, fileName)        }
     }
 
     val inputStream = contentResolver.openInputStream(uri) as InputStream
