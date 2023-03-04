@@ -51,6 +51,17 @@ interface MobilePqiService {
         @Path("idMateri") idMateri: Int
     ): GetDetailMateriQiroahResponse
 
+    @PUT("v1/mobilepqi/kelas/materi/{idMateri}")
+    suspend fun updateDetailMateriQiroah(
+        @Body payload: UpdateDetailMateriQiroahPayload,
+        @Path("idMateri") idMateri: Int
+    ): UpdateDetailMateriQiroahResponse
+
+    @DELETE("v1/mobilepqi/kelas/materi/{idMateri}")
+    suspend fun deleteMateriQiroah(
+        @Path("idMateri") idMateri: Int
+    ): DeleteMateriQiroahResponse
+
     @POST("v1/mobilepqi/kelas/{idKelas}/silabus")
     suspend fun createSilabus(
         @Body payload: CreateSilabusPayload,

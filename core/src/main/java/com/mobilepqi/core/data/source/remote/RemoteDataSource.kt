@@ -11,10 +11,7 @@ import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasRes
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetDetailMateriQiroahResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.GetMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -209,6 +206,33 @@ class RemoteDataSource(
                     emit(ApiResponse.Success(response))
                 }
             } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun deleteMateriQiroah(idMateri : Int): Flow<ApiResponse<DeleteMateriQiroahResponse>> {
+        return flow {
+            try {
+                val response =
+                    mobilePqiService.deleteMateriQiroah(idMateri)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun updateDetailMateriQiroah(request: UpdateDetailMateriQiroahPayload, idMateri: Int): Flow<ApiResponse<UpdateDetailMateriQiroahResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.updateDetailMateriQiroah(request, idMateri)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
                 emit(ApiResponse.Error(e.setGeneralError()))
             }
         }.flowOn(Dispatchers.IO)

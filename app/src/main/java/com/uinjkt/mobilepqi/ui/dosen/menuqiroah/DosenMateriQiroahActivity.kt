@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.ViewGroup
 import android.view.Window
 import androidx.activity.addCallback
@@ -156,7 +155,6 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
             tvTitleMessage.text = getString(R.string.hint_et_insert_topic_materi)
             btnTambahkanMateriDosen.setOnClickListener {
                 val getText = etInsertTopicText.text.toString()
-                Log.d("TestPrint", getText)
                 DataSourceMateriQiroah().addDataMenuQiroah(getText)
                 if (etInsertTopicText.text.isNotEmpty()) {
                     showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
@@ -164,7 +162,10 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                     }
                     dialog.dismiss()
                 } else {
-                    showOneActionDialog("Materi Tidak Boleh Kosong", "Okay")
+                    dialog.hide()
+                    showOneActionDialogWithInvoke("Materi Tidak Boleh Kosong", "Okay") {
+                        dialog.show()
+                    }
                 }
             }
 
@@ -186,5 +187,8 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
         viewModel.getMateriQiroah(idKelas)
     }
 
-
+    override fun onRestart() {
+        super.onRestart()
+        initView()
+    }
 }
