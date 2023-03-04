@@ -41,7 +41,6 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
             when(model) {
                 is Resource.Loading -> {
                     showLoading(true)
-                    binding.btnSimpanDatakelas.isVisible = false
                 }
                 is Resource.Success -> {
                     showLoading(false)
@@ -68,6 +67,7 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
 
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
+        binding.btnSimpanDatakelas.isVisible = value
     }
 
     private fun initListener() {
