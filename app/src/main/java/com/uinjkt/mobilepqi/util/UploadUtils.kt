@@ -27,7 +27,7 @@ fun createCustomTempPdfFile(context: Context): File {
 }
 
 fun createCustomTempFile(context: Context, fileName: String): File {
-    val fileFormat = fileName.substringAfterLast('.', "")
+    val fileFormat = fileName.getFileExtension()
     return File.createTempFile(timeStamp, ".$fileFormat", context.externalCacheDir)
 }
 
