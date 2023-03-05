@@ -7,6 +7,7 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.DataMateri
 import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -17,10 +18,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBinding>(), MenuMahasiswaMateriAdapterList.OnUserClickListener {
 
-    private lateinit var listMateri: List<GetMateriQiroahModel.DataMateri>
-    private val viewModel by viewModel<MahasiswaMateriQiroahViewModel>()
-    private lateinit var mahasiswaMateriAdapter: MenuMahasiswaMateriAdapterList
-
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
@@ -30,6 +27,10 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         }
         private const val ID_KELAS = "idKelas"
     }
+
+    private lateinit var listMateri: List<DataMateri>
+    private val viewModel by viewModel<MahasiswaMateriQiroahViewModel>()
+    private lateinit var mahasiswaMateriAdapter: MenuMahasiswaMateriAdapterList
 
     override fun getViewBinding(): ActivityMahasiswaMateriBinding = ActivityMahasiswaMateriBinding.inflate(layoutInflater)
 
@@ -85,9 +86,16 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
 
     private fun actionAfterGetMateri(materi: List<GetMateriQiroahModel.DataMateri>) {
         // Initialize data.
-        listMateri = materi
+        listMateri = materi.map {
+            DataMateri(
+                id = it.id,
+                title = it.title
+            )
+        }
+        initAdapter()
+    }
 
-        // Initialize Adapter
+    private fun initAdapter() {
         mahasiswaMateriAdapter = MenuMahasiswaMateriAdapterList(this, listMateri, this)
         binding.recycleViewMenuMahasiswa.adapter =  mahasiswaMateriAdapter
         binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)

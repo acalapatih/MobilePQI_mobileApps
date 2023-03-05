@@ -8,46 +8,58 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.view.Window
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.ibadah.CreateMateriIbadahPayload
+import com.mobilepqi.core.domain.model.DataMateri
+import com.mobilepqi.core.domain.model.menuibadah.GetMateriIbadahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
-import com.uinjkt.mobilepqi.data.DataMateri
-import com.uinjkt.mobilepqi.data.DataSourceMateriIbadah
 import com.uinjkt.mobilepqi.databinding.ActivityDosenMateriBinding
 import com.uinjkt.mobilepqi.databinding.ItemDialogAddTopicActionBinding
-import com.uinjkt.mobilepqi.ui.dosen.MenuDosenMateriAdapter
+import com.uinjkt.mobilepqi.ui.dosen.MenuDosenMateriAdapterList
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), MenuDosenMateriAdapter.OnUserClickListener {
-
-    private lateinit var listMateri: MutableList<DataMateri>
-    private lateinit var dosenMateriAdapter: MenuDosenMateriAdapter
+class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), MenuDosenMateriAdapterList.OnUserClickListener {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
+        fun start(context: Context, idKelas: Int) {
             val starter = Intent(context, DosenMateriIbadahActivity::class.java)
+                .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
+        private const val ID_KELAS = "idKelas"
     }
+
+    private lateinit var listMateri: List<DataMateri>
+    private lateinit var dosenMateriAdapter: MenuDosenMateriAdapterList
+    private lateinit var dialogBinding: ItemDialogAddTopicActionBinding
+    private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private val viewModel by viewModel<DosenMateriIbadahViewModel>()
 
     override fun getViewBinding(): ActivityDosenMateriBinding = ActivityDosenMateriBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
+        initListener()
+        initObserver()
+    }
 
-        // Initialize data.
-        listMateri = DataSourceMateriIbadah().loadDataMenuIbadah()
-
-        // Initialize Adapter & Layout
-        dosenMateriAdapter = MenuDosenMateriAdapter(this, listMateri, this)
-        binding.recycleViewMenuDosen.adapter = dosenMateriAdapter
-
-        // Initialize Layout
-        binding.recycleViewMenuDosen.layoutManager = LinearLayoutManager(this)
-
+    private fun initView() {
         // Initialize Title
         binding.tvTitleMenuDosen.text = getString(R.string.tv_title_materi_ibadah)
+        getMateriIbadah(idKelas)
+    }
 
+    private fun getMateriIbadah(idKelas: Int) {
+        viewModel.getMateriIbadah(idKelas)
+    }
+
+
+    private fun initListener() {
         // icon Close onClickListener
         binding.ivIconClose.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -60,21 +72,84 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
 
+    private fun initObserver() {
+        viewModel.createMateri.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoadingInDialog(true)
+                }
+                is Resource.Success -> {
+                    showLoadingInDialog(false)
+                    model.data?.let { actionAfterCreateMateri() }
+                }
+                is Resource.Error -> {
+                    showLoadingInDialog(false)
+                    showToast(model.message ?: "Something Went Wrong")
+                }
+            }
+        }
+        viewModel.getMateri.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        actionAfterGetMateri(it.materi)
+                    }
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
+                }
+            }
+        }
+    }
+
+    private fun actionAfterCreateMateri() {
+        getMateriIbadah(idKelas)
+    }
+
+    private fun actionAfterGetMateri(getMateri: List<GetMateriIbadahModel.DataMateri>) {
+        listMateri = getMateri.map {  materi ->
+            DataMateri(
+                id = materi.id,
+                title = materi.title
+            )
+        }
+        initAdapter()
+
+    }
+
+    private fun initAdapter() {
+        // Initialize Adapter & Layout
+        dosenMateriAdapter = MenuDosenMateriAdapterList(this, listMateri, this)
+        binding.recycleViewMenuDosen.adapter = dosenMateriAdapter
+        binding.recycleViewMenuDosen.layoutManager = LinearLayoutManager(this)
+    }
+
+    private fun showLoadingInDialog(value: Boolean) {
+        dialogBinding.pbLoadingScreen.isVisible = value
+        dialogBinding.btnTambahkanMateriDosen.isVisible = !value
+        dialogBinding.tvBatalTambahkanMateriDosen.isVisible = !value
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.recycleViewMenuDosen.isVisible = !value
     }
 
 
     override fun onUserClicked(position: Int) {
-        DosenMateriDetailIbadahActivity.start(
-            this@DosenMateriIbadahActivity,
-            listMateri[position].idMateri,
-            listMateri[position].titleMenuName
-        )
+        DosenMateriDetailIbadahActivity.start(this@DosenMateriIbadahActivity, listMateri[position].id)
     }
 
     private fun buttonTambahMateriClicked() {
         val dialog = Dialog(this)
-        val dialogBinding = ItemDialogAddTopicActionBinding.inflate(layoutInflater)
+        dialogBinding = ItemDialogAddTopicActionBinding.inflate(layoutInflater)
         val window = dialog.window
 
         window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -90,10 +165,17 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
         with(dialogBinding) {
             tvTitleMessage.text = getString(R.string.hint_et_insert_topic_materi)
             btnTambahkanMateriDosen.setOnClickListener {
-                val getText = etInsertTopicText.text.toString()
-                DataSourceMateriIbadah().addDataMenuIbadah(getText)
-                dialog.dismiss()
-                showOneActionDialog("Materi Berhasil Ditambahkan", "Okay")
+                if (etInsertTopicText.text.isNotEmpty()) {
+                    showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
+                        createMateriIbadah(etInsertTopicText.text.toString(), idKelas)
+                    }
+                    dialog.dismiss()
+                } else {
+                    dialog.hide()
+                    showOneActionDialogWithInvoke("Materi Tidak Boleh Kosong", "Okay") {
+                        dialog.show()
+                    }
+                }
             }
 
             tvBatalTambahkanMateriDosen.setOnClickListener {
@@ -102,5 +184,16 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
         }
 
         dialog.show()
+    }
+
+    private fun createMateriIbadah(title: String, idKelas: Int) {
+        viewModel.createMateriIbadah(
+            CreateMateriIbadahPayload(title),idKelas
+        )
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        initView()
     }
 }

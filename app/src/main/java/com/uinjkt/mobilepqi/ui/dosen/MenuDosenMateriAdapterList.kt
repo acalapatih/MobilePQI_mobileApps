@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
+import com.mobilepqi.core.domain.model.DataMateri
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewListMenuDosenBinding
 
 class MenuDosenMateriAdapterList(
     private val context: Context,
-    private val dataset: List<GetMateriQiroahModel.DataMateri>,
+    private val dataset: List<DataMateri>,
     val listener: OnUserClickListener? = null
     ) : RecyclerView.Adapter<MenuDosenMateriAdapterList.ViewHolder>(){
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         private val binding =  RecycleViewListMenuDosenBinding.bind(itemView)
-        fun bindItem(materi: GetMateriQiroahModel.DataMateri, position : Int) {
+        fun bindItem(materi: DataMateri, position : Int) {
             binding.tvJudulMenu.text = materi.title
             binding.btnMenuDetail.setOnClickListener {
                 listener?.onUserClicked(position)

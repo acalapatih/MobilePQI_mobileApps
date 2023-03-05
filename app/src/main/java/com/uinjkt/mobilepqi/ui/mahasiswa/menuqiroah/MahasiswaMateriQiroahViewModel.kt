@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
-import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahUsecase
+import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahUsecase
 import kotlinx.coroutines.launch
 
 class MahasiswaMateriQiroahViewModel(private val useCase: MenuQiroahUsecase) : ViewModel() {

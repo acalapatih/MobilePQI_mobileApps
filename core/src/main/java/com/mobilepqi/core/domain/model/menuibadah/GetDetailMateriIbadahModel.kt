@@ -1,10 +1,10 @@
-package com.mobilepqi.core.domain.model.menuqiroah
+package com.mobilepqi.core.domain.model.menuibadah
 
-import com.mobilepqi.core.data.source.remote.response.qiroah.GetDetailMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.ibadah.GetDetailMateriIbadahResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-data class GetDetailMateriQiroahModel (
+data class GetDetailMateriIbadahModel (
     val id: Int,
     val type: String,
     val title: String,
@@ -15,9 +15,9 @@ data class GetDetailMateriQiroahModel (
         val url: String
     )
     companion object {
-        fun mapResponseToModel(response: GetDetailMateriQiroahResponse): Flow<GetDetailMateriQiroahModel> {
+        fun mapResponseToModel(response: GetDetailMateriIbadahResponse): Flow<GetDetailMateriIbadahModel> {
             return flowOf(
-                GetDetailMateriQiroahModel(
+                GetDetailMateriIbadahModel(
                     id = response.data?.id ?:0,
                     type = response.data?.type ?:"",
                     title = response.data?.title ?:"",

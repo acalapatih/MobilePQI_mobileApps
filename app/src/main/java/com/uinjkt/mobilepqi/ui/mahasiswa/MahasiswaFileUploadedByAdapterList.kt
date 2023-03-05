@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
+import com.mobilepqi.core.domain.model.FileItem
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewFileUploadedByDosenBinding
 import com.uinjkt.mobilepqi.ui.dosen.FileUploadedUtils
+import com.uinjkt.mobilepqi.util.getFileExtension
+import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 
 class MahasiswaFileUploadedByAdapterList(
     private val context: Context,
-    private var dataset: MutableList<Any>,
+    private var dataset: MutableList<FileItem>,
     private val setIcon: String = "download",
     private val listener: OnUserClickListener? = null
 ) : RecyclerView.Adapter<MahasiswaFileUploadedByAdapterList.ViewHolder>() {
@@ -26,21 +28,14 @@ class MahasiswaFileUploadedByAdapterList(
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
         private val binding = RecycleViewFileUploadedByDosenBinding.bind(view)
         private lateinit var getTypeFile: String
-        private val listTypeImageFile = listOf("img","png","bmp","gif","svg","jpg")
-        fun bindItem(listTugas : Any) {
-            when(listTugas) {
-                is GetDetailMateriQiroahModel.FileItem -> {
-                    binding.tvNamaFileMahasiswaTerlampir.text =
-                        listTugas.url.substring(listTugas.url.lastIndexOf('/')+1)
-                    getTypeFile = listTugas.url.substring(listTugas.url.lastIndexOf(".")+1)
-                }
-            }
-
+        private val listTypeImageFile = listOf("img","png","bmp","gif","svg","jpg", "jpeg")
+        fun bindItem(listTugas : FileItem) {
+            binding.tvNamaFileMahasiswaTerlampir.text = listTugas.url.getFileNameFromUrl()
+            getTypeFile = listTugas.url.getFileExtension()
             when(getTypeFile) {
                 in listTypeImageFile -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_image_file_type)
                 else -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_documentwithtext_margined)
             }
-
             if (setIcon == "delete") {
                 with(binding.ivIconCloseOrDownloadFile) {
                     setImageResource(R.drawable.ic_close_with_margin)
@@ -79,12 +74,10 @@ class MahasiswaFileUploadedByAdapterList(
 
     override fun getItemCount(): Int = dataset.size
 
-    fun setData(newDataset: List<Any>) {
+    fun setData(newDataset: List<FileItem>) {
         val diffUtil = FileUploadedUtils(dataset, newDataset)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         dataset = newDataset.toMutableList()
         diffResult.dispatchUpdatesTo(this)
     }
-
-
 }

@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
+import com.mobilepqi.core.domain.model.DataMateri
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewListMenuMahasiswaBinding
 
 class MenuMahasiswaMateriAdapterList(
     private val context: Context,
-    private val dataset : List<GetMateriQiroahModel.DataMateri>,
+    private val dataset : List<DataMateri>,
     val listener: OnUserClickListener? = null
     ) : RecyclerView.Adapter<MenuMahasiswaMateriAdapterList.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewListMenuMahasiswaBinding.bind(view)
-        fun bindItem(materi: GetMateriQiroahModel.DataMateri, position: Int) {
+        fun bindItem(materi: DataMateri, position: Int) {
             binding.tvJudulMenu.text = materi.title
             binding.cardMenu.setOnClickListener {
                 listener?.onUserClicked(position)
