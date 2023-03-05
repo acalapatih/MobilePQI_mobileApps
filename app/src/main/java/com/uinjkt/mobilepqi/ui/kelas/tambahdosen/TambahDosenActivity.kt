@@ -17,7 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
-    private var postListDosen: List<PostTambahDosenModel.Data> = listOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
