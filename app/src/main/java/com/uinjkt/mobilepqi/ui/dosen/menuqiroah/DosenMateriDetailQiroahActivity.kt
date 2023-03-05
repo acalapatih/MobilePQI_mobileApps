@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -257,7 +256,6 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("INI_LOG_CUY", "onDestroy() Kepanggil")
         if (!isChangingConfigurations) {
             externalCacheDir?.let { deleteTempFile(it) }
         }
