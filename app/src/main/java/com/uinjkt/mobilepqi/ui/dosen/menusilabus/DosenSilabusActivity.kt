@@ -15,6 +15,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenSilabusBinding
 import com.uinjkt.mobilepqi.util.Constant
+import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.uriToFile
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -88,7 +89,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                         with(binding) {
                             btnSimpanSilabusDosen.isEnabled = true
                             tvNamaDokumenSilabus.text =
-                                urlSilabus.substring(it.lastIndexOf('/') + 1)
+                                urlSilabus.getFileNameFromUrl()
                             tvNamaDokumenSilabus.gravity = Gravity.START
                             ivLogoDocument.isGone = false
                         }
@@ -134,9 +135,9 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     if (model.data?.silabus?.isNotEmpty() == true) {
-                        val url = model.data?.silabus ?: ""
+                        urlSilabus = model.data?.silabus ?: ""
                         with(binding) {
-                            tvNamaDokumenSilabus.text = url.substring(url.lastIndexOf('/') + 1)
+                            tvNamaDokumenSilabus.text = urlSilabus.getFileNameFromUrl()
                             tvNamaDokumenSilabus.gravity = Gravity.START
                             ivLogoDocument.isGone = false
                             btnSimpanSilabusDosen.isEnabled = false
