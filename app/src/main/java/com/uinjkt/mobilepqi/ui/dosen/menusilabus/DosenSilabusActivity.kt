@@ -25,7 +25,8 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
-            val starter = Intent(context, DosenSilabusActivity::class.java).putExtra("idKelas", idKelas)
+            val starter =
+                Intent(context, DosenSilabusActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
