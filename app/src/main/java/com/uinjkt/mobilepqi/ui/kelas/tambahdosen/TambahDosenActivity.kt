@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
+import com.mobilepqi.core.domain.model.tambahdosen.PostTambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
@@ -16,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
+    private var postListDosen: List<PostTambahDosenModel.Data> = listOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
@@ -23,7 +25,8 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
-            val starter = Intent(context, TambahDosenActivity::class.java).putExtra("idKelas", idKelas)
+            val starter =
+                Intent(context, TambahDosenActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
@@ -46,7 +49,10 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         getTambahDosen(classId)
     }
 
-    private fun postTambahDosen(idKelas: Int, dosen: MutableList<GetTambahDosenModel.GetTambahDosen>) {
+    private fun postTambahDosen(
+        idKelas: Int,
+        dosen: MutableList<GetTambahDosenModel.GetTambahDosen>
+    ) {
         viewModel.postTambahDosen(PostTambahDosenPayload(
             dosen = dosen.map {
                 PostTambahDosenPayload.DosenItem(nim = it.nip)
@@ -69,7 +75,8 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                     getListDosen = model.data?.list ?: emptyList()
                     model.data?.let {
                         getListDosen = it.list
-                        tambahDosenAdapter = TambahDosenAdapter(this, getListDosen, 2-it.dosenregistered)
+                        tambahDosenAdapter =
+                            TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
                     }
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter

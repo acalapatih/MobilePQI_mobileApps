@@ -28,7 +28,8 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int): Intent {
-            val starter = Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
+            val starter =
+                Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
             return starter
         }
     }
@@ -56,8 +57,8 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     }
 
     private fun initObserver() {
-        viewModel.detailkelas.observe(this) {model ->
-            when(model) {
+        viewModel.detailkelas.observe(this) { model ->
+            when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
@@ -79,7 +80,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                         binding.tvLabelTambahDosen.isEnabled = true
                     } else {
                         binding.tvLabelTambahDosen.isEnabled = false
-                        binding.tvLabelTambahDosen.alpha = 0.7F
+                        binding.tvLabelTambahDosen.alpha = 0.5F
                     }
 
                     setResult(Activity.RESULT_OK)
