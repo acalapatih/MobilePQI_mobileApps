@@ -17,8 +17,8 @@ import com.uinjkt.mobilepqi.databinding.ActivityDosenSilabusBinding
 import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.uriToFile
-import java.io.File
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     companion object {
@@ -63,11 +63,6 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
 
         binding.btnSimpanSilabusDosen.setOnClickListener {
             createSilabus(classId)
-            showOneActionDialogWithInvoke(
-                message = getString(R.string.tv_tambah_file_silabus_dialog),
-                btnMessage = getString(R.string.btn_oke_text),
-                onButtonClicked = { getSilabus(classId) }
-            )
         }
 
         binding.btnHapusFile.setOnClickListener {
@@ -113,7 +108,11 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    getSilabus(classId)
+                    showOneActionDialogWithInvoke(
+                        message = getString(R.string.tv_tambah_file_silabus_dialog),
+                        btnMessage = getString(R.string.btn_oke_text),
+                        onButtonClicked = { getSilabus(classId) }
+                    )
                     with(binding) {
                         btnTambahFile.isEnabled = false
                         btnSimpanSilabusDosen.isEnabled = false
