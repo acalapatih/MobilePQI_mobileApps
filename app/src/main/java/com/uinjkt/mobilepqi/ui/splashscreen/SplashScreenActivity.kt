@@ -12,7 +12,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivitySplashScreenBinding
 import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
-import com.uinjkt.mobilepqi.ui.kelas.DaftarKelasActivity
+import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,5 +1,11 @@
 package com.uinjkt.mobilepqi.di
 
+import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasIteractor
+import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasUsecase
+import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasInteractor
+import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasUsecase
+import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasInteractor
+import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasUsecase
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
 import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordInteractor
@@ -12,12 +18,18 @@ import com.mobilepqi.core.domain.usecase.signin.SigninInteractor
 import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import com.mobilepqi.core.domain.usecase.signup.SignupInteractor
 import com.mobilepqi.core.domain.usecase.signup.SignupUsecase
+import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenInteractor
+import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenUsecase
 import com.mobilepqi.core.domain.usecase.silabus.SilabusInteractor
 import com.mobilepqi.core.domain.usecase.silabus.SilabusUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
+import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasViewModel
+import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasViewModel
+import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasViewModel
+import com.uinjkt.mobilepqi.ui.kelas.tambahdosen.TambahDosenViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
@@ -38,6 +50,10 @@ val useCaseModule = module {
     factory<SignupUsecase> { SignupInteractor(get()) }
     factory<MenuQiroahUsecase> { MenuQiroahInteractor(get()) }
     factory<OnboardingUsecase> { OnboardingInteractor(get()) }
+    factory<TambahDosenUsecase> { TambahDosenInteractor(get()) }
+    factory<BuatKelasUsecase> { BuatKelasIteractor(get()) }
+    factory<DaftarKelasUsecase> { DaftarKelasInteractor(get()) }
+    factory<DetailKelasUsecase> { DetailKelasInteractor(get()) }
     factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
     factory<SilabusUsecase> { SilabusInteractor(get()) }
 }
@@ -50,6 +66,10 @@ val viewModelModule = module {
     viewModel { DosenMateriDetailQiroahViewModel(get(), get()) }
     viewModel { SplashOnboardingViewModel(get()) }
     viewModel { DashboardSharedViewModel() }
+    viewModel { TambahDosenViewModel(get()) }
+    viewModel { BuatKelasViewModel(get()) }
+    viewModel { DaftarKelasViewModel(get()) }
+    viewModel { DetailKelasViewModel(get()) }
     viewModel { MahasiswaMateriQiroahViewModel(get()) }
     viewModel { MahasiswaMateriDetailQiroahViewModel(get()) }
     viewModel { LupaPasswordViewModel(get()) }
