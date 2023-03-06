@@ -15,7 +15,7 @@
     <string name="tv_masuk_sekarang_text"><u>Masuk Sekarang</u></string>
     <string name="tv_action_bar_lupa_password_text">Lupa Password</string>
     <string name="lupa_password_deskripsi_text">Silakan masukkan email Anda pada kotak di bawah ini untuk mengatur ulang password Anda</string>
-    <string name="btn_kirim_lupa_password_text">kirim</string>
+    <string name="btn_kirim_lupa_password_text">Kirim</string>
     <string name="btn_location_text">Click Location</string>
     <string name="tv_kode_kelas_text">Kode Kelas</string>
     <string name="btn_kirim_lupa_password_deksripsi_text">"Kami telah mengirim password baru ke email Anda"</string>

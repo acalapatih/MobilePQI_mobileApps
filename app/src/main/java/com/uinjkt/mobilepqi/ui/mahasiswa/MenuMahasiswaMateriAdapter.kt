@@ -11,7 +11,7 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewListMenuMahasiswaBinding
 
 class MenuMahasiswaMateriAdapter(
     private val context: Context,
-    private val dataset : MutableList<DataMateri>,
+    private val dataset : List<DataMateri>,
     val listener: OnUserClickListener? = null
     ) : RecyclerView.Adapter<MenuMahasiswaMateriAdapter.ViewHolder>() {
 
@@ -20,7 +20,7 @@ class MenuMahasiswaMateriAdapter(
         fun bindItem(materi: DataMateri) {
             binding.tvJudulMenu.text = materi.titleMenuName
             binding.cardMenu.setOnClickListener {
-                listener?.onUserClicked(materi.idMateri-1) // index = id - 1
+                listener?.onUserClicked(materi.idMateri-1)
             }
         }
     }

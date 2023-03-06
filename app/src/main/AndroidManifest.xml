@@ -112,17 +112,17 @@
             android:name=".ui.pengaturan.ProfilPengaturanBahasaActivity"
             android:exported="false"/>
         <activity
-            android:name=".ui.kelas.DaftarKelasActivity"
+            android:name=".ui.kelas.daftarkelas.DaftarKelasActivity"
             android:exported="false">
         </activity>
         <activity
-            android:name=".ui.kelas.BuatKelasActivity"
+            android:name=".ui.kelas.buatkelas.BuatKelasActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.kelas.DetailKelasActivity"
+            android:name=".ui.kelas.detailkelas.DetailKelasActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.kelas.TambahDosenActivity"
+            android:name=".ui.kelas.tambahdosen.TambahDosenActivity"
             android:exported="false" />
     </application>
 
