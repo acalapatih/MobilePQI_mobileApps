@@ -8,7 +8,7 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.FileItem
+import com.mobilepqi.core.domain.model.common.FileItem
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity

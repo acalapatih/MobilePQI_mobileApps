@@ -11,7 +11,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.qiroah.UpdateDetailMateriQiroahPayload
-import com.mobilepqi.core.domain.model.FileItem
+import com.mobilepqi.core.domain.model.common.FileItem
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -145,7 +145,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                 is Resource.Success -> {
                     model.data?.fileUrl?.let { file ->
                         urlFile = file
-                        listFileAttached.add(0,FileItem(urlFile))
+                        listFileAttached.add(0, FileItem(urlFile))
                         fileUploadedByDosenAdapter.setData(listFileAttached)
                         if (!isChangingConfigurations) {
                             externalCacheDir?.let { cache -> deleteTempFile(cache) }

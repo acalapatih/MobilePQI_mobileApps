@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.ibadah.CreateMateriIbadahPayload
-import com.mobilepqi.core.domain.model.DataMateri
+import com.mobilepqi.core.domain.model.common.DataMateri
 import com.mobilepqi.core.domain.model.menuibadah.GetMateriIbadahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -97,7 +97,7 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
                 }
                 is Resource.Success -> {
                     model.data?.let {
-                        actionAfterGetMateri(it.materi)
+                        actionAfterGetMateri(it)
                     }
                     showLoading(false)
                 }
@@ -113,8 +113,8 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
         getMateriIbadah(idKelas)
     }
 
-    private fun actionAfterGetMateri(getMateri: List<GetMateriIbadahModel.DataMateri>) {
-        listMateri = getMateri.map {  materi ->
+    private fun actionAfterGetMateri(model: GetMateriIbadahModel) {
+        listMateri = model.materi.map {  materi ->
             DataMateri(
                 id = materi.id,
                 title = materi.title

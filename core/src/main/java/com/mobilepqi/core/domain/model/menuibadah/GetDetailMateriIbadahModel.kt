@@ -1,6 +1,7 @@
 package com.mobilepqi.core.domain.model.menuibadah
 
 import com.mobilepqi.core.data.source.remote.response.ibadah.GetDetailMateriIbadahResponse
+import com.mobilepqi.core.domain.model.common.FileItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -11,9 +12,6 @@ data class GetDetailMateriIbadahModel (
     val description: String,
     val file: List<FileItem>
 ) {
-    data class FileItem(
-        val url: String
-    )
     companion object {
         fun mapResponseToModel(response: GetDetailMateriIbadahResponse): Flow<GetDetailMateriIbadahModel> {
             return flowOf(

@@ -1,7 +1,7 @@
 package com.uinjkt.mobilepqi.ui.dosen
 
 import androidx.recyclerview.widget.DiffUtil
-import com.mobilepqi.core.domain.model.FileItem
+import com.mobilepqi.core.domain.model.common.FileItem
 
 class FileUploadedUtils(
     private val oldList: List<FileItem>,

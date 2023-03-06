@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.mobilepqi.core.domain.model.FileItem
+import com.mobilepqi.core.domain.model.common.FileItem
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewFileUploadedByDosenBinding
 import com.uinjkt.mobilepqi.ui.dosen.FileUploadedUtils

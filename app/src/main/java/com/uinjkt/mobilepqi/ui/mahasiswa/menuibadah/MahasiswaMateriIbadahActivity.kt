@@ -7,7 +7,7 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.domain.model.DataMateri
+import com.mobilepqi.core.domain.model.common.DataMateri
 import com.mobilepqi.core.domain.model.menuibadah.GetMateriIbadahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -68,7 +68,7 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                 }
                 is Resource.Success -> {
                     model.data?.let {
-                        actionAfterGetMateri(it.materi)
+                        actionAfterGetMateri(it)
                     }
                     showLoading(false)
                 }
@@ -80,9 +80,9 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
         }
     }
 
-    private fun actionAfterGetMateri(materi: List<GetMateriIbadahModel.DataMateri>) {
+    private fun actionAfterGetMateri(model: GetMateriIbadahModel) {
         // Initialize data.
-        listMateri = materi.map {
+        listMateri = model.materi.map {
             DataMateri(
                 id = it.id,
                 title = it.title

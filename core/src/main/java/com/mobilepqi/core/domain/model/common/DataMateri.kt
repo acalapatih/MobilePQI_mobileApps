@@ -1,4 +1,4 @@
-package com.mobilepqi.core.domain.model
+package com.mobilepqi.core.domain.model.common
 
 data class DataMateri(
     val id: Int,

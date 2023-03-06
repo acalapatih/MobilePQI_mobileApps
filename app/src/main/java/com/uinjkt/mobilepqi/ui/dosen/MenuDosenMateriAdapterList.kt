@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mobilepqi.core.domain.model.DataMateri
+import com.mobilepqi.core.domain.model.common.DataMateri
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewListMenuDosenBinding
 
