@@ -244,13 +244,6 @@ class DosenMateriDetailIbadahActivity : BaseActivity<ActivityDosenMateriDetailBi
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        if (!isChangingConfigurations) {
-            externalCacheDir?.let { deleteTempFile(it) }
-        }
-    }
-
     private fun deleteTempFile(file: File): Boolean {
         if (file.isDirectory) {
             val files = file.listFiles()
