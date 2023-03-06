@@ -10,7 +10,6 @@ import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.ProfilRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.PutProfilRepositoryImpl
 import com.mobilepqi.core.data.repository.menuqiroah.MenuQiroahRepositoryImpl
-import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.lupapassword.LupaPasswordRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
@@ -31,7 +30,6 @@ import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.profil.ProfilRepository
 import com.mobilepqi.core.domain.repository.profil.PutProfilRepository
 import com.mobilepqi.core.domain.repository.lupapassword.LupaPasswordRepository
-import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.signup.SignupRepository
