@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -249,8 +248,6 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         if (action == "delete") {
             listFileAttached.removeAt(position)
             fileUploadedByDosenAdapter.setData(listFileAttached)
-        } else {
-            showToast("File Downloaded", Toast.LENGTH_SHORT)
         }
     }
 

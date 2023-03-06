@@ -16,7 +16,7 @@ import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 class MahasiswaFileUploadedByAdapterList(
     private val context: Context,
     private var dataset: MutableList<FileItem>,
-    private val setIcon: String = "download",
+    private val setIcon: String,
     private val listener: OnUserClickListener? = null
 ) : RecyclerView.Adapter<MahasiswaFileUploadedByAdapterList.ViewHolder>() {
 

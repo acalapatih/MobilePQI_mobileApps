@@ -3,7 +3,6 @@ package com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +13,8 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriDetailBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
+import com.uinjkt.mobilepqi.util.downloadFileToStorage
+import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MahasiswaMateriDetailQiroahActivity : BaseActivity<ActivityMahasiswaMateriDetailBinding>(), MahasiswaFileUploadedByAdapterList.OnUserClickListener {
@@ -101,10 +102,9 @@ class MahasiswaMateriDetailQiroahActivity : BaseActivity<ActivityMahasiswaMateri
     }
 
     override fun onUserClickListener(action: String, position: Int) {
-        if (action == "delete") {
-            showToast("File Deleted", Toast.LENGTH_SHORT)
-        } else {
-            showToast("File Downloaded", Toast.LENGTH_SHORT)
+        if(action == "download") {
+            val urlFile = listFileAttached[position].url
+            downloadFileToStorage(this, urlFile, urlFile.getFileNameFromUrl())
         }
     }
 }
