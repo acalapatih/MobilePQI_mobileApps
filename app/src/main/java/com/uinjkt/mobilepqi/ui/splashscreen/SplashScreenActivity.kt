@@ -69,7 +69,7 @@ class SplashScreenActivity : BaseActivity<ActivitySplashScreenBinding>() {
                 finish()
             } else {
                 if (viewModel.userRole.value?.equals("mahasiswa") == true) {
-                    DashboardActivity.start(this, "")
+                    DashboardActivity.start(this)
                     finish()
                 } else {
                     DaftarKelasActivity.start(this)

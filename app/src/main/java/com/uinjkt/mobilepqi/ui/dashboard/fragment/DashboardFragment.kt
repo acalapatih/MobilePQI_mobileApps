@@ -1,6 +1,7 @@
 package com.uinjkt.mobilepqi.ui.dashboard.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,11 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivit
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
 
@@ -45,6 +46,8 @@ class DashboardFragment : Fragment() {
     private var latitude = ""
     private var longitude = ""
     private var currentTimestamp = ""
+    private val classIdDosen by lazy { arguments?.getInt("class_id", 0) ?: 0 }
+    private var classIdMahasiswa = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,17 +60,13 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.d("Dashboard", "onViewCreated: $classIdDosen")
         viewModel.getUserRole()
+        viewModel.getClassId()
 
+        initObserver()
         initView()
         initListener()
-        initObserver()
-
-        if (latitude.isEmpty() && longitude.isEmpty()) {
-            binding.tvSholat.text = "-"
-            binding.tvWaktu.text = "-"
-        }
     }
 
     private fun initObserver() {
@@ -172,6 +171,21 @@ class DashboardFragment : Fragment() {
         tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
         binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+
+        if (latitude.isEmpty() && longitude.isEmpty()) {
+            binding.tvSholat.text = "-"
+            binding.tvWaktu.text = "-"
+        }
+
+        if (viewModel.userRole.value.equals("mahasiswa")) {
+            viewModel.classId.observe(viewLifecycleOwner) { value ->
+                //hit viewmodel get class dashboard mahasiswa using value
+                classIdMahasiswa = value
+                Log.d("Class Id Mahasiswa", "class Id: $value")
+            }
+        } else {
+            //hit viewmodel get class dashboard dosen using classId
+        }
     }
 
     private fun initListener() {
@@ -200,10 +214,10 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuSilabus() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaSilabusActivity.start(requireContext(), 1)
+            MahasiswaSilabusActivity.start(requireContext(), classIdMahasiswa)
             //TODO idKelas jangan lupa mir nanti disesuaikan
         } else {
-            DosenSilabusActivity.start(requireContext(), 1)
+            DosenSilabusActivity.start(requireContext(), classIdDosen)
             //TODO idKelas jangan lupa mir nanti disesuaikan
         }
     }
@@ -218,10 +232,10 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuQiroah() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaMateriQiroahActivity.start(requireContext(), 1)
+            MahasiswaMateriQiroahActivity.start(requireContext(), classIdMahasiswa)
             // TODO: parameter idKelas disesuaikan dengan input user
         } else {
-            DosenMateriQiroahActivity.start(requireContext(), 1)
+            DosenMateriQiroahActivity.start(requireContext(), classIdDosen)
             // TODO: parameter idKelas disesuaikan dengan input user
         }
     }
