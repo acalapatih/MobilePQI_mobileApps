@@ -8,21 +8,22 @@ import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
+import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
+import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
 import com.mobilepqi.core.data.source.remote.response.signup.SignupResponse
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusPayload
 import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.DeleteSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -281,6 +282,77 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.deleteSilabus(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun createMateriIbadah(
+        request: CreateMateriIbadahPayload,
+        idKelas: Int
+    ): Flow<ApiResponse<CreateMateriIbadahResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.createMateriIbadah(request, idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getMateriIbadah(idKelas : Int): Flow<ApiResponse<GetMateriIbadahResponse>> {
+        return flow {
+            try {
+                val response =
+                    mobilePqiService.getMateriIbadah(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getDetailMateriIbadah(id: Int): Flow<ApiResponse<GetDetailMateriIbadahResponse>> {
+        return flow {
+            try {
+                val response =
+                    mobilePqiService.getDetailMateriIbadah(id)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun deleteMateriIbadah(idMateri : Int): Flow<ApiResponse<DeleteMateriIbadahResponse>> {
+        return flow {
+            try {
+                val response =
+                    mobilePqiService.deleteMateriIbadah(idMateri)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Throwable) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun updateDetailMateriIbadah(request: UpdateDetailMateriIbadahPayload, idMateri: Int): Flow<ApiResponse<UpdateDetailMateriIbadahResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.updateDetailMateriIbadah(request, idMateri)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

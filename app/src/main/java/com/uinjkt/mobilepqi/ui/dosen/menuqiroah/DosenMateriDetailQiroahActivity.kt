@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.UpdateDetailMateriQiroahPayload
+import com.mobilepqi.core.data.source.remote.response.qiroah.UpdateDetailMateriQiroahPayload
+import com.mobilepqi.core.domain.model.common.FileItem
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -20,8 +20,8 @@ import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.openGallery
 import com.uinjkt.mobilepqi.util.uriToFile
-import java.io.File
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBinding>(), MahasiswaFileUploadedByAdapterList.OnUserClickListener {
 
@@ -39,7 +39,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     private val idMateri by lazy { intent.getIntExtra(ID, 0) }
     private var urlFile = ""
     private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
-    private lateinit var listFileAttached: MutableList<GetDetailMateriQiroahModel.FileItem>
+    private lateinit var listFileAttached: MutableList<FileItem>
 
     override fun getViewBinding(): ActivityDosenMateriDetailBinding = ActivityDosenMateriDetailBinding.inflate(layoutInflater)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +50,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     }
 
     private fun initView() {
+        getString(R.string.tv_title_detail_materi_qiroah, "")
         getDetailMateriQiroah()
     }
 
@@ -99,7 +100,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         }
     }
 
-    private fun updateDetailMaterQiroah(file: List<GetDetailMateriQiroahModel.FileItem>, description: String, idMateri: Int) {
+    private fun updateDetailMaterQiroah(file: List<FileItem>, description: String, idMateri: Int) {
         viewModel.updateDetailMateriQiroah(
             UpdateDetailMateriQiroahPayload(
                 file = file.map { fileItem ->
@@ -141,10 +142,13 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
                     binding.pbFileLoading.isVisible = true
                 }
                 is Resource.Success -> {
-                    model.data?.fileUrl?.let {
-                        urlFile = it
-                        listFileAttached.add(0,GetDetailMateriQiroahModel.FileItem(urlFile))
+                    model.data?.fileUrl?.let { file ->
+                        urlFile = file
+                        listFileAttached.add(0, FileItem(urlFile))
                         fileUploadedByDosenAdapter.setData(listFileAttached)
+                        if (!isChangingConfigurations) {
+                            externalCacheDir?.let { cache -> deleteTempFile(cache) }
+                        }
                     }
                     binding.pbFileLoading.isVisible = false
                 }
@@ -203,7 +207,11 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     }
 
     private fun actionAfterGetMateri(materi: GetDetailMateriQiroahModel) {
-        listFileAttached = materi.file.toMutableList()
+        listFileAttached = materi.file.map {
+            FileItem(
+                url = it.url
+            )
+        }.toMutableList()
         // Initialize Adapter List Tugas Upload By Dosen
         initAdapter()
         binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title)
@@ -240,15 +248,6 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         if (action == "delete") {
             listFileAttached.removeAt(position)
             fileUploadedByDosenAdapter.setData(listFileAttached)
-        } else {
-            showToast("File Downloaded", Toast.LENGTH_SHORT)
-        }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (!isChangingConfigurations) {
-            externalCacheDir?.let { deleteTempFile(it) }
         }
     }
 

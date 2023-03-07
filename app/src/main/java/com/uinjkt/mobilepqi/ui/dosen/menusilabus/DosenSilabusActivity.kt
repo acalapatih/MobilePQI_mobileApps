@@ -15,16 +15,18 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenSilabusBinding
 import com.uinjkt.mobilepqi.util.Constant
+import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.uriToFile
-import java.io.File
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 
 class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
-            val starter = Intent(context, DosenSilabusActivity::class.java).putExtra("idKelas", idKelas)
+            val starter =
+                Intent(context, DosenSilabusActivity::class.java).putExtra("idKelas", idKelas)
             context.startActivity(starter)
         }
     }
@@ -63,11 +65,6 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
 
         binding.btnSimpanSilabusDosen.setOnClickListener {
             createSilabus(classId)
-            showOneActionDialogWithInvoke(
-                message = getString(R.string.tv_tambah_file_silabus_dialog),
-                btnMessage = getString(R.string.btn_oke_text),
-                onButtonClicked = { getSilabus(classId) }
-            )
         }
 
         binding.btnHapusFile.setOnClickListener {
@@ -93,7 +90,7 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                         with(binding) {
                             btnSimpanSilabusDosen.isEnabled = true
                             tvNamaDokumenSilabus.text =
-                                urlSilabus.substring(it.lastIndexOf('/') + 1)
+                                urlSilabus.getFileNameFromUrl()
                             tvNamaDokumenSilabus.gravity = Gravity.START
                             ivLogoDocument.isGone = false
                         }
@@ -113,7 +110,11 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    getSilabus(classId)
+                    showOneActionDialogWithInvoke(
+                        message = getString(R.string.tv_tambah_file_silabus_dialog),
+                        btnMessage = getString(R.string.btn_oke_text),
+                        onButtonClicked = { getSilabus(classId) }
+                    )
                     with(binding) {
                         btnTambahFile.isEnabled = false
                         btnSimpanSilabusDosen.isEnabled = false
@@ -135,9 +136,9 @@ class DosenSilabusActivity : BaseActivity<ActivityDosenSilabusBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     if (model.data?.silabus?.isNotEmpty() == true) {
-                        val url = model.data?.silabus ?: ""
+                        urlSilabus = model.data?.silabus ?: ""
                         with(binding) {
-                            tvNamaDokumenSilabus.text = url.substring(url.lastIndexOf('/') + 1)
+                            tvNamaDokumenSilabus.text = urlSilabus.getFileNameFromUrl()
                             tvNamaDokumenSilabus.gravity = Gravity.START
                             ivLogoDocument.isGone = false
                             btnSimpanSilabusDosen.isEnabled = false

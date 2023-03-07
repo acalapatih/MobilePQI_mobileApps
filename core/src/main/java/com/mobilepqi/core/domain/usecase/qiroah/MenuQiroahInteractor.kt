@@ -1,10 +1,10 @@
-package com.mobilepqi.core.domain.usecase.menuqiroah
+package com.mobilepqi.core.domain.usecase.qiroah
 
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.UpdateDetailMateriQiroahPayload
+import com.mobilepqi.core.data.source.remote.response.qiroah.CreateMateriQiroahPayload
+import com.mobilepqi.core.data.source.remote.response.qiroah.UpdateDetailMateriQiroahPayload
 import com.mobilepqi.core.domain.model.menuqiroah.*
-import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
+import com.mobilepqi.core.domain.repository.qiroah.MenuQiroahRepository
 import kotlinx.coroutines.flow.Flow
 
 class MenuQiroahInteractor(

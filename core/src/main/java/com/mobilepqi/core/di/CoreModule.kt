@@ -5,10 +5,11 @@ import com.mobilepqi.core.BuildConfig
 import com.mobilepqi.core.data.repository.buatkelas.BuatKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.daftarkelas.DaftarKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.detailkelas.DetailKelasRepositoryImpl
+import com.mobilepqi.core.data.repository.ibadah.MenuIbadahRepositoryImpl
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
-import com.mobilepqi.core.data.repository.menuqiroah.MenuQiroahRepositoryImpl
-import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.lupapassword.LupaPasswordRepositoryImpl
+import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
+import com.mobilepqi.core.data.repository.qiroah.MenuQiroahRepositoryImpl
 import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
 import com.mobilepqi.core.data.repository.silabus.SilabusRepositoryImpl
@@ -23,10 +24,11 @@ import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.domain.repository.buatkelas.BuatKelasRepository
 import com.mobilepqi.core.domain.repository.daftarkelas.DaftarKelasRepository
 import com.mobilepqi.core.domain.repository.detailkelas.DetailKelasRepository
+import com.mobilepqi.core.domain.repository.ibadah.MenuIbadahRepository
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
 import com.mobilepqi.core.domain.repository.lupapassword.LupaPasswordRepository
 import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
-import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
+import com.mobilepqi.core.domain.repository.qiroah.MenuQiroahRepository
 import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.signup.SignupRepository
 import com.mobilepqi.core.domain.repository.silabus.SilabusRepository
@@ -97,6 +99,7 @@ val repositoryModule = module {
     single<SignupRepository> { SignupRepositoryImpl(get()) }
     single<OnboardingRepository> { OnboardingRepositoryImpl(get()) }
     single<MenuQiroahRepository> { MenuQiroahRepositoryImpl(get()) }
+    single<MenuIbadahRepository> { MenuIbadahRepositoryImpl(get()) }
     single<LupaPasswordRepository> { LupaPasswordRepositoryImpl(get()) }
     single<SilabusRepository> { SilabusRepositoryImpl(get()) }
     single<TambahDosenRepository> { TambahDosenRepositoryImpl(get()) }
