@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahPayload
+import com.mobilepqi.core.data.source.remote.response.qiroah.CreateMateriQiroahPayload
 import com.mobilepqi.core.domain.model.menuqiroah.CreateMateriQiroahModel
 import com.mobilepqi.core.domain.model.menuqiroah.GetMateriQiroahModel
-import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahUsecase
+import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahUsecase
 import kotlinx.coroutines.launch
 
 class DosenMateriQiroahViewModel(private val useCase: MenuQiroahUsecase) : ViewModel() {

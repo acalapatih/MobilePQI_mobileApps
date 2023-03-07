@@ -5,12 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.UpdateDetailMateriQiroahPayload
+import com.mobilepqi.core.data.source.remote.response.qiroah.UpdateDetailMateriQiroahPayload
 import com.mobilepqi.core.domain.model.menuqiroah.DeleteMateriQiroahModel
 import com.mobilepqi.core.domain.model.menuqiroah.GetDetailMateriQiroahModel
 import com.mobilepqi.core.domain.model.menuqiroah.UpdateDetailMateriQiroahModel
 import com.mobilepqi.core.domain.model.upload.UploadModel
-import com.mobilepqi.core.domain.usecase.menuqiroah.MenuQiroahUsecase
+import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.util.Constant
 import kotlinx.coroutines.launch

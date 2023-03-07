@@ -1,19 +1,19 @@
-package com.mobilepqi.core.domain.model.menuqiroah
+package com.mobilepqi.core.domain.model.menuibadah
 
-import com.mobilepqi.core.data.source.remote.response.qiroah.CreateMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.ibadah.CreateMateriIbadahResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-data class CreateMateriQiroahModel (
+data class CreateMateriIbadahModel (
     val id: Int,
     val createdBy: String,
     val type: String,
     val title: String
 ) {
     companion object {
-        fun mapResponseToModel(response: CreateMateriQiroahResponse): Flow<CreateMateriQiroahModel> {
+        fun mapResponseToModel(response: CreateMateriIbadahResponse): Flow<CreateMateriIbadahModel> {
             return flowOf(
-                CreateMateriQiroahModel(
+                CreateMateriIbadahModel(
                     id = response.data?.id ?:0,
                     createdBy = response.data?.createdBy ?:"",
                     type = response.data?.type ?:"",
