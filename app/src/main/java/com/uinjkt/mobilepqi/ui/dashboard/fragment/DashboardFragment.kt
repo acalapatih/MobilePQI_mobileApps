@@ -179,12 +179,12 @@ class DashboardFragment : Fragment() {
 
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
-                //hit viewmodel get class dashboard mahasiswa using value
+                //hit viewmodel get class dashboard using value or classIdMahasiswa
                 classIdMahasiswa = value
                 Log.d("Class Id Mahasiswa", "class Id: $value")
             }
         } else {
-            //hit viewmodel get class dashboard dosen using classId
+            //hit viewmodel get class dashboard using classIdDosen
         }
     }
 
