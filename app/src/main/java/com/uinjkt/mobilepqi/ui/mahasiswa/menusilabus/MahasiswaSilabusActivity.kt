@@ -60,6 +60,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
             when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
+                    binding.wvSilabusPdf.isVisible = false
                 }
                 is Resource.Success -> {
                     showLoading(false)
@@ -69,11 +70,13 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
                         initWebView()
                     } else {
                         binding.tvEmptySilabus.isVisible = true
+                        binding.wvSilabusPdf.isVisible = false
                     }
                 }
                 is Resource.Error -> {
                     showLoading(false)
                     showToast(model.message ?: "Something Went Wrong")
+                    binding.wvSilabusPdf.isVisible = false
                 }
             }
         }
