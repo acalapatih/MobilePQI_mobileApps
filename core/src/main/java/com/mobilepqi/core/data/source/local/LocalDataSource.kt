@@ -13,7 +13,7 @@ class LocalDataSource(private val sharedPref: MainPreferences) {
     }
 
     fun clearToken() {
-        return sharedPref.clearToken()
+        sharedPref.clearToken()
     }
 
     fun setOnboardingStatus(value: Boolean) {
@@ -25,7 +25,7 @@ class LocalDataSource(private val sharedPref: MainPreferences) {
     }
 
     fun clearOnboardingStatus() {
-        return sharedPref.clearOnboardingStatus()
+        sharedPref.clearOnboardingStatus()
     }
 
     fun setUserRole(role: String) {
@@ -37,6 +37,18 @@ class LocalDataSource(private val sharedPref: MainPreferences) {
     }
 
     fun clearUserRole() {
-        return sharedPref.clearUserRole()
+        sharedPref.clearUserRole()
+    }
+
+    fun setClassId(classId: Int) {
+        sharedPref.setClassId(classId)
+    }
+
+    fun getClassId(): Int {
+        return sharedPref.getClassId()
+    }
+
+    fun clearClassId() {
+        sharedPref.clearClassId()
     }
 }

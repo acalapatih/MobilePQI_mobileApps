@@ -5,4 +5,5 @@ interface OnboardingUsecase {
     fun getOnboardingStatus(): Boolean
     fun getToken(): String
     fun getUserRole(): String
+    fun getClassId(): Int
 }
