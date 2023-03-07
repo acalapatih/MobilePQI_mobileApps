@@ -224,21 +224,17 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuIbadah() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaMateriIbadahActivity.start(requireContext(), 1)
-            // TODO: parameter idKelas disesuaikan dengan input user
+            MahasiswaMateriIbadahActivity.start(requireContext(), classIdMahasiswa)
         } else {
-            DosenMateriIbadahActivity.start(requireContext(), 1)
-            // TODO: parameter idKelas disesuaikan dengan input user
+            DosenMateriIbadahActivity.start(requireContext(), classIdDosen)
         }
     }
 
     private fun redirectToMenuQiroah() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
             MahasiswaMateriQiroahActivity.start(requireContext(), classIdMahasiswa)
-            // TODO: parameter idKelas disesuaikan dengan input user
         } else {
             DosenMateriQiroahActivity.start(requireContext(), classIdDosen)
-            // TODO: parameter idKelas disesuaikan dengan input user
         }
     }
 
