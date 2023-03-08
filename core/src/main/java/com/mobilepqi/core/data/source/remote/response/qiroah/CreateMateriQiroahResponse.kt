@@ -1,8 +1,8 @@
-package com.mobilepqi.core.data.source.remote.response.menuqiroah
+package com.mobilepqi.core.data.source.remote.response.qiroah
 
 import com.google.gson.annotations.SerializedName
 
-data class UpdateDetailMateriQiroahResponse(
+data class CreateMateriQiroahResponse(
 
 	@field:SerializedName("data")
 	val data: Data? = null,
@@ -17,15 +17,6 @@ data class UpdateDetailMateriQiroahResponse(
 
 		@field:SerializedName("errors")
 		val errors: String? = null,
-
-		@field:SerializedName("file")
-		val file: List<FileItem?>? = null,
-
-		@field:SerializedName("updated_at")
-		val updatedAt: String? = null,
-
-		@field:SerializedName("description")
-		val description: String? = null,
 
 		@field:SerializedName("created_at")
 		val createdAt: String? = null,
@@ -44,15 +35,7 @@ data class UpdateDetailMateriQiroahResponse(
 
 		@field:SerializedName("created_by")
 		val createdBy: String? = null
-	) {
-		data class FileItem(
-
-			@field:SerializedName("url")
-			val url: String? = null
-		)
-	}
+	)
 }
-
-
 
 

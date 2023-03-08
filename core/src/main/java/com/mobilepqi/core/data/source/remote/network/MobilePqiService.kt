@@ -10,6 +10,8 @@ import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
 import com.mobilepqi.core.data.source.remote.response.profil.ProfilResponse
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilResponse
+import com.mobilepqi.core.data.source.remote.response.ibadah.*
+import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -26,6 +28,9 @@ import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusPaylo
 import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.DeleteSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
+import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import retrofit2.http.*
 
 interface MobilePqiService {
@@ -100,4 +105,31 @@ interface MobilePqiService {
 
     @GET("v1/mobilepqi/kelas/{idKelas}")
     suspend fun detailkelas(@Path("idKelas")idKelas: Int): DetailKelasResponse
+
+    @POST("v1/mobilepqi/kelas/{idKelas}/materi/ibadah")
+    suspend fun createMateriIbadah(
+        @Body payload: CreateMateriIbadahPayload,
+        @Path("idKelas") idKelas: Int
+    ): CreateMateriIbadahResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/materi/ibadah")
+    suspend fun getMateriIbadah(
+        @Path("idKelas") idKelas: Int
+    ): GetMateriIbadahResponse
+
+    @GET("v1/mobilepqi/kelas/materi/{idMateri}")
+    suspend fun getDetailMateriIbadah(
+        @Path("idMateri") idMateri: Int
+    ): GetDetailMateriIbadahResponse
+
+    @PUT("v1/mobilepqi/kelas/materi/{idMateri}")
+    suspend fun updateDetailMateriIbadah(
+        @Body payload: UpdateDetailMateriIbadahPayload,
+        @Path("idMateri") idMateri: Int
+    ): UpdateDetailMateriIbadahResponse
+
+    @DELETE("v1/mobilepqi/kelas/materi/{idMateri}")
+    suspend fun deleteMateriIbadah(
+        @Path("idMateri") idMateri: Int
+    ): DeleteMateriIbadahResponse
 }

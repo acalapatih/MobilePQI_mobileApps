@@ -1,12 +1,12 @@
-package com.mobilepqi.core.data.repository.menuqiroah
+package com.mobilepqi.core.data.repository.qiroah
 
 import com.mobilepqi.core.data.NetworkOnlyResource
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
+import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.domain.model.menuqiroah.*
-import com.mobilepqi.core.domain.repository.menuqiroah.MenuQiroahRepository
+import com.mobilepqi.core.domain.repository.qiroah.MenuQiroahRepository
 import kotlinx.coroutines.flow.Flow
 
 class MenuQiroahRepositoryImpl(

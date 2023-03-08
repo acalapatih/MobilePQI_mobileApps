@@ -23,6 +23,7 @@ class MahasiswaAdapter(
             binding.tvNimMahasiswa.text = mahasiswa.nim
             Glide.with(context)
                 .load(mahasiswa.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(binding.imgProfilMahasiswa)
         }
     }

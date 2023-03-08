@@ -28,6 +28,9 @@ class DashboardViewModel(
     private val _userRole = MutableLiveData<String>()
     val userRole: LiveData<String> get() = _userRole
 
+    private val _classId = MutableLiveData<Int>()
+    val classId: LiveData<Int> get() = _classId
+
     fun getJadwalSholat(timestamp: String, latitude: String, longitude: String) {
         viewModelScope.launch {
             jadwalSholatUsecase.getJadwalSholat(timestamp, latitude, longitude).collect {
@@ -50,5 +53,9 @@ class DashboardViewModel(
 
     fun getUserRole() {
         _userRole.value = loginUseCase.getUserRole()
+    }
+
+    fun getClassId() {
+        _classId.value = loginUseCase.getClassId()
     }
 }

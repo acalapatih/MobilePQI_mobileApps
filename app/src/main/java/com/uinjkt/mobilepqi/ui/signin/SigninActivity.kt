@@ -136,7 +136,8 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
         viewModel.setToken(data.token)
         viewModel.setUserRole(data.role)
         if (data.role == "mahasiswa") {
-            DashboardActivity.start(this, "")
+            viewModel.setClassId(data.classId)
+            DashboardActivity.start(this)
             finish()
         } else {
             DaftarKelasActivity.start(this)

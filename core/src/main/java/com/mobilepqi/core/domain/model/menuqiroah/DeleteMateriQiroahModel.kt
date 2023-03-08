@@ -1,6 +1,6 @@
 package com.mobilepqi.core.domain.model.menuqiroah
 
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.DeleteMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.qiroah.DeleteMateriQiroahResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

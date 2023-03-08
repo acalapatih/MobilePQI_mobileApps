@@ -15,6 +15,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -32,13 +33,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
     companion object {
         @JvmStatic
-        fun start(context: Context, value: String) {
+        fun start(context: Context, value: String? = "", classId: Int? = 0) {
             val starter = Intent(context, DashboardActivity::class.java)
                 .putExtra("action", value)
+                .putExtra("class_id", classId)
             context.startActivity(starter)
         }
     }
 
+    private val classId by lazy { intent.getIntExtra("class_id", 0) }
     private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by viewModel<DashboardSharedViewModel>()
     private lateinit var locationService: LocationService
@@ -79,15 +82,20 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
         navController = findNavController(R.id.nav_host_fragment_activity_home)
         navView.setupWithNavController(navController)
 
+        /*
+        https://stackoverflow.com/a/54613997
+         */
+
         when (intent.getStringExtra("action")) {
             "profil" -> {
-                navView.selectedItemId = R.id.navigation_profil
+                navController.navigate(R.id.navigation_profil)
             }
             "pengaturan" -> {
-                navView.selectedItemId = R.id.navigation_pengaturan
+                navController.navigate(R.id.navigation_pengaturan)
             }
             else -> {
-                navView.selectedItemId = R.id.navigation_dashboard
+                val bundle = bundleOf("class_id" to classId)
+                navController.navigate(R.id.navigation_dashboard, bundle)
             }
         }
     }

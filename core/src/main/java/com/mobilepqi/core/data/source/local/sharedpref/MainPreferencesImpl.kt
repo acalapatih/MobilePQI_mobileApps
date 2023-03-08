@@ -18,6 +18,7 @@ class MainPreferencesImpl(private val sharedPreferences: SharedPreferences) : Ma
         private const val PREF_TOKEN_AUTH = "PREF_TOKEN_AUTH"
         private const val PREF_ONBOARDING_STATUS = "PREF_ONBOARDING_STATUS"
         private const val PREF_USER_ROLE = "PREF_USER_ROLE"
+        private const val PREF_CLASS_ID = "PREF_CLASS_ID"
     }
 
     override fun setToken(token: String) {
@@ -54,5 +55,17 @@ class MainPreferencesImpl(private val sharedPreferences: SharedPreferences) : Ma
 
     override fun clearUserRole() {
         sharedPreferences.edit().remove(PREF_USER_ROLE).apply()
+    }
+
+    override fun setClassId(classId: Int) {
+        sharedPreferences.edit().putInt(PREF_CLASS_ID, classId).apply()
+    }
+
+    override fun getClassId(): Int {
+        return sharedPreferences.getInt(PREF_CLASS_ID, 0)
+    }
+
+    override fun clearClassId() {
+        sharedPreferences.edit().remove(PREF_CLASS_ID).apply()
     }
 }

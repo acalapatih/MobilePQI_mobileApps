@@ -1,6 +1,6 @@
 package com.mobilepqi.core.domain.model.menuqiroah
 
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.CreateMateriQiroahResponse
+import com.mobilepqi.core.data.source.remote.response.qiroah.CreateMateriQiroahResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
