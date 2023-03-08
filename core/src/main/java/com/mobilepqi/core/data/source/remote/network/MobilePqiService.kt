@@ -6,12 +6,11 @@ import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasRes
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
-import com.mobilepqi.core.data.source.remote.response.menuqiroah.*
+import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.profil.ProfilResponse
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilResponse
 import com.mobilepqi.core.data.source.remote.response.ibadah.*
-import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -28,9 +27,6 @@ import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusPaylo
 import com.mobilepqi.core.data.source.remote.response.silabus.CreateSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.DeleteSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
-import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import retrofit2.http.*
 
 interface MobilePqiService {
