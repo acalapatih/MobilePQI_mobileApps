@@ -33,4 +33,10 @@ class SigninViewModel(private val useCase: SigninUsecase) : ViewModel() {
             useCase.setUserRole(role)
         }
     }
+
+    fun setClassId(classId: Int) {
+        viewModelScope.launch {
+            useCase.setClassId(classId)
+        }
+    }
 }

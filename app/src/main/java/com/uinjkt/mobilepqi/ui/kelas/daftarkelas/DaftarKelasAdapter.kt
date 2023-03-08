@@ -48,7 +48,7 @@ class DaftarKelasAdapter(
     override fun getItemCount(): Int = dataset.size
 
     interface OnUserClickListener {
-        fun onUserClicked(position: Int, clicked: String)
+        fun onUserClicked(classId: Int, clicked: String)
     }
 
 }

@@ -22,6 +22,7 @@ class DosenAdapter(
             binding.tvNipDosen.text = dosen.nip
             Glide.with(context)
                 .load(dosen.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(binding.imgProfilDosen)
         }
     }

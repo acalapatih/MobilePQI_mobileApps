@@ -10,4 +10,7 @@ interface MainPreferences {
     fun setUserRole(role: String)
     fun getUserRole(): String?
     fun clearUserRole()
+    fun setClassId(classId: Int)
+    fun getClassId(): Int
+    fun clearClassId()
 }

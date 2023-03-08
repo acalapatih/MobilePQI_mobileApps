@@ -27,4 +27,5 @@ class SigninRepositoryImpl(
 
     override fun setToken(token: String) = localDataSource.setToken(token)
     override fun setUserRole(role: String) = localDataSource.setUserRole(role)
+    override fun setClassId(classId: Int) = localDataSource.setClassId(classId)
 }

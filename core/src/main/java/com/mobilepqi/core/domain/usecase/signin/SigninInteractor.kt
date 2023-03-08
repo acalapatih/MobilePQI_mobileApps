@@ -19,4 +19,8 @@ class SigninInteractor(
     override fun setUserRole(role: String) {
         repository.setUserRole(role)
     }
+
+    override fun setClassId(classId: Int) {
+        repository.setClassId(classId)
+    }
 }
