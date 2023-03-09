@@ -22,6 +22,7 @@ import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahActivity
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusActivity
 import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasActivity
+import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
@@ -40,7 +41,7 @@ class DashboardFragment : Fragment() {
     private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by activityViewModel<DashboardSharedViewModel>()
 
-    private var listTugasDashboard: MutableList<GetTugasModel> = mutableListOf()
+    private var listTugasDashboard: List<GetTugasModel.ListTugas> = listOf()
     private lateinit var tugasDashboardAdapter: DashboardAdapter
     private var latitude = ""
     private var longitude = ""
@@ -62,7 +63,6 @@ class DashboardFragment : Fragment() {
         Log.d("Dashboard", "onViewCreated: $classIdDosen")
         viewModel.getUserRole()
         viewModel.getClassId()
-        viewModel.getTugas(classIdDosen)
 
         initObserver()
         initView()
@@ -119,7 +119,7 @@ class DashboardFragment : Fragment() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-
+                    listTugasDashboard = model.data?.listTugas ?: emptyList()
                     tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
                     binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvTugasDashboard.adapter = tugasDashboardAdapter
@@ -195,12 +195,12 @@ class DashboardFragment : Fragment() {
 
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
-                //hit viewmodel get class dashboard using value or classIdMahasiswa
+                viewModel.getTugas(classIdMahasiswa)
                 classIdMahasiswa = value
                 Log.d("Class Id Mahasiswa", "class Id: $value")
             }
         } else {
-            //hit viewmodel get class dashboard using classIdDosen
+            viewModel.getTugas(classIdDosen)
         }
     }
 
@@ -208,6 +208,10 @@ class DashboardFragment : Fragment() {
         with(binding) {
             imgUser.setOnClickListener {
                 DashboardActivity.start(requireContext(), "profil")
+            }
+
+            icKelas.setOnClickListener {
+                DaftarKelasActivity.start(requireContext())
             }
 
             clSilabus.setOnClickListener {

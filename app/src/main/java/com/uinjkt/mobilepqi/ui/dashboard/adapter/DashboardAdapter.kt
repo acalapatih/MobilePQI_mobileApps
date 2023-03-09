@@ -11,16 +11,15 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewTugasDashboardBinding
 
 class DashboardAdapter(
     private val context: Context,
-    private val dataset: MutableList<GetTugasModel>
+    private val dataset: List<GetTugasModel.ListTugas>
 ) : RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTugasDashboardBinding.bind(view)
-
-        fun bindItem(tugasDashboard: GetTugasModel) {
-            binding.tvTanggalTugas.text = tugasDashboard.dlPraktikum
-            binding.tvNamaTugas.text = tugasDashboard.jdPraktikum
-            binding.tvDeadlineTugas.text = tugasDashboard.dlPraktikum
+        fun bindItem(tugasDashboard: GetTugasModel.ListTugas) {
+            binding.tvTanggalTugas.text = tugasDashboard.createdAt
+            binding.tvNamaTugas.text = tugasDashboard.title
+            binding.tvDeadlineTugas.text = tugasDashboard.deadline
         }
     }
 

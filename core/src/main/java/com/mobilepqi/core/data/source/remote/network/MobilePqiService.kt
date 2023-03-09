@@ -3,7 +3,7 @@ package com.mobilepqi.core.data.source.remote.network
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
-import com.mobilepqi.core.data.source.remote.response.dashboard.Data
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetTugasResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
@@ -126,5 +126,5 @@ interface MobilePqiService {
     ): DeleteMateriIbadahResponse
 
     @GET("v1/mobilepqi/kelas/{idKelas}/tugas/dashboard")
-    suspend fun getTugas(@Path("idKelas")idKelas: Int): Data.GetTugasResponse
+    suspend fun getTugas(@Path("idKelas")idKelas: Int): GetTugasResponse
 }

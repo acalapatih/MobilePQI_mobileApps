@@ -28,10 +28,12 @@ import com.uinjkt.mobilepqi.util.uriToFile
 import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import java.util.Calendar as JavaCalendar
 
 
 class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     private val viewModel by viewModel<ProfilViewModel>()
+    private var urlAvatar = ""
 
     companion object {
         @JvmStatic
@@ -41,13 +43,12 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
-
-
     override fun getViewBinding(): ActivityProfilInformasiBinding =
         ActivityProfilInformasiBinding.inflate(layoutInflater)
 
     @RequiresApi(Build.VERSION_CODES.N)
     val myCalendar: Calendar = Calendar.getInstance()
+    val myCalendarJava: JavaCalendar = JavaCalendar.getInstance()
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -181,9 +182,15 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     private fun initView() {
         val date =
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
-                myCalendar[Calendar.YEAR] = year
-                myCalendar[Calendar.MONTH] = month
-                myCalendar[Calendar.DAY_OF_MONTH] = day
+                if (Build.VERSION.SDK_INT >= 24) {
+                    myCalendar[Calendar.YEAR] = year
+                    myCalendar[Calendar.MONTH] = month
+                    myCalendar[Calendar.DAY_OF_MONTH] = day
+                } else {
+                    myCalendar[JavaCalendar.YEAR] = year
+                    myCalendar[JavaCalendar.MONTH] = month
+                    myCalendar[JavaCalendar.DAY_OF_MONTH] = day
+                }
                 updateLabel()
             }
 
@@ -194,11 +201,20 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 setTextIsSelectable(true)
                 isFocusable = false
             }
-            val datePicker = DatePickerDialog(
-                this@ProfileInfoActivity, date,
-                myCalendar[Calendar.YEAR],
-                myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
-            )
+            val datePicker: DatePickerDialog
+                if(Build.VERSION.SDK_INT >= 24) {
+                    datePicker = DatePickerDialog(
+                        this@ProfileInfoActivity, date,
+                        myCalendar[Calendar.YEAR],
+                        myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
+                    )
+                } else {
+                    datePicker = DatePickerDialog(
+                        this@ProfileInfoActivity, date,
+                        myCalendar[JavaCalendar.YEAR],
+                        myCalendar[JavaCalendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
+                    )
+                }
             datePicker.datePicker.maxDate = System.currentTimeMillis()
             datePicker.show()
         }
@@ -245,7 +261,11 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             etFakultas.setText(data.faculty)
             etProdi.setText(data.major)
             etTglahir.setText(data.birth)
-            etTglahir.setText(dateFormat.format(myCalendar.time))
+            if (Build.VERSION.SDK_INT >= 24) {
+                etTglahir.setText(dateFormat.format(myCalendar.time))
+            } else {
+                etTglahir.setText(dateFormat.format(myCalendarJava.time))
+            }
             etNohp.setText(data.phone)
             etAlamat.setText(data.address)
         }
@@ -269,6 +289,27 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             }
         }
 
+        viewModel.uploadImage.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    model.data?.fileUrl?.let { file ->
+                        urlAvatar = file
+                        Glide.with(this@ProfileInfoActivity)
+                            .load(urlAvatar)
+                            .into(binding.imgProfil)
+                    }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "Something when wrong")
+                }
+            }
+        }
+
         viewModel.putprofil.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
@@ -284,7 +325,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something when wrong")
                 }
             }
         }
