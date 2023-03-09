@@ -7,14 +7,15 @@ import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.Data
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
+import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
 import com.mobilepqi.core.data.source.remote.response.profil.ProfilResponse
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
 import com.mobilepqi.core.data.source.remote.response.profil.PutProfilResponse
-import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
-import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
 import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
@@ -382,6 +383,19 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.updateDetailMateriIbadah(request, idMateri)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getTugas(idKelas: Int): Flow<ApiResponse<Data.GetTugasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getTugas(idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

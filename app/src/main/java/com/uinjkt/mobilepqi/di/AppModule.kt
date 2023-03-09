@@ -4,6 +4,8 @@ import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasIteractor
 import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasUsecase
 import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasInteractor
 import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.GetTugasInteractor
+import com.mobilepqi.core.domain.usecase.dashboard.GetTugasUsecase
 import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasInteractor
 import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasUsecase
 import com.mobilepqi.core.domain.usecase.ibadah.MenuIbadahInteractor
@@ -14,12 +16,12 @@ import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordInteractor
 import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
-import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahInteractor
-import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahUsecase
 import com.mobilepqi.core.domain.usecase.profil.ProfilInteractor
 import com.mobilepqi.core.domain.usecase.profil.ProfilUsecase
 import com.mobilepqi.core.domain.usecase.profil.PutProfilInteractor
 import com.mobilepqi.core.domain.usecase.profil.PutProfilUsecase
+import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahInteractor
+import com.mobilepqi.core.domain.usecase.qiroah.MenuQiroahUsecase
 import com.mobilepqi.core.domain.usecase.signin.SigninInteractor
 import com.mobilepqi.core.domain.usecase.signin.SigninUsecase
 import com.mobilepqi.core.domain.usecase.signup.SignupInteractor
@@ -32,7 +34,6 @@ import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
-import com.uinjkt.mobilepqi.ui.profil.ProfilViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriDetailIbadahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
@@ -48,6 +49,7 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahViewMod
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusViewModel
+import com.uinjkt.mobilepqi.ui.profil.ProfilViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -71,12 +73,13 @@ val useCaseModule = module {
     factory<DetailKelasUsecase> { DetailKelasInteractor(get()) }
     factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
     factory<SilabusUsecase> { SilabusInteractor(get()) }
+    factory<GetTugasUsecase> { GetTugasInteractor(get()) }
 }
 
 val viewModelModule = module {
-    viewModel { DashboardViewModel(get(), get(), get()) }
+    viewModel { DashboardViewModel(get(), get(), get(), get()) }
     viewModel { SigninViewModel(get()) }
-    viewModel { ProfilViewModel(get(), get()) }
+    viewModel { ProfilViewModel(get(), get(), get()) }
     viewModel { SigninViewModel(get()) }
     viewModel { SignupViewModel(get()) }
     viewModel { DosenMateriQiroahViewModel(get()) }

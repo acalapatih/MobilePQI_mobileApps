@@ -6,10 +6,12 @@ import android.content.Context
 import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -20,15 +22,16 @@ import com.mobilepqi.core.domain.model.profil.ProfilModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityProfilInformasiBinding
+import com.uinjkt.mobilepqi.util.Constant
+import com.uinjkt.mobilepqi.util.openGallery
+import com.uinjkt.mobilepqi.util.uriToFile
 import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 
 class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
-    /**
-     * Called when the activity is first created.
-     */
+    private val viewModel by viewModel<ProfilViewModel>()
 
     companion object {
         @JvmStatic
@@ -38,7 +41,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
-    private val viewModel by viewModel<ProfilViewModel>()
+
 
     override fun getViewBinding(): ActivityProfilInformasiBinding =
         ActivityProfilInformasiBinding.inflate(layoutInflater)
@@ -64,6 +67,10 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
 
     @SuppressLint("CheckResult")
     private fun initListener() {
+        binding.icEditImgProfil.setOnClickListener {
+            openGallery(launcherIntentGallery)
+        }
+
         val fakultasStream = RxTextView.textChanges(binding.etFakultas)
             .skipInitialValue()
             .map { fakultas ->
@@ -257,7 +264,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "")
+                    showToast(model.message ?: "Something when wrong")
                 }
             }
         }
@@ -283,8 +290,14 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
-    private fun updateData() {
-        finish()
+    private val launcherIntentGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedFile: Uri = result.data?.data as Uri
+            val myFile = uriToFile(selectedFile, this, "image")
+            viewModel.uploadImage(Constant.UPLOAD_KEY.AVATAR, Constant.UPLOAD_TYPE.IMAGE, myFile)
+        }
     }
 
     private fun showLoading(value: Boolean) {

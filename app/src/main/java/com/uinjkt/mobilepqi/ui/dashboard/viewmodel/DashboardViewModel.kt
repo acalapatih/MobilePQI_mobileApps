@@ -5,19 +5,22 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import com.mobilepqi.core.domain.model.upload.UploadModel
+import com.mobilepqi.core.domain.usecase.dashboard.GetTugasUsecase
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.util.Constant
-import java.io.File
 import kotlinx.coroutines.launch
+import java.io.File
 
 class DashboardViewModel(
     private val jadwalSholatUsecase: JadwalSholatUsecase,
     private val uploadFileAndImageUsecase: UploadFileOrImageUsecase,
-    private val loginUseCase: OnboardingUsecase
+    private val loginUseCase: OnboardingUsecase,
+    private val getTugasUsecase: GetTugasUsecase
 ) : ViewModel() {
     private val _jadwalSholat = MutableLiveData<Resource<JadwalSholatModel>>()
     val jadwalSholat: LiveData<Resource<JadwalSholatModel>> get() = _jadwalSholat
@@ -30,6 +33,9 @@ class DashboardViewModel(
 
     private val _classId = MutableLiveData<Int>()
     val classId: LiveData<Int> get() = _classId
+
+    private val _getTugas = MutableLiveData<Resource<GetTugasModel>>()
+    val getTugas: LiveData<Resource<GetTugasModel>> get() = _getTugas
 
     fun getJadwalSholat(timestamp: String, latitude: String, longitude: String) {
         viewModelScope.launch {
@@ -57,5 +63,13 @@ class DashboardViewModel(
 
     fun getClassId() {
         _classId.value = loginUseCase.getClassId()
+    }
+
+    fun getTugas(idKelas: Int) {
+        viewModelScope.launch {
+            getTugasUsecase.getTugas(idKelas).collect {
+                _getTugas.value = it
+            }
+        }
     }
 }

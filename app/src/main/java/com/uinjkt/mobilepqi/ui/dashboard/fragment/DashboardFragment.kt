@@ -10,10 +10,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataSourceTugasDashboard
-import com.uinjkt.mobilepqi.data.DataTugasDashboard
 import com.uinjkt.mobilepqi.databinding.FragmentDashboardBinding
 import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
 import com.uinjkt.mobilepqi.ui.dashboard.adapter.DashboardAdapter
@@ -27,11 +26,11 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivit
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
 
@@ -41,7 +40,7 @@ class DashboardFragment : Fragment() {
     private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by activityViewModel<DashboardSharedViewModel>()
 
-    private lateinit var listTugasDashboard: MutableList<DataTugasDashboard>
+    private var listTugasDashboard: MutableList<GetTugasModel> = mutableListOf()
     private lateinit var tugasDashboardAdapter: DashboardAdapter
     private var latitude = ""
     private var longitude = ""
@@ -63,6 +62,7 @@ class DashboardFragment : Fragment() {
         Log.d("Dashboard", "onViewCreated: $classIdDosen")
         viewModel.getUserRole()
         viewModel.getClassId()
+        viewModel.getTugas(classIdDosen)
 
         initObserver()
         initView()
@@ -109,6 +109,27 @@ class DashboardFragment : Fragment() {
             } else {
                 binding.tvDaerah.text = "-"
                 binding.tvSholat.text = "-"
+            }
+        }
+
+        viewModel.getTugas.observe(viewLifecycleOwner) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+
+                    tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
+                    binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
+                    binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    model.message?.let {
+                        Toast.makeText(requireContext(), "Something when worng", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
     }
@@ -166,11 +187,6 @@ class DashboardFragment : Fragment() {
 
     private fun initView() {
         currentTimestamp = Timestamp(System.currentTimeMillis()).toString()
-        listTugasDashboard = DataSourceTugasDashboard().dataTugasDashboard
-
-        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
-        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvTugasDashboard.adapter = tugasDashboardAdapter
 
         if (latitude.isEmpty() && longitude.isEmpty()) {
             binding.tvSholat.text = "-"
