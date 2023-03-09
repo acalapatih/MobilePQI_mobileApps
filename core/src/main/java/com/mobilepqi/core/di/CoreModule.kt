@@ -14,6 +14,7 @@ import com.mobilepqi.core.data.repository.signin.SigninRepositoryImpl
 import com.mobilepqi.core.data.repository.signup.SignupRepositoryImpl
 import com.mobilepqi.core.data.repository.silabus.SilabusRepositoryImpl
 import com.mobilepqi.core.data.repository.tambahdosen.TambahDosenRepositoryImpl
+import com.mobilepqi.core.data.repository.tugas.MenuTugasRepositoryImpl
 import com.mobilepqi.core.data.repository.uploadimage.UploadFileOrImageRepositoryImpl
 import com.mobilepqi.core.data.source.local.LocalDataSource
 import com.mobilepqi.core.data.source.local.sharedpref.MainPreferencesImpl
@@ -33,6 +34,7 @@ import com.mobilepqi.core.domain.repository.signin.SigninRepository
 import com.mobilepqi.core.domain.repository.signup.SignupRepository
 import com.mobilepqi.core.domain.repository.silabus.SilabusRepository
 import com.mobilepqi.core.domain.repository.tambahdosen.TambahDosenRepository
+import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
 import okhttp3.OkHttpClient
@@ -106,4 +108,5 @@ val repositoryModule = module {
     single<BuatKelasRepository> { BuatKelasRepositoryImpl(get()) }
     single<DaftarKelasRepository> { DaftarKelasRepositoryImpl(get()) }
     single<DetailKelasRepository> { DetailKelasRepositoryImpl(get()) }
+    single<MenuTugasRepository> { MenuTugasRepositoryImpl(get())}
 }

@@ -32,7 +32,7 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         }
 
         binding.btnEditTugasDosen.setOnClickListener {
-            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity, "edit")
+            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity, "edit", 1)
         }
 
         binding.btnCekTugasMahasiswa.setOnClickListener {

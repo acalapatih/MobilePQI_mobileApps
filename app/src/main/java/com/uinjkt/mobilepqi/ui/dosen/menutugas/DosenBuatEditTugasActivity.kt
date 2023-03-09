@@ -8,92 +8,229 @@ import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
+import com.mobilepqi.core.domain.model.common.FileItem
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenBuatTugasBaruBinding
+import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
+import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openFileManagerPdf
 import com.uinjkt.mobilepqi.util.openGallery
 import com.uinjkt.mobilepqi.util.uriToFile
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBinding>() {
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    val myCalendar: Calendar = Calendar.getInstance()
+class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBinding>(),
+    MahasiswaFileUploadedByAdapterList.OnUserClickListener {
 
     companion object {
         @JvmStatic
-        fun start(context: Context, behavior: String = "buat") {
+        fun start(context: Context, behavior: String = "buat", idKelas: Int) {
             val starter = Intent(context, DosenBuatEditTugasActivity::class.java)
                 .putExtra(BEHAVIOR, behavior)
+                .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
 
         private const val BEHAVIOR = "behavior"
+        private const val ID_KELAS = "idKelas"
     }
+
+    private val behavior by lazy { intent.getStringExtra(BEHAVIOR) }
+    private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private lateinit var myCalendar: Calendar
+    private val viewModel by viewModel<DosenBuatTugasViewModel>()
+    private lateinit var listFileAttached: MutableList<FileItem>
+    private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
+    private lateinit var spinnerJenisArrayAdapter: ArrayAdapter<String>
+    private lateinit var spinnerTopikArrayAdapter: ArrayAdapter<String>
+    private var urlFile = ""
+    private val listDataTopik =
+        arrayOf("Praktikum Qiroah", "Praktikum Ibadah", "Hafalan Doa", "Hafalan Surah")
+    private val listDataJenisTugas = arrayOf("Individu", "Kelompok")
+
 
     override fun getViewBinding(): ActivityDosenBuatTugasBaruBinding =
         ActivityDosenBuatTugasBaruBinding.inflate(layoutInflater)
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        initView()
         initListener()
+        initObserver()
+    }
 
-        val behavior = intent.getStringExtra(BEHAVIOR)
+    private fun initView() {
+        if (behavior == "buat") {
+            binding.tvTitleMenuBuatTugasDosen.text =
+                getString(R.string.tv_title_menu_buat_tugas_dosen)
 
-        val listDataTopik =
-            arrayOf("Praktikum Qiroah", "Praktikum Ibadah", "Hafalan Doa", "Hafalan Surah")
-        val spinnerTopik = binding.spinnerTopikTugas
-        val spinnerTopikArrayAdapter = ArrayAdapter(this, R.layout.item_spinner, listDataTopik)
-        spinnerTopikArrayAdapter.setDropDownViewResource(R.layout.item_dropdown_spinner)
-        spinnerTopik.adapter = spinnerTopikArrayAdapter
-
-        val listDataJenisTugas = arrayOf("Ibadah", "Kelompok")
-        val spinnerJenisTugas = binding.spinnerJenisTugas
-        val spinnerJenisArrayAdapter = ArrayAdapter(this, R.layout.item_spinner, listDataJenisTugas)
-        spinnerJenisArrayAdapter.setDropDownViewResource(R.layout.item_dropdown_spinner)
-        spinnerJenisTugas.adapter = spinnerJenisArrayAdapter
-
-        if (behavior == "edit") {
-            with(binding) {
-                tvTitleMenuBuatTugasDosen.text =
-                    getString(R.string.tv_title_menu_edit_tugas_dosen)
-                btnPostingTugasBaruDosen.visibility = View.GONE
-                btnHapusTugas.visibility = View.VISIBLE
-                btnSimpanEditTugas.visibility = View.VISIBLE
-            }
         } else {
-            with(binding) {
-                tvTitleMenuBuatTugasDosen.text =
-                    getString(R.string.tv_title_tugas_detail_mahasiswa)
-                btnPostingTugasBaruDosen.visibility = View.VISIBLE
-                btnHapusTugas.visibility = View.GONE
-                btnSimpanEditTugas.visibility = View.GONE
+            binding.tvTitleMenuBuatTugasDosen.text =
+                getString(R.string.tv_title_menu_edit_tugas_dosen, "topik", "judul tugas")
+        }
+        listFileAttached = mutableListOf()
+        initAdapter()
+    }
+
+    private fun initAdapter() {
+
+        // Topik Tugas Adapter
+        spinnerTopikArrayAdapter = ArrayAdapter(this, R.layout.item_spinner, listDataTopik)
+        spinnerTopikArrayAdapter.setDropDownViewResource(R.layout.item_dropdown_spinner)
+        binding.spinnerTopikTugas.adapter = spinnerTopikArrayAdapter
+
+        // Jenis Tugas Adapter
+        spinnerJenisArrayAdapter = ArrayAdapter(this, R.layout.item_spinner, listDataJenisTugas)
+        spinnerJenisArrayAdapter.setDropDownViewResource(R.layout.item_dropdown_spinner)
+        binding.spinnerJenisTugas.adapter = spinnerJenisArrayAdapter
+
+        // File Recycle View Adapter
+        fileUploadedByDosenAdapter =
+            MahasiswaFileUploadedByAdapterList(this, listFileAttached, "delete", this)
+        binding.rvFileUploadByDosen.adapter = fileUploadedByDosenAdapter
+        binding.rvFileUploadByDosen.layoutManager = LinearLayoutManager(this)
+    }
+
+
+    private fun initObserver() {
+        viewModel.fileUploaded.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    binding.pbFileLoading.isVisible = true
+                }
+                is Resource.Success -> {
+                    model.data?.fileUrl?.let { file ->
+                        urlFile = file
+                        Log.d("INI_LOG_CUY", urlFile)
+                        listFileAttached.add(0, FileItem(urlFile))
+                        fileUploadedByDosenAdapter.setData(listFileAttached)
+                        Log.d("INI_LOG_CUY", "$listFileAttached")
+
+                        if (!isChangingConfigurations) {
+                            externalCacheDir?.let { cache -> deleteTempFile(cache) }
+                        }
+                    }
+                    binding.pbFileLoading.isVisible = false
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    binding.pbFileLoading.isVisible = false
+                }
+            }
+        }
+        viewModel.createTugas.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showloading(true)
+                }
+                is Resource.Success -> {
+                    showOneActionDialogWithInvoke("Tugas Berhasil Ditambahkan", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
+                    showloading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showloading(false)
+                }
             }
         }
 
-        val textViewTglDeadline = binding.tvDeadlineTugas
-        val date = OnDateSetListener { _, year, month, day ->
-            myCalendar[Calendar.YEAR] = year
-            myCalendar[Calendar.MONTH] = month
-            myCalendar[Calendar.DAY_OF_MONTH] = day
-            updatelabel()
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
         }
+    }
 
-        textViewTglDeadline.setOnClickListener {
-            with(binding.tvDeadlineTugas) {
-                isEnabled = true
-                inputType = 0
-                setTextIsSelectable(true)
-                isFocusable = false
+    private fun showloading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.btnPostingTugasBaruDosen.isVisible = !value
+    }
+
+    private fun initListener() {
+        with(binding) {
+            ivAttachFile.setOnClickListener {
+                openFileManagerPdf(launcherIntentFile)
+            }
+
+            ivInsertLink.setOnClickListener {
+                // TODO("Masukkan Link")
+            }
+
+            ivImageAttach.setOnClickListener {
+                openGallery(launcherIntentGallery)
+            }
+
+            ivMicAttach.setOnClickListener {
+                // TODO("Rekam Suara")
+            }
+
+            ivLogoBackCircleButtonBuatTugas.setOnClickListener {
+                onBackPressedDispatcher.onBackPressed()
+            }
+            tvDeadlineTugas.setOnClickListener {
+                with(tvDeadlineTugas) {
+                    isEnabled = true
+                    inputType = 0
+                    setTextIsSelectable(true)
+                    isFocusable = false
+                }
+                openCalendar()
+            }
+
+            btnPostingTugasBaruDosen.setOnClickListener {
+                if (tvDeadlineTugas.text.toString() == "Deadline") {
+                    showOneActionDialog("Tugas Gagal Diposting", "Okay")
+                } else {
+                    createTugas()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
+        }
+    }
+
+    private fun createTugas() {
+        val topic = binding.spinnerTopikTugas.selectedItem.toString()
+        viewModel.createTugas(
+            CreateTugasPayload(
+                title = binding.etDescJudulBuatTugasDosen.text.toString(),
+                jenis = binding.spinnerJenisTugas.selectedItem.toString(),
+                description = binding.etDescDeskripsiBuatTugasDosen.text.toString(),
+                topic = when (topic) {
+                    "Hafalan Surah" -> "hafalan surat"
+                    else -> topic.lowercase()
+                },
+                file = listFileAttached.map {
+                    CreateTugasPayload.FileItem(
+                        url = it.url
+                    )
+                },
+                deadline = binding.tvDeadlineTugas.text.toString()
+            ), idKelas
+        )
+    }
+
+
+    private fun openCalendar() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            myCalendar = Calendar.getInstance()
+            val date = OnDateSetListener { _, year, month, day ->
+                myCalendar[Calendar.YEAR] = year
+                myCalendar[Calendar.MONTH] = month
+                myCalendar[Calendar.DAY_OF_MONTH] = day
+                updatelabel()
             }
             val datePicker = DatePickerDialog(
                 this@DosenBuatEditTugasActivity,
@@ -105,57 +242,15 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
             datePicker.datePicker.minDate = System.currentTimeMillis()
             datePicker.show()
         }
-
-        binding.btnPostingTugasBaruDosen.setOnClickListener {
-            if (textViewTglDeadline.text.toString() == "Deadline") {
-                showOneActionDialog("Tugas Gagal Diposting", "Okay")
-            } else {
-                showOneActionDialogWithInvoke("Tugas Berhasil Diposting", "Okay") {
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        }
-
-        binding.btnHapusTugas.setOnClickListener {
-            showTwoActionDialog("Hapus Tugas", btnPositiveMessage = "Yes", btnNegativeMessage = "Batal") {
-                showOneActionDialogWithInvoke("Tugas Berhasil Dihapus", "Okay") {
-                    onBackPressedDispatcher.onBackPressed()
-                }
-            }
-        }
-
-        binding.btnSimpanEditTugas.setOnClickListener {
-            showOneActionDialogWithInvoke("Perubahan Berhasil Disimpan","Okay") {
-                onBackPressedDispatcher.onBackPressed()
-            }
-        }
-
-        binding.ivLogoBackCircleButtonBuatTugas.setOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
-        }
-        onBackPressedDispatcher.addCallback(this) {
-            finish()
-        }
     }
 
-    private fun initListener() {
-        with(binding) {
-            ivAttachFile.setOnClickListener {
-                openFileManagerPdf(launcherIntentFile)
-            }
 
-            ivImageAttach.setOnClickListener {
-                openGallery(launcherIntentGallery)
-            }
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun updatelabel() {
         val myFormat = "dd/MM/yyyy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-        val textView = binding.tvDeadlineTugas
-        textView.text = dateFormat.format(myCalendar.time)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.tvDeadlineTugas.text = dateFormat.format(myCalendar.time)
+        }
     }
 
     private val launcherIntentFile = registerForActivityResult(
@@ -163,13 +258,10 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-
             val myFile = uriToFile(selectedFile, this, "pdf")
-
-            /*
-            TODO
-            trigger viewmodel disini, parameter file masukin aja myFile
-             */
+            viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.TUGAS,
+                Constant.UPLOAD_TYPE.FILE,
+                myFile)
         }
     }
 
@@ -178,13 +270,33 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-
             val myFile = uriToFile(selectedFile, this, "image")
+            viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.TUGAS,
+                Constant.UPLOAD_TYPE.IMAGE,
+                myFile)
+        }
+    }
 
-            /*
-            TODO
-            trigger viewmodel disini, parameter file masukin aja myFile
-             */
+    private fun deleteTempFile(file: File): Boolean {
+        if (file.isDirectory) {
+            val files = file.listFiles()
+            if (files != null) {
+                for (f in files) {
+                    if (f.isDirectory) {
+                        deleteTempFile(f)
+                    } else {
+                        f.delete()
+                    }
+                }
+            }
+        }
+        return file.delete()
+    }
+
+    override fun onUserClickListener(action: String, position: Int) {
+        if (action == "delete") {
+            listFileAttached.removeAt(position)
+            fileUploadedByDosenAdapter.setData(listFileAttached)
         }
     }
 }

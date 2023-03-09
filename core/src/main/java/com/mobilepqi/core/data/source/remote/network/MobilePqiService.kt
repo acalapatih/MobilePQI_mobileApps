@@ -4,9 +4,9 @@ import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
+import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
-import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
@@ -19,6 +19,9 @@ import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
 import retrofit2.http.*
 
 interface MobilePqiService {
@@ -115,4 +118,17 @@ interface MobilePqiService {
     suspend fun deleteMateriIbadah(
         @Path("idMateri") idMateri: Int
     ): DeleteMateriIbadahResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/tugas")
+    suspend fun getListTugas(
+        @Path("idKelas") idKelas: Int
+    ): GetListTugasResponse
+
+    @POST("v1/mobilepqi/kelas/{idKelas}/tugas")
+    suspend fun createTugas(
+        @Body payload: CreateTugasPayload,
+        @Path("idKelas") idKelas: Int
+    ): CreateTugasResponse
+
+
 }

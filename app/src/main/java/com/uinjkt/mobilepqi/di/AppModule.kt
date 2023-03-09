@@ -24,6 +24,8 @@ import com.mobilepqi.core.domain.usecase.silabus.SilabusInteractor
 import com.mobilepqi.core.domain.usecase.silabus.SilabusUsecase
 import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenInteractor
 import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenUsecase
+import com.mobilepqi.core.domain.usecase.tugas.MenuTugasInteractor
+import com.mobilepqi.core.domain.usecase.tugas.MenuTugasUseCase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
@@ -33,6 +35,8 @@ import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenBuatTugasViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasViewModel
@@ -63,6 +67,7 @@ val useCaseModule = module {
     factory<DetailKelasUsecase> { DetailKelasInteractor(get()) }
     factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
     factory<SilabusUsecase> { SilabusInteractor(get()) }
+    factory<MenuTugasUseCase> { MenuTugasInteractor(get()) }
 }
 
 val viewModelModule = module {
@@ -86,4 +91,6 @@ val viewModelModule = module {
     viewModel { LupaPasswordViewModel(get()) }
     viewModel { DosenSilabusViewModel(get(), get()) }
     viewModel { MahasiswaSilabusViewModel(get()) }
+    viewModel { DosenTugasViewModel(get()) }
+    viewModel { DosenBuatTugasViewModel(get(), get()) }
 }

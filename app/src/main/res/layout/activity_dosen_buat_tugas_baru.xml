@@ -120,7 +120,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_attach_files"
+                    android:padding="5dp"
                     android:src="@drawable/ic_baseline_attach_file" />
 
                 <ImageView
@@ -128,7 +130,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_insert_link"
+                    android:padding="5dp"
                     android:src="@drawable/ic_sharp_insert_link" />
 
                 <ImageView
@@ -137,13 +141,16 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
                     android:contentDescription="@string/desc_iv_google_drive"
-                    android:src="@drawable/ic_google_drive" />
+                    android:padding="5dp"
+                    android:src="@drawable/ic_google_drive"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/iv_image_attach"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_image_attach"
                     android:src="@drawable/ic_image_attach" />
 
@@ -152,7 +159,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_mic_attach"
+                    android:padding="5dp"
                     android:src="@drawable/ic_mic_attach" />
             </LinearLayout>
 
@@ -166,12 +175,31 @@
                 app:layout_constraintStart_toStartOf="@id/ll_attach_buat_tugas_dosen"
                 app:layout_constraintTop_toTopOf="@+id/spinner_jenis_tugas" />
 
+            <ProgressBar
+                android:id="@+id/pb_file_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/rv_file_upload_by_dosen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_attach_buat_tugas_dosen" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_file_upload_by_dosen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/pb_file_loading"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
+
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_jenis_tugas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/style_spinner_pqi"
                 android:dropDownVerticalOffset="48dp"
                 android:minHeight="48dp"
@@ -179,7 +207,7 @@
                 android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="@id/ll_attach_buat_tugas_dosen"
                 app:layout_constraintStart_toEndOf="@id/tv_jenis_tugas_spinner_dosen"
-                app:layout_constraintTop_toBottomOf="@id/ll_attach_buat_tugas_dosen"
+                app:layout_constraintTop_toBottomOf="@id/rv_file_upload_by_dosen"
                 tools:listitem="@layout/item_spinner" />
 
             <TextView
@@ -220,6 +248,16 @@
                 app:layout_constraintStart_toStartOf="@id/tv_deadline_spinner_dosen"
                 app:layout_constraintTop_toTopOf="@+id/spinner_topik_tugas" />
 
+            <ProgressBar
+                android:id="@+id/pb_loading_screen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_topik_tugas"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"/>
+
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_topik_tugas"
                 android:layout_width="0dp"
@@ -251,40 +289,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/spinner_topik_tugas"
-                tools:ignore="VisualLintButtonSize" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_simpan_edit_tugas"
-                style="@style/TextNormal16spMobilePQI"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="75dp"
-                android:layout_marginTop="70dp"
-                android:background="@drawable/bg_button_06283d_48dp_ripple"
-                android:text="@string/btn_simpan"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btn_posting_tugas_baru_dosen"
-                tools:ignore="VisualLintButtonSize" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_hapus_tugas"
-                style="@style/TextNormal16spMobilePQI"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/bg_button_hapus_48dp"
-                android:text="@string/tv_btn_hapus_materi_dosen"
-                android:textAllCaps="false"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/btn_simpan_edit_tugas"
-                app:layout_constraintStart_toStartOf="@id/btn_simpan_edit_tugas"
-                app:layout_constraintTop_toBottomOf="@id/btn_simpan_edit_tugas"
-                app:layout_constraintVertical_bias="0"
                 tools:ignore="VisualLintButtonSize" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

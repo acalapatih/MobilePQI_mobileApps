@@ -24,6 +24,9 @@ import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -353,6 +356,32 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.updateDetailMateriIbadah(request, idMateri)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getListTugas(idKelas: Int): Flow<ApiResponse<GetListTugasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getListTugas(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun createTugas(request: CreateTugasPayload,idKelas: Int): Flow<ApiResponse<CreateTugasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.createTugas(request, idKelas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

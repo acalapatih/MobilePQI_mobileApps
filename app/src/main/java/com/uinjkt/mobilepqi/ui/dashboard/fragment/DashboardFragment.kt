@@ -27,11 +27,11 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivit
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment() {
 
@@ -240,7 +240,7 @@ class DashboardFragment : Fragment() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
             MahasiswaTugasActivity.start(requireContext())
         } else {
-            DosenTugasActivity.start(requireContext())
+            DosenTugasActivity.start(requireContext(), classIdDosen)
         }
     }
 
