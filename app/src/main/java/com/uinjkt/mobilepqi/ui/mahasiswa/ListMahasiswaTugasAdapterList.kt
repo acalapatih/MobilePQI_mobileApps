@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
+import com.mobilepqi.core.domain.model.common.TugasItem
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewListTugasBinding
 
 class ListMahasiswaTugasAdapterList(
     private val context: Context,
-    private val dataset: List<GetListTugasModel.TugasItem>,
+    private val dataset: List<TugasItem>,
     private val listener: OnUserClickTugasListener? = null
 ) : RecyclerView.Adapter<ListMahasiswaTugasAdapterList.ViewHolder>() {
 
@@ -21,7 +21,7 @@ class ListMahasiswaTugasAdapterList(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewListTugasBinding.bind(view)
-        fun bindItem(listTugas: GetListTugasModel.TugasItem) {
+        fun bindItem(listTugas: TugasItem) {
             binding.tvNamaTaskTugas.text = listTugas.title
             binding.tvTenggatWaktuTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, listTugas.deadline?.substring(0,10))
             itemView.setOnClickListener{

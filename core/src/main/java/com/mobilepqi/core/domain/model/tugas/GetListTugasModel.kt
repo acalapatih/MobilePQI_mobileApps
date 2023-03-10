@@ -1,6 +1,7 @@
 package com.mobilepqi.core.domain.model.tugas
 
 import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
+import com.mobilepqi.core.domain.model.common.TugasItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -11,12 +12,6 @@ data class GetListTugasModel(
     val surah: List<TugasItem>,
     val doa: List<TugasItem>,
 ) {
-    data class TugasItem(
-        val id: Int?,
-        val title: String?,
-        val deadline: String?,
-        val status: Boolean?,
-    )
     companion object {
         fun mapResponseToModel(response: GetListTugasResponse): Flow<GetListTugasModel> {
             return flowOf(

@@ -26,6 +26,7 @@ import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDose
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.GetListTopicTugasResponse
 import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
@@ -382,6 +383,19 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.createTugas(request, idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getListTopicTugas(idKelas: Int, topic: String): Flow<ApiResponse<GetListTopicTugasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getListTopicTugas(idKelas, topic)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

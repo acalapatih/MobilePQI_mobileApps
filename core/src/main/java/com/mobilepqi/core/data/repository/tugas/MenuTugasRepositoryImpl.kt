@@ -6,7 +6,9 @@ import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.GetListTopicTugasResponse
 import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
+import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
 import kotlinx.coroutines.flow.Flow
@@ -32,4 +34,17 @@ class MenuTugasRepositoryImpl(
             override suspend fun createCall(): Flow<ApiResponse<CreateTugasResponse>> =
                 remoteDataSource.createTugas(payload, idKelas)
         }.asFlow()
+
+    override fun getListTopicTugas(
+        idKelas: Int,
+        topic: String,
+    ): Flow<Resource<GetListTopicTugasModel>> =
+        object : NetworkOnlyResource<GetListTopicTugasModel, GetListTopicTugasResponse>() {
+            override fun loadFromNetwork(data: GetListTopicTugasResponse): Flow<GetListTopicTugasModel> =
+                GetListTopicTugasModel.mapResponseToModel(data)
+
+            override suspend fun createCall(): Flow<ApiResponse<GetListTopicTugasResponse>> =
+                remoteDataSource.getListTopicTugas(idKelas, topic)
+        }.asFlow()
+
 }

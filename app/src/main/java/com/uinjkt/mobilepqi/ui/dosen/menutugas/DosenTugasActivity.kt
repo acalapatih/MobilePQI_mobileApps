@@ -7,17 +7,16 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.common.JenisTugas
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
-import com.uinjkt.mobilepqi.data.DataJenisTugas
-import com.uinjkt.mobilepqi.data.DataSourceJenisTugas
 import com.uinjkt.mobilepqi.databinding.ActivityDosenTugasSemuaBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapterList
-import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapter
+import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuMahasiswaJenisTugasAdapter.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
+class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
 
     companion object {
         @JvmStatic
@@ -26,12 +25,19 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
                 .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
-        private const val SEMUA = 1
         private const val ID_KELAS = "idKelas"
     }
 
-    private lateinit var listJenisTugas: MutableList<DataJenisTugas>
-    private lateinit var dosenJenisTugasAdapter: MenuMahasiswaJenisTugasAdapter
+    private val listJenisTugas by lazy {
+        mutableListOf(
+            JenisTugas("Semua", true),
+            JenisTugas("Praktikum Qiroah", false),
+            JenisTugas("Praktikum Ibadah", false),
+            JenisTugas("Hafalan Surah", false),
+            JenisTugas("Hafalan Doa", false),
+        )
+    }
+    private lateinit var dosenJenisTugasAdapter: MenuMahasiswaJenisTugasAdapterNew
     private lateinit var dosenTugasQiroahAdapter: ListMahasiswaTugasAdapterList
     private lateinit var dosenTugasIbadahAdapter: ListMahasiswaTugasAdapterList
     private lateinit var dosenTugasSurahAdapter: ListMahasiswaTugasAdapterList
@@ -46,9 +52,6 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         initView()
         initListener()
         initObserver()
-
-        // Initialize data.
-        listJenisTugas = DataSourceJenisTugas().setDataJenisTugasClicked(SEMUA)
     }
 
     private fun initView() {
@@ -114,7 +117,7 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
 
     private fun initAdapter(model: GetListTugasModel) {
         // Initialize Adapter Jenis Tugas
-        dosenJenisTugasAdapter = MenuMahasiswaJenisTugasAdapter(this, listJenisTugas, this)
+        dosenJenisTugasAdapter = MenuMahasiswaJenisTugasAdapterNew(this, listJenisTugas, this)
         binding.rvJenisTugasDosenSemua.adapter = dosenJenisTugasAdapter
 
         // Initialize Adapter Tugas Qiroah
@@ -145,7 +148,9 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         DosenDetailTugasActivity.start(this@DosenTugasActivity)
     }
 
-    override fun onUserJenisTugasClicked(data: DataJenisTugas) {
-        DosenTugasFilterActivity.start(this@DosenTugasActivity, data.idJenisTugas)
+    override fun onUserJenisTugasClicked(data: JenisTugas) {
+        if (data.titleJenisTugas != "Semua") {
+            DosenTugasFilterActivity.start(this@DosenTugasActivity, idKelas, data.titleJenisTugas)
+        }
     }
 }
