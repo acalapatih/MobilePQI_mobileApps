@@ -1,6 +1,7 @@
 package com.uinjkt.mobilepqi.ui.profil
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
@@ -37,9 +38,9 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
+        fun start(context: Context): Intent {
             val starter = Intent(context, ProfileInfoActivity::class.java)
-            context.startActivity(starter)
+            return starter
         }
     }
 
@@ -173,11 +174,12 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 phone = binding.etNohp.text.toString(),
                 address = binding.etAlamat.text.toString(),
                 birth = binding.etTglahir.text.toString(),
-                avatar = ""
+                avatar = urlAvatar
             )
         )
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @RequiresApi(Build.VERSION_CODES.N)
     private fun initView() {
         val date =
@@ -202,19 +204,19 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 isFocusable = false
             }
             val datePicker: DatePickerDialog
-                if(Build.VERSION.SDK_INT >= 24) {
-                    datePicker = DatePickerDialog(
-                        this@ProfileInfoActivity, date,
-                        myCalendar[Calendar.YEAR],
-                        myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
-                    )
-                } else {
-                    datePicker = DatePickerDialog(
-                        this@ProfileInfoActivity, date,
-                        myCalendar[JavaCalendar.YEAR],
-                        myCalendar[JavaCalendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
-                    )
-                }
+            datePicker = if(Build.VERSION.SDK_INT >= 24) {
+                DatePickerDialog(
+                    this@ProfileInfoActivity, date,
+                    myCalendar[Calendar.YEAR],
+                    myCalendar[Calendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
+                )
+            } else {
+                DatePickerDialog(
+                    this@ProfileInfoActivity, date,
+                    myCalendar[JavaCalendar.YEAR],
+                    myCalendar[JavaCalendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
+                )
+            }
             datePicker.datePicker.maxDate = System.currentTimeMillis()
             datePicker.show()
         }
@@ -317,6 +319,8 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
+                    setResult(Activity.RESULT_OK)
+                    finish()
                     showOneActionDialogWithInvoke(
                         message = getString(R.string.message_profilInfo),
                         btnMessage = getString(R.string.btnMessage_profilInfo),

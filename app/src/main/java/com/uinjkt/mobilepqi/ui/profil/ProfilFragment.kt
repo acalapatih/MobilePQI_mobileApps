@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -13,6 +15,7 @@ import com.mobilepqi.core.domain.model.profil.ProfilModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.FragmentProfilBinding
 import com.uinjkt.mobilepqi.ui.dashboard.activity.DashboardActivity
+import com.uinjkt.mobilepqi.ui.signin.SigninActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfilFragment : Fragment() {
@@ -20,6 +23,12 @@ class ProfilFragment : Fragment() {
     private var _binding: FragmentProfilBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<ProfilViewModel>()
+
+    private val createClassLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == AppCompatActivity.RESULT_OK) {
+            viewModel.profil()
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +72,7 @@ class ProfilFragment : Fragment() {
 
     private fun initListener() {
         binding.tvProfil.setOnClickListener {
-            ProfileInfoActivity.start(requireContext())
+            createClassLauncher.launch(ProfileInfoActivity.start(requireContext()))
         }
 
         binding.tvPengaturan.setOnClickListener {
@@ -76,9 +85,16 @@ class ProfilFragment : Fragment() {
                 message = getString(R.string.message_logout),
                 btnPositiveMessage = getString(R.string.btnPositive_logout),
                 btnNegativeMessage = getString(R.string.btnNegative_logout),
-                onPositiveButtonClicked = {}
+                onPositiveButtonClicked = { logOut() }
             )
         }
+    }
+
+    private fun logOut() {
+        SigninActivity.start(requireContext())
+//        Intent.FLAG_ACTIVITY_CLEAR_TOP
+//        Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        Intent.FLAG_ACTIVITY_NEW_TASK
     }
 
     private fun initView() {
