@@ -1,7 +1,6 @@
 package com.uinjkt.mobilepqi.ui.dosen.menutugas
 
 import android.app.DatePickerDialog
-import android.app.DatePickerDialog.OnDateSetListener
 import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
@@ -12,6 +11,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
@@ -29,6 +29,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.Calendar as JavaCalendar
 
 class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBinding>(),
     MahasiswaFileUploadedByAdapterList.OnUserClickListener {
@@ -48,7 +49,11 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
 
     private val behavior by lazy { intent.getStringExtra(BEHAVIOR) }
     private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
-    private lateinit var myCalendar: Calendar
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private val myCalendar: Calendar = Calendar.getInstance()
+    private val myCalendarJava: JavaCalendar = JavaCalendar.getInstance()
+
     private val viewModel by viewModel<DosenBuatTugasViewModel>()
     private lateinit var listFileAttached: MutableList<FileItem>
     private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
@@ -224,24 +229,38 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
 
 
     private fun openCalendar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            myCalendar = Calendar.getInstance()
-            val date = OnDateSetListener { _, year, month, day ->
+        val date = DatePickerDialog.OnDateSetListener { _, year, month, day ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 myCalendar[Calendar.YEAR] = year
                 myCalendar[Calendar.MONTH] = month
                 myCalendar[Calendar.DAY_OF_MONTH] = day
-                updatelabel()
+            } else {
+                myCalendarJava[JavaCalendar.YEAR] = year
+                myCalendarJava[JavaCalendar.MONTH] = month
+                myCalendarJava[JavaCalendar.DAY_OF_MONTH] = day
             }
-            val datePicker = DatePickerDialog(
+            updatelabel()
+        }
+        val datePicker: DatePickerDialog
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            datePicker = DatePickerDialog(
                 this@DosenBuatEditTugasActivity,
                 date,
                 myCalendar[Calendar.YEAR],
                 myCalendar[Calendar.MONTH],
                 myCalendar[Calendar.DAY_OF_MONTH]
             )
-            datePicker.datePicker.minDate = System.currentTimeMillis()
-            datePicker.show()
+        } else {
+            datePicker = DatePickerDialog(
+                this@DosenBuatEditTugasActivity,
+                date,
+                myCalendarJava[JavaCalendar.YEAR],
+                myCalendarJava[JavaCalendar.MONTH],
+                myCalendarJava[JavaCalendar.DAY_OF_MONTH]
+            )
         }
+        datePicker.datePicker.minDate = System.currentTimeMillis()
+        datePicker.show()
     }
 
 
@@ -250,6 +269,8 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.tvDeadlineTugas.text = dateFormat.format(myCalendar.time)
+        } else {
+            binding.tvDeadlineTugas.text = dateFormat.format(myCalendarJava.time)
         }
     }
 
