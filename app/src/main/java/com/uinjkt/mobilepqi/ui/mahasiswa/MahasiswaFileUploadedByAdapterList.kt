@@ -1,7 +1,6 @@
 package com.uinjkt.mobilepqi.ui.mahasiswa
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -76,7 +75,6 @@ class MahasiswaFileUploadedByAdapterList(
     override fun getItemCount(): Int = dataset.size
 
     fun setData(newDataset: List<FileItem>) {
-        Log.d("INI_LOG_CUY", "berhasil")
         val diffUtil = FileUploadedUtils(dataset, newDataset)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         dataset = newDataset.toMutableList()

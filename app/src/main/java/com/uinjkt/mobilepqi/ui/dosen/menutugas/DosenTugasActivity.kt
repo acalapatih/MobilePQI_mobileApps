@@ -144,8 +144,8 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         binding.rvListTugasDosenHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
-    override fun onUserTugasClicked(position: Int) {
-        DosenDetailTugasActivity.start(this@DosenTugasActivity)
+    override fun onUserTugasClicked(idTugas: Int) {
+        DosenDetailTugasActivity.start(this@DosenTugasActivity, idTugas)
     }
 
     override fun onUserJenisTugasClicked(data: JenisTugas) {

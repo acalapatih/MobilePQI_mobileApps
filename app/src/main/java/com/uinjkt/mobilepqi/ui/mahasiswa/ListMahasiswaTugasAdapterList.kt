@@ -16,7 +16,7 @@ class ListMahasiswaTugasAdapterList(
 ) : RecyclerView.Adapter<ListMahasiswaTugasAdapterList.ViewHolder>() {
 
     interface OnUserClickTugasListener {
-        fun onUserTugasClicked(position: Int)
+        fun onUserTugasClicked(idTugas: Int)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -25,7 +25,7 @@ class ListMahasiswaTugasAdapterList(
             binding.tvNamaTaskTugas.text = listTugas.title
             binding.tvTenggatWaktuTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, listTugas.deadline?.substring(0,10))
             itemView.setOnClickListener{
-                listener?.onUserTugasClicked(adapterPosition)
+                listener?.onUserTugasClicked(listTugas.id ?:0)
             }
         }
     }

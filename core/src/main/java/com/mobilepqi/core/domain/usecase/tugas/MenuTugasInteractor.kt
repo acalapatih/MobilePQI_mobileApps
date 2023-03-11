@@ -2,6 +2,7 @@ package com.mobilepqi.core.domain.usecase.tugas
 
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
+import com.mobilepqi.core.domain.model.tugas.GetDetailTugasModel
 import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
@@ -20,4 +21,7 @@ class MenuTugasInteractor(
         idKelas: Int,
         topic: String,
     ): Flow<Resource<GetListTopicTugasModel>> = repository.getListTopicTugas(idKelas, topic)
+
+    override fun getDetailTugas(idTugas: Int): Flow<Resource<GetDetailTugasModel>> =
+        repository.getDetailTugas(idTugas)
 }

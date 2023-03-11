@@ -3,7 +3,6 @@ package com.uinjkt.mobilepqi.ui.dosen.menutugas
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,8 +55,6 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         topic = getSelectedTopic(titleTopic?:"all")
-        Log.d("ini_log", topic)
-        Log.d("ini_log", titleTopic?:"all")
         initView()
         initListener()
         initObserver()
@@ -162,10 +159,11 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         binding.rvListTugasDosenFilter.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvListTugasDosenFilter.adapter = dosenTugasFilterAdapter
+
     }
 
-    override fun onUserTugasClicked(position: Int) {
-        DosenDetailTugasActivity.start(this@DosenTugasFilterActivity)
+    override fun onUserTugasClicked(idTugas: Int) {
+        DosenDetailTugasActivity.start(this@DosenTugasFilterActivity, idTugas)
     }
 
     override fun onUserJenisTugasClicked(data: JenisTugas) {

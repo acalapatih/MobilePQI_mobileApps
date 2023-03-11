@@ -1,7 +1,6 @@
 package com.uinjkt.mobilepqi.ui.mahasiswa
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,13 +28,11 @@ class MahasiswaFileUploadedByAdapter(
             if (setIcon == "delete") {
                 binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_close_delete_file)
                 binding.ivIconCloseOrDownloadFile.setOnClickListener {
-                    Log.d("testPrint","Print DELETE")
                     listener?.onUserClickListener("delete")
                 }
             } else {
                 binding.ivIconCloseOrDownloadFile.setImageResource(R.drawable.ic_download_blue)
                 binding.ivIconCloseOrDownloadFile.setOnClickListener {
-                    Log.d("testPrint","Print DOWNLOAD")
                     listener?.onUserClickListener("download")
                 }
             }

@@ -19,10 +19,7 @@ import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.GetListTopicTugasResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.*
 import retrofit2.http.*
 
 interface MobilePqiService {
@@ -136,4 +133,9 @@ interface MobilePqiService {
         @Path("idKelas") idKelas: Int,
         @Query("query") topic: String,
     ) : GetListTopicTugasResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}")
+    suspend fun getDetailTugas(
+        @Path("idTugas") idTugas: Int
+    ): GetDetailTugasResponse
 }

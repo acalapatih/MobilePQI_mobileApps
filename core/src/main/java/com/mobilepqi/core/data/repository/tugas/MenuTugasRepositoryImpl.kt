@@ -4,10 +4,8 @@ import com.mobilepqi.core.data.NetworkOnlyResource
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.GetListTopicTugasResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.*
+import com.mobilepqi.core.domain.model.tugas.GetDetailTugasModel
 import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
@@ -45,6 +43,15 @@ class MenuTugasRepositoryImpl(
 
             override suspend fun createCall(): Flow<ApiResponse<GetListTopicTugasResponse>> =
                 remoteDataSource.getListTopicTugas(idKelas, topic)
+        }.asFlow()
+
+    override fun getDetailTugas(idTugas: Int): Flow<Resource<GetDetailTugasModel>> =
+        object : NetworkOnlyResource<GetDetailTugasModel, GetDetailTugasResponse>() {
+            override fun loadFromNetwork(data: GetDetailTugasResponse): Flow<GetDetailTugasModel> =
+                GetDetailTugasModel.mapResponseToModel(data)
+
+            override suspend fun createCall(): Flow<ApiResponse<GetDetailTugasResponse>> =
+                remoteDataSource.getDetailTugas(idTugas)
         }.asFlow()
 
 }

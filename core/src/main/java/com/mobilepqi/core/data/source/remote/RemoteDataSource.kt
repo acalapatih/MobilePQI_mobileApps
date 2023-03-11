@@ -24,10 +24,7 @@ import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.GetListTopicTugasResponse
-import com.mobilepqi.core.data.source.remote.response.tugas.GetListTugasResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.*
 import com.mobilepqi.core.data.source.remote.response.uploadimage.UploadResponse
 import com.mobilepqi.core.util.setGeneralError
 import kotlinx.coroutines.Dispatchers
@@ -396,6 +393,19 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.getListTopicTugas(idKelas, topic)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getDetailTugas(idTugas: Int): Flow<ApiResponse<GetDetailTugasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getDetailTugas(idTugas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }
