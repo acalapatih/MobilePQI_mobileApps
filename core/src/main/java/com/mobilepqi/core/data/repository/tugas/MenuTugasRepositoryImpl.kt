@@ -54,4 +54,15 @@ class MenuTugasRepositoryImpl(
                 remoteDataSource.getDetailTugas(idTugas)
         }.asFlow()
 
+    override fun updateDetailTugas(
+        payload: UpdateDetailTugasPayload,
+        idTugas: Int,
+    ): Flow<Resource<Boolean>> =
+        object : NetworkOnlyResource<Boolean, UpdateDetailTugasResponse>() {
+            override fun loadFromNetwork(data: UpdateDetailTugasResponse): Flow<Boolean> =
+                flowOf(true)
+
+            override suspend fun createCall(): Flow<ApiResponse<UpdateDetailTugasResponse>> =
+                remoteDataSource.updateDetailTugas(payload, idTugas)
+        }.asFlow()
 }

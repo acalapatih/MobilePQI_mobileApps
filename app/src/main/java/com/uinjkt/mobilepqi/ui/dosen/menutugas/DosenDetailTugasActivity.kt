@@ -71,7 +71,7 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         }
 
         binding.btnEditTugasDosen.setOnClickListener {
-            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity, "edit", 1)
+            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity, "edit",  idTugas = idTugas)
         }
 
         binding.btnCekTugasMahasiswa.setOnClickListener {
@@ -129,6 +129,11 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         if (action == "download") {
             downloadFileToStorage(this, url, url.getFileNameFromUrl())
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        initView()
     }
 
 }

@@ -71,7 +71,7 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         }
 
         binding.tvIconAddTugas.setOnClickListener {
-            DosenBuatEditTugasActivity.start(this,"buat", idKelas)
+            DosenBuatEditTugasActivity.start(this,"buat", idKelas = idKelas)
         }
 
         binding.tvIconUnduhNilaiTugas.setOnClickListener {

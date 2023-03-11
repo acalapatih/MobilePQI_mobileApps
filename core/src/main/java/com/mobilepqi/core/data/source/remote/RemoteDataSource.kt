@@ -37,12 +37,12 @@ import okhttp3.MultipartBody
 class RemoteDataSource(
     private val apiSholatService: ApiSholatService,
     private val commonService: CommonService,
-    private val mobilePqiService: MobilePqiService
+    private val mobilePqiService: MobilePqiService,
 ) {
     suspend fun getJadwalSholat(
         timestamp: String,
         latitude: String,
-        longitude: String
+        longitude: String,
     ): Flow<ApiResponse<JadwalSholatResponse>> {
         return flow {
             try {
@@ -64,7 +64,7 @@ class RemoteDataSource(
     }
 
     suspend fun uploadFileOrImage(
-        file: MultipartBody.Part
+        file: MultipartBody.Part,
     ): Flow<ApiResponse<UploadResponse>> {
         return channelFlow {
             try {
@@ -117,7 +117,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun postTambahDosen(request: PostTambahDosenPayload, idKelas: Int): Flow<ApiResponse<PostTambahDosenResponse>> {
+    suspend fun postTambahDosen(
+        request: PostTambahDosenPayload,
+        idKelas: Int,
+    ): Flow<ApiResponse<PostTambahDosenResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.postTambahdosen(request, idKelas)
@@ -171,7 +174,7 @@ class RemoteDataSource(
 
     suspend fun createMateriQiroah(
         request: CreateMateriQiroahPayload,
-        idKelas: Int
+        idKelas: Int,
     ): Flow<ApiResponse<CreateMateriQiroahResponse>> {
         return flow {
             try {
@@ -185,7 +188,7 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getMateriQiroah(idKelas : Int): Flow<ApiResponse<GetMateriQiroahResponse>> {
+    suspend fun getMateriQiroah(idKelas: Int): Flow<ApiResponse<GetMateriQiroahResponse>> {
         return flow {
             try {
                 val response =
@@ -213,7 +216,7 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun deleteMateriQiroah(idMateri : Int): Flow<ApiResponse<DeleteMateriQiroahResponse>> {
+    suspend fun deleteMateriQiroah(idMateri: Int): Flow<ApiResponse<DeleteMateriQiroahResponse>> {
         return flow {
             try {
                 val response =
@@ -227,7 +230,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun updateDetailMateriQiroah(request: UpdateDetailMateriQiroahPayload, idMateri: Int): Flow<ApiResponse<UpdateDetailMateriQiroahResponse>> {
+    suspend fun updateDetailMateriQiroah(
+        request: UpdateDetailMateriQiroahPayload,
+        idMateri: Int,
+    ): Flow<ApiResponse<UpdateDetailMateriQiroahResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.updateDetailMateriQiroah(request, idMateri)
@@ -253,7 +259,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun createSilabus(request: CreateSilabusPayload, idKelas: Int): Flow<ApiResponse<CreateSilabusResponse>> {
+    suspend fun createSilabus(
+        request: CreateSilabusPayload,
+        idKelas: Int,
+    ): Flow<ApiResponse<CreateSilabusResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.createSilabus(request, idKelas)
@@ -294,7 +303,7 @@ class RemoteDataSource(
 
     suspend fun createMateriIbadah(
         request: CreateMateriIbadahPayload,
-        idKelas: Int
+        idKelas: Int,
     ): Flow<ApiResponse<CreateMateriIbadahResponse>> {
         return flow {
             try {
@@ -308,7 +317,7 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getMateriIbadah(idKelas : Int): Flow<ApiResponse<GetMateriIbadahResponse>> {
+    suspend fun getMateriIbadah(idKelas: Int): Flow<ApiResponse<GetMateriIbadahResponse>> {
         return flow {
             try {
                 val response =
@@ -336,7 +345,7 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun deleteMateriIbadah(idMateri : Int): Flow<ApiResponse<DeleteMateriIbadahResponse>> {
+    suspend fun deleteMateriIbadah(idMateri: Int): Flow<ApiResponse<DeleteMateriIbadahResponse>> {
         return flow {
             try {
                 val response =
@@ -350,7 +359,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun updateDetailMateriIbadah(request: UpdateDetailMateriIbadahPayload, idMateri: Int): Flow<ApiResponse<UpdateDetailMateriIbadahResponse>> {
+    suspend fun updateDetailMateriIbadah(
+        request: UpdateDetailMateriIbadahPayload,
+        idMateri: Int,
+    ): Flow<ApiResponse<UpdateDetailMateriIbadahResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.updateDetailMateriIbadah(request, idMateri)
@@ -376,7 +388,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun createTugas(request: CreateTugasPayload,idKelas: Int): Flow<ApiResponse<CreateTugasResponse>> {
+    suspend fun createTugas(
+        request: CreateTugasPayload,
+        idKelas: Int,
+    ): Flow<ApiResponse<CreateTugasResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.createTugas(request, idKelas)
@@ -389,7 +404,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getListTopicTugas(idKelas: Int, topic: String): Flow<ApiResponse<GetListTopicTugasResponse>> {
+    suspend fun getListTopicTugas(
+        idKelas: Int,
+        topic: String,
+    ): Flow<ApiResponse<GetListTopicTugasResponse>> {
         return flow {
             try {
                 val response = mobilePqiService.getListTopicTugas(idKelas, topic)
@@ -406,6 +424,22 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.getDetailTugas(idTugas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun updateDetailTugas(
+        request: UpdateDetailTugasPayload,
+        idTugas: Int,
+    ): Flow<ApiResponse<UpdateDetailTugasResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.updateDetailTugas(request, idTugas)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

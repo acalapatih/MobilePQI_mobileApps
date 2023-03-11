@@ -207,11 +207,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     }
 
     private fun actionAfterGetMateri(materi: GetDetailMateriQiroahModel) {
-        listFileAttached = materi.file.map {
-            FileItem(
-                url = it.url
-            )
-        }.toMutableList()
+        listFileAttached = materi.file.toMutableList()
         // Initialize Adapter List Tugas Upload By Dosen
         initAdapter()
         binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title)

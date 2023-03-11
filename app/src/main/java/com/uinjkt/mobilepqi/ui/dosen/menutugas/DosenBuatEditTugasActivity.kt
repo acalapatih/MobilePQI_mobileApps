@@ -16,45 +16,52 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
+import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
 import com.mobilepqi.core.domain.model.common.FileItem
+import com.mobilepqi.core.domain.model.tugas.GetDetailTugasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenBuatTugasBaruBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
-import com.uinjkt.mobilepqi.util.Constant
-import com.uinjkt.mobilepqi.util.openFileManagerPdf
-import com.uinjkt.mobilepqi.util.openGallery
-import com.uinjkt.mobilepqi.util.uriToFile
+import com.uinjkt.mobilepqi.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar as JavaCalendar
+/*
+LIST BUG:
+1. force close ketika delete file
+2. diff utils tidak bekerja baik
+ */
 
 class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBinding>(),
     MahasiswaFileUploadedByAdapterList.OnUserClickListener {
 
     companion object {
         @JvmStatic
-        fun start(context: Context, behavior: String = "buat", idKelas: Int) {
+        fun start(context: Context, behavior: String = "buat", idKelas: Int = 0, idTugas: Int = 0) {
             val starter = Intent(context, DosenBuatEditTugasActivity::class.java)
                 .putExtra(BEHAVIOR, behavior)
                 .putExtra(ID_KELAS, idKelas)
+                .putExtra(ID_TUGAS, idTugas)
             context.startActivity(starter)
         }
 
         private const val BEHAVIOR = "behavior"
         private const val ID_KELAS = "idKelas"
+        private const val ID_TUGAS = "idTugas"
     }
 
     private val behavior by lazy { intent.getStringExtra(BEHAVIOR) }
     private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private val idTugas by lazy { intent.getIntExtra(ID_TUGAS, 0) }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private val myCalendar: Calendar = Calendar.getInstance()
     private val myCalendarJava: JavaCalendar = JavaCalendar.getInstance()
 
-    private val viewModel by viewModel<DosenBuatTugasViewModel>()
+    private val viewModel by viewModel<DosenBuatEditTugasViewModel>()
     private lateinit var listFileAttached: MutableList<FileItem>
     private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
     private lateinit var spinnerJenisArrayAdapter: ArrayAdapter<String>
@@ -79,13 +86,19 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         if (behavior == "buat") {
             binding.tvTitleMenuBuatTugasDosen.text =
                 getString(R.string.tv_title_menu_buat_tugas_dosen)
-
+            listFileAttached = emptyList<FileItem>().toMutableList()
+            Log.d("ini_log", listFileAttached.toString())
+            initAdapter()
         } else {
             binding.tvTitleMenuBuatTugasDosen.text =
                 getString(R.string.tv_title_menu_edit_tugas_dosen, "topik", "judul tugas")
+            getDetailTugas()
         }
-        listFileAttached = mutableListOf()
-        initAdapter()
+
+    }
+
+    private fun getDetailTugas() {
+        viewModel.getDetailTugas(idTugas)
     }
 
     private fun initAdapter() {
@@ -109,6 +122,23 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
 
 
     private fun initObserver() {
+        viewModel.getdetailTugas.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showloading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        afterGetDetailTugas(it)
+                    }
+                    showloading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showloading(false)
+                }
+            }
+        }
         viewModel.fileUploaded.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
@@ -117,11 +147,9 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
                 is Resource.Success -> {
                     model.data?.fileUrl?.let { file ->
                         urlFile = file
-                        Log.d("INI_LOG_CUY", urlFile)
                         listFileAttached.add(0, FileItem(urlFile))
+                        Log.d("ini_log", listFileAttached.toString())
                         fileUploadedByDosenAdapter.setData(listFileAttached)
-                        Log.d("INI_LOG_CUY", "$listFileAttached")
-
                         if (!isChangingConfigurations) {
                             externalCacheDir?.let { cache -> deleteTempFile(cache) }
                         }
@@ -151,10 +179,79 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
                 }
             }
         }
+        viewModel.updateDetailTugas.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showloading(true)
+                }
+                is Resource.Success -> {
+                    showOneActionDialogWithInvoke("Tugas Berhasil Diubah", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
+                    showloading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showloading(false)
+                }
+            }
+        }
 
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
+
+    private fun afterGetDetailTugas(model: GetDetailTugasModel) {
+        val breadcrumbs = binding.tvTitleMenuBuatTugasDosen
+        val title = model.title
+        binding.etDescJudulBuatTugasDosen.setText(title)
+        binding.etDescDeskripsiBuatTugasDosen.setText(model.description)
+        listFileAttached = model.file.toMutableList()
+        Log.d("ini_log_after", listFileAttached.toString())
+        when (model.topic) {
+            "praktikum qiroah" -> {
+                breadcrumbs.text =
+                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                        "Praktikum Qiroah",
+                        title.capitalizeEachWord())
+                binding.spinnerTopikTugas.setSelection(0)
+            }
+            "praktikum ibadah" -> {
+                breadcrumbs.text =
+                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                        "Praktikum Ibadah",
+                        title.capitalizeEachWord())
+                binding.spinnerTopikTugas.setSelection(1)
+            }
+            "hafalan doa" -> {
+                breadcrumbs.text =
+                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                        "Hafalan Doa",
+                        title.capitalizeEachWord())
+                binding.spinnerTopikTugas.setSelection(2)
+            }
+            "hafalan surat" -> {
+                breadcrumbs.text =
+                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                        "Hafalan Surah",
+                        title.capitalizeEachWord())
+                binding.spinnerTopikTugas.setSelection(3)
+            }
+        }
+        when (model.jenis) {
+            "individu" -> binding.spinnerJenisTugas.setSelection(0)
+            "kelompok" -> binding.spinnerJenisTugas.setSelection(1)
+        }
+        binding.tvDeadlineTugas.text = convertTime(model.deadline.substring(0, 10))
+        initAdapter()
+    }
+
+    private fun convertTime(time: String): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+        val newDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
+
+        return dateFormat.parse(time)?.let { newDateFormat.format(it) }.toString()
     }
 
     private fun showloading(value: Boolean) {
@@ -195,15 +292,41 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
 
             btnPostingTugasBaruDosen.setOnClickListener {
                 if (tvDeadlineTugas.text.toString() == "Deadline") {
-                    showOneActionDialog("Tugas Gagal Diposting", "Okay")
+                    showOneActionDialog("Tentukan Deadlinenya", "Okay")
+                } else if (etDescJudulBuatTugasDosen.text.toString().isEmpty()) {
+                    showOneActionDialog("Judul Tidak Boleh Kosong", "Okay")
                 } else {
-                    createTugas()
+                    when (behavior) {
+                        "buat" -> createTugas()
+                        "edit" -> updateTugas()
+                    }
                 }
             }
         }
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
+
+    private fun updateTugas() {
+        viewModel.updateDetailTugas(
+            UpdateDetailTugasPayload(
+                title = binding.etDescJudulBuatTugasDosen.text.toString(),
+                description = binding.etDescDeskripsiBuatTugasDosen.text.toString(),
+                jenis = binding.spinnerJenisTugas.selectedItem.toString().lowercase(),
+                topic = when (binding.spinnerTopikTugas.selectedItem.toString()) {
+                    "Hafalan Surah" -> "Hafalan Surat"
+                    else -> binding.spinnerTopikTugas.selectedItem.toString()
+                },
+                deadline = binding.tvDeadlineTugas.text.toString(),
+                file = listFileAttached.map {
+                    UpdateDetailTugasPayload.FileItem(
+                        url = it.url
+                    )
+                }
+            ),
+            idTugas
+        )
     }
 
     private fun createTugas() {

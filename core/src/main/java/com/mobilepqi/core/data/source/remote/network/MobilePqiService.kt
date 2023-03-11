@@ -138,4 +138,10 @@ interface MobilePqiService {
     suspend fun getDetailTugas(
         @Path("idTugas") idTugas: Int
     ): GetDetailTugasResponse
+
+    @PUT("v1/mobilepqi/kelas/tugas/{idTugas}")
+    suspend fun updateDetailTugas(
+        @Body payload: UpdateDetailTugasPayload,
+        @Path("idTugas") idTugas: Int
+    ): UpdateDetailTugasResponse
 }
