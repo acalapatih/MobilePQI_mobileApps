@@ -26,11 +26,12 @@ class ProfilFragment : Fragment() {
     private val viewModel by viewModel<ProfilViewModel>()
     private lateinit var baseActivity: DashboardActivity
 
-    private val createClassLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == AppCompatActivity.RESULT_OK) {
-            viewModel.profil()
+    private val createClassLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == AppCompatActivity.RESULT_OK) {
+                viewModel.profil()
+            }
         }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +58,8 @@ class ProfilFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -101,8 +103,8 @@ class ProfilFragment : Fragment() {
         val intent = Intent(requireContext(), SigninActivity::class.java)
         intent.setFlags(
             Intent.FLAG_ACTIVITY_CLEAR_TOP or
-            Intent.FLAG_ACTIVITY_CLEAR_TASK or
-            Intent.FLAG_ACTIVITY_NEW_TASK
+                    Intent.FLAG_ACTIVITY_CLEAR_TASK or
+                    Intent.FLAG_ACTIVITY_NEW_TASK
         )
         SigninActivity.start(requireContext())
     }
