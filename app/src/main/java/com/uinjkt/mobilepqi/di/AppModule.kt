@@ -4,8 +4,12 @@ import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasIteractor
 import com.mobilepqi.core.domain.usecase.buatkelas.BuatKelasUsecase
 import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasInteractor
 import com.mobilepqi.core.domain.usecase.daftarkelas.DaftarKelasUsecase
-import com.mobilepqi.core.domain.usecase.dashboard.GetTugasInteractor
-import com.mobilepqi.core.domain.usecase.dashboard.GetTugasUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.getClass.GetClassInteractor
+import com.mobilepqi.core.domain.usecase.dashboard.getClass.GetClassUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.getTugas.GetTugasInteractor
+import com.mobilepqi.core.domain.usecase.dashboard.getTugas.GetTugasUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.getUser.GetUserInteractor
+import com.mobilepqi.core.domain.usecase.dashboard.getUser.GetUserUsecase
 import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasInteractor
 import com.mobilepqi.core.domain.usecase.detailkelas.DetailKelasUsecase
 import com.mobilepqi.core.domain.usecase.ibadah.MenuIbadahInteractor
@@ -74,10 +78,12 @@ val useCaseModule = module {
     factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
     factory<SilabusUsecase> { SilabusInteractor(get()) }
     factory<GetTugasUsecase> { GetTugasInteractor(get()) }
+    factory<GetClassUsecase> { GetClassInteractor(get()) }
+    factory<GetUserUsecase> { GetUserInteractor(get()) }
 }
 
 val viewModelModule = module {
-    viewModel { DashboardViewModel(get(), get(), get(), get()) }
+    viewModel { DashboardViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SigninViewModel(get()) }
     viewModel { ProfilViewModel(get(), get(), get()) }
     viewModel { SigninViewModel(get()) }

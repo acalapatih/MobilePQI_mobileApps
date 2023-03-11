@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi.ui.profil
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,11 +24,17 @@ class ProfilFragment : Fragment() {
     private var _binding: FragmentProfilBinding? = null
     private val binding get() = _binding!!
     private val viewModel by viewModel<ProfilViewModel>()
+    private lateinit var baseActivity: DashboardActivity
 
     private val createClassLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == AppCompatActivity.RESULT_OK) {
             viewModel.profil()
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        baseActivity = activity as DashboardActivity
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,10 +98,13 @@ class ProfilFragment : Fragment() {
     }
 
     private fun logOut() {
+        val intent = Intent(requireContext(), SigninActivity::class.java)
+        intent.setFlags(
+            Intent.FLAG_ACTIVITY_CLEAR_TOP or
+            Intent.FLAG_ACTIVITY_CLEAR_TASK or
+            Intent.FLAG_ACTIVITY_NEW_TASK
+        )
         SigninActivity.start(requireContext())
-//        Intent.FLAG_ACTIVITY_CLEAR_TOP
-//        Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        Intent.FLAG_ACTIVITY_NEW_TASK
     }
 
     private fun initView() {

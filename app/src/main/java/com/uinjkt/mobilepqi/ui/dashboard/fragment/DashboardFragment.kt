@@ -9,8 +9,11 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.dashboard.GetClassModel
 import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
+import com.mobilepqi.core.domain.model.dashboard.GetUserModel
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.FragmentDashboardBinding
@@ -41,6 +44,7 @@ class DashboardFragment : Fragment() {
     private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by activityViewModel<DashboardSharedViewModel>()
 
+    private lateinit var baseActivity: DashboardActivity
     private var listTugasDashboard: List<GetTugasModel.ListTugas> = listOf()
     private lateinit var tugasDashboardAdapter: DashboardAdapter
     private var latitude = ""
@@ -48,6 +52,11 @@ class DashboardFragment : Fragment() {
     private var currentTimestamp = ""
     private val classIdDosen by lazy { arguments?.getInt("class_id", 0) ?: 0 }
     private var classIdMahasiswa = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        baseActivity = activity as DashboardActivity
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +72,7 @@ class DashboardFragment : Fragment() {
         Log.d("Dashboard", "onViewCreated: $classIdDosen")
         viewModel.getUserRole()
         viewModel.getClassId()
+        viewModel.getUser()
 
         initObserver()
         initView()
@@ -70,6 +80,44 @@ class DashboardFragment : Fragment() {
     }
 
     private fun initObserver() {
+        viewModel.getUser.observe(viewLifecycleOwner) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    model.data?.let { showUser(it) }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    model.message?.let {
+                        Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+
+        viewModel.getClass.observe(viewLifecycleOwner) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    model.data?.let { showClass(it) }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    model.message?.let {
+                        Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+            }
+        }
+
         viewModel.jadwalSholat.observe(viewLifecycleOwner) { model ->
             when (model) {
                 is Resource.Loading -> {
@@ -127,10 +175,24 @@ class DashboardFragment : Fragment() {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        Toast.makeText(requireContext(), "Something when worng", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Something when worng", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
+        }
+    }
+
+    private fun showClass(data: GetClassModel) {
+        binding.tvKelas.text = data.name
+    }
+
+    private fun showUser(data: GetUserModel) {
+        with(binding) {
+            Glide.with(this@DashboardFragment)
+                .load(data.avatar)
+                .into(imgUser)
+            tvNama.text = data.name
         }
     }
 
@@ -195,11 +257,13 @@ class DashboardFragment : Fragment() {
 
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
+                viewModel.getClass(classIdMahasiswa)
                 viewModel.getTugas(classIdMahasiswa)
                 classIdMahasiswa = value
                 Log.d("Class Id Mahasiswa", "class Id: $value")
             }
         } else {
+            viewModel.getClass(classIdDosen)
             viewModel.getTugas(classIdDosen)
         }
     }
@@ -207,7 +271,7 @@ class DashboardFragment : Fragment() {
     private fun initListener() {
         with(binding) {
             imgUser.setOnClickListener {
-                DashboardActivity.start(requireContext(), "profil")
+                baseActivity.navView.selectedItemId = R.id.navigation_profil
             }
 
             icKelas.setOnClickListener {

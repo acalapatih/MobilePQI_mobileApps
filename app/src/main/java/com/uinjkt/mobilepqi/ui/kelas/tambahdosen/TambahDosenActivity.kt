@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
-import com.mobilepqi.core.domain.model.tambahdosen.PostTambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
@@ -31,7 +30,6 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private val viewModel by viewModel<TambahDosenViewModel>()
-
     private val classId by lazy { intent.getIntExtra("idKelas", 0) }
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
@@ -98,8 +96,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private fun initListener() {
-        val backIcon = binding.icBackWhite
-        backIcon.setOnClickListener {
+        binding.icBackWhite.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
         onBackPressedDispatcher.addCallback(this) {

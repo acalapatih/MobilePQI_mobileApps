@@ -3,7 +3,9 @@ package com.mobilepqi.core.data.source.remote.network
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetClassResponse
 import com.mobilepqi.core.data.source.remote.response.dashboard.GetTugasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetUserResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
@@ -127,4 +129,10 @@ interface MobilePqiService {
 
     @GET("v1/mobilepqi/kelas/{idKelas}/tugas/dashboard")
     suspend fun getTugas(@Path("idKelas")idKelas: Int): GetTugasResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/dashboard")
+    suspend fun getClass(@Path("idKelas")idKelas: Int): GetClassResponse
+
+    @GET("v1/mobilepqi/users/fetch")
+    suspend fun getUser(): GetUserResponse
 }

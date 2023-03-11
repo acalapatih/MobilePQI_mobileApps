@@ -1,4 +1,4 @@
-package com.mobilepqi.core.domain.usecase.dashboard
+package com.mobilepqi.core.domain.usecase.dashboard.getTugas
 
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.dashboard.GetTugasModel

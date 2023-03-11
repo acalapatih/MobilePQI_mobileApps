@@ -18,17 +18,17 @@ data class GetTugasResponse(
 		@field:SerializedName("errors")
 		val errors: String? = null,
 
+		@field:SerializedName("tugas")
+		val tugas: List<TugasItem?>? = null,
+
 		@field:SerializedName("tugas_count")
 		val tugasCount: Int? = null,
-
-		@field:SerializedName("hafalan")
-		val hafalan: List<HafalanItem?>? = null,
 
 		@field:SerializedName("kelas_id")
 		val kelasId: Int? = null
 	)
 
-	data class HafalanItem(
+	data class TugasItem(
 
 		@field:SerializedName("errors")
 		val errors: String? = null,

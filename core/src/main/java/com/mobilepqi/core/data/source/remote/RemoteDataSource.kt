@@ -7,7 +7,9 @@ import com.mobilepqi.core.data.source.remote.network.MobilePqiService
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetClassResponse
 import com.mobilepqi.core.data.source.remote.response.dashboard.GetTugasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetUserResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
 import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
@@ -396,6 +398,32 @@ class RemoteDataSource(
         return flow {
             try {
                 val response = mobilePqiService.getTugas(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getClass(idKelas: Int): Flow<ApiResponse<GetClassResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getClass(idKelas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun getUser(): Flow<ApiResponse<GetUserResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getUser()
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

@@ -5,10 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.dashboard.GetClassModel
 import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
+import com.mobilepqi.core.domain.model.dashboard.GetUserModel
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import com.mobilepqi.core.domain.model.upload.UploadModel
-import com.mobilepqi.core.domain.usecase.dashboard.GetTugasUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.getClass.GetClassUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.getTugas.GetTugasUsecase
+import com.mobilepqi.core.domain.usecase.dashboard.getUser.GetUserUsecase
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
@@ -20,7 +24,9 @@ class DashboardViewModel(
     private val jadwalSholatUsecase: JadwalSholatUsecase,
     private val uploadFileAndImageUsecase: UploadFileOrImageUsecase,
     private val loginUseCase: OnboardingUsecase,
-    private val getTugasUsecase: GetTugasUsecase
+    private val getTugasUsecase: GetTugasUsecase,
+    private val getClassUsecase: GetClassUsecase,
+    private val getUserusecase: GetUserUsecase
 ) : ViewModel() {
     private val _jadwalSholat = MutableLiveData<Resource<JadwalSholatModel>>()
     val jadwalSholat: LiveData<Resource<JadwalSholatModel>> get() = _jadwalSholat
@@ -36,6 +42,12 @@ class DashboardViewModel(
 
     private val _getTugas = MutableLiveData<Resource<GetTugasModel>>()
     val getTugas: LiveData<Resource<GetTugasModel>> get() = _getTugas
+
+    private val _getClass = MutableLiveData<Resource<GetClassModel>>()
+    val getClass: LiveData<Resource<GetClassModel>> get() = _getClass
+
+    private val _getUser = MutableLiveData<Resource<GetUserModel>>()
+    val getUser: LiveData<Resource<GetUserModel>> get() = _getUser
 
     fun getJadwalSholat(timestamp: String, latitude: String, longitude: String) {
         viewModelScope.launch {
@@ -69,6 +81,22 @@ class DashboardViewModel(
         viewModelScope.launch {
             getTugasUsecase.getTugas(idKelas).collect {
                 _getTugas.value = it
+            }
+        }
+    }
+
+    fun getClass(idKelas: Int) {
+        viewModelScope.launch {
+            getClassUsecase.getClass(idKelas).collect {
+                _getClass.value = it
+            }
+        }
+    }
+
+    fun getUser() {
+        viewModelScope.launch {
+            getUserusecase.getUser().collect {
+                _getUser.value = it
             }
         }
     }

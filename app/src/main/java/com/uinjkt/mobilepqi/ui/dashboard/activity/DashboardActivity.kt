@@ -26,8 +26,8 @@ import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMainBinding
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
-import java.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
 class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
@@ -45,10 +45,12 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
     private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by viewModel<DashboardSharedViewModel>()
     private lateinit var locationService: LocationService
-    private lateinit var navController: NavController
     private val locationPermissionCode = 99
     private var doubleBackToExitPressedOnce = false
     private var isGranted = true
+
+    lateinit var navView: BottomNavigationView
+    lateinit var navController: NavController
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -77,7 +79,7 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
     }
 
     private fun initBottomNav() {
-        val navView: BottomNavigationView = binding.navView
+        navView = binding.navView
 
         navController = findNavController(R.id.nav_host_fragment_activity_home)
         navView.setupWithNavController(navController)

@@ -5,7 +5,6 @@ import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
@@ -28,6 +27,7 @@ import com.uinjkt.mobilepqi.util.openGallery
 import com.uinjkt.mobilepqi.util.uriToFile
 import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar as JavaCalendar
 
@@ -39,8 +39,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context): Intent {
-            val starter = Intent(context, ProfileInfoActivity::class.java)
-            return starter
+            return Intent(context, ProfileInfoActivity::class.java)
         }
     }
 
@@ -49,9 +48,8 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     val myCalendar: Calendar = Calendar.getInstance()
-    val myCalendarJava: JavaCalendar = JavaCalendar.getInstance()
+    private val myCalendarJava: JavaCalendar = JavaCalendar.getInstance()
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -180,7 +178,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     }
 
     @SuppressLint("SuspiciousIndentation")
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun initView() {
         val date =
             DatePickerDialog.OnDateSetListener { _, year, month, day ->
@@ -189,9 +186,9 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                     myCalendar[Calendar.MONTH] = month
                     myCalendar[Calendar.DAY_OF_MONTH] = day
                 } else {
-                    myCalendar[JavaCalendar.YEAR] = year
-                    myCalendar[JavaCalendar.MONTH] = month
-                    myCalendar[JavaCalendar.DAY_OF_MONTH] = day
+                    myCalendarJava[JavaCalendar.YEAR] = year
+                    myCalendarJava[JavaCalendar.MONTH] = month
+                    myCalendarJava[JavaCalendar.DAY_OF_MONTH] = day
                 }
                 updateLabel()
             }
@@ -203,8 +200,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 setTextIsSelectable(true)
                 isFocusable = false
             }
-            val datePicker: DatePickerDialog
-            datePicker = if(Build.VERSION.SDK_INT >= 24) {
+            val datePicker: DatePickerDialog = if (Build.VERSION.SDK_INT >= 24) {
                 DatePickerDialog(
                     this@ProfileInfoActivity, date,
                     myCalendar[Calendar.YEAR],
@@ -213,8 +209,8 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             } else {
                 DatePickerDialog(
                     this@ProfileInfoActivity, date,
-                    myCalendar[JavaCalendar.YEAR],
-                    myCalendar[JavaCalendar.MONTH], myCalendar[Calendar.DAY_OF_MONTH]
+                    myCalendarJava[JavaCalendar.YEAR],
+                    myCalendarJava[JavaCalendar.MONTH], myCalendarJava[JavaCalendar.DAY_OF_MONTH]
                 )
             }
             datePicker.datePicker.maxDate = System.currentTimeMillis()
@@ -247,11 +243,15 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("CheckResult")
     private fun showData(data: ProfilModel) {
         val myFormat = "dd/MM/yyyy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
+        if (Build.VERSION.SDK_INT >= 24) {
+            dateFormat.format(myCalendar.time)
+        } else {
+            dateFormat.format(myCalendarJava.time)
+        }
         with(binding) {
             Glide.with(this@ProfileInfoActivity)
                 .load(data.avatar)
@@ -263,21 +263,15 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             etFakultas.setText(data.faculty)
             etProdi.setText(data.major)
             etTglahir.setText(data.birth)
-            if (Build.VERSION.SDK_INT >= 24) {
-                etTglahir.setText(dateFormat.format(myCalendar.time))
-            } else {
-                etTglahir.setText(dateFormat.format(myCalendarJava.time))
-            }
             etNohp.setText(data.phone)
             etAlamat.setText(data.address)
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun initObserver() {
         viewModel.profil.observe(this) { model ->
             when (model) {
-                is Resource.Loading -> { 
+                is Resource.Loading -> {
                     showLoading(true)
                 }
                 is Resource.Success -> {
@@ -349,17 +343,19 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         binding.progressBar.isVisible = value
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
     private fun updateLabel() {
         val myFormat = "dd/MM/yyyy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         val editText = binding.etTglahir
-        editText.setText(dateFormat.format(myCalendar.time))
+        if (Build.VERSION.SDK_INT >= 24) {
+            editText.setText(dateFormat.format(myCalendar.time))
+        } else {
+            editText.setText(dateFormat.format(myCalendarJava.time))
+        }
     }
 
     private fun passwordValidate(password: String): Boolean {
         val passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\\W)(?!.*\\s).{6,}$"
         return password.matches(passwordPattern.toRegex())
     }
-
 }

@@ -20,7 +20,7 @@ data class GetTugasModel(
                 GetTugasModel(
                     idKelas = response.data?.kelasId ?: 0,
                     tugasCount = response.data?.tugasCount ?: 0,
-                    listTugas = response.data?.hafalan?.map {
+                    listTugas = response.data?.tugas?.map {
                         ListTugas(
                             idTugas = it?.id ?: 0,
                             title = it?.title ?: "",
