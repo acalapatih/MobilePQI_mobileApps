@@ -246,11 +246,14 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
     @SuppressLint("CheckResult")
     private fun showData(data: ProfilModel) {
         val myFormat = "dd/MM/yyyy"
-        val dateFormat = SimpleDateFormat(myFormat, Locale.US)
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss Z", Locale.US)
+        val newDateFormat = SimpleDateFormat(myFormat, Locale.US)
         if (Build.VERSION.SDK_INT >= 24) {
             dateFormat.format(myCalendar.time)
+            newDateFormat.format(myCalendar.time)
         } else {
             dateFormat.format(myCalendarJava.time)
+            newDateFormat.format(myCalendarJava.time)
         }
         with(binding) {
             Glide.with(this@ProfileInfoActivity)
@@ -262,7 +265,11 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             tvNomorInduk.text = data.nim
             etFakultas.setText(data.faculty)
             etProdi.setText(data.major)
-            etTglahir.setText(data.birth)
+
+            val date = dateFormat.parse(data.birth)
+            val newDate = date?.let { newDateFormat.format(it) }
+            etTglahir.setText(newDate)
+
             etNohp.setText(data.phone)
             etAlamat.setText(data.address)
         }
