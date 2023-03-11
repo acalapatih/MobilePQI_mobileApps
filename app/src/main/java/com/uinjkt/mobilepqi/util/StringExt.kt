@@ -7,3 +7,9 @@ fun String.getFileNameFromUrl(): String {
 fun String.getFileExtension(): String {
     return this.substringAfterLast('.', "")
 }
+
+fun String.capitalizeEachWord(): String {
+    return this
+        .split(" ")
+        .joinToString(" ") { it.replaceFirstChar(Char::uppercaseChar) }
+}

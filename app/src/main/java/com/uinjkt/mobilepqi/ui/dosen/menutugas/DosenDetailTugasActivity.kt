@@ -13,6 +13,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenDetailTugasBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
+import com.uinjkt.mobilepqi.util.capitalizeEachWord
 import com.uinjkt.mobilepqi.util.downloadFileToStorage
 import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -50,7 +51,8 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
     }
 
     private fun initView() {
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, "")
+        binding.tvTitleTugasDetailMahasiswa.text =
+            getString(R.string.tv_title_tugas_detail_mahasiswa, "")
         binding.tvTenggatWaktuTugasDosen.text = getString(R.string.tv_tenggat_waktu_tugas, "")
         listFileAttached = mutableListOf()
         getDetailTugas()
@@ -98,17 +100,21 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
     }
 
     private fun actionAfterGetDetailTugas(model: GetDetailTugasModel) {
-        val title = model.title
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa,"${model.topic} > $title")
+        val title = model.title.capitalizeEachWord()
+        binding.tvTitleTugasDetailMahasiswa.text =
+            getString(R.string.tv_title_tugas_detail_mahasiswa,
+                "${model.topic.capitalizeEachWord()} > $title")
         binding.tvNamaTaskTugas.text = title
-        binding.tvTenggatWaktuTugasDosen.text = getString(R.string.tv_tenggat_waktu_tugas, model.deadline.substring(0, 10))
+        binding.tvTenggatWaktuTugasDosen.text =
+            getString(R.string.tv_tenggat_waktu_tugas, model.deadline.substring(0, 10))
         binding.tvDescriptionTugasDetail.text = model.description
         listFileAttached.addAll(0, model.file)
         initAdapter()
     }
 
     private fun initAdapter() {
-        fileUploadedByDosenAdapter = MahasiswaFileUploadedByAdapterList(this, listFileAttached, "download", this)
+        fileUploadedByDosenAdapter =
+            MahasiswaFileUploadedByAdapterList(this, listFileAttached, "download", this)
         binding.rvFileUploadByDosen.adapter = fileUploadedByDosenAdapter
         binding.rvFileUploadByDosen.layoutManager = LinearLayoutManager(this)
     }
