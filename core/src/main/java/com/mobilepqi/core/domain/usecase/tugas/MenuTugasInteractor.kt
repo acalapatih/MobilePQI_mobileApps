@@ -1,6 +1,7 @@
 package com.mobilepqi.core.domain.usecase.tugas
 
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
 import com.mobilepqi.core.domain.model.tugas.*
@@ -40,4 +41,7 @@ class MenuTugasInteractor(
         idTugas: Int,
         nim: String,
     ): Flow<Resource<GetJawabanForDosenModel>> = repository.getJawabanForDosen(idTugas, nim)
+
+    override fun createNilai(request: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>> =
+        repository.createNilai(request, idJawaban)
 }

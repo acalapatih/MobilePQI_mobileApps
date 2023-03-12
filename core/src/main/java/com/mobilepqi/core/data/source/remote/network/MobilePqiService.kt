@@ -1,5 +1,6 @@
 package com.mobilepqi.core.data.source.remote.network
 
+import com.mobilepqi.core.data.source.remote.response.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
@@ -161,4 +162,10 @@ interface MobilePqiService {
         @Path("idTugas") idTugas: Int,
         @Path("nim") nim: String,
     ): GetJawabanForDosenResponse
+
+    @POST("v1/mobilepqi/kelas/tugas/jawaban/{idJawaban}")
+    suspend fun createNilai(
+        @Body payload: CreateNilaiPayload,
+        @Path("idJawaban") idJawaban: Int
+    ): CreateNilaiResponse
 }

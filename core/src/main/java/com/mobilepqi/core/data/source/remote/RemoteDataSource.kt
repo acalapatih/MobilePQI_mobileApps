@@ -4,6 +4,7 @@ import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
+import com.mobilepqi.core.data.source.remote.response.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
@@ -482,4 +483,19 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun createNilai(
+        request: CreateNilaiPayload,
+        idJawaban: Int
+    ): Flow<ApiResponse<CreateNilaiResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.createNilai(request, idJawaban)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

@@ -4,6 +4,7 @@ import com.mobilepqi.core.data.NetworkOnlyResource
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
+import com.mobilepqi.core.data.source.remote.response.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.tugas.*
 import com.mobilepqi.core.domain.model.tugas.*
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
@@ -87,5 +88,14 @@ class MenuTugasRepositoryImpl(
 
             override suspend fun createCall(): Flow<ApiResponse<GetJawabanForDosenResponse>> =
                 remoteDataSource.getJawabanForDosen(idTugas, nim)
+        }.asFlow()
+
+    override fun createNilai(payload: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>> =
+        object : NetworkOnlyResource<Boolean, CreateNilaiResponse>() {
+            override fun loadFromNetwork(data: CreateNilaiResponse): Flow<Boolean> =
+                flowOf(true)
+
+            override suspend fun createCall(): Flow<ApiResponse<CreateNilaiResponse>> =
+                remoteDataSource.createNilai(payload, idJawaban)
         }.asFlow()
 }

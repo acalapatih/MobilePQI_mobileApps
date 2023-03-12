@@ -1,6 +1,7 @@
 package com.mobilepqi.core.domain.repository.tugas
 
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
 import com.mobilepqi.core.domain.model.tugas.*
@@ -14,4 +15,5 @@ interface MenuTugasRepository {
     fun updateDetailTugas(payload: UpdateDetailTugasPayload, idTugas: Int): Flow<Resource<Boolean>>
     fun getListTugasMahasiswa(idTugas: Int, page: Int, limit: Int): Flow<Resource<GetListTugasMahasiswaModel>>
     fun getJawabanForDosen(idTugas: Int, nim: String): Flow<Resource<GetJawabanForDosenModel>>
+    fun createNilai(payload: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>>
 }

@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.EditText
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiPayload
 import com.mobilepqi.core.domain.model.tugas.GetJawabanForDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -19,6 +19,7 @@ import com.uinjkt.mobilepqi.ui.dosen.DosenFileUploadedByMahasiswaAdapter
 import com.uinjkt.mobilepqi.util.downloadFileToStorage
 import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.properties.Delegates
 
 
 class DosenBeriNilaiTugasMahasiswaActivity :
@@ -38,7 +39,7 @@ class DosenBeriNilaiTugasMahasiswaActivity :
     }
 
     private lateinit var dosenFileUploadedByMahasiswaAdapter: DosenFileUploadedByMahasiswaAdapter
-    private lateinit var editInputNilai: EditText
+    private var idJawaban by Delegates.notNull<Int>()
 
     private val viewModel by viewModel<DosenBeriNilaiTugasMahasiswaViewModel>()
     private val idTugas by lazy { intent.getIntExtra(ID_TUGAS, 0) }
@@ -66,8 +67,8 @@ class DosenBeriNilaiTugasMahasiswaActivity :
 
     @SuppressLint("CheckResult", "SetTextI18n")
     private fun initListener() {
-        editInputNilai = binding.etNilaiTugasMahasiswa
-        val nilaiStream = RxTextView.textChanges(binding.etNilaiTugasMahasiswa)
+        val editInputNilai = binding.etNilaiTugasMahasiswa
+        val nilaiStream = RxTextView.textChanges(editInputNilai)
             .skipInitialValue()
             .map { nilai ->
                 nilai.isNotEmpty()
@@ -79,15 +80,17 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                 }
             }
         }
+
+        // Listener
         binding.btnBeriNilai.setOnClickListener {
             if (editInputNilai.text.isNotEmpty()) {
-                showOneActionDialogWithInvoke("Nilai Berhasil Ditambahkan", "Okay") {
-                    onBackPressedDispatcher.onBackPressed()
-                }
+                val nilai = editInputNilai.text.toString().toInt()
+                createNilai(nilai, idJawaban)
             } else {
                 showOneActionDialog("Masukkan Nilai", "Okay")
             }
         }
+
         binding.ivLogoBackCircleButtonTugasDosen.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -96,6 +99,11 @@ class DosenBeriNilaiTugasMahasiswaActivity :
             finish()
         }
     }
+
+    private fun createNilai(nilai: Int, idJawaban: Int) {
+        viewModel.createNilai(CreateNilaiPayload(nilai), idJawaban)
+    }
+
 
     private fun initObserver() {
         viewModel.getJawabanForDosen.observe(this) { model ->
@@ -115,20 +123,40 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                 }
             }
         }
+        viewModel.createNilai.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showloading(true)
+                }
+                is Resource.Success -> {
+                    showOneActionDialogWithInvoke("Nilai Berhasil Ditambahkan", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
+                    showloading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showloading(false)
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
+        }
     }
 
     private fun afterGetJawabanForDosen(model: GetJawabanForDosenModel) {
+
         val dataUser = model.user
         val dataTugas = model.tugas
         val dataJawaban = model.jawaban
-        // Initialize Adapter
+        // Show Jawaban
         dosenFileUploadedByMahasiswaAdapter =
             DosenFileUploadedByMahasiswaAdapter(this, listOf(dataJawaban), this)
         binding.rvFileUpload.adapter = dosenFileUploadedByMahasiswaAdapter
-
-        // Set Layout Manager
         binding.rvFileUpload.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        idJawaban = dataJawaban.id
 
         // Show User
         binding.tvCekTugasNamaMahasiswa.text = dataUser.name
@@ -141,6 +169,7 @@ class DosenBeriNilaiTugasMahasiswaActivity :
         // Show Tugas
         binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, dataTugas.title)
         binding.etNilaiTugasMahasiswa.setText(dataJawaban.nilai.toString())
+
     }
 
     private fun showloading(value: Boolean) {
