@@ -152,15 +152,17 @@
                     android:id="@+id/tv_silahkan_upload_file"
                     style="@style/TextRegular20spMobilePQI"
                     android:layout_width="match_parent"
+                    android:minHeight="48dp"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:text="@string/tv_silahkan_upload_file"
-                    android:textAlignment="center" />
+                    android:text="@string/tv_silahkan_upload_file" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_file_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_margin="10dp"
                     tools:itemCount="2"
                     tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />

@@ -25,10 +25,20 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:lineSpacingExtra="3dp"
+        android:minHeight="48dp"
         android:text="@string/tv_title_tugas_detail_mahasiswa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_tugas_dosen"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_content_detail_list_mahasiswa"
@@ -36,21 +46,21 @@
         android:layout_height="0dp"
         android:layout_marginTop="22dp"
         android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa"
-        app:layout_behavior = "@string/appbar_scrolling_view_behavior">
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp">
+            android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_profile_picture_mahasiswa"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
+                android:layout_marginStart="16dp"
                 android:src="@drawable/img_user"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -109,8 +119,10 @@
                 style="@style/TextNormal18spMobilePQI"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_rounded_blue_06283d_border_2dp"
                 android:hint="@string/et_input_nilai_tugas_mahasiswa"
+                android:imeOptions="actionDone"
                 android:importantForAutofill="no"
                 android:inputType="number"
                 android:maxLength="3"
@@ -120,21 +132,19 @@
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="@id/tv_cek_tugas_nim_mahasiswa"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_title_nilai_tugas_mahasiswa"
-                android:imeOptions="actionDone" />
+                app:layout_constraintTop_toBottomOf="@id/tv_title_nilai_tugas_mahasiswa" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_file_upload"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="48dp"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_cek_tugas_nim_mahasiswa"
                 tools:itemCount="1"
-                tools:listitem="@layout/recycle_view_file_sent_by_mahasiswa"
-                android:nestedScrollingEnabled="false"/>
+                tools:listitem="@layout/recycle_view_file_sent_by_mahasiswa" />
 
             <LinearLayout
                 android:id="@+id/ll_comment_box"
@@ -190,6 +200,7 @@
                 style="@style/TextNormal16spMobilePQI"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/bg_button_06283d_48dp_ripple"

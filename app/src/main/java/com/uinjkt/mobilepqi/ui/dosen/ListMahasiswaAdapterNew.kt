@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mobilepqi.core.domain.model.tugas.GetListTugasMahasiswaModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewCekTugasMahasiswaListBinding
@@ -17,7 +18,7 @@ class ListMahasiswaAdapterNew(
 ) : RecyclerView.Adapter<ListMahasiswaAdapterNew.ViewHolder>() {
 
     interface OnUserClickListener {
-        fun onUserClickListener(position: Int)
+        fun onUserClickListener(nim: String, status: Boolean)
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
@@ -25,6 +26,10 @@ class ListMahasiswaAdapterNew(
         fun bindItem(mahasiswa: GetListTugasMahasiswaModel.JawabanItem) {
             binding.tvCekNamaMahasiswa.text = mahasiswa.name
             binding.tvCekNimMahasiswa.text = mahasiswa.nim
+            Glide.with(context)
+                .load(mahasiswa.avatar)
+                .placeholder(R.drawable.img_user)
+                .into(binding.ivProfilePictureMahasiswa)
             if(mahasiswa.status) {
                 binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
             } else {
@@ -32,7 +37,7 @@ class ListMahasiswaAdapterNew(
             }
 
             binding.root.setOnClickListener {
-                listener?.onUserClickListener(adapterPosition)
+                listener?.onUserClickListener(mahasiswa.nim, mahasiswa.status)
             }
         }
     }

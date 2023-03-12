@@ -466,4 +466,20 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun getJawabanForDosen(
+        idTugas: Int,
+        nim: String
+    ): Flow<ApiResponse<GetJawabanForDosenResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getJawabanForDosen(idTugas, nim)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 }

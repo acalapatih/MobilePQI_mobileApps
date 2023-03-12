@@ -38,6 +38,7 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
 
     private lateinit var listFileAttached: MutableList<FileItem>
     private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
+    private lateinit var title: String
 
     override fun getViewBinding(): ActivityDosenDetailTugasBinding =
         ActivityDosenDetailTugasBinding.inflate(layoutInflater)
@@ -71,11 +72,13 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         }
 
         binding.btnEditTugasDosen.setOnClickListener {
-            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity, "edit",  idTugas = idTugas)
+            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity,
+                "edit",
+                idTugas = idTugas)
         }
 
         binding.btnCekTugasMahasiswa.setOnClickListener {
-            DosenCekTugasMahasiswaActivity.start(this@DosenDetailTugasActivity, idTugas)
+            DosenCekTugasMahasiswaActivity.start(this@DosenDetailTugasActivity, idTugas, title)
         }
     }
 
@@ -100,10 +103,16 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
     }
 
     private fun actionAfterGetDetailTugas(model: GetDetailTugasModel) {
-        val title = model.title.capitalizeEachWord()
+        title = model.title
+
+        val topik = when (model.topic) {
+            "hafalan surat" -> "hafalan surah"
+            else -> model.topic
+        }
+
         binding.tvTitleTugasDetailMahasiswa.text =
             getString(R.string.tv_title_tugas_detail_mahasiswa,
-                "${model.topic.capitalizeEachWord()} > $title")
+                "${topik.capitalizeEachWord()} > ${title.capitalizeEachWord()}")
         binding.tvNamaTaskTugas.text = title
         binding.tvTenggatWaktuTugasDosen.text =
             getString(R.string.tv_tenggat_waktu_tugas, model.deadline.substring(0, 10))

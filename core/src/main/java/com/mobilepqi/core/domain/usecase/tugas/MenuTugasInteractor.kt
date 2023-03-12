@@ -3,10 +3,7 @@ package com.mobilepqi.core.domain.usecase.tugas
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
-import com.mobilepqi.core.domain.model.tugas.GetDetailTugasModel
-import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
-import com.mobilepqi.core.domain.model.tugas.GetListTugasMahasiswaModel
-import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
+import com.mobilepqi.core.domain.model.tugas.*
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
 import kotlinx.coroutines.flow.Flow
 
@@ -36,5 +33,11 @@ class MenuTugasInteractor(
         idTugas: Int,
         page: Int,
         limit: Int,
-    ): Flow<Resource<GetListTugasMahasiswaModel>> = repository.getListTugasMahasiswa(idTugas,page,limit)
+    ): Flow<Resource<GetListTugasMahasiswaModel>> =
+        repository.getListTugasMahasiswa(idTugas, page, limit)
+
+    override fun getJawabanForDosen(
+        idTugas: Int,
+        nim: String,
+    ): Flow<Resource<GetJawabanForDosenModel>> = repository.getJawabanForDosen(idTugas, nim)
 }

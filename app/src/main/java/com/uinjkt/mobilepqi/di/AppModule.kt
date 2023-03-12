@@ -95,4 +95,5 @@ val viewModelModule = module {
     viewModel { DosenTugasFilterViewModel(get()) }
     viewModel { DosenDetailTugasViewModel(get()) }
     viewModel { DosenCekTugasMahasiswaViewModel(get()) }
+    viewModel { DosenBeriNilaiTugasMahasiswaViewModel(get()) }
 }

@@ -3,10 +3,7 @@ package com.mobilepqi.core.domain.repository.tugas
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
-import com.mobilepqi.core.domain.model.tugas.GetDetailTugasModel
-import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
-import com.mobilepqi.core.domain.model.tugas.GetListTugasMahasiswaModel
-import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
+import com.mobilepqi.core.domain.model.tugas.*
 import kotlinx.coroutines.flow.Flow
 
 interface MenuTugasRepository {
@@ -16,4 +13,5 @@ interface MenuTugasRepository {
     fun getDetailTugas(idTugas: Int): Flow<Resource<GetDetailTugasModel>>
     fun updateDetailTugas(payload: UpdateDetailTugasPayload, idTugas: Int): Flow<Resource<Boolean>>
     fun getListTugasMahasiswa(idTugas: Int, page: Int, limit: Int): Flow<Resource<GetListTugasMahasiswaModel>>
+    fun getJawabanForDosen(idTugas: Int, nim: String): Flow<Resource<GetJawabanForDosenModel>>
 }

@@ -155,4 +155,10 @@ interface MobilePqiService {
         @Query("page") page: Int,
         @Query("limit") limit: Int,
     ): GetListTugasMahasiswaResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban/{nim}")
+    suspend fun getJawabanForDosen(
+        @Path("idTugas") idTugas: Int,
+        @Path("nim") nim: String,
+    ): GetJawabanForDosenResponse
 }

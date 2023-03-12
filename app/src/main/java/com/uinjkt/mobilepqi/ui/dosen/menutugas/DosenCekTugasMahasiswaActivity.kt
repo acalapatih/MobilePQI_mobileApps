@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.tugas.GetListTugasMahasiswaModel
+import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenCekTugasMahasiswaBinding
 import com.uinjkt.mobilepqi.ui.dosen.ListMahasiswaAdapterNew
@@ -18,18 +19,21 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
 
     companion object {
         @JvmStatic
-        fun start(context: Context, idTugas: Int) {
+        fun start(context: Context, idTugas: Int, title: String) {
             val starter = Intent(context, DosenCekTugasMahasiswaActivity::class.java)
                 .putExtra(ID_TUGAS, idTugas)
+                .putExtra(TITLE, title)
             context.startActivity(starter)
         }
 
         private const val ID_TUGAS = "idTugas"
+        private const val TITLE = "title"
     }
 
     private lateinit var listMahasiswaAdapter: ListMahasiswaAdapterNew
 
     private val idTugas by lazy { intent.getIntExtra(ID_TUGAS, 0) }
+    private val titleTugas by lazy { intent.getStringExtra(TITLE) ?:"" }
 
     private val viewModel by viewModel<DosenCekTugasMahasiswaViewModel>()
 
@@ -44,6 +48,7 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
     }
 
     private fun initView() {
+        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa)
         getListTugasMahasiswa()
     }
 
@@ -89,6 +94,9 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
         // Set Layout Manager
         binding.rvListMahasiswa.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        binding.tvJudulTugasDosen.text = titleTugas
+        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, titleTugas)
     }
 
     private fun showloading(value: Boolean) {
@@ -96,7 +104,12 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
         binding.nsvContentDetailListMahasiswa.isVisible = !value
     }
 
-    override fun onUserClickListener(position: Int) {
-        DosenBeriNilaiTugasMahasiswaActivity.start(this@DosenCekTugasMahasiswaActivity, position)
+    override fun onUserClickListener(nim: String, status: Boolean) {
+        if(status) {
+            DosenBeriNilaiTugasMahasiswaActivity.start(this@DosenCekTugasMahasiswaActivity, idTugas, nim)
+        } else {
+            showOneActionThinFontDialog("Mahasiswa belum mengumpulkan Tugas", "Okay")
+        }
+
     }
 }
