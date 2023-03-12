@@ -9,6 +9,9 @@ data class PutProfilPayload(
     @field:SerializedName("major")
     val major: String? = null,
 
+    @field:SerializedName("password")
+    val password: String? = null,
+
     @field:SerializedName("phone")
     val phone: String? = null,
 

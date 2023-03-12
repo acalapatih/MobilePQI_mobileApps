@@ -40,6 +40,7 @@ interface MobilePqiService {
 
     @PUT("v1/mobilepqi/users")
     suspend fun putprofil(@Body payload: PutProfilPayload): PutProfilResponse
+
     @POST("v1/mobilepqi/users/password")
     suspend fun lupaPassword(@Body payload: LupaPasswordPayload): LupaPasswordResponse
 

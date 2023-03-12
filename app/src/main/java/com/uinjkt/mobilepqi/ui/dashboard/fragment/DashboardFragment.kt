@@ -111,8 +111,7 @@ class DashboardFragment : Fragment() {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT)
-                            .show()
+                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
                     }
                 }
             }
@@ -130,7 +129,7 @@ class DashboardFragment : Fragment() {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
                         binding.tvWaktu.text = "-"
                     }
                 }
@@ -175,8 +174,7 @@ class DashboardFragment : Fragment() {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        Toast.makeText(requireContext(), "Something when worng", Toast.LENGTH_SHORT)
-                            .show()
+                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
                     }
                 }
             }
@@ -191,6 +189,7 @@ class DashboardFragment : Fragment() {
         with(binding) {
             Glide.with(this@DashboardFragment)
                 .load(data.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(imgUser)
             tvNama.text = data.name
         }
@@ -257,9 +256,9 @@ class DashboardFragment : Fragment() {
 
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
+                classIdMahasiswa = value
                 viewModel.getClass(classIdMahasiswa)
                 viewModel.getTugas(classIdMahasiswa)
-                classIdMahasiswa = value
                 Log.d("Class Id Mahasiswa", "class Id: $value")
             }
         } else {

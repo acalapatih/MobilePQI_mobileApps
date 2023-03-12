@@ -9,7 +9,6 @@ import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -169,6 +168,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             PutProfilPayload(
                 faculty = binding.etFakultas.text.toString(),
                 major = binding.etProdi.text.toString(),
+                password = binding.etPassword.text.toString(),
                 phone = binding.etNohp.text.toString(),
                 address = binding.etAlamat.text.toString(),
                 birth = binding.etTglahir.text.toString(),
@@ -215,11 +215,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             }
             datePicker.datePicker.maxDate = System.currentTimeMillis()
             datePicker.show()
-        }
-
-        binding.btnSimpanProfil.setOnClickListener {
-            val tgLahir = binding.etTglahir.text.toString()
-            Log.v("tgLahir", tgLahir)
         }
 
         binding.icEditFakultas.setOnClickListener {
@@ -321,7 +316,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     setResult(Activity.RESULT_OK)
-                    finish()
                     showOneActionDialogWithInvoke(
                         message = getString(R.string.message_profilInfo),
                         btnMessage = getString(R.string.btnMessage_profilInfo),

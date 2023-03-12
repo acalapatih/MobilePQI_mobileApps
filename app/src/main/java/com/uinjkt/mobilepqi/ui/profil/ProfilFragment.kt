@@ -58,8 +58,9 @@ class ProfilFragment : Fragment() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT)
-                        .show()
+                    model.message?.let {
+                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                    }
                 }
             }
         }
@@ -106,7 +107,7 @@ class ProfilFragment : Fragment() {
                     Intent.FLAG_ACTIVITY_CLEAR_TASK or
                     Intent.FLAG_ACTIVITY_NEW_TASK
         )
-        SigninActivity.start(requireContext())
+        startActivity(intent)
     }
 
     private fun initView() {
