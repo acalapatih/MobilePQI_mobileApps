@@ -32,6 +32,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_buat_tugas"
         app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_menu_buat_tugas_dosen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
 
     <ScrollView
         android:id="@+id/nsv_buat_tugas"
@@ -68,7 +75,7 @@
                 android:layout_marginTop="7dp"
                 android:background="@drawable/box_shape"
                 android:gravity="start"
-                android:hint="@string/tv_nama_tugas"
+                android:hint="@string/tv_judul_buat_tugas_dosen"
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:maxLines="1"
@@ -248,16 +255,6 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_deadline_spinner_dosen"
                 app:layout_constraintStart_toStartOf="@id/tv_deadline_spinner_dosen"
                 app:layout_constraintTop_toTopOf="@+id/spinner_topik_tugas" />
-
-            <ProgressBar
-                android:id="@+id/pb_loading_screen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spinner_topik_tugas" />
 
             <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/spinner_topik_tugas"

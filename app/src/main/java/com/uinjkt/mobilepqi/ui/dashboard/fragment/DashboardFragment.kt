@@ -238,7 +238,7 @@ class DashboardFragment : Fragment() {
 
     private fun redirectToMenuTugas() {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaTugasActivity.start(requireContext())
+            MahasiswaTugasActivity.start(requireContext(), classIdMahasiswa)
         } else {
             DosenTugasActivity.start(requireContext(), classIdDosen)
         }

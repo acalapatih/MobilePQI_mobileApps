@@ -80,14 +80,14 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         initView()
         initListener()
         initObserver()
+
     }
 
     private fun initView() {
         if (behavior == "buat") {
             binding.tvTitleMenuBuatTugasDosen.text =
                 getString(R.string.tv_title_menu_buat_tugas_dosen)
-            listFileAttached = emptyList<FileItem>().toMutableList()
-            Log.d("ini_log", listFileAttached.toString())
+            listFileAttached = mutableListOf()
             initAdapter()
         } else {
             binding.tvTitleMenuBuatTugasDosen.text =
@@ -148,7 +148,6 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
                     model.data?.fileUrl?.let { file ->
                         urlFile = file
                         listFileAttached.add(0, FileItem(urlFile))
-                        Log.d("ini_log", listFileAttached.toString())
                         fileUploadedByDosenAdapter.setData(listFileAttached)
                         if (!isChangingConfigurations) {
                             externalCacheDir?.let { cache -> deleteTempFile(cache) }
