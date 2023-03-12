@@ -3,23 +3,26 @@ package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
-import com.mobilepqi.core.domain.model.tambahdosen.PostTambahDosenModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+    private val listName: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
 
     companion object {
         @JvmStatic
@@ -88,6 +91,15 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                         }
                         binding.icTambahDosen.isVisible = listDosenSelected.isNotEmpty()
                     }
+
+                    binding.etSearchDosen.addTextChangedListener(object: TextWatcher {
+                        override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {}
+                        override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {}
+                        override fun afterTextChanged(editable: Editable) {
+                            //after the change calling the method and passing the search input
+                            filter(editable.toString())
+                        }
+                    })
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -118,6 +130,17 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 onButtonClicked = { onBackPressedDispatcher.onBackPressed() }
             )
         }
+    }
+
+    private fun filter(text: String) {
+        val filteredList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+        for (s in listName) {
+            if (s.name.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault()))) {
+                //adding the element to filtered list
+                filteredList.add(s)
+            }
+        }
+        tambahDosenAdapter.filterList(filteredList)
     }
 
     private fun showLoading(value: Boolean) {

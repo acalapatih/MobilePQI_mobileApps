@@ -1,5 +1,6 @@
 package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ class TambahDosenAdapter(
     var onDosenSelected: ((data: GetTambahDosenModel.GetTambahDosen) -> Unit)? = null
 
     val tempList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+    var listName: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTambahDosenBinding.bind(view)
@@ -61,4 +63,10 @@ class TambahDosenAdapter(
     }
 
     override fun getItemCount(): Int = dataset.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(filteredList: MutableList<GetTambahDosenModel.GetTambahDosen>) {
+        this.listName = filteredList
+        notifyDataSetChanged()
+    }
 }
