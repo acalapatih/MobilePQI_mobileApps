@@ -7,7 +7,6 @@ import android.icu.util.Calendar
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.ArrayAdapter
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -77,6 +76,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initAdapter()
         initView()
         initListener()
         initObserver()
@@ -87,8 +87,6 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         if (behavior == "buat") {
             binding.tvTitleMenuBuatTugasDosen.text =
                 getString(R.string.tv_title_menu_buat_tugas_dosen)
-            listFileAttached = mutableListOf()
-            initAdapter()
         } else {
             binding.tvTitleMenuBuatTugasDosen.text =
                 getString(R.string.tv_title_menu_edit_tugas_dosen, "topik", "judul tugas")
@@ -114,6 +112,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         binding.spinnerJenisTugas.adapter = spinnerJenisArrayAdapter
 
         // File Recycle View Adapter
+        listFileAttached = mutableListOf()
         fileUploadedByDosenAdapter =
             MahasiswaFileUploadedByAdapterList(this, listFileAttached, "delete", this)
         binding.rvFileUploadByDosen.adapter = fileUploadedByDosenAdapter
@@ -207,7 +206,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         binding.etDescJudulBuatTugasDosen.setText(title)
         binding.etDescDeskripsiBuatTugasDosen.setText(model.description)
         listFileAttached = model.file.toMutableList()
-        Log.d("ini_log_after", listFileAttached.toString())
+        fileUploadedByDosenAdapter.setData(listFileAttached)
         when (model.topic) {
             "praktikum qiroah" -> {
                 breadcrumbs.text =
@@ -243,7 +242,6 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
             "kelompok" -> binding.spinnerJenisTugas.setSelection(1)
         }
         binding.tvDeadlineTugas.text = model.deadline.convertTime("dd/MM/yyyy")
-        initAdapter()
     }
 
     private fun showloading(value: Boolean) {

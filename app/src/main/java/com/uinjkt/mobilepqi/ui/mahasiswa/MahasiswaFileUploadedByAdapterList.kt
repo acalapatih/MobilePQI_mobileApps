@@ -76,7 +76,6 @@ class MahasiswaFileUploadedByAdapterList(
 
     fun setData(newDataset: List<FileItem>) {
         val diffUtil = FileUploadedUtils(dataset, newDataset)
-        notifyItemRangeInserted(dataset.size, newDataset.size)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
         dataset = newDataset.toMutableList()
         diffResult.dispatchUpdatesTo(this)
