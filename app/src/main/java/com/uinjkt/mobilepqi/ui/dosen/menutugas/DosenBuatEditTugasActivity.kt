@@ -28,11 +28,6 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar as JavaCalendar
-/*
-LIST BUG:
-1. force close ketika delete file
-2. diff utils tidak bekerja baik
- */
 
 class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBinding>(),
     MahasiswaFileUploadedByAdapterList.OnUserClickListener {
