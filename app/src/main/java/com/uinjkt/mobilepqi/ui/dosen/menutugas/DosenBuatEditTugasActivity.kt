@@ -247,7 +247,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
     private fun initListener() {
         with(binding) {
             ivAttachFile.setOnClickListener {
-                openFileManagerPdf(launcherIntentFile)
+                openFileManager(launcherIntentFile)
             }
 
             ivInsertLink.setOnClickListener {

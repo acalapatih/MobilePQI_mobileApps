@@ -144,6 +144,10 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         binding.rvListTugasDosenHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        getListTugas(idKelas)
+    }
 
     override fun onUserTugasClicked(idTugas: Int) {
         DosenDetailTugasActivity.start(this@DosenTugasActivity, idTugas)
