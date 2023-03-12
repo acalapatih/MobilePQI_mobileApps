@@ -32,8 +32,8 @@ class MenuTugasInteractor(
 
     override fun getListTugasMahasiswa(
         idTugas: Int,
-        page: Int,
-        limit: Int,
+        page: Int?,
+        limit: Int?
     ): Flow<Resource<GetListTugasMahasiswaModel>> =
         repository.getListTugasMahasiswa(idTugas, page, limit)
 

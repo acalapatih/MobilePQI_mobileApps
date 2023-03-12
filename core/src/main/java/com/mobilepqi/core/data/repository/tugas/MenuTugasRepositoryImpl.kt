@@ -67,8 +67,8 @@ class MenuTugasRepositoryImpl(
 
     override fun getListTugasMahasiswa(
         idTugas: Int,
-        page: Int,
-        limit: Int,
+        page: Int?,
+        limit: Int?
     ): Flow<Resource<GetListTugasMahasiswaModel>> =
         object : NetworkOnlyResource<GetListTugasMahasiswaModel, GetListTugasMahasiswaResponse>() {
             override fun loadFromNetwork(data: GetListTugasMahasiswaResponse): Flow<GetListTugasMahasiswaModel> =

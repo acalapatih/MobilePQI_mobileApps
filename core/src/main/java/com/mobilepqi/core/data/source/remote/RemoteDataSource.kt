@@ -452,8 +452,8 @@ class RemoteDataSource(
 
     suspend fun getListTugasMahasiswa(
         idTugas: Int,
-        page: Int,
-        limit: Int
+        page: Int? = null,
+        limit: Int? = null
     ): Flow<ApiResponse<GetListTugasMahasiswaResponse>> {
         return flow {
             try {

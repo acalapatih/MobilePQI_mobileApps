@@ -13,7 +13,7 @@ interface MenuTugasUseCase {
     fun getLisTopicTugas(idKelas: Int, topic: String): Flow<Resource<GetListTopicTugasModel>>
     fun getDetailTugas(idTugas: Int): Flow<Resource<GetDetailTugasModel>>
     fun updateDetailTugas(request: UpdateDetailTugasPayload, idTugas: Int): Flow<Resource<Boolean>>
-    fun getListTugasMahasiswa(idTugas: Int, page: Int, limit: Int): Flow<Resource<GetListTugasMahasiswaModel>>
+    fun getListTugasMahasiswa(idTugas: Int, page: Int? = null, limit: Int? = null): Flow<Resource<GetListTugasMahasiswaModel>>
     fun getJawabanForDosen(idTugas: Int, nim: String): Flow<Resource<GetJawabanForDosenModel>>
     fun createNilai(request: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>>
 }

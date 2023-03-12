@@ -16,9 +16,9 @@ class DosenCekTugasMahasiswaViewModel(
     private val _getListTugasMahasiswa = MutableLiveData<Resource<GetListTugasMahasiswaModel>>()
     val getListTugasMahasiswa: LiveData<Resource<GetListTugasMahasiswaModel>> get() = _getListTugasMahasiswa
 
-    fun getListTugasMahasiswa(idTugas: Int, page: Int = 0, limit: Int = 0) {
+    fun getListTugasMahasiswa(idTugas: Int, page: Int? = null, limit: Int? = null) {
         viewModelScope.launch {
-            useCase.getListTugasMahasiswa(idTugas,page,limit).collect {
+            useCase.getListTugasMahasiswa(idTugas, page, limit).collect {
                 _getListTugasMahasiswa.value = it
             }
         }
