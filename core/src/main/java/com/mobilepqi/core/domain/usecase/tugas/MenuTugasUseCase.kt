@@ -5,6 +5,7 @@ import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
 import com.mobilepqi.core.domain.model.tugas.GetDetailTugasModel
 import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
+import com.mobilepqi.core.domain.model.tugas.GetListTugasMahasiswaModel
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import kotlinx.coroutines.flow.Flow
 
@@ -14,4 +15,5 @@ interface MenuTugasUseCase {
     fun getLisTopicTugas(idKelas: Int, topic: String): Flow<Resource<GetListTopicTugasModel>>
     fun getDetailTugas(idTugas: Int): Flow<Resource<GetDetailTugasModel>>
     fun updateDetailTugas(request: UpdateDetailTugasPayload, idTugas: Int): Flow<Resource<Boolean>>
+    fun getListTugasMahasiswa(idTugas: Int, page: Int, limit: Int): Flow<Resource<GetListTugasMahasiswaModel>>
 }

@@ -75,7 +75,7 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         }
 
         binding.btnCekTugasMahasiswa.setOnClickListener {
-            DosenCekTugasMahasiswaActivity.start(this@DosenDetailTugasActivity)
+            DosenCekTugasMahasiswaActivity.start(this@DosenDetailTugasActivity, idTugas)
         }
     }
 

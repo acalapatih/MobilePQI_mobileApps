@@ -35,10 +35,7 @@ import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
-import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenBuatEditTugasViewModel
-import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenDetailTugasViewModel
-import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasFilterViewModel
-import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.*
 import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasViewModel
@@ -97,4 +94,5 @@ val viewModelModule = module {
     viewModel { DosenBuatEditTugasViewModel(get(), get()) }
     viewModel { DosenTugasFilterViewModel(get()) }
     viewModel { DosenDetailTugasViewModel(get()) }
+    viewModel { DosenCekTugasMahasiswaViewModel(get()) }
 }

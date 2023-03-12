@@ -448,4 +448,22 @@ class RemoteDataSource(
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun getListTugasMahasiswa(
+        idTugas: Int,
+        page: Int,
+        limit: Int
+    ): Flow<ApiResponse<GetListTugasMahasiswaResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.getListTugasMahasiswa(idTugas, page, limit)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
 }
