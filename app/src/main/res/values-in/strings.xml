@@ -68,7 +68,7 @@
     <string name="tv_titleappbar_tugas">Tugas</string>
     <string name="desc_iv_task_tugas">Icon Task Tugas</string>
     <string name="tv_nama_task_tugas">Tugas 1</string>
-    <string name="tv_tenggat_waktu_tugas">Tenggat Waktu : %s \n(23:59)</string>
+    <string name="tv_tenggat_waktu_tugas">Tenggat Waktu : %s</string>
     <string name="tv_tugas_praktikum_qiroah">Praktikum Qiroah</string>
     <string name="tv_belum_ada_tugas_qiroah">Belum ada tugas praktikum qiroah</string>
     <string name="tv_tugas_praktikum_ibadah">Praktikum Ibadah</string>

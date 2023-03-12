@@ -243,20 +243,13 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
             "individu" -> binding.spinnerJenisTugas.setSelection(0)
             "kelompok" -> binding.spinnerJenisTugas.setSelection(1)
         }
-        binding.tvDeadlineTugas.text = convertTime(model.deadline.substring(0, 10))
+        binding.tvDeadlineTugas.text = model.deadline.convertTime("dd/MM/yyyy")
         initAdapter()
-    }
-
-    private fun convertTime(time: String): String {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
-        val newDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-
-        return dateFormat.parse(time)?.let { newDateFormat.format(it) }.toString()
     }
 
     private fun showloading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
-        binding.btnPostingTugasBaruDosen.isVisible = !value
+        binding.nsvBuatTugas.isVisible = !value
     }
 
     private fun initListener() {

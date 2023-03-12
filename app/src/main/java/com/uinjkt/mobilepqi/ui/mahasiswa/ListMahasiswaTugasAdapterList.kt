@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mobilepqi.core.domain.model.common.TugasItem
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewListTugasBinding
+import com.uinjkt.mobilepqi.util.convertTime
 
 class ListMahasiswaTugasAdapterList(
     private val context: Context,
@@ -23,7 +24,7 @@ class ListMahasiswaTugasAdapterList(
         private val binding = RecycleViewListTugasBinding.bind(view)
         fun bindItem(listTugas: TugasItem) {
             binding.tvNamaTaskTugas.text = listTugas.title
-            binding.tvTenggatWaktuTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, listTugas.deadline?.substring(0,10))
+            binding.tvTenggatWaktuTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, listTugas.deadline?.convertTime("EEEE, dd MMMM yyyy (HH:mm)"))
             itemView.setOnClickListener{
                 listener?.onUserTugasClicked(listTugas.id ?:0)
             }

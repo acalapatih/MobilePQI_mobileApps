@@ -16,6 +16,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenBeriNilaiTugasMahasiswaBinding
 import com.uinjkt.mobilepqi.ui.dosen.DosenFileUploadedByMahasiswaAdapter
+import com.uinjkt.mobilepqi.util.capitalizeEachWord
 import com.uinjkt.mobilepqi.util.downloadFileToStorage
 import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -167,7 +168,7 @@ class DosenBeriNilaiTugasMahasiswaActivity :
             .into(binding.ivProfilePictureMahasiswa)
 
         // Show Tugas
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, dataTugas.title)
+        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, "${dataTugas.title.capitalizeEachWord()} > ${dataTugas.topic.capitalizeEachWord()}")
         binding.etNilaiTugasMahasiswa.setText(dataJawaban.nilai.toString())
 
     }

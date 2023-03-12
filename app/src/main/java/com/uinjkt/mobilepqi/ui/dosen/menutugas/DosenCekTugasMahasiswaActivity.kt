@@ -12,6 +12,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenCekTugasMahasiswaBinding
 import com.uinjkt.mobilepqi.ui.dosen.ListMahasiswaAdapterNew
+import com.uinjkt.mobilepqi.util.capitalizeEachWord
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasiswaBinding>(),
@@ -19,21 +20,24 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
 
     companion object {
         @JvmStatic
-        fun start(context: Context, idTugas: Int, title: String) {
+        fun start(context: Context, idTugas: Int, topic: String, title: String) {
             val starter = Intent(context, DosenCekTugasMahasiswaActivity::class.java)
                 .putExtra(ID_TUGAS, idTugas)
+                .putExtra(TOPIC, topic)
                 .putExtra(TITLE, title)
             context.startActivity(starter)
         }
 
         private const val ID_TUGAS = "idTugas"
+        private const val TOPIC = "topik"
         private const val TITLE = "title"
     }
 
     private lateinit var listMahasiswaAdapter: ListMahasiswaAdapterNew
 
     private val idTugas by lazy { intent.getIntExtra(ID_TUGAS, 0) }
-    private val titleTugas by lazy { intent.getStringExtra(TITLE) ?:"" }
+    private val titleTugas by lazy { intent.getStringExtra(TITLE) ?: "" }
+    private val topikTugas by lazy { intent.getStringExtra(TOPIC) ?: "" }
 
     private val viewModel by viewModel<DosenCekTugasMahasiswaViewModel>()
 
@@ -48,7 +52,9 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
     }
 
     private fun initView() {
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa)
+        binding.tvTitleTugasDetailMahasiswa.text =
+            getString(R.string.tv_title_tugas_detail_mahasiswa,
+                "${topikTugas.capitalizeEachWord()} > ${titleTugas.capitalizeEachWord()}")
         getListTugasMahasiswa()
     }
 
@@ -96,7 +102,6 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.tvJudulTugasDosen.text = titleTugas
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, titleTugas)
     }
 
     private fun showloading(value: Boolean) {
@@ -105,8 +110,10 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
     }
 
     override fun onUserClickListener(nim: String, status: Boolean) {
-        if(status) {
-            DosenBeriNilaiTugasMahasiswaActivity.start(this@DosenCekTugasMahasiswaActivity, idTugas, nim)
+        if (status) {
+            DosenBeriNilaiTugasMahasiswaActivity.start(this@DosenCekTugasMahasiswaActivity,
+                idTugas,
+                nim)
         } else {
             showOneActionThinFontDialog("Mahasiswa belum mengumpulkan Tugas", "Okay")
         }
