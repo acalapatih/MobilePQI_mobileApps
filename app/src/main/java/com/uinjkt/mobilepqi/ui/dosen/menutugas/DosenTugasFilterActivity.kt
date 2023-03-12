@@ -150,6 +150,8 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
 
     private fun actionAfterGetListTopicTugas(model: GetListTopicTugasModel) {
         initListTugasAdapter(model)
+        binding.tvBelumAdaTugasQiroahFilter.text = getString(R.string.tv_belum_ada_tugas, titleTopic)
+        binding.tvBelumAdaTugasQiroahFilter.isVisible = model.tugas?.isEmpty() ?:true
     }
 
     private fun initListTugasAdapter(model: GetListTopicTugasModel) {

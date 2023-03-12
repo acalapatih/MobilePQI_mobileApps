@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.common.JenisTugas
+import com.mobilepqi.core.domain.model.common.TugasItem
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -108,7 +109,13 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
 
     private fun actionAfterGetListTugas(model: GetListTugasModel) {
         initAdapter(model)
+        binding.tvBelumAdaTugasPraktikumQiroahDosen.isVisible = checkEmptyTugas(model.qiroah)
+        binding.tvBelumAdaTugasPraktikumIbadahDosen.isVisible = checkEmptyTugas(model.ibadah)
+        binding.tvBelumAdaTugasHafalanSurahDosen.isVisible = checkEmptyTugas(model.surah)
+        binding.tvBelumAdaTugasHafalanDoaDosen.isVisible = checkEmptyTugas(model.doa)
     }
+
+    private fun checkEmptyTugas(listTugas: List<TugasItem>) : Boolean = listTugas.isEmpty()
 
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value

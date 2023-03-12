@@ -142,7 +142,11 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
                 is Resource.Success -> {
                     model.data?.fileUrl?.let { file ->
                         urlFile = file
-                        listFileAttached.add(0, FileItem(urlFile))
+                        if (listFileAttached.isEmpty()) {
+                            listFileAttached.addAll(listOf(FileItem(urlFile)))
+                        } else {
+                            listFileAttached.add(0, FileItem(urlFile))
+                        }
                         fileUploadedByDosenAdapter.setData(listFileAttached)
                         if (!isChangingConfigurations) {
                             externalCacheDir?.let { cache -> deleteTempFile(cache) }
@@ -206,30 +210,38 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         when (model.topic) {
             "praktikum qiroah" -> {
                 breadcrumbs.text =
-                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                    getString(
+                        R.string.tv_title_menu_edit_tugas_dosen,
                         "Praktikum Qiroah",
-                        title.capitalizeEachWord())
+                        title.capitalizeEachWord()
+                    )
                 binding.spinnerTopikTugas.setSelection(0)
             }
             "praktikum ibadah" -> {
                 breadcrumbs.text =
-                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                    getString(
+                        R.string.tv_title_menu_edit_tugas_dosen,
                         "Praktikum Ibadah",
-                        title.capitalizeEachWord())
+                        title.capitalizeEachWord()
+                    )
                 binding.spinnerTopikTugas.setSelection(1)
             }
             "hafalan doa" -> {
                 breadcrumbs.text =
-                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                    getString(
+                        R.string.tv_title_menu_edit_tugas_dosen,
                         "Hafalan Doa",
-                        title.capitalizeEachWord())
+                        title.capitalizeEachWord()
+                    )
                 binding.spinnerTopikTugas.setSelection(2)
             }
             "hafalan surat" -> {
                 breadcrumbs.text =
-                    getString(R.string.tv_title_menu_edit_tugas_dosen,
+                    getString(
+                        R.string.tv_title_menu_edit_tugas_dosen,
                         "Hafalan Surah",
-                        title.capitalizeEachWord())
+                        title.capitalizeEachWord()
+                    )
                 binding.spinnerTopikTugas.setSelection(3)
             }
         }
@@ -389,9 +401,11 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedFile, this, "pdf")
-            viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.TUGAS,
+            viewModel.uploadFileOrImage(
+                Constant.UPLOAD_KEY.TUGAS,
                 Constant.UPLOAD_TYPE.FILE,
-                myFile)
+                myFile
+            )
         }
     }
 
@@ -401,9 +415,11 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
             val myFile = uriToFile(selectedFile, this, "image")
-            viewModel.uploadFileOrImage(Constant.UPLOAD_KEY.TUGAS,
+            viewModel.uploadFileOrImage(
+                Constant.UPLOAD_KEY.TUGAS,
                 Constant.UPLOAD_TYPE.IMAGE,
-                myFile)
+                myFile
+            )
         }
     }
 
