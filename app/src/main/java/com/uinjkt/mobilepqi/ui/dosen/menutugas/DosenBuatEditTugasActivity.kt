@@ -110,6 +110,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
         listFileAttached = mutableListOf()
         fileUploadedByDosenAdapter =
             MahasiswaFileUploadedByAdapterList(this, listFileAttached, "delete", this)
+        fileUploadedByDosenAdapter.setData(listFileAttached)
         binding.rvFileUploadByDosen.adapter = fileUploadedByDosenAdapter
         binding.rvFileUploadByDosen.layoutManager = LinearLayoutManager(this)
     }
