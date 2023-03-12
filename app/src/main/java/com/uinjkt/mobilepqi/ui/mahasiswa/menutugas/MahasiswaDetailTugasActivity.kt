@@ -9,11 +9,15 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobilepqi.core.domain.model.common.FileItem
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.data.DataSourceTugas
 import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaDetailTugasBinding
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenDetailTugasViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapter
+import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBinding>(), MahasiswaFileUploadedByAdapter.OnUserClickListener {
 
@@ -24,17 +28,31 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
+        fun start(context: Context, idTugas: Int) {
             val starter = Intent(context, MahasiswaDetailTugasActivity::class.java)
+                .putExtra(ID_TUGAS, idTugas)
             context.startActivity(starter)
         }
+        private const val ID_TUGAS = "topic"
     }
+
+    private val idTugas by lazy { intent.getIntExtra(ID_TUGAS, 0) }
+
+    private val viewModel by viewModel<DosenDetailTugasViewModel>()
+
+    private lateinit var listFileAttached: MutableList<FileItem>
+    private lateinit var fileUploadedByDosenAdapter: MahasiswaFileUploadedByAdapterList
+    private lateinit var topic: String
+    private lateinit var title: String
 
     override fun getViewBinding(): ActivityMahasiswaDetailTugasBinding = ActivityMahasiswaDetailTugasBinding.inflate(layoutInflater)
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
+        initListener()
+        initObserver()
 
         listTugasDosen = DataSourceTugas().dataTugas
         listTugasMhs = DataSourceTugas().getDataUploadTugas()
@@ -75,6 +93,18 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
             finish()
         }
 
+    }
+
+    private fun initView() {
+        TODO("Not yet implemented")
+    }
+
+    private fun initListener() {
+        TODO("Not yet implemented")
+    }
+
+    private fun initObserver() {
+        TODO("Not yet implemented")
     }
 
     override fun onUserClickListener(action: String) {

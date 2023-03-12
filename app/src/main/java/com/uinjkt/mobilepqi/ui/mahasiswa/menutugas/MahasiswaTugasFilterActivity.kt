@@ -62,7 +62,7 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
     }
 
     override fun onUserTugasClicked(position: Int) {
-        MahasiswaDetailTugasActivity.start(this@MahasiswaTugasFilterActivity)
+        MahasiswaDetailTugasActivity.start(this@MahasiswaTugasFilterActivity, 1)
     }
 
     override fun onUserJenisTugasClicked(data: DataJenisTugas) {
