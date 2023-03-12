@@ -15,6 +15,9 @@ data class GetListTugasMahasiswaResponse(
 ) {
 	data class Data(
 
+		@field:SerializedName("errors")
+		val errors: String? = null,
+
 		@field:SerializedName("count")
 		val count: Int? = null,
 

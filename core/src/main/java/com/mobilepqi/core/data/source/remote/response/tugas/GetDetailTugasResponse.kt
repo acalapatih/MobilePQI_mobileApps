@@ -15,6 +15,9 @@ data class GetDetailTugasResponse(
 ) {
 	data class Data(
 
+		@field:SerializedName("errors")
+		val errors: String? = null,
+
 		@field:SerializedName("file")
 		val file: List<FileItem?>? = null,
 

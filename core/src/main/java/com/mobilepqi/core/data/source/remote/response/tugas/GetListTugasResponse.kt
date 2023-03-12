@@ -15,6 +15,9 @@ data class GetListTugasResponse(
 ) {
 	data class Data(
 
+		@field:SerializedName("errors")
+		val errors: String? = null,
+
 		@field:SerializedName("doa")
 		val doa: List<DoaItem?>? = null,
 
