@@ -181,4 +181,8 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         initView()
     }
 
+    override fun onRestart() {
+        super.onRestart()
+        getListTugas()
+    }
 }

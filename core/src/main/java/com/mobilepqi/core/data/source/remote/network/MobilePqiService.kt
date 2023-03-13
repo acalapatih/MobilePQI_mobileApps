@@ -173,4 +173,10 @@ interface MobilePqiService {
     suspend fun getJawabanForMahasiswa(
         @Path("idTugas") idTugas: Int
     ): GetJawabanForMahasiswaResponse
+
+    @POST("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban")
+    suspend fun createJawaban(
+        @Body payload: CreateJawabanPayload,
+        @Path("idTugas") idTugas: Int
+    ): CreateJawabanResponse
 }

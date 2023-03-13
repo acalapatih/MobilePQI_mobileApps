@@ -146,5 +146,8 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
         MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas, data.titleJenisTugas)
     }
 
-
+    override fun onRestart() {
+        super.onRestart()
+        getListTugas()
+    }
 }

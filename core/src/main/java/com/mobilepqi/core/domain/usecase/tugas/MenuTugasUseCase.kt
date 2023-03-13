@@ -1,6 +1,7 @@
 package com.mobilepqi.core.domain.usecase.tugas
 
 import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateJawabanPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.CreateTugasPayload
 import com.mobilepqi.core.data.source.remote.response.tugas.UpdateDetailTugasPayload
@@ -17,4 +18,5 @@ interface MenuTugasUseCase {
     fun getJawabanForDosen(idTugas: Int, nim: String): Flow<Resource<GetJawabanForDosenModel>>
     fun createNilai(request: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>>
     fun getJawabanForMahasiswa(idTugas: Int): Flow<Resource<GetJawabanForMahasiswaModel>>
+    fun createJawaban(request: CreateJawabanPayload, idTugas: Int): Flow<Resource<Boolean>>
 }

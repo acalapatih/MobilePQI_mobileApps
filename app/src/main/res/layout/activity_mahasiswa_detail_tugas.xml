@@ -95,9 +95,9 @@
                     android:id="@+id/tv_nama_task_tugas"
                     style="@style/TextBold20spMobilePQI"
                     android:layout_width="wrap_content"
-                    android:maxWidth="240dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:maxWidth="220dp"
                     android:text="@string/tv_nama_task_tugas" />
 
 
@@ -134,9 +134,7 @@
                 style="@style/TextNormal16spMobilePQI"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginTop="16dp"
                 android:justificationMode="inter_word"
                 android:text="@string/tv_description_tugas_detail"
                 app:layout_constraintEnd_toEndOf="@id/ll_desc_task_tugas_mahasiswa"
@@ -149,7 +147,6 @@
                 android:id="@+id/rv_file_upload_by_dosen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"
                 android:nestedScrollingEnabled="false"
@@ -186,21 +183,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:minHeight="48dp"
-                    android:text="@string/tv_silahkan_upload_file" />
+                    android:text="@string/tv_silahkan_upload_file"
+                    android:visibility="gone" />
 
                 <ProgressBar
                     android:id="@+id/pb_file_loading"
+                    android:minHeight="48dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_file_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:nestedScrollingEnabled="false"
                     tools:itemCount="2"
                     tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
 
@@ -211,9 +211,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="21dp"
                     android:background="@drawable/bg_button_stroke6199c1_ripple"
-                    android:visibility="gone"
                     android:text="@string/btn_tambah_file_upload"
-                    android:textAllCaps="false" />
+                    android:textAllCaps="false"
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_kirim_file_upload"
@@ -221,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="21dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_button_06283d_48dp_ripple"
                     android:fontFamily="@font/inter_medium"
                     android:text="@string/btn_kirim_file_upload"

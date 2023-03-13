@@ -101,5 +101,5 @@ val viewModelModule = module {
     viewModel { DosenBeriNilaiTugasMahasiswaViewModel(get()) }
     viewModel { MahasiswaTugasViewModel(get()) }
     viewModel { MahasiswaTugasFilterViewModel(get()) }
-    viewModel { MahasiswaDetailTugasViewModel(get())}
+    viewModel { MahasiswaDetailTugasViewModel(get(), get())}
 }

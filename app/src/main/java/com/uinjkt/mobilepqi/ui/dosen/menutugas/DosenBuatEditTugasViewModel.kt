@@ -17,7 +17,7 @@ import java.io.File
 
 class DosenBuatEditTugasViewModel(
     private val useCase: MenuTugasUseCase,
-    private val uploadFileAndImageUsecase: UploadFileOrImageUsecase,
+    private val uploadFileAndImageUsecase: UploadFileOrImageUsecase
 ) : ViewModel() {
     private val _createTugas = MutableLiveData<Resource<Boolean>>()
     val createTugas: LiveData<Resource<Boolean>> get() = _createTugas
