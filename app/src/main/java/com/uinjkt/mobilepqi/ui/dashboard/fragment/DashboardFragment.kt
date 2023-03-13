@@ -351,11 +351,11 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         private const val FORMAT_DATE_TIME = "dd/MM/yyyy HH:mm"
     }
 
-    override fun onUserClicked(classId: Int, clicked: String) {
+    override fun onUserClicked(tugasId: Int, clicked: String) {
         if (viewModel.userRole.value.equals("mahasiswa")) {
-            MahasiswaDetailTugasActivity.start(requireContext())
+            MahasiswaDetailTugasActivity.start(requireContext(), tugasId)
         } else {
-            DosenDetailTugasActivity.start(requireContext())
+            DosenDetailTugasActivity.start(requireContext(), tugasId)
         }
     }
 }

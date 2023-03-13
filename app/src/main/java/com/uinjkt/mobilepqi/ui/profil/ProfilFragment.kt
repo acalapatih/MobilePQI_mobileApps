@@ -70,6 +70,7 @@ class ProfilFragment : Fragment() {
         with(binding) {
             Glide.with(this@ProfilFragment)
                 .load(data.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(imgUser)
             tvNama.text = data.name
             tvNomorInduk.text = data.nim
