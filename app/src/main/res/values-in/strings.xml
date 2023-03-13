@@ -152,7 +152,7 @@
     <string name="tv_update">Anda memposting tugas baru</string>
     <string name="tv_tanggal_tugas">29 November 2022</string>
     <string name="tv_nama_tugas">Tugas 6</string>
-    <string name="tv_deadline_tugas">Tenggat waktu : 30 Desember 2022</string>
+    <string name="tv_deadline_tugas">30 Desember 2022</string>
     <string name="tv_tanggal_hafalan">29 November 2022</string>
     <string name="tv_nama_hafalan">Surah An-Naba</string>
     <string name="tv_deadline_hafalan">Tenggat waktu : 30 Desember 2022</string>
@@ -233,4 +233,5 @@
     <string name="btn_beri_nilai">Beri Nilai</string>
     <string name="tv_nilai">Nilai</string>
     <string name="tv_title_menu_edit_tugas_dosen"><![CDATA[Tugas > Praktikum Ibadah > Tugas 6 > Edit Tugas]]></string>
+    <string name="tv_label_deadline_tugas">Tenggat Waktu : </string>
 </resources>
