@@ -5,6 +5,7 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 fun String.convertTime(newPattern: String): String {
     val output = SimpleDateFormat(newPattern, Locale("id", "ID"))
     var outputString = this
@@ -16,3 +17,4 @@ fun String.convertTime(newPattern: String): String {
     }
     return outputString
 }
+

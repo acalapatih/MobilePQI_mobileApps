@@ -6,33 +6,35 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.mobilepqi.core.domain.model.common.TugasItem
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.RecycleViewListTugasBinding
+import com.uinjkt.mobilepqi.util.convertTime
 
-class ListMahasiswaTugasAdapter(
+class ListMahasiswaTugasAdapterList(
     private val context: Context,
-    private val dataset: MutableList<DataTugas>,
+    private val dataset: List<TugasItem>,
     private val listener: OnUserClickTugasListener? = null
-) : RecyclerView.Adapter<ListMahasiswaTugasAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ListMahasiswaTugasAdapterList.ViewHolder>() {
 
     interface OnUserClickTugasListener {
-        fun onUserTugasClicked(position: Int)
+        fun onUserTugasClicked(idTugas: Int)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewListTugasBinding.bind(view)
-        fun bindItem(listTugas: DataTugas, position: Int) {
-            if (listTugas.doneStatus){
+        fun bindItem(listTugas: TugasItem) {
+            binding.tvNamaTaskTugas.text = listTugas.title
+            binding.tvTenggatWaktuTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, listTugas.deadline?.convertTime("EEEE, dd MMMM yyyy (HH:mm)"))
+            if (listTugas.status == true) {
+                binding.clTaskTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
+            } else {
                 binding.clTaskTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
             }
-            binding.tvNamaTaskTugas.text = listTugas.titleNameTugas
-            binding.tvTenggatWaktuTugas.text = listTugas.dateDeadlineTugas
             itemView.setOnClickListener{
-                listener?.onUserTugasClicked(position)
+                listener?.onUserTugasClicked(listTugas.id ?:0)
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,7 +46,7 @@ class ListMahasiswaTugasAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(dataset[position], position)
+        holder.bindItem(dataset[position])
     }
 
     override fun getItemCount(): Int = dataset.size

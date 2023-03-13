@@ -34,6 +34,8 @@ import com.mobilepqi.core.domain.usecase.silabus.SilabusInteractor
 import com.mobilepqi.core.domain.usecase.silabus.SilabusUsecase
 import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenInteractor
 import com.mobilepqi.core.domain.usecase.tambahdosen.TambahDosenUsecase
+import com.mobilepqi.core.domain.usecase.tugas.MenuTugasInteractor
+import com.mobilepqi.core.domain.usecase.tugas.MenuTugasUseCase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageInteractor
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
@@ -43,6 +45,7 @@ import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.*
 import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasViewModel
@@ -53,6 +56,9 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahViewMod
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaDetailTugasViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasFilterViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasViewModel
 import com.uinjkt.mobilepqi.ui.profil.ProfilViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
@@ -77,6 +83,7 @@ val useCaseModule = module {
     factory<DetailKelasUsecase> { DetailKelasInteractor(get()) }
     factory<LupaPasswordUsecase> { LupaPasswordInteractor(get()) }
     factory<SilabusUsecase> { SilabusInteractor(get()) }
+    factory<MenuTugasUseCase> { MenuTugasInteractor(get()) }
     factory<GetTugasUsecase> { GetTugasInteractor(get()) }
     factory<GetClassUsecase> { GetClassInteractor(get()) }
     factory<GetUserUsecase> { GetUserInteractor(get()) }
@@ -105,4 +112,13 @@ val viewModelModule = module {
     viewModel { LupaPasswordViewModel(get()) }
     viewModel { DosenSilabusViewModel(get(), get()) }
     viewModel { MahasiswaSilabusViewModel(get()) }
+    viewModel { DosenTugasViewModel(get()) }
+    viewModel { DosenBuatEditTugasViewModel(get(), get()) }
+    viewModel { DosenTugasFilterViewModel(get()) }
+    viewModel { DosenDetailTugasViewModel(get()) }
+    viewModel { DosenCekTugasMahasiswaViewModel(get()) }
+    viewModel { DosenBeriNilaiTugasMahasiswaViewModel(get()) }
+    viewModel { MahasiswaTugasViewModel(get()) }
+    viewModel { MahasiswaTugasFilterViewModel(get()) }
+    viewModel { MahasiswaDetailTugasViewModel(get(), get())}
 }

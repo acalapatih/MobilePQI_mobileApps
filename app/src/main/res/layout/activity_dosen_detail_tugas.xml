@@ -25,21 +25,32 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:lineSpacingExtra="3dp"
+        android:minHeight="48dp"
         android:text="@string/tv_title_tugas_detail_mahasiswa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_tugas_dosen"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa" />
+
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsv_content_detail_tugas_dosen"
+        android:id="@+id/nsv_content_detail"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="16dp"
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo_back_circle_button_tugas_dosen">
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -115,15 +126,12 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_file_upload_by_dosen"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="20dp"
                 android:nestedScrollingEnabled="false"
                 app:layout_constraintBottom_toTopOf="@id/btn_edit_tugas_dosen"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_description_tugas_detail"
                 app:layout_constraintVertical_bias="0"
                 tools:itemCount="1"
@@ -140,8 +148,8 @@
                 android:text="@string/btn_edit_tugas_dosen"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toTopOf="@id/btn_cek_tugas_mahasiswa"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_cek_tugas_mahasiswa"
@@ -154,9 +162,9 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="@id/btn_edit_tugas_dosen"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/btn_edit_tugas_dosen"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toStartOf="@id/btn_edit_tugas_dosen" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

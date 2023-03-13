@@ -4,54 +4,81 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.common.JenisTugas
+import com.mobilepqi.core.domain.model.tugas.GetListTopicTugasModel
+import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
-import com.uinjkt.mobilepqi.data.DataJenisTugas
-import com.uinjkt.mobilepqi.data.DataSourceJenisTugas
-import com.uinjkt.mobilepqi.data.DataSourceTugas
-import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaTugasFilteredBinding
-import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapter
-import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapter
+import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapterList
+import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFilteredBinding>(), ListMahasiswaTugasAdapter.OnUserClickTugasListener, MenuMahasiswaJenisTugasAdapter.OnUserClickJenisTugasListener {
-    private lateinit var listJenisTugas: MutableList<DataJenisTugas>
-    private lateinit var listTugas: MutableList<DataTugas>
-    private lateinit var mahasiswaJenisTugasAdapter: MenuMahasiswaJenisTugasAdapter
-    private lateinit var mahasiswaTugasFilterAdapter: ListMahasiswaTugasAdapter
+class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFilteredBinding>(),
+    ListMahasiswaTugasAdapterList.OnUserClickTugasListener,
+    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener {
 
     companion object {
         @JvmStatic
-        fun start(context: Context, idPosition: Int) {
+        fun start(context: Context, idKelas: Int, topic: String) {
             val starter = Intent(context, MahasiswaTugasFilterActivity::class.java)
-                .putExtra(ID, idPosition)
+                .putExtra(ID_KELAS, idKelas)
+                .putExtra(TOPIC, topic)
             context.startActivity(starter)
         }
 
-        private const val ID = "id"
+        private const val ID_KELAS = "idKelas"
+        private const val TOPIC = "topic"
     }
 
-    override fun getViewBinding(): ActivityMahasiswaTugasFilteredBinding = ActivityMahasiswaTugasFilteredBinding.inflate(layoutInflater)
+    private val listJenisTugas by lazy {
+        mutableListOf(
+            JenisTugas("Praktikum Qiroah", false),
+            JenisTugas("Praktikum Ibadah", false),
+            JenisTugas("Hafalan Surah", false),
+            JenisTugas("Hafalan Doa", false),
+        )
+    }
+
+    private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private val titleTopic by lazy { intent.getStringExtra(TOPIC) }
+
+    private lateinit var mahasiswaJenisTugasAdapter: MenuMahasiswaJenisTugasAdapterNew
+    private lateinit var mahasiswaTugasFilterAdapter: ListMahasiswaTugasAdapterList
+    private val viewModel by viewModel<MahasiswaTugasFilterViewModel>()
+    private lateinit var topic: String
+
+    override fun getViewBinding(): ActivityMahasiswaTugasFilteredBinding =
+        ActivityMahasiswaTugasFilteredBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Initialize data.
-        listJenisTugas = DataSourceJenisTugas().getDataJenisTugas(intent.getIntExtra(ID,2))
-        listTugas = DataSourceTugas().dataTugas
+        topic = getSelectedTopic(titleTopic ?: "all")
+        initView()
+        initListener()
+        initObserver()
+    }
 
-        // Initialize Adapter Jenis Tugas
-        mahasiswaJenisTugasAdapter = MenuMahasiswaJenisTugasAdapter(this, listJenisTugas, this)
+    private fun initView() {
+        initJenisTugasAdapter()
+        getListTugas()
+    }
+
+    private fun initJenisTugasAdapter() {
+        mahasiswaJenisTugasAdapter = MenuMahasiswaJenisTugasAdapterNew(this, listJenisTugas, this)
         binding.rvJenisTugasMahasiswaFilter.adapter = mahasiswaJenisTugasAdapter
+        binding.rvJenisTugasMahasiswaFilter.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    }
 
-        // Initialize Adapter Tugas Filter
-        mahasiswaTugasFilterAdapter = ListMahasiswaTugasAdapter(this, listTugas, this)
-        binding.rvListTugasMahasiswaFilter.adapter = mahasiswaTugasFilterAdapter
+    private fun getListTugas() {
+        viewModel.getListTopicTugas(idKelas, topic)
+    }
 
-        // Set Layout Manager
-        binding.rvJenisTugasMahasiswaFilter.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListTugasMahasiswaFilter.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
+    private fun initListener() {
         binding.ivLogoBackCircleButtonTugasMahasiswaFiltered.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -61,12 +88,101 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         }
     }
 
-    override fun onUserTugasClicked(position: Int) {
-        MahasiswaDetailTugasActivity.start(this@MahasiswaTugasFilterActivity)
+    private fun initObserver() {
+        viewModel.getListTopicTugas.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        actionAfterGetListTopicTugas(it)
+                    }
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
+                }
+            }
+
+        }
     }
 
-    override fun onUserJenisTugasClicked(data: DataJenisTugas) {
-        binding.tvTugasFiltered.text = data.titleJenisTugas
+    private fun actionAfterGetListTopicTugas(model: GetListTopicTugasModel) {
+        initListTugasAdapter(model)
+        binding.tvBelumAdaTugasQiroahFilter.text =
+            getString(R.string.tv_belum_ada_tugas, titleTopic)
+        binding.tvBelumAdaTugasQiroahFilter.isVisible = model.tugas?.isEmpty() ?: true
     }
 
+    private fun initListTugasAdapter(model: GetListTopicTugasModel) {
+        // Initialize Adapter Tugas Filter
+        mahasiswaTugasFilterAdapter =
+            ListMahasiswaTugasAdapterList(this, model.tugas ?: emptyList(), this)
+        binding.rvListTugasMahasiswaFilter.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaFilter.adapter = mahasiswaTugasFilterAdapter
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.nsvContentDetail.isVisible = !value
+
+    }
+
+    private fun getSelectedTopic(title: String): String {
+        binding.tvTugasFiltered.text = title
+        binding.tvTitleJenisTugasMahasiswa.text =
+            getString(R.string.tv_title_jenis_tugas_mahasiswa, title)
+        when (title) {
+            "Praktikum Qiroah" -> {
+                changeStatusSelected(0)
+                return "qiroah"
+            }
+            "Praktikum Ibadah" -> {
+                changeStatusSelected(1)
+                return "ibadah"
+            }
+            "Hafalan Surah" -> {
+                changeStatusSelected(2)
+                return "surat"
+            }
+            "Hafalan Doa" -> {
+                changeStatusSelected(3)
+                return "doa"
+            }
+            else -> {
+                return "all"
+            }
+        }
+    }
+
+    private fun changeStatusSelected(index: Int) {
+        for (i in listJenisTugas.indices) {
+            when (i) {
+                index -> {
+                    listJenisTugas[i].isSelected = true
+                }
+                else -> listJenisTugas[i].isSelected = false
+            }
+        }
+    }
+
+    override fun onUserTugasClicked(idTugas: Int) {
+        MahasiswaDetailTugasActivity.start(this@MahasiswaTugasFilterActivity, idTugas)
+    }
+
+    override fun onUserJenisTugasClicked(data: JenisTugas) {
+        val title = data.titleJenisTugas
+        binding.tvTitleJenisTugasMahasiswa.text = title
+        binding.tvTugasFiltered.text = title
+        topic = getSelectedTopic(title)
+        initView()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        getListTugas()
+    }
 }

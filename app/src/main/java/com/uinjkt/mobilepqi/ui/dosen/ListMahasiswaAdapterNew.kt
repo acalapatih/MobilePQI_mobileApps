@@ -6,32 +6,39 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.mobilepqi.core.domain.model.tugas.GetListTugasMahasiswaModel
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataTugasMahasiswa
 import com.uinjkt.mobilepqi.databinding.RecycleViewCekTugasMahasiswaListBinding
 
-class ListMahasiswaAdapter(
+class ListMahasiswaAdapterNew(
     private val context : Context,
-    private val dataset: MutableList<DataTugasMahasiswa>,
+    private val dataset: List<GetListTugasMahasiswaModel.JawabanItem>,
     private val listener: OnUserClickListener? = null
-) : RecyclerView.Adapter<ListMahasiswaAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ListMahasiswaAdapterNew.ViewHolder>() {
 
     interface OnUserClickListener {
-        fun onUserClickListener(position: Int)
+        fun onUserClickListener(nim: String, status: Boolean)
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
         private val binding =  RecycleViewCekTugasMahasiswaListBinding.bind(itemView)
-        val cardView = binding.root
-        fun bindItem(mahasiswa: DataTugasMahasiswa) {
-            binding.tvCekNamaMahasiswa.text = mahasiswa.namaMahasiswa
-            binding.tvCekNimMahasiswa.text = mahasiswa.nimMahasiswa
-            if(mahasiswa.doneStatus) {
-                binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
-            } else {
+        fun bindItem(mahasiswa: GetListTugasMahasiswaModel.JawabanItem) {
+            binding.tvCekNamaMahasiswa.text = mahasiswa.name
+            binding.tvCekNimMahasiswa.text = mahasiswa.nim
+            Glide.with(context)
+                .load(mahasiswa.avatar)
+                .placeholder(R.drawable.img_user)
+                .into(binding.ivProfilePictureMahasiswa)
+            if(mahasiswa.status) {
                 binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            } else {
+                binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
             }
 
+            binding.root.setOnClickListener {
+                listener?.onUserClickListener(mahasiswa.nim, mahasiswa.status)
+            }
         }
     }
 
@@ -45,12 +52,7 @@ class ListMahasiswaAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(dataset[position])
-        holder.cardView.setOnClickListener {
-            listener?.onUserClickListener(position)
-        }
     }
 
     override fun getItemCount(): Int = dataset.size
-
-
 }

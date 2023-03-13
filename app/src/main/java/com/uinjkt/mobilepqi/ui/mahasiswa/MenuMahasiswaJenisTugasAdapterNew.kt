@@ -6,26 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.mobilepqi.core.domain.model.common.JenisTugas
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataJenisTugas
 import com.uinjkt.mobilepqi.databinding.RecycleViewJenisTugasBinding
 
-class MenuMahasiswaJenisTugasAdapter(
+class MenuMahasiswaJenisTugasAdapterNew(
     private val context: Context,
-    private val dataset: MutableList<DataJenisTugas>,
+    private val dataset: MutableList<JenisTugas>,
     private val listener: OnUserClickJenisTugasListener? = null
-) : RecyclerView.Adapter<MenuMahasiswaJenisTugasAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<MenuMahasiswaJenisTugasAdapterNew.ViewHolder>() {
 
     interface OnUserClickJenisTugasListener {
-        fun onUserJenisTugasClicked(data : DataJenisTugas)
+        fun onUserJenisTugasClicked(data : JenisTugas)
     }
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewJenisTugasBinding.bind(view)
 
-        fun bindItem(jenisTugas: DataJenisTugas) {
+        fun bindItem(jenisTugas: JenisTugas) {
             binding.btnJenisTugas.text = jenisTugas.titleJenisTugas
-            if (jenisTugas.statusJenisTugas) {
+            if (jenisTugas.isSelected) {
                 binding.btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_06283d))
             } else {
                 binding.btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.light_blue_0078ce))

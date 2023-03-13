@@ -193,7 +193,7 @@
     <string name="tv_titleappbar_tugas">Tugas</string>
     <string name="desc_iv_task_tugas">Icon Task Tugas</string>
     <string name="tv_nama_task_tugas">Tugas 1</string>
-    <string name="tv_tenggat_waktu_tugas">Tenggat Waktu : 30 Desember 2022 \n(23:59)</string>
+    <string name="tv_tenggat_waktu_tugas">Tenggat Waktu : %s</string>
     <string name="tv_tugas_praktikum_qiroah">Praktikum Qiroah</string>
     <string name="tv_belum_ada_tugas_qiroah">Belum ada tugas praktikum qiroah</string>
     <string name="tv_tugas_praktikum_ibadah">Praktikum Ibadah</string>
@@ -202,13 +202,13 @@
     <string name="tv_belum_ada_tugas_surah">Belum ada tugas Hafalan Surah</string>
     <string name="tv_tugas_hafalan_doa">Hafalan Doa</string>
     <string name="tv_belum_ada_tugas_hafalan_doa">Belum ada tugas Hafalan Doa</string>
-    <string name="tv_title_tugas_detail_mahasiswa"><![CDATA[Tugas > Praktikum Ibadah > Tugas 6]]></string>
+    <string name="tv_title_tugas_detail_mahasiswa"><![CDATA[Tugas > %s]]></string>
     <string name="desc_iv_logo_file_terlampir">Logo File Terlampir</string>
     <string name="tv_silahkan_upload_file">Silahkan Upload File Tugas Anda</string>
     <string name="btn_tambah_file_upload">Tambah File +</string>
     <string name="btn_kirim_file_upload">Kirim</string>
-    <string name="tv_title_jenis_tugas_mahasiswa"><![CDATA[Tugas > Praktikum Qiroah]]></string>
-    <string name="tv_date_file_mahasiswa_terlampir">Diupload pada 29 Desember 2022 \n(20.00)</string>
+    <string name="tv_title_jenis_tugas_mahasiswa"><![CDATA[Tugas > %s]]></string>
+    <string name="tv_date_file_mahasiswa_terlampir">Diupload pada %s</string>
     <string name="tv_nama_file_mahasiswa_terlampir">File Jawaban Tugas 4</string>
     <string name="desc_iv_icon_close_download_file">Icon Download atau Delete</string>
     <string name="tv_description_tugas_detail">Berikut adalah file tugas 6 Praktikum Ibadah, harap diisi dan dikumpulkan sebelum deadline yang telah ditentukan</string>
@@ -233,6 +233,9 @@
     <string name="btn_beri_nilai">Beri Nilai</string>
     <string name="et_input_nilai_seratus">100</string>
     <string name="tv_nilai">Nilai</string>
-    <string name="tv_title_menu_edit_tugas_dosen"><![CDATA[Tugas > Praktikum Ibadah > Tugas 6 > Edit Tugas]]></string>
     <string name="tv_label_deadline_tugas">Tenggat Waktu : </string>
+    <string name="tv_title_menu_edit_tugas_dosen"><![CDATA[Tugas > %1$s > %2$s > Edit Tugas]]></string>
+    <string name="tv_belum_ada_tugas">Belum ada tugas %s</string>
+    <string name="poin_maksimal">100 Poin</string>
+    <string name="nilai_tugas">%d / 100</string>
 </resources>

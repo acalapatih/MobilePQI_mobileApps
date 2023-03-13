@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -34,7 +33,18 @@
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_tugas_dosen_filter"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_jenis_tugas_dosen" />
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_tugas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -77,6 +87,7 @@
 
             <TextView
                 android:id="@+id/tv_tugas_filter"
+                style="@style/TextBold20spMobilePQI"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -84,7 +95,6 @@
                 android:gravity="center_vertical"
                 android:paddingVertical="5dp"
                 android:text="@string/tv_tugas_praktikum_qiroah"
-                style="@style/TextBold20spMobilePQI"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:fontFamily="@font/inter"
-                android:text="@string/tv_belum_ada_tugas_qiroah"
+                android:text="@string/tv_belum_ada_tugas"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 android:visibility="gone"

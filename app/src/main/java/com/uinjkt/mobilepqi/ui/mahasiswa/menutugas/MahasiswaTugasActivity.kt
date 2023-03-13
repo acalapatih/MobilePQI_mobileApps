@@ -4,80 +4,71 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.mobilepqi.core.data.Resource
+import com.mobilepqi.core.domain.model.common.JenisTugas
+import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
-import com.uinjkt.mobilepqi.data.DataJenisTugas
-import com.uinjkt.mobilepqi.data.DataSourceJenisTugas
-import com.uinjkt.mobilepqi.data.DataSourceTugas
-import com.uinjkt.mobilepqi.data.DataTugas
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaTugasSemuaBinding
-import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapter
-import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapter
+import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapterList
+import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(),
-    MenuMahasiswaJenisTugasAdapter.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapter.OnUserClickTugasListener {
-
-    private lateinit var listJenisTugas: MutableList<DataJenisTugas>
-    private lateinit var listTugas: MutableList<DataTugas>
-    private lateinit var mahasiswaJenisTugasAdapter: MenuMahasiswaJenisTugasAdapter
-    private lateinit var mahasiswaTugasQiroahAdapter: ListMahasiswaTugasAdapter
-    private lateinit var mahasiswaTugasIbadahAdapter: ListMahasiswaTugasAdapter
-    private lateinit var mahasiswaTugasSurahAdapter: ListMahasiswaTugasAdapter
-    private lateinit var mahasiswaTugasDoaAdapter: ListMahasiswaTugasAdapter
+    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
 
     companion object {
         @JvmStatic
-        fun start(context: Context) {
+        fun start(context: Context, idKelas: Int) {
             val starter = Intent(context, MahasiswaTugasActivity::class.java)
+                .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
 
-        private const val SEMUA = 1
-
+        private const val ID_KELAS = "idKelas"
     }
+
+    private val listJenisTugas by lazy {
+        mutableListOf(
+            JenisTugas("Semua", true),
+            JenisTugas("Praktikum Qiroah", false),
+            JenisTugas("Praktikum Ibadah", false),
+            JenisTugas("Hafalan Surah", false),
+            JenisTugas("Hafalan Doa", false),
+        )
+    }
+    private lateinit var mahasiswaJenisTugasAdapter: MenuMahasiswaJenisTugasAdapterNew
+    private lateinit var mahasiswaTugasQiroahAdapter: ListMahasiswaTugasAdapterList
+    private lateinit var mahasiswaTugasIbadahAdapter: ListMahasiswaTugasAdapterList
+    private lateinit var mahasiswaTugasSurahAdapter: ListMahasiswaTugasAdapterList
+    private lateinit var mahasiswaTugasDoaAdapter: ListMahasiswaTugasAdapterList
+
+    private val viewModel by viewModel<MahasiswaTugasViewModel>()
+    private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
 
     override fun getViewBinding(): ActivityMahasiswaTugasSemuaBinding =
         ActivityMahasiswaTugasSemuaBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initView()
+        initListener()
+        initObserver()
+    }
 
-        // Initialize data.
-        listJenisTugas = DataSourceJenisTugas().setDataJenisTugasClicked(SEMUA)
-        listTugas = DataSourceTugas().dataTugas
-
-        // Initialize Adapter Jenis Tugas
-        mahasiswaJenisTugasAdapter = MenuMahasiswaJenisTugasAdapter(this, listJenisTugas, this)
-        binding.rvJenisTugasMahasiswaSemua.adapter = mahasiswaJenisTugasAdapter
-
-        // Initialize Adapter Tugas Qiroah
-        mahasiswaTugasQiroahAdapter = ListMahasiswaTugasAdapter(this, listTugas, this)
-        binding.rvListTugasMahasiswaQiroah.adapter = mahasiswaTugasQiroahAdapter
-
-        // Initialize Adapter Tugas Ibadah
-        mahasiswaTugasIbadahAdapter = ListMahasiswaTugasAdapter(this, listTugas, this)
-        binding.rvListTugasMahasiswaIbadah.adapter = mahasiswaTugasIbadahAdapter
-
-        // Initialize Adapter Tugas Hafalan Surah
-        mahasiswaTugasSurahAdapter = ListMahasiswaTugasAdapter(this, listTugas, this)
-        binding.rvListTugasMahasiswaHafalanSurah.adapter = mahasiswaTugasSurahAdapter
-
-        // Initialize Adapter Tugas Hafalan Doa
-        mahasiswaTugasDoaAdapter = ListMahasiswaTugasAdapter(this, listTugas, this)
-        binding.rvListTugasMahasiswaHafalanDoa.adapter = mahasiswaTugasDoaAdapter
-
+    private fun initView() {
         // Set Title Action Bar
         binding.tvTitleAppBarMahasiswaSemua.text = getString(R.string.tv_titleappbar_tugas)
+        getListTugas()
+    }
 
-        // Set Layout Manager
-        binding.rvJenisTugasMahasiswaSemua.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListTugasMahasiswaQiroah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaIbadah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaHafalanSurah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    private fun getListTugas() {
+        viewModel.getListTugas(idKelas)
+    }
 
-        // icon Close onClickListener
+    private fun initListener() {
         binding.ivIconClose.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -87,14 +78,76 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
         }
     }
 
+    private fun initObserver() {
+        viewModel.getListTugas.observe(this) { model ->
+            when(model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        actionAfterGetListTugas(it)
+                    }
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
+                }
+            }
 
-    override fun onUserTugasClicked(position: Int) {
-        MahasiswaDetailTugasActivity.start(this@MahasiswaTugasActivity)
+        }
     }
 
-    override fun onUserJenisTugasClicked(data: DataJenisTugas) {
-        MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, data.idJenisTugas)
+    private fun actionAfterGetListTugas(model: GetListTugasModel) {
+        initAdapter(model)
+    }
+
+    private fun initAdapter(model: GetListTugasModel) {
+        // Initialize Adapter Jenis Tugas
+        mahasiswaJenisTugasAdapter = MenuMahasiswaJenisTugasAdapterNew(this, listJenisTugas, this)
+        binding.rvJenisTugasMahasiswaSemua.adapter = mahasiswaJenisTugasAdapter
+
+        // Initialize Adapter Tugas Qiroah
+        mahasiswaTugasQiroahAdapter = ListMahasiswaTugasAdapterList(this, model.qiroah, this)
+        binding.rvListTugasMahasiswaQiroah.adapter = mahasiswaTugasQiroahAdapter
+
+        // Initialize Adapter Tugas Ibadah
+        mahasiswaTugasIbadahAdapter = ListMahasiswaTugasAdapterList(this, model.ibadah, this)
+        binding.rvListTugasMahasiswaIbadah.adapter = mahasiswaTugasIbadahAdapter
+
+        // Initialize Adapter Tugas Hafalan Surah
+        mahasiswaTugasSurahAdapter = ListMahasiswaTugasAdapterList(this, model.surah, this)
+        binding.rvListTugasMahasiswaHafalanSurah.adapter = mahasiswaTugasSurahAdapter
+
+        // Initialize Adapter Tugas Hafalan Doa
+        mahasiswaTugasDoaAdapter = ListMahasiswaTugasAdapterList(this, model.doa, this)
+        binding.rvListTugasMahasiswaHafalanDoa.adapter = mahasiswaTugasDoaAdapter
+
+        // Set Layout Manager
+        binding.rvJenisTugasMahasiswaSemua.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvListTugasMahasiswaQiroah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaIbadah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaHafalanSurah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun showLoading(value: Boolean) {
+        binding.pbLoadingScreen.isVisible = value
+        binding.nsvContentDetail.isVisible = !value
     }
 
 
+    override fun onUserTugasClicked(idTugas: Int) {
+        MahasiswaDetailTugasActivity.start(this@MahasiswaTugasActivity, idTugas)
+    }
+
+    override fun onUserJenisTugasClicked(data: JenisTugas) {
+        MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas, data.titleJenisTugas)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        getListTugas()
+    }
 }
