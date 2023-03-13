@@ -24,11 +24,13 @@ import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahActivity
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusActivity
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenDetailTugasActivity
 import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasActivity
 import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaDetailTugasActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,7 +38,7 @@ import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DashboardFragment : Fragment() {
+class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
@@ -167,7 +169,7 @@ class DashboardFragment : Fragment() {
                 is Resource.Success -> {
                     showLoading(false)
                     listTugasDashboard = model.data?.listTugas ?: emptyList()
-                    tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
+                    tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
                     binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvTugasDashboard.adapter = tugasDashboardAdapter
                     binding.rvTugasDashboard.isNestedScrollingEnabled = false
@@ -347,5 +349,13 @@ class DashboardFragment : Fragment() {
     companion object {
         private const val FORMAT_DATE = "dd/MM/yyyy"
         private const val FORMAT_DATE_TIME = "dd/MM/yyyy HH:mm"
+    }
+
+    override fun onUserClicked(classId: Int, clicked: String) {
+        if (viewModel.userRole.value.equals("mahasiswa")) {
+            MahasiswaDetailTugasActivity.start(requireContext())
+        } else {
+            DosenDetailTugasActivity.start(requireContext())
+        }
     }
 }
