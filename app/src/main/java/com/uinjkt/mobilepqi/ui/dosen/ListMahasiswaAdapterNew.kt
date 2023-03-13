@@ -31,9 +31,9 @@ class ListMahasiswaAdapterNew(
                 .placeholder(R.drawable.img_user)
                 .into(binding.ivProfilePictureMahasiswa)
             if(mahasiswa.status) {
-                binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
-            } else {
                 binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            } else {
+                binding.clListTugasMahasiswa.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
             }
 
             binding.root.setOnClickListener {

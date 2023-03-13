@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepqi.core.domain.model.common.TugasItem
 import com.uinjkt.mobilepqi.R
@@ -25,6 +26,11 @@ class ListMahasiswaTugasAdapterList(
         fun bindItem(listTugas: TugasItem) {
             binding.tvNamaTaskTugas.text = listTugas.title
             binding.tvTenggatWaktuTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, listTugas.deadline?.convertTime("EEEE, dd MMMM yyyy (HH:mm)"))
+            if (listTugas.status == true) {
+                binding.clTaskTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.blue_6199C1))
+            } else {
+                binding.clTaskTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.white))
+            }
             itemView.setOnClickListener{
                 listener?.onUserTugasClicked(listTugas.id ?:0)
             }
