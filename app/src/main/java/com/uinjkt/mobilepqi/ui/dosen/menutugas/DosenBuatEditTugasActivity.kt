@@ -400,7 +400,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val selectedFile: Uri = result.data?.data as Uri
-            val myFile = uriToFile(selectedFile, this, "pdf")
+            val myFile = uriToFile(selectedFile, this, "file")
             viewModel.uploadFileOrImage(
                 Constant.UPLOAD_KEY.TUGAS,
                 Constant.UPLOAD_TYPE.FILE,
