@@ -1,4 +1,4 @@
-package com.mobilepqi.core.data.source.remote.response
+package com.mobilepqi.core.data.source.remote.response.tugas
 
 import com.google.gson.annotations.SerializedName
 

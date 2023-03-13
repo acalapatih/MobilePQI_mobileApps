@@ -1,6 +1,6 @@
 package com.mobilepqi.core.data.source.remote.network
 
-import com.mobilepqi.core.data.source.remote.response.CreateNilaiResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse

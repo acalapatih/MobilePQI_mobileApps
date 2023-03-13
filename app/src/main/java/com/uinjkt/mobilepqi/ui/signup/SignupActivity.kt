@@ -53,14 +53,14 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
                 val end = binding.etPasswordSignup.selectionEnd
                 binding.etPasswordSignup.transformationMethod = null
                 binding.etPasswordSignup.setSelection(start, end)
-                isSelected = false;
+                isSelected = false
             } else {
                 binding.ivShowHidePassword.setImageResource(R.drawable.ic_eye_show_password)
                 val start = binding.etPasswordSignup.selectionStart
                 val end = binding.etPasswordSignup.selectionEnd
                 binding.etPasswordSignup.transformationMethod = PasswordTransformationMethod()
                 binding.etPasswordSignup.setSelection(start, end)
-                isSelected = true;
+                isSelected = true
             }
         }
     }

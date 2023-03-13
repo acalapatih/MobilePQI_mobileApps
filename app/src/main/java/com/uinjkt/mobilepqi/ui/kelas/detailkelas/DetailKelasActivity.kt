@@ -28,9 +28,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int): Intent {
-            val starter =
-                Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
-            return starter
+            return Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
         }
     }
 
