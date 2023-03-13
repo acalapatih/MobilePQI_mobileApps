@@ -170,6 +170,7 @@ class DashboardFragment : Fragment() {
                     tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard)
                     binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+                    binding.rvTugasDashboard.isNestedScrollingEnabled = false
                 }
                 is Resource.Error -> {
                     showLoading(false)
