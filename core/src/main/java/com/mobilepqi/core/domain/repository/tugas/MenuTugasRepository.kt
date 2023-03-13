@@ -19,4 +19,5 @@ interface MenuTugasRepository {
     fun createNilai(payload: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>>
     fun getJawabanForMahasiswa(idTugas: Int): Flow<Resource<GetJawabanForMahasiswaModel>>
     fun createJawaban(payload: CreateJawabanPayload, idTugas: Int): Flow<Resource<Boolean>>
+    fun downloadNilai(idKelas: Int, query: String? = null): Flow<Resource<DownloadNilaiModel>>
 }

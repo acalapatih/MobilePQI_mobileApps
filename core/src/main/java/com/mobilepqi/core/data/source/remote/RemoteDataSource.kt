@@ -529,4 +529,20 @@ class RemoteDataSource(
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun downloadNilai(
+        idKelas: Int,
+        query: String? = null
+    ): Flow<ApiResponse<DownloadNilaiResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.downloadNilai(idKelas, query)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }

@@ -15,9 +15,13 @@ import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenTugasSemuaBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapterList
 import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
+import com.uinjkt.mobilepqi.util.downloadFileToStorage
+import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
+class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(),
+    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener,
+    ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
 
     companion object {
         @JvmStatic
@@ -26,6 +30,7 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
                 .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
+
         private const val ID_KELAS = "idKelas"
     }
 
@@ -46,7 +51,8 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
     private val viewModel by viewModel<DosenTugasViewModel>()
     private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
 
-    override fun getViewBinding(): ActivityDosenTugasSemuaBinding = ActivityDosenTugasSemuaBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityDosenTugasSemuaBinding =
+        ActivityDosenTugasSemuaBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,12 +78,16 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         }
 
         binding.tvIconAddTugas.setOnClickListener {
-            DosenBuatEditTugasActivity.start(this,"buat", idKelas = idKelas)
+            DosenBuatEditTugasActivity.start(this, "buat", idKelas = idKelas)
         }
 
         binding.tvIconUnduhNilaiTugas.setOnClickListener {
-            showTwoActionDialog("Unduh Nilai?", btnPositiveMessage = "Unduh", btnNegativeMessage = "batal") {
-                showOneActionDialog("Nilai Berhasil Diunduh", "Okay")
+            showTwoActionDialog(
+                "Unduh Nilai?",
+                btnPositiveMessage = "Unduh",
+                btnNegativeMessage = "Batal"
+            ) {
+                downloadNilai()
             }
         }
 
@@ -86,15 +96,39 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         }
     }
 
+    private fun downloadNilai() {
+        viewModel.downloadNilai(idKelas)
+    }
+
     private fun initObserver() {
         viewModel.getListTugas.observe(this) { model ->
-            when(model) {
+            when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
                 is Resource.Success -> {
                     model.data?.let {
                         actionAfterGetListTugas(it)
+                    }
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
+                }
+            }
+        }
+
+        viewModel.downloadNilai.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        showOneActionDialogWithInvoke("Unduh Nilai Berhasil", "Okay") {
+                            downloadFileToStorage(this, it.url, it.url.getFileNameFromUrl())
+                        }
                     }
                     showLoading(false)
                 }
@@ -115,7 +149,7 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         binding.tvBelumAdaTugasHafalanDoaDosen.isVisible = checkEmptyTugas(model.doa)
     }
 
-    private fun checkEmptyTugas(listTugas: List<TugasItem>) : Boolean = listTugas.isEmpty()
+    private fun checkEmptyTugas(listTugas: List<TugasItem>): Boolean = listTugas.isEmpty()
 
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
@@ -144,11 +178,16 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(), MenuM
         binding.rvListTugasDosenHafalanDoa.adapter = dosenTugasDoaAdapter
 
         // Set Layout Manager
-        binding.rvJenisTugasDosenSemua.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListTugasDosenQiroah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasDosenIbadah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasDosenHafalanSurah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasDosenHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvJenisTugasDosenSemua.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvListTugasDosenQiroah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasDosenIbadah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasDosenHafalanSurah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasDosenHafalanDoa.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     override fun onRestart() {

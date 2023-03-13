@@ -53,4 +53,6 @@ class MenuTugasInteractor(
         request: CreateJawabanPayload,
         idTugas: Int
     ): Flow<Resource<Boolean>> = repository.createJawaban(request, idTugas)
+
+    override fun downloadNilai(idKelas: Int, query: String?): Flow<Resource<DownloadNilaiModel>> = repository.downloadNilai(idKelas, query)
 }

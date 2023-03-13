@@ -14,6 +14,8 @@ import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenTugasFilteredBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.ListMahasiswaTugasAdapterList
 import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
+import com.uinjkt.mobilepqi.util.downloadFileToStorage
+import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>(),
@@ -28,6 +30,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
                 .putExtra(TOPIC, topic)
             context.startActivity(starter)
         }
+
         private const val ID_KELAS = "idKelas"
         private const val TOPIC = "topic"
     }
@@ -54,7 +57,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        topic = getSelectedTopic(titleTopic?:"all")
+        topic = getSelectedTopic(titleTopic ?: "all")
         initView()
         initListener()
         initObserver()
@@ -110,16 +113,22 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         }
 
         binding.tvIconUnduhNilai.setOnClickListener {
-            showTwoActionDialog("Unduh Nilai?",
+            showTwoActionDialog(
+                "Unduh Nilai?",
                 btnPositiveMessage = "Unduh",
-                btnNegativeMessage = "batal") {
-                showOneActionDialog("Nilai Berhasil Diunduh", "Okay")
+                btnNegativeMessage = "Batal"
+            ) {
+                downloadNilai()
             }
         }
 
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
+    }
+
+    private fun downloadNilai() {
+        viewModel.downloadNilai(idKelas, topic)
     }
 
     private fun initObserver() {
@@ -139,6 +148,25 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
                     showLoading(false)
                 }
             }
+        }
+        viewModel.downloadNilai.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    model.data?.let {
+                        showOneActionDialogWithInvoke("Unduh Nilai Berhasil", "Okay") {
+                            downloadFileToStorage(this, it.url, it.url.getFileNameFromUrl())
+                        }
+                    }
+                    showLoading(false)
+                }
+                is Resource.Error -> {
+                    showToast(model.message ?: "Something Went Wrong")
+                    showLoading(false)
+                }
+            }
 
         }
     }
@@ -150,8 +178,9 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
 
     private fun actionAfterGetListTopicTugas(model: GetListTopicTugasModel) {
         initListTugasAdapter(model)
-        binding.tvBelumAdaTugasQiroahFilter.text = getString(R.string.tv_belum_ada_tugas, titleTopic)
-        binding.tvBelumAdaTugasQiroahFilter.isVisible = model.tugas?.isEmpty() ?:true
+        binding.tvBelumAdaTugasQiroahFilter.text =
+            getString(R.string.tv_belum_ada_tugas, titleTopic)
+        binding.tvBelumAdaTugasQiroahFilter.isVisible = model.tugas?.isEmpty() ?: true
     }
 
     private fun initListTugasAdapter(model: GetListTopicTugasModel) {

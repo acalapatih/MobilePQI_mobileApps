@@ -179,4 +179,10 @@ interface MobilePqiService {
         @Body payload: CreateJawabanPayload,
         @Path("idTugas") idTugas: Int
     ): CreateJawabanResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/nilai")
+    suspend fun downloadNilai(
+        @Path("idKelas") idKelas: Int,
+        @Query("query") page: String? = null
+    ): DownloadNilaiResponse
 }
