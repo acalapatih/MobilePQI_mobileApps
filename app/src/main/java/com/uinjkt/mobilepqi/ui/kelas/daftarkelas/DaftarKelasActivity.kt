@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
@@ -31,7 +30,7 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
     private val viewModel by viewModel<DaftarKelasViewModel>()
 
     private val createClassLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-        if (it.resultCode == AppCompatActivity.RESULT_OK) {
+        if (it.resultCode == RESULT_OK) {
             viewModel.daftarkelas()
         }
     }
@@ -87,6 +86,7 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
             createClassLauncher.launch(DetailKelasActivity.start(this, classId))
         } else {
             DashboardActivity.start(this, "dashboard", classId)
+            finish()
         }
     }
 }

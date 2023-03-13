@@ -38,69 +38,98 @@
             app:layout_constraintTop_toBottomOf="@id/tv_update_tugas"
             tools:text="@string/tv_tanggal_tugas" />
 
-        <View
-            android:id="@+id/bg_tugas_rounded"
-            style="@style/bg_tugas_rounded"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_tugas_dashboard"
             android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:layout_marginStart="10dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintBaseline_toBottomOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_tanggal_tugas" />
+            app:layout_constraintTop_toBottomOf="@id/tv_tanggal_tugas">
 
-        <ImageView
-            android:id="@+id/ic_task"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:contentDescription="@string/desc_iv_logo_tugas"
-            android:src="@drawable/ic_task"
-            app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
-            app:layout_constraintStart_toStartOf="@id/bg_tugas_rounded"
-            app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_nama_tugas"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginEnd="15dp"
-            android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/ic_task"
-            app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
-            tools:text="@string/tv_nama_tugas" />
+                <View
+                    android:id="@+id/bg_tugas_rounded"
+                    style="@style/bg_tugas_rounded"
+                    android:layout_width="match_parent"
+                    android:layout_height="82dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintBaseline_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-        <View
-            android:id="@+id/tugas_line"
-            android:layout_width="250dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
-            android:background="@color/black"
-            app:layout_constraintStart_toStartOf="@id/tv_nama_tugas"
-            app:layout_constraintTop_toBottomOf="@id/tv_nama_tugas" />
+                <ImageView
+                    android:id="@+id/ic_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:contentDescription="@string/desc_iv_logo_tugas"
+                    android:src="@drawable/ic_task"
+                    app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
+                    app:layout_constraintStart_toStartOf="@id/bg_tugas_rounded"
+                    app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded" />
 
-        <TextView
-            android:id="@+id/tv_deadline_tugas"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/inter_medium"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_nama_tugas"
-            tools:text="@string/tv_deadline_tugas" />
+                <TextView
+                    android:id="@+id/tv_nama_tugas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_task"
+                    app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
+                    tools:text="@string/tv_nama_tugas" />
+
+                <View
+                    android:id="@+id/tugas_line"
+                    android:layout_width="250dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/black"
+                    app:layout_constraintStart_toStartOf="@id/tv_nama_tugas"
+                    app:layout_constraintTop_toBottomOf="@id/tv_nama_tugas" />
+
+                <TextView
+                    android:id="@+id/tv_label_deadline_tugas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/tv_label_deadline_tugas"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
+                    app:layout_constraintStart_toStartOf="@id/tv_nama_tugas" />
+
+                <TextView
+                    android:id="@+id/tv_deadline_tugas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_label_deadline_tugas"
+                    app:layout_constraintEnd_toEndOf="@id/bg_tugas_rounded"
+                    app:layout_constraintStart_toEndOf="@id/tv_label_deadline_tugas"
+                    app:layout_constraintTop_toTopOf="@id/tv_label_deadline_tugas"
+                    tools:text="@string/tv_deadline_tugas" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

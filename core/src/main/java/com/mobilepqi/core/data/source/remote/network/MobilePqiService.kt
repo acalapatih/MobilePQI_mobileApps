@@ -1,12 +1,19 @@
 package com.mobilepqi.core.data.source.remote.network
 
+import com.mobilepqi.core.data.source.remote.response.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetClassResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetTugasResponse
+import com.mobilepqi.core.data.source.remote.response.dashboard.GetUserResponse
 import com.mobilepqi.core.data.source.remote.response.detailkelas.DetailKelasResponse
+import com.mobilepqi.core.data.source.remote.response.ibadah.*
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordResponse
-import com.mobilepqi.core.data.source.remote.response.ibadah.*
+import com.mobilepqi.core.data.source.remote.response.profil.ProfilResponse
+import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
+import com.mobilepqi.core.data.source.remote.response.profil.PutProfilResponse
 import com.mobilepqi.core.data.source.remote.response.qiroah.*
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
 import com.mobilepqi.core.data.source.remote.response.signin.SigninResponse
@@ -19,6 +26,7 @@ import com.mobilepqi.core.data.source.remote.response.silabus.GetSilabusResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.GetTambahDosenResponse
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.*
 import retrofit2.http.*
 
 interface MobilePqiService {
@@ -28,6 +36,12 @@ interface MobilePqiService {
 
     @POST("v1/mobilepqi/users")
     suspend fun signup(@Body payload: SignupPayload): SignupResponse
+
+    @GET("v1/mobilepqi/users")
+    suspend fun profil(): ProfilResponse
+
+    @PUT("v1/mobilepqi/users")
+    suspend fun putprofil(@Body payload: PutProfilPayload): PutProfilResponse
 
     @POST("v1/mobilepqi/users/password")
     suspend fun lupaPassword(@Body payload: LupaPasswordPayload): LupaPasswordResponse
@@ -74,11 +88,15 @@ interface MobilePqiService {
     suspend fun deleteSilabus(
         @Path("idKelas") idKelas: Int
     ): DeleteSilabusResponse
+
     @GET("v1/mobilepqi/kelas/{idKelas}/dosen")
-    suspend fun getTambahDosen(@Path("idKelas")idKelas: Int): GetTambahDosenResponse
+    suspend fun getTambahDosen(@Path("idKelas") idKelas: Int): GetTambahDosenResponse
 
     @POST("v1/mobilepqi/kelas/{idKelas}/dosen")
-    suspend fun postTambahdosen(@Body payload: PostTambahDosenPayload, @Path("idKelas")idKelas: Int): PostTambahDosenResponse
+    suspend fun postTambahdosen(
+        @Body payload: PostTambahDosenPayload,
+        @Path("idKelas") idKelas: Int
+    ): PostTambahDosenResponse
 
     @POST("v1/mobilepqi/kelas")
     suspend fun buatkelas(@Body payload: BuatKelasPayload): BuatKelasResponse
@@ -87,7 +105,7 @@ interface MobilePqiService {
     suspend fun daftarkelas(): DaftarKelasResponse
 
     @GET("v1/mobilepqi/kelas/{idKelas}")
-    suspend fun detailkelas(@Path("idKelas")idKelas: Int): DetailKelasResponse
+    suspend fun detailkelas(@Path("idKelas") idKelas: Int): DetailKelasResponse
 
     @POST("v1/mobilepqi/kelas/{idKelas}/materi/ibadah")
     suspend fun createMateriIbadah(
@@ -115,4 +133,77 @@ interface MobilePqiService {
     suspend fun deleteMateriIbadah(
         @Path("idMateri") idMateri: Int
     ): DeleteMateriIbadahResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/tugas/dashboard")
+    suspend fun getTugas(@Path("idKelas")idKelas: Int): GetTugasResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/dashboard")
+    suspend fun getClass(@Path("idKelas")idKelas: Int): GetClassResponse
+
+    @GET("v1/mobilepqi/users/fetch")
+    suspend fun getUser(): GetUserResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/tugas")
+    suspend fun getListTugas(
+        @Path("idKelas") idKelas: Int
+    ): GetListTugasResponse
+
+    @POST("v1/mobilepqi/kelas/{idKelas}/tugas")
+    suspend fun createTugas(
+        @Body payload: CreateTugasPayload,
+        @Path("idKelas") idKelas: Int
+    ): CreateTugasResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/tugas")
+    suspend fun getListTopicTugas(
+        @Path("idKelas") idKelas: Int,
+        @Query("query") topic: String
+    ): GetListTopicTugasResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}")
+    suspend fun getDetailTugas(
+        @Path("idTugas") idTugas: Int
+    ): GetDetailTugasResponse
+
+    @PUT("v1/mobilepqi/kelas/tugas/{idTugas}")
+    suspend fun updateDetailTugas(
+        @Body payload: UpdateDetailTugasPayload,
+        @Path("idTugas") idTugas: Int
+    ): UpdateDetailTugasResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban")
+    suspend fun getListTugasMahasiswa(
+        @Path("idTugas") idTugas: Int,
+        @Query("page") page: Int? = null,
+        @Query("limit") limit: Int? = null
+    ): GetListTugasMahasiswaResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban/{nim}")
+    suspend fun getJawabanForDosen(
+        @Path("idTugas") idTugas: Int,
+        @Path("nim") nim: String
+    ): GetJawabanForDosenResponse
+
+    @POST("v1/mobilepqi/kelas/tugas/jawaban/{idJawaban}")
+    suspend fun createNilai(
+        @Body payload: CreateNilaiPayload,
+        @Path("idJawaban") idJawaban: Int
+    ): CreateNilaiResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban/mahasiswa")
+    suspend fun getJawabanForMahasiswa(
+        @Path("idTugas") idTugas: Int
+    ): GetJawabanForMahasiswaResponse
+
+    @POST("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban")
+    suspend fun createJawaban(
+        @Body payload: CreateJawabanPayload,
+        @Path("idTugas") idTugas: Int
+    ): CreateJawabanResponse
+
+    @GET("v1/mobilepqi/kelas/{idKelas}/nilai")
+    suspend fun downloadNilai(
+        @Path("idKelas") idKelas: Int,
+        @Query("query") page: String? = null
+    ): DownloadNilaiResponse
 }

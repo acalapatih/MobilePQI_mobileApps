@@ -5,22 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
 import com.uinjkt.mobilepqi.R
-import com.uinjkt.mobilepqi.data.DataTugasDashboard
 import com.uinjkt.mobilepqi.databinding.RecycleViewTugasDashboardBinding
+import com.uinjkt.mobilepqi.util.convertTime
 
 class DashboardAdapter(
     private val context: Context,
-    private val dataset: MutableList<DataTugasDashboard>
+    private val dataset: List<GetTugasModel.ListTugas>,
+    val listener: OnUserClickListener? = null,
 ) : RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTugasDashboardBinding.bind(view)
+        fun bindItem(tugasDashboard: GetTugasModel.ListTugas) {
+            binding.tvNamaTugas.text = tugasDashboard.title
+            binding.tvDeadlineTugas.text = tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)")
+            binding.tvTanggalTugas.text = tugasDashboard.createdAt.convertTime("dd MMMM yyyy")
 
-        fun bindItem(tugasDashboard: DataTugasDashboard) {
-            binding.tvTanggalTugas.text = tugasDashboard.tanggalTugas
-            binding.tvNamaTugas.text = tugasDashboard.namaTugas
-            binding.tvDeadlineTugas.text = tugasDashboard.deadlineTugas
+            binding.cvTugasDashboard.setOnClickListener {
+                listener?.onUserClicked(tugasDashboard.idTugas, "detailTugas")
+            }
         }
     }
 
@@ -41,5 +46,9 @@ class DashboardAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(dataset[position])
+    }
+
+    interface OnUserClickListener {
+        fun onUserClicked(tugasId: Int, clicked: String)
     }
 }

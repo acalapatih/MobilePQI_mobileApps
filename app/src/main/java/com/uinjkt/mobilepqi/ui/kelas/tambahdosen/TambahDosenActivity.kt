@@ -34,7 +34,6 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private val viewModel by viewModel<TambahDosenViewModel>()
-
     private val classId by lazy { intent.getIntExtra("idKelas", 0) }
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
@@ -110,8 +109,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private fun initListener() {
-        val backIcon = binding.icBackWhite
-        backIcon.setOnClickListener {
+        binding.icBackWhite.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
         onBackPressedDispatcher.addCallback(this) {

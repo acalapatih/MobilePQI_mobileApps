@@ -37,7 +37,18 @@
         app:layout_constraintEnd_toEndOf="@id/action_bar_tugas_dosen_semua"
         app:layout_constraintTop_toTopOf="@id/action_bar_tugas_dosen_semua" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/action_bar_tugas_dosen_semua" />
+
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_tugas"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -137,12 +148,12 @@
                 android:id="@+id/rv_list_tugas_dosen_qiroah"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false"
                 android:scrollbarThumbVertical="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_belum_ada_tugas_praktikum_qiroah_dosen"
-                tools:itemCount="2"
                 tools:listitem="@layout/recycle_view_list_tugas" />
 
             <TextView
@@ -190,7 +201,8 @@
                 android:id="@+id/rv_list_tugas_dosen_ibadah"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false"
                 android:scrollbarThumbVertical="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +254,8 @@
                 android:id="@+id/rv_list_tugas_dosen_hafalan_surah"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
+                android:nestedScrollingEnabled="false"
                 android:scrollbarThumbVertical="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -294,7 +307,7 @@
                 android:id="@+id/rv_list_tugas_dosen_hafalan_doa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="16dp"
                 android:nestedScrollingEnabled="false"
                 android:scrollbarThumbVertical="@null"
                 app:layout_constraintBottom_toBottomOf="parent"

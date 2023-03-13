@@ -25,10 +25,21 @@
         android:layout_marginStart="7dp"
         android:layout_marginEnd="16dp"
         android:lineSpacingExtra="3dp"
+        android:minHeight="48dp"
         android:text="@string/tv_title_tugas_detail_mahasiswa"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_tugas_dosen"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_content_detail_list_mahasiswa"
@@ -67,6 +78,7 @@
                 app:layout_constraintEnd_toEndOf="@id/tv_judul_tugas_dosen"
                 app:layout_constraintStart_toStartOf="@id/tv_judul_tugas_dosen"
                 app:layout_constraintTop_toBottomOf="@id/tv_judul_tugas_dosen" />
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list_mahasiswa"
