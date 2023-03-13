@@ -12,7 +12,8 @@ import com.uinjkt.mobilepqi.util.convertTime
 
 class DashboardAdapter(
     private val context: Context,
-    private val dataset: List<GetTugasModel.ListTugas>
+    private val dataset: List<GetTugasModel.ListTugas>,
+    val listener: OnUserClickListener? = null,
 ) : RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -21,6 +22,10 @@ class DashboardAdapter(
             binding.tvNamaTugas.text = tugasDashboard.title
             binding.tvDeadlineTugas.text = tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)")
             binding.tvTanggalTugas.text = tugasDashboard.createdAt.convertTime("dd MMMM yyyy")
+
+            binding.cvTugasDashboard.setOnClickListener {
+                listener?.onUserClicked(tugasDashboard.idTugas, "detailTugas")
+            }
         }
     }
 
@@ -41,5 +46,9 @@ class DashboardAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItem(dataset[position])
+    }
+
+    interface OnUserClickListener {
+        fun onUserClicked(classId: Int, clicked: String)
     }
 }
