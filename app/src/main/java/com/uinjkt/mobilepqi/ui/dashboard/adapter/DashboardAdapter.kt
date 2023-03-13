@@ -49,6 +49,6 @@ class DashboardAdapter(
     }
 
     interface OnUserClickListener {
-        fun onUserClicked(classId: Int, clicked: String)
+        fun onUserClicked(tugasId: Int, clicked: String)
     }
 }
