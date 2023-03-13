@@ -35,6 +35,7 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
         @JvmStatic
         fun start(context: Context, value: String? = "", classId: Int? = 0) {
             val starter = Intent(context, DashboardActivity::class.java)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra("action", value)
                 .putExtra("class_id", classId)
             context.startActivity(starter)

@@ -86,6 +86,7 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
             createClassLauncher.launch(DetailKelasActivity.start(this, classId))
         } else {
             DashboardActivity.start(this, "dashboard", classId)
+            finish()
         }
     }
 }
