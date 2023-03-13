@@ -234,4 +234,6 @@
     <string name="tv_nilai">Nilai</string>
     <string name="tv_title_menu_edit_tugas_dosen"><![CDATA[Tugas > %1$s > %2$s > Edit Tugas]]></string>
     <string name="tv_belum_ada_tugas">Belum ada tugas %s</string>
+    <string name="poin_maksimal">100 Poin</string>
+    <string name="nilai_tugas">%d / 100</string>
 </resources>

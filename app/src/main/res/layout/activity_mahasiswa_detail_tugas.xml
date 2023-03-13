@@ -25,12 +25,21 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/inter_bold"
         android:lineSpacingExtra="3dp"
+        android:minHeight="48dp"
         android:text="@string/tv_title_tugas_detail_mahasiswa"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_tugas_mahasiswa"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_content_detail_tugas_mahasiswa"
@@ -60,6 +69,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/ll_desc_task_tugas_mahasiswa" />
 
+            <TextView
+                android:id="@+id/tv_nilai_tugas"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="@string/nilai_tugas"
+                app:layout_constraintEnd_toEndOf="@id/ll_desc_task_tugas_mahasiswa"
+                app:layout_constraintTop_toTopOf="@id/ll_desc_task_tugas_mahasiswa" />
+
             <LinearLayout
                 android:id="@+id/ll_desc_task_tugas_mahasiswa"
                 android:layout_width="0dp"
@@ -76,9 +95,11 @@
                     android:id="@+id/tv_nama_task_tugas"
                     style="@style/TextBold20spMobilePQI"
                     android:layout_width="wrap_content"
+                    android:maxWidth="240dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:text="@string/tv_nama_task_tugas" />
+
 
                 <View
                     android:id="@+id/vw_line_break"
@@ -97,6 +118,15 @@
                     android:layout_marginTop="3dp"
                     android:lineSpacingExtra="6dp"
                     android:text="@string/tv_tenggat_waktu_tugas" />
+
+                <TextView
+                    style="@style/TextNormal14spMobilePQI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="3dp"
+                    android:lineSpacingExtra="6dp"
+                    android:text="@string/poin_maksimal" />
             </LinearLayout>
 
             <TextView
@@ -131,6 +161,7 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
 
+
             <LinearLayout
                 android:id="@+id/ll_tambah_file_mahasiswa"
                 android:layout_width="match_parent"
@@ -152,17 +183,23 @@
                     android:id="@+id/tv_silahkan_upload_file"
                     style="@style/TextRegular20spMobilePQI"
                     android:layout_width="match_parent"
-                    android:minHeight="48dp"
-                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:minHeight="48dp"
                     android:text="@string/tv_silahkan_upload_file" />
+
+                <ProgressBar
+                    android:id="@+id/pb_file_loading"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_file_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_margin="10dp"
                     tools:itemCount="2"
                     tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
@@ -174,6 +211,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="21dp"
                     android:background="@drawable/bg_button_stroke6199c1_ripple"
+                    android:visibility="gone"
                     android:text="@string/btn_tambah_file_upload"
                     android:textAllCaps="false" />
 

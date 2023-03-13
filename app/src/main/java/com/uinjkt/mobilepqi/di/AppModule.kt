@@ -46,6 +46,9 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuibadah.MahasiswaMateriIbadahViewMod
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaDetailTugasViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasFilterViewModel
+import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasViewModel
 import com.uinjkt.mobilepqi.ui.signin.SigninViewModel
 import com.uinjkt.mobilepqi.ui.signup.SignupViewModel
 import com.uinjkt.mobilepqi.ui.splashscreen.SplashOnboardingViewModel
@@ -96,4 +99,7 @@ val viewModelModule = module {
     viewModel { DosenDetailTugasViewModel(get()) }
     viewModel { DosenCekTugasMahasiswaViewModel(get()) }
     viewModel { DosenBeriNilaiTugasMahasiswaViewModel(get()) }
+    viewModel { MahasiswaTugasViewModel(get()) }
+    viewModel { MahasiswaTugasFilterViewModel(get()) }
+    viewModel { MahasiswaDetailTugasViewModel(get())}
 }

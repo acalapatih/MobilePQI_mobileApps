@@ -143,7 +143,7 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
     }
 
     override fun onUserJenisTugasClicked(data: JenisTugas) {
-        MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas)
+        MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas, data.titleJenisTugas)
     }
 
 

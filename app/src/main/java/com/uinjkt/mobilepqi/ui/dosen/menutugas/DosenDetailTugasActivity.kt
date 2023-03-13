@@ -30,7 +30,7 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
             context.startActivity(starter)
         }
 
-        private const val ID_TUGAS = "topic"
+        private const val ID_TUGAS = "idTugas"
     }
 
     private val idTugas by lazy { intent.getIntExtra(ID_TUGAS, 0) }

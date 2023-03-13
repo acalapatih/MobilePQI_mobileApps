@@ -168,4 +168,9 @@ interface MobilePqiService {
         @Body payload: CreateNilaiPayload,
         @Path("idJawaban") idJawaban: Int
     ): CreateNilaiResponse
+
+    @GET("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban/mahasiswa")
+    suspend fun getJawabanForMahasiswa(
+        @Path("idTugas") idTugas: Int
+    ): GetJawabanForMahasiswaResponse
 }

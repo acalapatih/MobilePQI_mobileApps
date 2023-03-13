@@ -98,4 +98,14 @@ class MenuTugasRepositoryImpl(
             override suspend fun createCall(): Flow<ApiResponse<CreateNilaiResponse>> =
                 remoteDataSource.createNilai(payload, idJawaban)
         }.asFlow()
+
+    override fun getJawabanForMahasiswa(idTugas: Int): Flow<Resource<GetJawabanForMahasiswaModel>> =
+        object :
+            NetworkOnlyResource<GetJawabanForMahasiswaModel, GetJawabanForMahasiswaResponse>() {
+            override fun loadFromNetwork(data: GetJawabanForMahasiswaResponse): Flow<GetJawabanForMahasiswaModel> =
+                GetJawabanForMahasiswaModel.mapResponseToModel(data)
+
+            override suspend fun createCall(): Flow<ApiResponse<GetJawabanForMahasiswaResponse>> =
+                remoteDataSource.getJawabanForMahasiswa(idTugas)
+        }.asFlow()
 }

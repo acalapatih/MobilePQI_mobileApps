@@ -16,4 +16,5 @@ interface MenuTugasRepository {
     fun getListTugasMahasiswa(idTugas: Int, page: Int? = null, limit: Int? = null): Flow<Resource<GetListTugasMahasiswaModel>>
     fun getJawabanForDosen(idTugas: Int, nim: String): Flow<Resource<GetJawabanForDosenModel>>
     fun createNilai(payload: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>>
+    fun getJawabanForMahasiswa(idTugas: Int): Flow<Resource<GetJawabanForMahasiswaModel>>
 }

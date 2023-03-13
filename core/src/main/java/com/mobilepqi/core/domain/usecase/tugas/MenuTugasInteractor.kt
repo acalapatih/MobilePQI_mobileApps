@@ -44,4 +44,7 @@ class MenuTugasInteractor(
 
     override fun createNilai(request: CreateNilaiPayload, idJawaban: Int): Flow<Resource<Boolean>> =
         repository.createNilai(request, idJawaban)
+
+    override fun getJawabanForMahasiswa(idTugas: Int): Flow<Resource<GetJawabanForMahasiswaModel>> =
+        repository.getJawabanForMahasiswa(idTugas)
 }
