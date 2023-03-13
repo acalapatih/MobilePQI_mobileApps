@@ -3,8 +3,6 @@ package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +20,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
-    private val listName: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+    private val listName: List<GetTambahDosenModel.GetTambahDosen> = listOf()
 
     companion object {
         @JvmStatic
@@ -90,15 +88,25 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                         }
                         binding.icTambahDosen.isVisible = listDosenSelected.isNotEmpty()
                     }
-
-                    binding.etSearchDosen.addTextChangedListener(object: TextWatcher {
-                        override fun beforeTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {}
-                        override fun onTextChanged(charSequence: CharSequence?, i: Int, i1: Int, i2: Int) {}
-                        override fun afterTextChanged(editable: Editable) {
-                            //after the change calling the method and passing the search input
-                            filter(editable.toString())
-                        }
-                    })
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "Something Went Wrong")
+                }
+            }
+        }
+        viewModel.postTambahdosen.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    showOneActionDialogWithInvoke(
+                        message = getString(R.string.message_tambah_dosen),
+                        btnMessage = getString(R.string.btnMessage_tambah_dosen),
+                        onButtonClicked = { onBackPressedDispatcher.onBackPressed() }
+                    )
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -122,11 +130,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
         binding.icTambahDosen.setOnClickListener {
             postTambahDosen(classId, listDosenSelected)
-            showOneActionDialogWithInvoke(
-                message = getString(R.string.message_tambah_dosen),
-                btnMessage = getString(R.string.btnMessage_tambah_dosen),
-                onButtonClicked = { onBackPressedDispatcher.onBackPressed() }
-            )
+            viewModel.postTambahdosen
         }
     }
 
