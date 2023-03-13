@@ -92,7 +92,7 @@ class DashboardFragment : Fragment() {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        Toast.makeText(requireContext(), "Something when wrong", Toast.LENGTH_SHORT)
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT)
                             .show()
                     }
                 }

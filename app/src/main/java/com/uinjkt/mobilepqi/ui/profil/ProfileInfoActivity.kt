@@ -24,7 +24,6 @@ import com.uinjkt.mobilepqi.databinding.ActivityProfilInformasiBinding
 import com.uinjkt.mobilepqi.util.Constant
 import com.uinjkt.mobilepqi.util.openGallery
 import com.uinjkt.mobilepqi.util.uriToFile
-import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -98,11 +97,16 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 passwordValidate(password.toString())
             }
         passwordStream.subscribe { isPasswordValid ->
-            if (!isPasswordValid) {
-                binding.etPassword.setError(
-                    "Password harus mengandung minimal 6 karakter yang terdiri dari 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 karakter spesial",
-                    null
-                )
+            if (!isPasswordValid && binding.etPassword.text.toString().isNotEmpty()) {
+                binding.etPassword.error = "Password harus mengandung minimal 6 karakter yang terdiri dari 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 karakter spesial"
+                binding.btnSimpanProfil.isEnabled = isPasswordValid
+            } else if (binding.etPassword.text.toString().isEmpty()) {
+                binding.etPassword.setError(null, null)
+                binding.etPassword.clearFocus()
+                binding.btnSimpanProfil.isEnabled = true
+                binding.btnSimpanProfil.requestFocus()
+            } else {
+                binding.btnSimpanProfil.isEnabled = isPasswordValid
             }
         }
 
@@ -137,20 +141,6 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             if (!isAlamatValid) {
                 binding.etAlamat.setError("Harap masukkan Alamat Anda dengan benar!", null)
             }
-        }
-
-        Observable.combineLatest(
-            fakultasStream,
-            prodiStream,
-            passwordStream,
-            tglahirStream,
-            nohpStream,
-            alamatStream
-        ) { fakultasValid: Boolean, prodiValid: Boolean, passwordValid: Boolean,
-            tglahirValid: Boolean, nohpValid: Boolean, alamatValid: Boolean ->
-            fakultasValid && prodiValid && passwordValid && tglahirValid && nohpValid && alamatValid
-        }.subscribe { isButtonValid ->
-            binding.btnSimpanProfil.isEnabled = isButtonValid
         }
 
         binding.btnSimpanProfil.setOnClickListener {
@@ -282,7 +272,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "Something when wrong")
+                    showToast(model.message ?: "Something went wrong")
                 }
             }
         }
@@ -303,7 +293,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "Something when wrong")
+                    showToast(model.message ?: "Something went wrong")
                 }
             }
         }
@@ -324,7 +314,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "Something when wrong")
+                    showToast(model.message ?: "Something went wrong")
                 }
             }
         }
