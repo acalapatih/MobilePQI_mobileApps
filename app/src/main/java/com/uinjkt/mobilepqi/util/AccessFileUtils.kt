@@ -14,7 +14,7 @@ fun openGallery(launcher: ActivityResultLauncher<Intent>) {
 fun openFileManager(launcher: ActivityResultLauncher<Intent>) {
     val intent = Intent()
     intent.action = Intent.ACTION_GET_CONTENT
-    intent.type = "file/*"
+    intent.type = "*/*"
     val chooser = Intent.createChooser(intent, "Choose a File")
     launcher.launch(chooser)
 }
