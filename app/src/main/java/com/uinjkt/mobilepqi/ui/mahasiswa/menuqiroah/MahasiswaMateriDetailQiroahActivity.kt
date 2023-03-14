@@ -46,6 +46,8 @@ class MahasiswaMateriDetailQiroahActivity : BaseActivity<ActivityMahasiswaMateri
     }
 
     private fun initView() {
+        val breadcrumbText = getString(R.string.tv_title_menu_materi_detail, "Materi Qiroah", "Materi Detail Qiroah")
+        binding.tvTitleMenuDetail.text = breadcrumbText
         getDetailMateriQiroah()
     }
 
@@ -92,7 +94,11 @@ class MahasiswaMateriDetailQiroahActivity : BaseActivity<ActivityMahasiswaMateri
         }
         initAdapter()
         binding.tvTitleMenuDetail.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title)
-        binding.tvDescriptionMenuDetail.text = materi.description
+        if (materi.description.isEmpty() || materi.description.isBlank()) {
+            binding.tvDescriptionMenuDetail.text = getString(R.string.description_empty_state, "Materi")
+        } else {
+            binding.tvDescriptionMenuDetail.text = materi.description
+        }
     }
 
     private fun initAdapter() {
