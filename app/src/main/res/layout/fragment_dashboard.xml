@@ -344,12 +344,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_dashboard" />
 
+        <TextView
+            android:id="@+id/tv_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/inter"
+            android:text="@string/tv_belum_ada_tugas"
+            android:textSize="16sp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/tv_judul"
+            app:layout_constraintTop_toBottomOf="@id/tv_judul" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tugas_dashboard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            app:layout_constraintStart_toStartOf="@id/tv_judul"
             app:layout_constraintTop_toBottomOf="@id/tv_judul"
             tools:itemCount="2"
             tools:listitem="@layout/recycle_view_tugas_dashboard" />

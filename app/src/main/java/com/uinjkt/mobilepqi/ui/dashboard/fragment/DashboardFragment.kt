@@ -169,6 +169,7 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Success -> {
                     showLoading(false)
                     listTugasDashboard = model.data?.listTugas ?: emptyList()
+                    binding.tvEmptyState.isVisible = listTugasDashboard.isEmpty()
                     tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
                     binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
                     binding.rvTugasDashboard.adapter = tugasDashboardAdapter
@@ -251,6 +252,7 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
     private fun initView() {
         currentTimestamp = Timestamp(System.currentTimeMillis()).toString()
+        binding.tvEmptyState.text = getString(R.string.tv_belum_ada_tugas, binding.tvJudul.text.toString())
 
         if (latitude.isEmpty() && longitude.isEmpty()) {
             binding.tvSholat.text = "-"
@@ -264,6 +266,7 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 viewModel.getTugas(classIdMahasiswa)
                 Log.d("Class Id Mahasiswa", "class Id: $value")
             }
+            binding.icKelas.isVisible = false
         } else {
             viewModel.getClass(classIdDosen)
             viewModel.getTugas(classIdDosen)
