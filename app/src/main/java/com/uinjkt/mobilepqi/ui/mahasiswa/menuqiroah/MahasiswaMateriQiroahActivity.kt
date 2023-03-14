@@ -54,8 +54,10 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
+        val titleBar = getString(R.string.tv_title_materi_ibadah)
+        binding.tvTitleMenuMahasiswa.text = titleBar
+        binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
         getMateriQiroah(intent.getIntExtra(ID_KELAS, 0))
-        binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_qiroah)
     }
 
     private fun initObserver() {
@@ -65,10 +67,10 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -82,6 +84,7 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuMahasiswa.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
     }
 
     private fun actionAfterGetMateri(model: GetMateriQiroahModel) {
@@ -93,7 +96,9 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
             )
         }
         initAdapter()
+        binding.tvEmptyState.isVisible = listMateri.isEmpty()
     }
+
 
     private fun initAdapter() {
         mahasiswaMateriAdapter = MenuMahasiswaMateriAdapterList(this, listMateri, this)

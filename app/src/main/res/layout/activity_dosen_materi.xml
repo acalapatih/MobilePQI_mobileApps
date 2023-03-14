@@ -42,15 +42,16 @@
         android:id="@+id/pb_loading_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/action_bar_menu_dosen"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintTop_toBottomOf="@id/action_bar_menu_dosen" />
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_recycle_view_menu_dosen"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,17 +77,67 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tv_empty_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/empty_state"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@+id/tv_tap_icon"
+                app:layout_constraintEnd_toEndOf="@id/tv_tap_icon_cont"
+                app:layout_constraintStart_toStartOf="@id/tv_tap_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Tidak Ada Materi Qiroah" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_tap_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:text="@string/tap_icon"
+                app:drawableEndCompat="@drawable/ic_add_topic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_tap_icon_cont"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_empty_state" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tv_tap_icon_cont"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/inter"
+                android:gravity="center"
+                android:text="@string/tap_icon_cont"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_tap_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_tap_icon"
+                app:layout_constraintTop_toTopOf="@+id/tv_tap_icon"
+                tools:text="Untuk Menambahkan Materi Qiroah" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycle_view_menu_dosen"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_icon_add_topic"
-                tools:itemCount="20"
+                tools:itemCount="1"
                 tools:listitem="@layout/recycle_view_list_menu_dosen" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

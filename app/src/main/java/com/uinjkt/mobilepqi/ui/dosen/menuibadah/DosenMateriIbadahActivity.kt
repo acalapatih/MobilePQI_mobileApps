@@ -50,7 +50,10 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
 
     private fun initView() {
         // Initialize Title
-        binding.tvTitleMenuDosen.text = getString(R.string.tv_title_materi_ibadah)
+        val titleBar = getString(R.string.tv_title_materi_ibadah)
+        binding.tvTitleMenuDosen.text = titleBar
+        binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
+        binding.tvTapIconCont.text = getString(R.string.tap_icon_cont, titleBar)
         getMateriIbadah(idKelas)
     }
 
@@ -96,13 +99,15 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    showOneActionDialogWithInvoke("Materi Gagal Ditambahkan", "Okay") {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                     showLoading(false)
                 }
             }
@@ -110,7 +115,9 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
     }
 
     private fun actionAfterCreateMateri() {
-        getMateriIbadah(idKelas)
+        showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
+            getMateriIbadah(idKelas)
+        }
     }
 
     private fun actionAfterGetMateri(model: GetMateriIbadahModel) {
@@ -121,7 +128,13 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
             )
         }
         initAdapter()
+        showEmptyState(listMateri.isEmpty())
+    }
 
+    private fun showEmptyState(value: Boolean) {
+        binding.tvEmptyState.isVisible = value
+        binding.tvTapIcon.isVisible = value
+        binding.tvTapIconCont.isVisible = value
     }
 
     private fun initAdapter() {
@@ -140,6 +153,9 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuDosen.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
+        binding.tvTapIcon.isVisible = !value
+        binding.tvTapIconCont.isVisible = !value
     }
 
 
@@ -166,9 +182,7 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
             tvTitleMessage.text = getString(R.string.hint_et_insert_topic_materi)
             btnTambahkanMateriDosen.setOnClickListener {
                 if (etInsertTopicText.text.isNotEmpty()) {
-                    showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
-                        createMateriIbadah(etInsertTopicText.text.toString(), idKelas)
-                    }
+                    createMateriIbadah(etInsertTopicText.text.toString(), idKelas)
                     dialog.dismiss()
                 } else {
                     dialog.hide()

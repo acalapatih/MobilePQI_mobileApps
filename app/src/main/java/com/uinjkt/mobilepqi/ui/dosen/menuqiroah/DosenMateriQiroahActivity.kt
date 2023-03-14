@@ -73,10 +73,10 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -90,6 +90,9 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuDosen.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
+        binding.tvTapIcon.isVisible = !value
+        binding.tvTapIconCont.isVisible = !value
     }
 
     private fun actionAfterGetMateri(model: GetMateriQiroahModel) {
@@ -101,6 +104,13 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
             )
         }
         initAdapter()
+        showEmptyState(listMateri.isEmpty())
+    }
+
+    private fun showEmptyState(value: Boolean) {
+        binding.tvEmptyState.isVisible = value
+        binding.tvTapIcon.isVisible = value
+        binding.tvTapIconCont.isVisible = value
     }
 
     private fun initAdapter() {
@@ -137,7 +147,10 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
 
     private fun initView() {
         // Initialize Title
-        binding.tvTitleMenuDosen.text = getString(R.string.tv_title_materi_qiroah)
+        val titleBar = getString(R.string.tv_title_materi_qiroah)
+        binding.tvTitleMenuDosen.text = titleBar
+        binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
+        binding.tvTapIconCont.text = getString(R.string.tap_icon_cont, titleBar)
         getMateriQiroah(idKelas)
     }
 

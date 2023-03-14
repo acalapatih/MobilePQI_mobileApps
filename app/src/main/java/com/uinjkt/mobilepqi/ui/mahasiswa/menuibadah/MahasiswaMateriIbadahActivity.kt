@@ -41,8 +41,10 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
+        val titleBar = getString(R.string.tv_title_materi_ibadah)
+        binding.tvTitleMenuMahasiswa.text = titleBar
+        binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
         getMateriIbadah(intent.getIntExtra(ID_KELAS, 0))
-        binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_ibadah)
     }
 
     private fun getMateriIbadah(idKelas: Int) {
@@ -67,10 +69,10 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -89,6 +91,7 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
             )
         }
         initAdapter()
+        binding.tvEmptyState.isVisible = listMateri.isEmpty()
     }
 
     private fun initAdapter() {
@@ -101,6 +104,7 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuMahasiswa.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
     }
 
     override fun onUserClicked(position: Int) {

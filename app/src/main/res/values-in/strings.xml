@@ -237,4 +237,7 @@
     <string name="tv_belum_ada_tugas">Belum ada tugas %s</string>
     <string name="poin_maksimal">100 Poin</string>
     <string name="nilai_tugas">%d / 100</string>
+    <string name="empty_state">Tidak ada %s</string>
+    <string name="tap_icon">Tap Icon</string>
+    <string name="tap_icon_cont">Untuk Menambahkan %s</string>
 </resources>
