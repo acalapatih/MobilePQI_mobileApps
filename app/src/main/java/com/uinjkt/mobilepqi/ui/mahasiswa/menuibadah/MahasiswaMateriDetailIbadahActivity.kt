@@ -13,6 +13,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriDetailBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
+import com.uinjkt.mobilepqi.util.capitalizeEachWord
 import com.uinjkt.mobilepqi.util.downloadFileToStorage
 import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -84,7 +85,7 @@ class MahasiswaMateriDetailIbadahActivity : BaseActivity<ActivityMahasiswaMateri
             )
         }
         initAdapter()
-        binding.tvTitleMenuDetail.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title)
+        binding.tvTitleMenuDetail.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title.capitalizeEachWord())
         if (materi.description.isEmpty() || materi.description.isBlank()) {
             binding.tvDescriptionMenuDetail.text = getString(R.string.description_empty_state, "Materi")
         } else {

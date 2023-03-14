@@ -16,10 +16,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenMateriDetailBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
-import com.uinjkt.mobilepqi.util.Constant
-import com.uinjkt.mobilepqi.util.openFileManagerPdf
-import com.uinjkt.mobilepqi.util.openGallery
-import com.uinjkt.mobilepqi.util.uriToFile
+import com.uinjkt.mobilepqi.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -50,7 +47,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
     }
 
     private fun initView() {
-        getString(R.string.tv_title_detail_materi_qiroah, "")
+        getString(R.string.tv_title_detail_materi_qiroah, "Detail Materi Qiroah")
         getDetailMateriQiroah()
     }
 
@@ -210,7 +207,7 @@ class DosenMateriDetailQiroahActivity : BaseActivity<ActivityDosenMateriDetailBi
         listFileAttached = materi.file.toMutableList()
         // Initialize Adapter List Tugas Upload By Dosen
         initAdapter()
-        binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title)
+        binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_qiroah, materi.title.capitalizeEachWord())
         binding.etDescDetailMateriDosen.setText(materi.description)
     }
 
