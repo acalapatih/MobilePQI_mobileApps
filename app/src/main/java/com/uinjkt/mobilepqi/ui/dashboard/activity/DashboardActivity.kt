@@ -50,8 +50,8 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
     private var doubleBackToExitPressedOnce = false
     private var isGranted = true
 
+    private lateinit var navController: NavController
     lateinit var navView: BottomNavigationView
-    lateinit var navController: NavController
 
     override fun getViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 

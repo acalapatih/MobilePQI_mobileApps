@@ -4,7 +4,7 @@ import com.mobilepqi.core.data.NetworkOnlyResource
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.RemoteDataSource
 import com.mobilepqi.core.data.source.remote.network.ApiResponse
-import com.mobilepqi.core.data.source.remote.response.CreateNilaiResponse
+import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.tugas.*
 import com.mobilepqi.core.domain.model.tugas.*
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository

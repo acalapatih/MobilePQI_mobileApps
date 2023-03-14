@@ -16,6 +16,8 @@ import com.mobilepqi.core.domain.usecase.ibadah.MenuIbadahInteractor
 import com.mobilepqi.core.domain.usecase.ibadah.MenuIbadahUsecase
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatInteractor
 import com.mobilepqi.core.domain.usecase.jadwalsholat.JadwalSholatUsecase
+import com.mobilepqi.core.domain.usecase.logout.LogoutInteractor
+import com.mobilepqi.core.domain.usecase.logout.LogoutUseCase
 import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordInteractor
 import com.mobilepqi.core.domain.usecase.lupapassword.LupaPasswordUsecase
 import com.mobilepqi.core.domain.usecase.onboarding.OnboardingInteractor
@@ -45,7 +47,12 @@ import com.uinjkt.mobilepqi.ui.dosen.menuibadah.DosenMateriIbadahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriDetailQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menuqiroah.DosenMateriQiroahViewModel
 import com.uinjkt.mobilepqi.ui.dosen.menusilabus.DosenSilabusViewModel
-import com.uinjkt.mobilepqi.ui.dosen.menutugas.*
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenBeriNilaiTugasMahasiswaViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenBuatEditTugasViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenCekTugasMahasiswaViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenDetailTugasViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasFilterViewModel
+import com.uinjkt.mobilepqi.ui.dosen.menutugas.DosenTugasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.buatkelas.BuatKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.daftarkelas.DaftarKelasViewModel
 import com.uinjkt.mobilepqi.ui.kelas.detailkelas.DetailKelasViewModel
@@ -87,12 +94,13 @@ val useCaseModule = module {
     factory<GetTugasUsecase> { GetTugasInteractor(get()) }
     factory<GetClassUsecase> { GetClassInteractor(get()) }
     factory<GetUserUsecase> { GetUserInteractor(get()) }
+    factory<LogoutUseCase> { LogoutInteractor(get()) }
 }
 
 val viewModelModule = module {
     viewModel { DashboardViewModel(get(), get(), get(), get(), get(), get()) }
     viewModel { SigninViewModel(get()) }
-    viewModel { ProfilViewModel(get(), get(), get()) }
+    viewModel { ProfilViewModel(get(), get(), get(), get()) }
     viewModel { SigninViewModel(get()) }
     viewModel { SignupViewModel(get()) }
     viewModel { DosenMateriQiroahViewModel(get()) }
@@ -120,5 +128,5 @@ val viewModelModule = module {
     viewModel { DosenBeriNilaiTugasMahasiswaViewModel(get()) }
     viewModel { MahasiswaTugasViewModel(get()) }
     viewModel { MahasiswaTugasFilterViewModel(get()) }
-    viewModel { MahasiswaDetailTugasViewModel(get(), get())}
+    viewModel { MahasiswaDetailTugasViewModel(get(), get()) }
 }
