@@ -54,7 +54,7 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
-        val titleBar = getString(R.string.tv_title_materi_ibadah)
+        val titleBar = getString(R.string.tv_title_materi_qiroah)
         binding.tvTitleMenuMahasiswa.text = titleBar
         binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
         getMateriQiroah(intent.getIntExtra(ID_KELAS, 0))
