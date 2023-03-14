@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.common.JenisTugas
+import com.mobilepqi.core.domain.model.common.TugasItem
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -17,7 +18,8 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(),
-    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
+    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener,
+    ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
 
     companion object {
         @JvmStatic
@@ -80,7 +82,7 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
 
     private fun initObserver() {
         viewModel.getListTugas.observe(this) { model ->
-            when(model) {
+            when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
@@ -101,7 +103,13 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
 
     private fun actionAfterGetListTugas(model: GetListTugasModel) {
         initAdapter(model)
+        binding.tvBelumAdaTugasIbadah.isVisible = checkEmptyTugas(model.ibadah)
+        binding.tvBelumAdaTugasQiroah.isVisible = checkEmptyTugas(model.qiroah)
+        binding.tvBelumAdaTugasHafalanDoa.isVisible = checkEmptyTugas(model.doa)
+        binding.tvBelumAdaTugasHafalanSurah.isVisible = checkEmptyTugas(model.surah)
     }
+
+    private fun checkEmptyTugas(listTugas: List<TugasItem>): Boolean = listTugas.isEmpty()
 
     private fun initAdapter(model: GetListTugasModel) {
         // Initialize Adapter Jenis Tugas
@@ -125,11 +133,16 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
         binding.rvListTugasMahasiswaHafalanDoa.adapter = mahasiswaTugasDoaAdapter
 
         // Set Layout Manager
-        binding.rvJenisTugasMahasiswaSemua.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListTugasMahasiswaQiroah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaIbadah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaHafalanSurah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvJenisTugasMahasiswaSemua.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvListTugasMahasiswaQiroah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaIbadah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaHafalanSurah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaHafalanDoa.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun showLoading(value: Boolean) {
@@ -143,7 +156,11 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
     }
 
     override fun onUserJenisTugasClicked(data: JenisTugas) {
-        MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas, data.titleJenisTugas)
+        MahasiswaTugasFilterActivity.start(
+            this@MahasiswaTugasActivity,
+            idKelas,
+            data.titleJenisTugas
+        )
     }
 
     override fun onRestart() {
