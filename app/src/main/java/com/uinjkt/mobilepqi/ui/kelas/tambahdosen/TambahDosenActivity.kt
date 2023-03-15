@@ -31,6 +31,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
+
         private const val ID_KELAS = "id_kelas"
     }
 
@@ -166,7 +167,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
             .map { charSequence ->
                 charSequence.isNotEmpty()
             }
-        searchDosenStream.subscribe{ isValid ->
+        searchDosenStream.subscribe { isValid ->
             if (isValid) {
                 binding.icSearchDosen.alpha = 1F
                 binding.icSearchDosen.isClickable = isValid
