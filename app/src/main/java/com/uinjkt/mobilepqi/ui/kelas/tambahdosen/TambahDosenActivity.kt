@@ -78,8 +78,12 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                     getListDosen = model.data?.list?.toMutableList() ?: mutableListOf()
                     model.data?.let {
                         getListDosen = it.list.toMutableList()
-                        tambahDosenAdapter =
-                            TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
+                        if (getListDosen.isEmpty()) {
+                            showEmptyState()
+                        } else {
+                            tambahDosenAdapter =
+                                TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
+                        }
                     }
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter
@@ -101,25 +105,6 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
             }
         }
-        viewModel.postTambahdosen.observe(this) { model ->
-            when (model) {
-                is Resource.Loading -> {
-                    showLoading(true)
-                }
-                is Resource.Success -> {
-                    showLoading(false)
-                    showOneActionDialogWithInvoke(
-                        message = getString(R.string.message_tambah_dosen),
-                        btnMessage = getString(R.string.btnMessage_tambah_dosen),
-                        onButtonClicked = { onBackPressedDispatcher.onBackPressed() }
-                    )
-                }
-                is Resource.Error -> {
-                    showLoading(false)
-                    showToast(model.message ?: "Something Went Wrong")
-                }
-            }
-        }
 
         viewModel.postTambahdosen.observe(this) { model ->
             when (model) {
@@ -140,6 +125,10 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
             }
         }
+    }
+
+    private fun showEmptyState() {
+        binding.tvEmptyState.isVisible
     }
 
     @SuppressLint("CheckResult")
