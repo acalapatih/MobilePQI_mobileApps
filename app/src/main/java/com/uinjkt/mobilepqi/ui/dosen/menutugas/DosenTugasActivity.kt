@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.common.JenisTugas
-import com.mobilepqi.core.domain.model.common.TugasItem
 import com.mobilepqi.core.domain.model.tugas.GetListTugasModel
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
@@ -142,14 +141,17 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(),
     }
 
     private fun actionAfterGetListTugas(model: GetListTugasModel) {
+        showEmptyStateEachTopic(model)
         initAdapter(model)
-        binding.tvBelumAdaTugasPraktikumQiroahDosen.isVisible = checkEmptyTugas(model.qiroah)
-        binding.tvBelumAdaTugasPraktikumIbadahDosen.isVisible = checkEmptyTugas(model.ibadah)
-        binding.tvBelumAdaTugasHafalanSurahDosen.isVisible = checkEmptyTugas(model.surah)
-        binding.tvBelumAdaTugasHafalanDoaDosen.isVisible = checkEmptyTugas(model.doa)
     }
 
-    private fun checkEmptyTugas(listTugas: List<TugasItem>): Boolean = listTugas.isEmpty()
+    private fun showEmptyStateEachTopic(model: GetListTugasModel) {
+        binding.tvBelumAdaTugasPraktikumQiroahDosen.isVisible = model.qiroah.isEmpty()
+        binding.tvBelumAdaTugasPraktikumIbadahDosen.isVisible = model.ibadah.isEmpty()
+        binding.tvBelumAdaTugasHafalanSurahDosen.isVisible = model.surah.isEmpty()
+        binding.tvBelumAdaTugasHafalanDoaDosen.isVisible = model.doa.isEmpty()
+    }
+
 
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
@@ -160,34 +162,40 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(),
         // Initialize Adapter Jenis Tugas
         dosenJenisTugasAdapter = MenuMahasiswaJenisTugasAdapterNew(this, listJenisTugas, this)
         binding.rvJenisTugasDosenSemua.adapter = dosenJenisTugasAdapter
-
-        // Initialize Adapter Tugas Qiroah
-        dosenTugasQiroahAdapter = ListMahasiswaTugasAdapterList(this, model.qiroah, this)
-        binding.rvListTugasDosenQiroah.adapter = dosenTugasQiroahAdapter
-
-        // Initialize Adapter Tugas Ibadah
-        dosenTugasIbadahAdapter = ListMahasiswaTugasAdapterList(this, model.ibadah, this)
-        binding.rvListTugasDosenIbadah.adapter = dosenTugasIbadahAdapter
-
-        // Initialize Adapter Tugas Hafalan Surah
-        dosenTugasSurahAdapter = ListMahasiswaTugasAdapterList(this, model.surah, this)
-        binding.rvListTugasDosenHafalanSurah.adapter = dosenTugasSurahAdapter
-
-        // Initialize Adapter Tugas Hafalan Doa
-        dosenTugasDoaAdapter = ListMahasiswaTugasAdapterList(this, model.doa, this)
-        binding.rvListTugasDosenHafalanDoa.adapter = dosenTugasDoaAdapter
-
-        // Set Layout Manager
         binding.rvJenisTugasDosenSemua.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListTugasDosenQiroah.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasDosenIbadah.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasDosenHafalanSurah.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasDosenHafalanDoa.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        if (model.qiroah.isNotEmpty()) {
+            // Initialize Adapter Tugas Qiroah
+            dosenTugasQiroahAdapter = ListMahasiswaTugasAdapterList(this, model.qiroah, this)
+            binding.rvListTugasDosenQiroah.adapter = dosenTugasQiroahAdapter
+            binding.rvListTugasDosenQiroah.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        }
+
+        if (model.ibadah.isNotEmpty()) {
+            // Initialize Adapter Tugas Ibadah
+            dosenTugasIbadahAdapter = ListMahasiswaTugasAdapterList(this, model.ibadah, this)
+            binding.rvListTugasDosenIbadah.adapter = dosenTugasIbadahAdapter
+            binding.rvListTugasDosenIbadah.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        }
+
+        if (model.doa.isNotEmpty()) {
+            // Initialize Adapter Tugas Hafalan Doa
+            dosenTugasDoaAdapter = ListMahasiswaTugasAdapterList(this, model.doa, this)
+            binding.rvListTugasDosenHafalanDoa.adapter = dosenTugasDoaAdapter
+            binding.rvListTugasDosenHafalanDoa.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        }
+
+        if (model.surah.isNotEmpty()) {
+            // Initialize Adapter Tugas Hafalan Surah
+            dosenTugasSurahAdapter = ListMahasiswaTugasAdapterList(this, model.surah, this)
+            binding.rvListTugasDosenHafalanSurah.adapter = dosenTugasSurahAdapter
+            binding.rvListTugasDosenHafalanSurah.layoutManager =
+                LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     override fun onRestart() {

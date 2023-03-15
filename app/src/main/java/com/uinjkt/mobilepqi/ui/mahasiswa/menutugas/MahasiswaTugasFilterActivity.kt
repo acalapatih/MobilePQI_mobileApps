@@ -112,10 +112,21 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
     }
 
     private fun actionAfterGetListTopicTugas(model: GetListTopicTugasModel) {
+        if (model.tugas.isNullOrEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+        }
         initListTugasAdapter(model)
-        binding.tvBelumAdaTugasQiroahFilter.text =
-            getString(R.string.tv_belum_ada_tugas, titleTopic)
-        binding.tvBelumAdaTugasQiroahFilter.isVisible = model.tugas?.isEmpty() ?: true
+
+    }
+
+    private fun showEmptyState(value: Boolean) {
+        if (value) {
+            binding.tvBelumAdaTugasQiroahFilter.text =
+                getString(R.string.tv_belum_ada_tugas, titleTopic)
+        }
+        binding.tvBelumAdaTugasQiroahFilter.isVisible = value
     }
 
     private fun initListTugasAdapter(model: GetListTopicTugasModel) {

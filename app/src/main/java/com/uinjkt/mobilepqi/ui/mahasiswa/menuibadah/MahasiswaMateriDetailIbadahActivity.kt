@@ -86,10 +86,14 @@ class MahasiswaMateriDetailIbadahActivity : BaseActivity<ActivityMahasiswaMateri
         }
         initAdapter()
         binding.tvTitleMenuDetail.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title.capitalizeEachWord())
-        if (materi.description.isEmpty() || materi.description.isBlank()) {
+        checkEmptyDescription(materi.description)
+    }
+
+    private fun checkEmptyDescription(description: String) {
+        if (description.isEmpty() || description.isBlank()) {
             binding.tvDescriptionMenuDetail.text = getString(R.string.description_empty_state, "Materi")
         } else {
-            binding.tvDescriptionMenuDetail.text = materi.description
+            binding.tvDescriptionMenuDetail.text = description
         }
     }
 

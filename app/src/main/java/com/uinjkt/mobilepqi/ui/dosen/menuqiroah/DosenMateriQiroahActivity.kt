@@ -103,11 +103,21 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                 title = materi.title
             )
         }
-        initAdapter()
-        showEmptyState(listMateri.isEmpty())
+
+        if(listMateri.isEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+            initAdapter()
+        }
     }
 
     private fun showEmptyState(value: Boolean) {
+        if(value) {
+            val titleBar = binding.tvTitleMenuDosen.text.toString()
+            binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
+            binding.tvTapIconCont.text = getString(R.string.tap_icon_cont, titleBar)
+        }
         binding.tvEmptyState.isVisible = value
         binding.tvTapIcon.isVisible = value
         binding.tvTapIconCont.isVisible = value
@@ -147,10 +157,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
 
     private fun initView() {
         // Initialize Title
-        val titleBar = getString(R.string.tv_title_materi_qiroah)
-        binding.tvTitleMenuDosen.text = titleBar
-        binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
-        binding.tvTapIconCont.text = getString(R.string.tap_icon_cont, titleBar)
+        binding.tvTitleMenuDosen.text = getString(R.string.tv_title_materi_qiroah)
         getMateriQiroah(idKelas)
     }
 

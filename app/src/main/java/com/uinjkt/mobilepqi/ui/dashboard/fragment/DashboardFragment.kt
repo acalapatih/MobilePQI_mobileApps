@@ -169,11 +169,15 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Success -> {
                     showLoading(false)
                     listTugasDashboard = model.data?.listTugas ?: emptyList()
-                    binding.tvEmptyState.isVisible = listTugasDashboard.isEmpty()
-                    tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
-                    binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
-                    binding.rvTugasDashboard.adapter = tugasDashboardAdapter
-                    binding.rvTugasDashboard.isNestedScrollingEnabled = false
+                    if(listTugasDashboard.isEmpty()) {
+                        showEmptyState()
+                    } else {
+                        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
+                        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
+                        binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+                        binding.rvTugasDashboard.isNestedScrollingEnabled = false
+                    }
+
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -183,6 +187,11 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 }
             }
         }
+    }
+
+    private fun showEmptyState() {
+        binding.tvEmptyState.text = String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
+        binding.tvEmptyState.isVisible = true
     }
 
     private fun showClass(data: GetClassModel) {
@@ -252,8 +261,6 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
     private fun initView() {
         currentTimestamp = Timestamp(System.currentTimeMillis()).toString()
-        binding.tvEmptyState.text = getString(R.string.tv_belum_ada_tugas, binding.tvJudul.text.toString())
-
         if (latitude.isEmpty() && longitude.isEmpty()) {
             binding.tvSholat.text = "-"
             binding.tvWaktu.text = "-"

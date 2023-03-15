@@ -54,9 +54,7 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
-        val titleBar = getString(R.string.tv_title_materi_qiroah)
-        binding.tvTitleMenuMahasiswa.text = titleBar
-        binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
+        binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_qiroah)
         getMateriQiroah(intent.getIntExtra(ID_KELAS, 0))
     }
 
@@ -95,8 +93,21 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                 title = it.title
             )
         }
-        initAdapter()
-        binding.tvEmptyState.isVisible = listMateri.isEmpty()
+
+        if(listMateri.isEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+            initAdapter()
+        }
+
+    }
+
+    private fun showEmptyState(value: Boolean) {
+        if(value) {
+            binding.tvEmptyState.text = getString(R.string.empty_state, binding.tvTitleMenuMahasiswa.text.toString())
+        }
+        binding.tvEmptyState.isVisible = value
     }
 
 

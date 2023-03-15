@@ -130,15 +130,18 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
                 R.string.tv_tenggat_waktu_tugas,
                 model.deadline.convertTime("EEEE, dd MMMM yyyy (HH:mm)")
             )
-        if (model.description.isBlank() || model.description.isEmpty()) {
+        checkEmptyDescription(model.description)
+        listFileAttached.addAll(0, model.file)
+        initAdapter()
+    }
+
+    private fun checkEmptyDescription(description: String) {
+        if (description.isBlank() || description.isEmpty()) {
             binding.tvDescriptionTugasDetail.text =
                 getString(R.string.description_empty_state, "Tugas")
         } else {
-            binding.tvDescriptionTugasDetail.text = model.description
+            binding.tvDescriptionTugasDetail.text = description
         }
-
-        listFileAttached.addAll(0, model.file)
-        initAdapter()
     }
 
     private fun initAdapter() {
