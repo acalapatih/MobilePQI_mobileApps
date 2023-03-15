@@ -19,8 +19,7 @@ class BuatKelasActivity : BaseActivity<ActivityBuatKelasBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context): Intent {
-            val starter = Intent(context, BuatKelasActivity::class.java)
-            return starter
+            return Intent(context, BuatKelasActivity::class.java)
         }
     }
 

@@ -130,7 +130,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
     }
 
 
-    protected fun showOneActionDialogWithInvoke(message: String, btnMessage: String, onButtonClicked: () -> Unit) {
+    protected fun showOneActionDialogWithInvoke(
+        message: String,
+        btnMessage: String,
+        onButtonClicked: () -> Unit
+    ) {
         val dialog = Dialog(this)
         val dialogBinding = ItemDialogOneActionBinding.inflate(layoutInflater)
         val window = dialog.window
@@ -156,7 +160,11 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         dialog.show()
     }
 
-    protected fun showOneActionThinFontDialogWithInvoke(message: String, btnMessage: String, onButtonClicked: () -> Unit) {
+    protected fun showOneActionThinFontDialogWithInvoke(
+        message: String,
+        btnMessage: String,
+        onButtonClicked: () -> Unit
+    ) {
         val dialog = Dialog(this)
         val dialogBinding = ItemDialogOneActionThinFontBinding.inflate(layoutInflater)
         val window = dialog.window

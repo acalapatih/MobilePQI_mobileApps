@@ -9,6 +9,7 @@ import com.mobilepqi.core.data.source.remote.response.profil.PutProfilPayload
 import com.mobilepqi.core.domain.model.profil.ProfilModel
 import com.mobilepqi.core.domain.model.profil.PutProfilModel
 import com.mobilepqi.core.domain.model.upload.UploadModel
+import com.mobilepqi.core.domain.usecase.logout.LogoutUseCase
 import com.mobilepqi.core.domain.usecase.profil.ProfilUsecase
 import com.mobilepqi.core.domain.usecase.profil.PutProfilUsecase
 import com.mobilepqi.core.domain.usecase.upload.UploadFileOrImageUsecase
@@ -19,7 +20,8 @@ import java.io.File
 class ProfilViewModel(
     private val usecase: ProfilUsecase,
     private val usecasePut: PutProfilUsecase,
-    private val uploadFileAndImageUsecase: UploadFileOrImageUsecase
+    private val uploadFileAndImageUsecase: UploadFileOrImageUsecase,
+    private val logoutUseCase: LogoutUseCase
 ): ViewModel() {
     private val _profil = MutableLiveData<Resource<ProfilModel>>()
     val profil: LiveData<Resource<ProfilModel>> get() = _profil
@@ -56,5 +58,9 @@ class ProfilViewModel(
                 _uploadImage.value = it
             }
         }
+    }
+
+    fun clearAllSharedPreferences() {
+        logoutUseCase.clearAllSharedPreferences()
     }
 }

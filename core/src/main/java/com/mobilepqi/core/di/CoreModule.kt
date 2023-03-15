@@ -10,6 +10,7 @@ import com.mobilepqi.core.data.repository.dashboard.GetUserRepositoryImpl
 import com.mobilepqi.core.data.repository.detailkelas.DetailKelasRepositoryImpl
 import com.mobilepqi.core.data.repository.ibadah.MenuIbadahRepositoryImpl
 import com.mobilepqi.core.data.repository.jadwalsholat.JadwalSholatRepositoryImpl
+import com.mobilepqi.core.data.repository.logout.LogoutRepositoryImpl
 import com.mobilepqi.core.data.repository.lupapassword.LupaPasswordRepositoryImpl
 import com.mobilepqi.core.data.repository.onboarding.OnboardingRepositoryImpl
 import com.mobilepqi.core.data.repository.profil.ProfilRepositoryImpl
@@ -35,6 +36,7 @@ import com.mobilepqi.core.domain.repository.dashboard.GetUserRepository
 import com.mobilepqi.core.domain.repository.detailkelas.DetailKelasRepository
 import com.mobilepqi.core.domain.repository.ibadah.MenuIbadahRepository
 import com.mobilepqi.core.domain.repository.jadwalsholat.JadwalSholatRepository
+import com.mobilepqi.core.domain.repository.logout.LogoutRepository
 import com.mobilepqi.core.domain.repository.lupapassword.LupaPasswordRepository
 import com.mobilepqi.core.domain.repository.onboarding.OnboardingRepository
 import com.mobilepqi.core.domain.repository.profil.ProfilRepository
@@ -47,13 +49,13 @@ import com.mobilepqi.core.domain.repository.tambahdosen.TambahDosenRepository
 import com.mobilepqi.core.domain.repository.tugas.MenuTugasRepository
 import com.mobilepqi.core.domain.repository.upload.UploadFileOrImageRepository
 import com.mobilepqi.core.util.HeaderInterceptor
+import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 val storageModule = module {
     single { MainPreferencesImpl.getInstances(androidContext()) }
@@ -124,5 +126,6 @@ val repositoryModule = module {
     single<GetTugasRepository> { GetTugasRepositoryImpl(get()) }
     single<GetClassRepository> { GetClassRepositoryImpl(get()) }
     single<GetUserRepository> { GetUserRepositoryImpl(get()) }
-    single<MenuTugasRepository> { MenuTugasRepositoryImpl(get())}
+    single<MenuTugasRepository> { MenuTugasRepositoryImpl(get()) }
+    single<LogoutRepository> { LogoutRepositoryImpl(get()) }
 }

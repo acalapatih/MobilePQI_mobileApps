@@ -25,14 +25,19 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
-            val starter =
-                Intent(context, TambahDosenActivity::class.java).putExtra("idKelas", idKelas)
+            val starter = Intent(context, TambahDosenActivity::class.java)
+                .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
+
+        private const val ID_KELAS = "id_kelas"
     }
 
+    private lateinit var tambahDosenAdapter: TambahDosenAdapter
+    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
+    private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
     private val viewModel by viewModel<TambahDosenViewModel>()
-    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
+    private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
         ActivityTambahDosenBinding.inflate(layoutInflater)
@@ -95,6 +100,26 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
             }
         }
+        viewModel.postTambahdosen.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    showOneActionDialogWithInvoke(
+                        message = getString(R.string.message_tambah_dosen),
+                        btnMessage = getString(R.string.btnMessage_tambah_dosen),
+                        onButtonClicked = { onBackPressedDispatcher.onBackPressed() }
+                    )
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "Something Went Wrong")
+                }
+            }
+        }
+
         viewModel.postTambahdosen.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {

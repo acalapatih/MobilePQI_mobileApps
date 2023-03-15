@@ -1,7 +1,6 @@
 package com.mobilepqi.core.data.source.remote.network
 
 import com.mobilepqi.core.data.source.remote.response.jadwalsholat.JadwalSholatResponse
-import java.sql.Timestamp
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
