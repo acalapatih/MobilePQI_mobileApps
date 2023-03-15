@@ -1,6 +1,5 @@
 package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -61,10 +60,4 @@ class TambahDosenAdapter(
     }
 
     override fun getItemCount(): Int = dataset.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun filterList(filteredList: MutableList<GetTambahDosenModel.GetTambahDosen>) {
-        this.dataset = filteredList
-        notifyDataSetChanged();
-    }
 }

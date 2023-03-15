@@ -16,6 +16,7 @@ import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     private var getListDosen: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
@@ -35,6 +36,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
     private val viewModel by viewModel<TambahDosenViewModel>()
     private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private var namaNip: String = ""
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
         ActivityTambahDosenBinding.inflate(layoutInflater)
@@ -47,7 +49,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private fun initView() {
-        getTambahDosen(classId)
+        getTambahDosen(classId, namaNip)
     }
 
     private fun postTambahDosen(
@@ -61,8 +63,8 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         ), idKelas)
     }
 
-    private fun getTambahDosen(idKelas: Int) {
-        viewModel.getTambahDosen(idKelas)
+    private fun getTambahDosen(idKelas: Int, namaNip: String) {
+        viewModel.getTambahDosen(idKelas, namaNip)
     }
 
     private fun initObserver() {
@@ -160,6 +162,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
         val searchDosenStream = RxTextView.textChanges(binding.etSearchDosen)
             .skipInitialValue()
+            .debounce(800, TimeUnit.MILLISECONDS)
             .map { charSequence ->
                 charSequence.isNotEmpty()
             }
@@ -167,32 +170,17 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
             if (isValid) {
                 binding.icSearchDosen.alpha = 1F
                 binding.icSearchDosen.isClickable = isValid
-                filter(binding.etSearchDosen.text.toString())
+                getTambahDosen(classId, binding.etSearchDosen.text.toString())
             } else {
                 binding.icSearchDosen.alpha = 0.5F
                 binding.icSearchDosen.isClickable = isValid
-                tambahDosenAdapter.filterList(getListDosen)
+                getTambahDosen(classId, namaNip)
             }
         }
 
         binding.icSearchDosen.setOnClickListener {
-            filter(binding.etSearchDosen.text.toString())
+            getTambahDosen(classId, binding.etSearchDosen.text.toString())
         }
-    }
-
-    private fun filter(text: String) {
-        val newText = text.lowercase()
-        val filteredList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
-        for (model in getListDosen) {
-            val name = model.name.lowercase()
-            val nim = model.nip.lowercase()
-            if (name.contains(newText)) {
-                filteredList.add(model)
-            } else if (nim.contains(newText)) {
-                filteredList.add(model)
-            }
-        }
-        tambahDosenAdapter.filterList(filteredList)
     }
 
     private fun showLoading(value: Boolean) {
