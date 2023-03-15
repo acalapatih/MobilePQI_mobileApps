@@ -1,11 +1,13 @@
 package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
@@ -16,11 +18,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
-    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
+    private var getListDosen: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
 
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
-    private val listName: List<GetTambahDosenModel.GetTambahDosen> = listOf()
 
     companion object {
         @JvmStatic
@@ -29,13 +30,9 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
-
         private const val ID_KELAS = "id_kelas"
     }
 
-    private lateinit var tambahDosenAdapter: TambahDosenAdapter
-    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
-    private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
     private val viewModel by viewModel<TambahDosenViewModel>()
     private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
 
@@ -76,14 +73,16 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    getListDosen = model.data?.list ?: emptyList()
+                    getListDosen = model.data?.list?.toMutableList() ?: mutableListOf()
                     model.data?.let {
-                        getListDosen = it.list
+                        getListDosen = it.list.toMutableList()
                         tambahDosenAdapter =
                             TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
                     }
                     binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
                     binding.rvTambahDosen.adapter = tambahDosenAdapter
+
+                    binding.icTambahDosen.isVisible = listDosenSelected.isNotEmpty()
 
                     tambahDosenAdapter.onDosenSelected = { data ->
                         if (listDosenSelected.contains(data)) {
@@ -141,6 +140,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun initListener() {
         binding.icBackWhite.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -157,14 +157,39 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
             postTambahDosen(classId, listDosenSelected)
             viewModel.postTambahdosen
         }
+
+        val searchDosenStream = RxTextView.textChanges(binding.etSearchDosen)
+            .skipInitialValue()
+            .map { charSequence ->
+                charSequence.isNotEmpty()
+            }
+        searchDosenStream.subscribe{ isValid ->
+            if (isValid) {
+                binding.icSearchDosen.alpha = 1F
+                binding.icSearchDosen.isClickable = isValid
+                filter(binding.etSearchDosen.text.toString())
+            } else {
+                binding.icSearchDosen.alpha = 0.5F
+                binding.icSearchDosen.isClickable = isValid
+                tambahDosenAdapter.filterList(getListDosen)
+            }
+        }
+
+        binding.icSearchDosen.setOnClickListener {
+            filter(binding.etSearchDosen.text.toString())
+        }
     }
 
     private fun filter(text: String) {
+        val newText = text.lowercase()
         val filteredList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
-        for (s in listName) {
-            if (s.name.lowercase(Locale.getDefault()).contains(text.lowercase(Locale.getDefault()))) {
-                //adding the element to filtered list
-                filteredList.add(s)
+        for (model in getListDosen) {
+            val name = model.name.lowercase()
+            val nim = model.nip.lowercase()
+            if (name.contains(newText)) {
+                filteredList.add(model)
+            } else if (nim.contains(newText)) {
+                filteredList.add(model)
             }
         }
         tambahDosenAdapter.filterList(filteredList)

@@ -14,14 +14,12 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
 
 class TambahDosenAdapter(
     private val context: Context,
-    private val dataset: List<GetTambahDosenModel.GetTambahDosen>,
+    private var dataset: MutableList<GetTambahDosenModel.GetTambahDosen>,
     private val kuota: Int
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
     var onDosenSelected: ((data: GetTambahDosenModel.GetTambahDosen) -> Unit)? = null
-
     val tempList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
-    var listName: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val binding = RecycleViewTambahDosenBinding.bind(view)
@@ -66,7 +64,7 @@ class TambahDosenAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     fun filterList(filteredList: MutableList<GetTambahDosenModel.GetTambahDosen>) {
-        this.listName = filteredList
-        notifyDataSetChanged()
+        this.dataset = filteredList
+        notifyDataSetChanged();
     }
 }
