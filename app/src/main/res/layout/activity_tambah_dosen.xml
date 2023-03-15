@@ -67,7 +67,6 @@
         android:src="@drawable/ic_search"
         android:background="@color/white"
         android:clickable="false"
-        android:alpha="0.5"
         app:layout_constraintTop_toTopOf="@id/view_search_dosen"
         app:layout_constraintBottom_toBottomOf="@id/view_search_dosen"
         app:layout_constraintStart_toEndOf="@id/et_search_dosen"
