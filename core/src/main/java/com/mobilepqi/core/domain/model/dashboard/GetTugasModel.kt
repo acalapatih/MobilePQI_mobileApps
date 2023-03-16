@@ -13,7 +13,8 @@ data class GetTugasModel(
         val idTugas: Int,
         val title: String,
         val deadline: String,
-        val createdAt: String
+        val createdAt: String,
+        val status: Boolean
     ) companion object {
         fun mapResponseToModel(response: GetTugasResponse): Flow<GetTugasModel> {
             return flowOf(
@@ -25,7 +26,8 @@ data class GetTugasModel(
                             idTugas = it?.id ?: 0,
                             title = it?.title ?: "",
                             deadline = it?.deadline ?: "",
-                            createdAt = it?.createdAt ?: ""
+                            createdAt = it?.createdAt ?: "",
+                            status = it?.status ?: false
                         )
                     } ?: emptyList()
                 )
