@@ -31,8 +31,6 @@ import java.util.Calendar as JavaCalendar
 
 
 class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
-    private val viewModel by viewModel<ProfilViewModel>()
-    private var urlAvatar = ""
 
     companion object {
         @JvmStatic
@@ -40,6 +38,9 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             return Intent(context, ProfileInfoActivity::class.java)
         }
     }
+
+    private val viewModel by viewModel<ProfilViewModel>()
+    private var urlAvatar = ""
 
     override fun getViewBinding(): ActivityProfilInformasiBinding =
         ActivityProfilInformasiBinding.inflate(layoutInflater)
@@ -98,7 +99,8 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
             }
         passwordStream.subscribe { isPasswordValid ->
             if (!isPasswordValid && binding.etPassword.text.toString().isNotEmpty()) {
-                binding.etPassword.error = "Password harus mengandung minimal 6 karakter yang terdiri dari 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 karakter spesial"
+                binding.etPassword.error =
+                    "Password harus mengandung minimal 6 karakter yang terdiri dari 1 huruf besar, 1 huruf kecil, 1 angka, dan 1 karakter spesial"
                 binding.btnSimpanProfil.isEnabled = isPasswordValid
             } else if (binding.etPassword.text.toString().isEmpty()) {
                 binding.etPassword.setError(null, null)
@@ -243,6 +245,7 @@ class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
         with(binding) {
             Glide.with(this@ProfileInfoActivity)
                 .load(data.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(imgProfil)
 
             tvNama.text = data.name
