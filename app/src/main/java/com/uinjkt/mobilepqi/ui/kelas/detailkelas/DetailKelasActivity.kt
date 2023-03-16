@@ -82,6 +82,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                 is Resource.Success -> {
                     showLoading(false)
                     binding.tvKodeKelas.text = model.data?.code
+                    binding.tvActionBarNamakelas.text = model.data?.name
 
                     listDosen = model.data?.listdosen ?: emptyList()
                     dosenAdapter = DosenAdapter(this, listDosen)
