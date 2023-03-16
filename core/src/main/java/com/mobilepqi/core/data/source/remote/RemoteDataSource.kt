@@ -4,7 +4,6 @@ import com.mobilepqi.core.data.source.remote.network.ApiResponse
 import com.mobilepqi.core.data.source.remote.network.ApiSholatService
 import com.mobilepqi.core.data.source.remote.network.CommonService
 import com.mobilepqi.core.data.source.remote.network.MobilePqiService
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
@@ -137,10 +136,10 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun getTambahDosen(idKelas: Int): Flow<ApiResponse<GetTambahDosenResponse>> {
+    suspend fun getTambahDosen(idKelas: Int, namaNip: String): Flow<ApiResponse<GetTambahDosenResponse>> {
         return flow {
             try {
-                val response = mobilePqiService.getTambahDosen(idKelas)
+                val response = mobilePqiService.getTambahDosen(idKelas, namaNip)
                 if (response.status == 200) {
                     emit(ApiResponse.Success(response))
                 }

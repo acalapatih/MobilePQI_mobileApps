@@ -18,7 +18,6 @@ class TambahDosenAdapter(
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
     var onDosenSelected: ((data: GetTambahDosenModel.GetTambahDosen) -> Unit)? = null
-
     val tempList: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,6 +27,7 @@ class TambahDosenAdapter(
             binding.tvNipDosen.text = data.nip
             Glide.with(context)
                 .load(data.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(binding.imgProfilDosen)
 
             binding.cvTambahDosen.setOnClickListener {
@@ -35,11 +35,14 @@ class TambahDosenAdapter(
                     tempList.remove(data)
                     binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                     onDosenSelected?.invoke(data)
+                    println("List : ${tempList.size}")
                 } else {
+                    println("List : $kuota")
                     if (tempList.size < kuota) {
                         tempList.add(data)
                         binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                         onDosenSelected?.invoke(data)
+                        println("List : ${tempList.size}")
                     }
                 }
             }

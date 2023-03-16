@@ -74,13 +74,20 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         }
 
         binding.btnEditTugasDosen.setOnClickListener {
-            DosenBuatEditTugasActivity.start(this@DosenDetailTugasActivity,
+            DosenBuatEditTugasActivity.start(
+                this@DosenDetailTugasActivity,
                 "edit",
-                idTugas = idTugas)
+                idTugas = idTugas
+            )
         }
 
         binding.btnCekTugasMahasiswa.setOnClickListener {
-            DosenCekTugasMahasiswaActivity.start(this@DosenDetailTugasActivity, idTugas, topic, title)
+            DosenCekTugasMahasiswaActivity.start(
+                this@DosenDetailTugasActivity,
+                idTugas,
+                topic,
+                title
+            )
         }
     }
 
@@ -113,15 +120,28 @@ class DosenDetailTugasActivity : BaseActivity<ActivityDosenDetailTugasBinding>()
         }
 
         binding.tvTitleTugasDetailMahasiswa.text =
-            getString(R.string.tv_title_tugas_detail_mahasiswa,
-                "${topic.capitalizeEachWord()} > ${title.capitalizeEachWord()}")
+            getString(
+                R.string.tv_title_tugas_detail_mahasiswa,
+                "${topic.capitalizeEachWord()} > ${title.capitalizeEachWord()}"
+            )
         binding.tvNamaTaskTugas.text = title
         binding.tvTenggatWaktuTugasDosen.text =
-            getString(R.string.tv_tenggat_waktu_tugas,
-                model.deadline.convertTime("EEEE, dd MMMM yyyy (HH:mm)"))
-        binding.tvDescriptionTugasDetail.text = model.description
+            getString(
+                R.string.tv_tenggat_waktu_tugas,
+                model.deadline.convertTime("EEEE, dd MMMM yyyy (HH:mm)")
+            )
+        checkEmptyDescription(model.description)
         listFileAttached.addAll(0, model.file)
         initAdapter()
+    }
+
+    private fun checkEmptyDescription(description: String) {
+        if (description.isBlank() || description.isEmpty()) {
+            binding.tvDescriptionTugasDetail.text =
+                getString(R.string.description_empty_state, "Tugas")
+        } else {
+            binding.tvDescriptionTugasDetail.text = description
+        }
     }
 
     private fun initAdapter() {

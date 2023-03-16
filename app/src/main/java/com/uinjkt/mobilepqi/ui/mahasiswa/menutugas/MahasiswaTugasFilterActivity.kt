@@ -44,18 +44,20 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
     }
 
     private val idKelas by lazy { intent.getIntExtra(ID_KELAS, 0) }
-    private val titleTopic by lazy { intent.getStringExtra(TOPIC) }
+    private var titleTopic: String? = null
 
     private lateinit var mahasiswaJenisTugasAdapter: MenuMahasiswaJenisTugasAdapterNew
     private lateinit var mahasiswaTugasFilterAdapter: ListMahasiswaTugasAdapterList
     private val viewModel by viewModel<MahasiswaTugasFilterViewModel>()
     private lateinit var topic: String
 
+
     override fun getViewBinding(): ActivityMahasiswaTugasFilteredBinding =
         ActivityMahasiswaTugasFilteredBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        titleTopic = intent.getStringExtra(TOPIC)
         topic = getSelectedTopic(titleTopic ?: "all")
         initView()
         initListener()
@@ -110,10 +112,21 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
     }
 
     private fun actionAfterGetListTopicTugas(model: GetListTopicTugasModel) {
+        if (model.tugas.isNullOrEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+        }
         initListTugasAdapter(model)
-        binding.tvBelumAdaTugasQiroahFilter.text =
-            getString(R.string.tv_belum_ada_tugas, titleTopic)
-        binding.tvBelumAdaTugasQiroahFilter.isVisible = model.tugas?.isEmpty() ?: true
+
+    }
+
+    private fun showEmptyState(value: Boolean) {
+        if (value) {
+            binding.tvBelumAdaTugasQiroahFilter.text =
+                getString(R.string.tv_belum_ada_tugas, titleTopic)
+        }
+        binding.tvBelumAdaTugasQiroahFilter.isVisible = value
     }
 
     private fun initListTugasAdapter(model: GetListTopicTugasModel) {
@@ -177,6 +190,7 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         val title = data.titleJenisTugas
         binding.tvTitleJenisTugasMahasiswa.text = title
         binding.tvTugasFiltered.text = title
+        titleTopic = title
         topic = getSelectedTopic(title)
         initView()
     }

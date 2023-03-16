@@ -16,10 +16,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDosenMateriDetailBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
-import com.uinjkt.mobilepqi.util.Constant
-import com.uinjkt.mobilepqi.util.openFileManagerPdf
-import com.uinjkt.mobilepqi.util.openGallery
-import com.uinjkt.mobilepqi.util.uriToFile
+import com.uinjkt.mobilepqi.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
@@ -48,12 +45,10 @@ class DosenMateriDetailIbadahActivity : BaseActivity<ActivityDosenMateriDetailBi
         initView()
         initListener()
         initObserver()
-        binding.tvTitleMenuDetailDosen.text =
-            getString(R.string.tv_title_detail_materi_ibadah, "test")
     }
 
     private fun initView() {
-        binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_ibadah, "")
+        binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_ibadah, "Detail Materi Ibadah")
         getDetailMateriIbadah()
     }
 
@@ -215,7 +210,7 @@ class DosenMateriDetailIbadahActivity : BaseActivity<ActivityDosenMateriDetailBi
         }.toMutableList()
         // Initialize Adapter List Tugas Upload By Dosen
         initAdapter()
-        binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title)
+        binding.tvTitleMenuDetailDosen.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title.capitalizeEachWord())
         binding.etDescDetailMateriDosen.setText(materi.description)
     }
 

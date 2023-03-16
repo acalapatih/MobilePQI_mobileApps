@@ -169,10 +169,15 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Success -> {
                     showLoading(false)
                     listTugasDashboard = model.data?.listTugas ?: emptyList()
-                    tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
-                    binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
-                    binding.rvTugasDashboard.adapter = tugasDashboardAdapter
-                    binding.rvTugasDashboard.isNestedScrollingEnabled = false
+                    if(listTugasDashboard.isEmpty()) {
+                        showEmptyState()
+                    } else {
+                        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
+                        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
+                        binding.rvTugasDashboard.adapter = tugasDashboardAdapter
+                        binding.rvTugasDashboard.isNestedScrollingEnabled = false
+                    }
+
                 }
                 is Resource.Error -> {
                     showLoading(false)
@@ -182,6 +187,11 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 }
             }
         }
+    }
+
+    private fun showEmptyState() {
+        binding.tvEmptyState.text = String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
+        binding.tvEmptyState.isVisible = true
     }
 
     private fun showClass(data: GetClassModel) {
@@ -251,7 +261,6 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
     private fun initView() {
         currentTimestamp = Timestamp(System.currentTimeMillis()).toString()
-
         if (latitude.isEmpty() && longitude.isEmpty()) {
             binding.tvSholat.text = "-"
             binding.tvWaktu.text = "-"
@@ -260,13 +269,18 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
                 classIdMahasiswa = value
-                viewModel.getClass(classIdMahasiswa)
-                viewModel.getTugas(classIdMahasiswa)
-                Log.d("Class Id Mahasiswa", "class Id: $value")
+                if(classIdMahasiswa != 0) {
+                    viewModel.getClass(classIdMahasiswa)
+                    viewModel.getTugas(classIdMahasiswa)
+                    Log.d("Class Id Mahasiswa", "class Id: $value")
+                }
             }
         } else {
-            viewModel.getClass(classIdDosen)
-            viewModel.getTugas(classIdDosen)
+            if (classIdDosen != 0) {
+                binding.icKelas.isVisible = true
+                viewModel.getClass(classIdDosen)
+                viewModel.getTugas(classIdDosen)
+            }
         }
     }
 

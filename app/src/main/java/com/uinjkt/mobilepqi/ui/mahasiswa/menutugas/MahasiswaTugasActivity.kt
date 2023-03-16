@@ -17,7 +17,8 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaJenisTugasAdapterNew
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(),
-    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener, ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
+    MenuMahasiswaJenisTugasAdapterNew.OnUserClickJenisTugasListener,
+    ListMahasiswaTugasAdapterList.OnUserClickTugasListener {
 
     companion object {
         @JvmStatic
@@ -80,7 +81,7 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
 
     private fun initObserver() {
         viewModel.getListTugas.observe(this) { model ->
-            when(model) {
+            when (model) {
                 is Resource.Loading -> {
                     showLoading(true)
                 }
@@ -101,6 +102,14 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
 
     private fun actionAfterGetListTugas(model: GetListTugasModel) {
         initAdapter(model)
+        showEmptyStateEachTopic(model)
+    }
+
+    private fun showEmptyStateEachTopic(model: GetListTugasModel) {
+        binding.tvBelumAdaTugasIbadah.isVisible = model.ibadah.isEmpty()
+        binding.tvBelumAdaTugasQiroah.isVisible = model.qiroah.isEmpty()
+        binding.tvBelumAdaTugasHafalanDoa.isVisible = model.doa.isEmpty()
+        binding.tvBelumAdaTugasHafalanSurah.isVisible = model.surah.isEmpty()
     }
 
     private fun initAdapter(model: GetListTugasModel) {
@@ -125,11 +134,16 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
         binding.rvListTugasMahasiswaHafalanDoa.adapter = mahasiswaTugasDoaAdapter
 
         // Set Layout Manager
-        binding.rvJenisTugasMahasiswaSemua.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.rvListTugasMahasiswaQiroah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaIbadah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaHafalanSurah.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        binding.rvListTugasMahasiswaHafalanDoa.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvJenisTugasMahasiswaSemua.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvListTugasMahasiswaQiroah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaIbadah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaHafalanSurah.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.rvListTugasMahasiswaHafalanDoa.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
     private fun showLoading(value: Boolean) {
@@ -143,7 +157,11 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
     }
 
     override fun onUserJenisTugasClicked(data: JenisTugas) {
-        MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas, data.titleJenisTugas)
+        MahasiswaTugasFilterActivity.start(
+            this@MahasiswaTugasActivity,
+            idKelas,
+            data.titleJenisTugas
+        )
     }
 
     override fun onRestart() {
