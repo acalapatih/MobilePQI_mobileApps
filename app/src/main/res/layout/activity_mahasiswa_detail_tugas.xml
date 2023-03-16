@@ -136,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
                 android:text="@string/tv_description_tugas_detail"
                 app:layout_constraintEnd_toEndOf="@id/ll_desc_task_tugas_mahasiswa"
                 app:layout_constraintStart_toStartOf="@id/iv_task_tugas_mahasiswa"
@@ -189,11 +190,11 @@
 
                 <ProgressBar
                     android:id="@+id/pb_file_loading"
-                    android:minHeight="48dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="10dp"
+                    android:minHeight="48dp"
+                    android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_file_upload"

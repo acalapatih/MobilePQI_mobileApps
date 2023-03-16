@@ -15,7 +15,8 @@ import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MenuMahasiswaMateriAdapterList
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBinding>(), MenuMahasiswaMateriAdapterList.OnUserClickListener  {
+class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBinding>(),
+    MenuMahasiswaMateriAdapterList.OnUserClickListener {
 
     companion object {
         @JvmStatic
@@ -24,6 +25,7 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                 .putExtra(ID_KELAS, idKelas)
             context.startActivity(starter)
         }
+
         private const val ID_KELAS = "idKelas"
     }
 
@@ -31,7 +33,8 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     private val viewModel by viewModel<MahasiswaMateriIbadahViewModel>()
     private lateinit var mahasiswaMateriAdapter: MenuMahasiswaMateriAdapterList
 
-    override fun getViewBinding(): ActivityMahasiswaMateriBinding = ActivityMahasiswaMateriBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityMahasiswaMateriBinding =
+        ActivityMahasiswaMateriBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +44,8 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
-        getMateriIbadah(intent.getIntExtra(ID_KELAS, 0))
         binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_ibadah)
+        getMateriIbadah(intent.getIntExtra(ID_KELAS, 0))
     }
 
     private fun getMateriIbadah(idKelas: Int) {
@@ -67,10 +70,10 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -88,19 +91,34 @@ class MahasiswaMateriIbadahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                 title = it.title
             )
         }
-        initAdapter()
+        if (listMateri.isEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+            initAdapter()
+        }
+
+    }
+
+    private fun showEmptyState(value: Boolean) {
+        if (value) {
+            binding.tvEmptyState.text =
+                getString(R.string.empty_state, binding.tvTitleMenuMahasiswa.text.toString())
+        }
+        binding.tvEmptyState.isVisible = value
     }
 
     private fun initAdapter() {
         // Initialize Adapter
         mahasiswaMateriAdapter = MenuMahasiswaMateriAdapterList(this, listMateri, this)
         binding.recycleViewMenuMahasiswa.layoutManager = LinearLayoutManager(this)
-        binding.recycleViewMenuMahasiswa.adapter =  mahasiswaMateriAdapter
+        binding.recycleViewMenuMahasiswa.adapter = mahasiswaMateriAdapter
     }
 
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuMahasiswa.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
     }
 
     override fun onUserClicked(position: Int) {

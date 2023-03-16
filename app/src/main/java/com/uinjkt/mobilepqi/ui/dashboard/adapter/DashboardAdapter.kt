@@ -20,7 +20,7 @@ class DashboardAdapter(
         private val binding = RecycleViewTugasDashboardBinding.bind(view)
         fun bindItem(tugasDashboard: GetTugasModel.ListTugas) {
             binding.tvNamaTugas.text = tugasDashboard.title
-            binding.tvDeadlineTugas.text = tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)")
+            binding.tvLabelDeadlineTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)"))
             binding.tvTanggalTugas.text = tugasDashboard.createdAt.convertTime("dd MMMM yyyy")
 
             binding.cvTugasDashboard.setOnClickListener {

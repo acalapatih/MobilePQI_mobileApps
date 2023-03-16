@@ -54,8 +54,8 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     }
 
     private fun initView() {
-        getMateriQiroah(intent.getIntExtra(ID_KELAS, 0))
         binding.tvTitleMenuMahasiswa.text = getString(R.string.tv_title_materi_qiroah)
+        getMateriQiroah(intent.getIntExtra(ID_KELAS, 0))
     }
 
     private fun initObserver() {
@@ -65,10 +65,10 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -82,6 +82,7 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuMahasiswa.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
     }
 
     private fun actionAfterGetMateri(model: GetMateriQiroahModel) {
@@ -92,8 +93,23 @@ class MahasiswaMateriQiroahActivity : BaseActivity<ActivityMahasiswaMateriBindin
                 title = it.title
             )
         }
-        initAdapter()
+
+        if(listMateri.isEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+            initAdapter()
+        }
+
     }
+
+    private fun showEmptyState(value: Boolean) {
+        if(value) {
+            binding.tvEmptyState.text = getString(R.string.empty_state, binding.tvTitleMenuMahasiswa.text.toString())
+        }
+        binding.tvEmptyState.isVisible = value
+    }
+
 
     private fun initAdapter() {
         mahasiswaMateriAdapter = MenuMahasiswaMateriAdapterList(this, listMateri, this)
