@@ -30,7 +30,8 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/img_profil_dosen"
             app:layout_constraintStart_toEndOf="@id/img_profil_dosen"
-            android:layout_marginStart="-10dp"/>
+            android:layout_marginStart="-10dp"
+            android:contentDescription="@string/desc_sukses_tambah_dosen" />
 
         <TextView
             android:id="@+id/tv_nama_dosen"

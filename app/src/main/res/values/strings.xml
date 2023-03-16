@@ -239,4 +239,5 @@
     <string name="poin_maksimal">100 Poin</string>
     <string name="nilai_tugas">%d / 100</string>
     <string name="tv_empty_list_dosen">List dosen belum tersedia</string>
+    <string name="desc_sukses_tambah_dosen">Sukses</string>
 </resources>

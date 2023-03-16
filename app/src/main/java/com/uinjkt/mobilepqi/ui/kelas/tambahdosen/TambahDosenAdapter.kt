@@ -13,7 +13,7 @@ import com.uinjkt.mobilepqi.databinding.RecycleViewTambahDosenBinding
 
 class TambahDosenAdapter(
     private val context: Context,
-    private var dataset: MutableList<GetTambahDosenModel.GetTambahDosen>,
+    private val dataset: List<GetTambahDosenModel.GetTambahDosen>,
     private val kuota: Int
 ) : RecyclerView.Adapter<TambahDosenAdapter.ViewHolder>() {
 
@@ -34,11 +34,14 @@ class TambahDosenAdapter(
                     tempList.remove(data)
                     binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                     onDosenSelected?.invoke(data)
+                    println("List : ${tempList.size}")
                 } else {
+                    println("List : $kuota")
                     if (tempList.size < kuota) {
                         tempList.add(data)
                         binding.icPilihDosen.isVisible = !binding.icPilihDosen.isVisible
                         onDosenSelected?.invoke(data)
+                        println("List : ${tempList.size}")
                     }
                 }
             }

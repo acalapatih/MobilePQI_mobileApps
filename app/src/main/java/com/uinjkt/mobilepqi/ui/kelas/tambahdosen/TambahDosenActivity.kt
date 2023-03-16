@@ -19,10 +19,12 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
-    private var getListDosen: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
     private lateinit var tambahDosenAdapter: TambahDosenAdapter
-
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+    private val viewModel by viewModel<TambahDosenViewModel>()
+    private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private var namaNip: String = ""
 
     companion object {
         @JvmStatic
@@ -33,10 +35,6 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         }
         private const val ID_KELAS = "id_kelas"
     }
-
-    private val viewModel by viewModel<TambahDosenViewModel>()
-    private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
-    private var namaNip: String = ""
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
         ActivityTambahDosenBinding.inflate(layoutInflater)
@@ -75,9 +73,9 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    getListDosen = model.data?.list?.toMutableList() ?: mutableListOf()
+                    getListDosen = model.data?.list ?: emptyList()
                     model.data?.let {
-                        getListDosen = it.list.toMutableList()
+                        getListDosen = it.list
                         if (getListDosen.isEmpty()) {
                             showEmptyState()
                         } else {
@@ -128,7 +126,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private fun showEmptyState() {
-        binding.tvEmptyState.isVisible
+        binding.tvEmptyState.isVisible = true
     }
 
     @SuppressLint("CheckResult")
@@ -146,7 +144,6 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
         binding.icTambahDosen.setOnClickListener {
             postTambahDosen(classId, listDosenSelected)
-            viewModel.postTambahdosen
         }
 
         val searchDosenStream = RxTextView.textChanges(binding.etSearchDosen)
