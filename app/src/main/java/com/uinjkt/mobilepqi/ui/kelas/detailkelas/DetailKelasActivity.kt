@@ -9,21 +9,27 @@ import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.detailkelas.DetailKelasModel
+import com.mobilepqi.core.domain.model.profil.ProfilModel
+import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityDetailKelasBinding
 import com.uinjkt.mobilepqi.ui.kelas.adapter.DosenAdapter
 import com.uinjkt.mobilepqi.ui.kelas.adapter.MahasiswaAdapter
 import com.uinjkt.mobilepqi.ui.kelas.tambahdosen.TambahDosenActivity
+import com.uinjkt.mobilepqi.ui.profil.ProfilViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     private var listDosen: List<DetailKelasModel.ListDosen> = listOf()
     private var listMahasiswa: List<DetailKelasModel.ListMahasiswa> = listOf()
-
     private lateinit var dosenAdapter: DosenAdapter
     private lateinit var mahasiswaAdapter: MahasiswaAdapter
+    private val viewModel by viewModel<DetailKelasViewModel>()
+    private val viewModelProfil by viewModel<ProfilViewModel>()
+    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
 
     companion object {
         @JvmStatic
@@ -31,10 +37,6 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
             return Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
         }
     }
-
-    private val viewModel by viewModel<DetailKelasViewModel>()
-
-    private val classId by lazy { intent.getIntExtra("idKelas", 0) }
 
     override fun getViewBinding(): ActivityDetailKelasBinding =
         ActivityDetailKelasBinding.inflate(layoutInflater)
@@ -48,6 +50,7 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
 
     private fun initView() {
         getDetailKelas(classId)
+        viewModelProfil.profil()
     }
 
     private fun getDetailKelas(idKelas: Int) {
@@ -55,6 +58,22 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     }
 
     private fun initObserver() {
+        viewModelProfil.profil.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showLoading(true)
+                }
+                is Resource.Success -> {
+                    showLoading(false)
+                    model.data?.let { showImgProfil(it) }
+                }
+                is Resource.Error -> {
+                    showLoading(false)
+                    showToast(model.message ?: "Something Went Wrong")
+                }
+            }
+        }
+
         viewModel.detailkelas.observe(this) { model ->
             when (model) {
                 is Resource.Loading -> {
@@ -88,6 +107,15 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
                     showToast(model.message ?: "Something when wrong")
                 }
             }
+        }
+    }
+
+    private fun showImgProfil(data: ProfilModel) {
+        with(binding) {
+            Glide.with(this@DetailKelasActivity)
+                .load(data.avatar)
+                .placeholder(R.drawable.img_user)
+                .into(imgProfil)
         }
     }
 
