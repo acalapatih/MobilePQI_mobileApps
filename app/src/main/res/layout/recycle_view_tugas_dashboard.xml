@@ -85,7 +85,7 @@
                     android:fontFamily="@font/inter_medium"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/bg_tugas_rounded"
                     app:layout_constraintStart_toEndOf="@id/ic_task"
                     app:layout_constraintTop_toTopOf="@id/bg_tugas_rounded"
                     tools:text="@string/tv_nama_tugas" />
@@ -106,26 +106,12 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/inter_medium"
-                    android:text="@string/tv_label_deadline_tugas"
+                    android:text="@string/tv_tenggat_waktu_tugas"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="@id/bg_tugas_rounded"
-                    app:layout_constraintStart_toStartOf="@id/tv_nama_tugas" />
-
-                <TextView
-                    android:id="@+id/tv_deadline_tugas"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="3dp"
-                    android:layout_marginEnd="15dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_label_deadline_tugas"
                     app:layout_constraintEnd_toEndOf="@id/bg_tugas_rounded"
-                    app:layout_constraintStart_toEndOf="@id/tv_label_deadline_tugas"
-                    app:layout_constraintTop_toTopOf="@id/tv_label_deadline_tugas"
-                    tools:text="@string/tv_deadline_tugas" />
+                    app:layout_constraintStart_toStartOf="@id/tv_nama_tugas" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

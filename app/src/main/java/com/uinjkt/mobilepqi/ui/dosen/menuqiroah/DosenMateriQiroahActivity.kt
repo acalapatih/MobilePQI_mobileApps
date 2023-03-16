@@ -73,10 +73,10 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                     showLoading(true)
                 }
                 is Resource.Success -> {
+                    showLoading(false)
                     model.data?.let {
                         actionAfterGetMateri(it)
                     }
-                    showLoading(false)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -90,6 +90,9 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
     private fun showLoading(value: Boolean) {
         binding.pbLoadingScreen.isVisible = value
         binding.recycleViewMenuDosen.isVisible = !value
+        binding.tvEmptyState.isVisible = !value
+        binding.tvTapIcon.isVisible = !value
+        binding.tvTapIconCont.isVisible = !value
     }
 
     private fun actionAfterGetMateri(model: GetMateriQiroahModel) {
@@ -100,7 +103,24 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                 title = materi.title
             )
         }
-        initAdapter()
+
+        if(listMateri.isEmpty()) {
+            showEmptyState(true)
+        } else {
+            showEmptyState(false)
+            initAdapter()
+        }
+    }
+
+    private fun showEmptyState(value: Boolean) {
+        if(value) {
+            val titleBar = binding.tvTitleMenuDosen.text.toString()
+            binding.tvEmptyState.text = getString(R.string.empty_state, titleBar)
+            binding.tvTapIconCont.text = getString(R.string.tap_icon_cont, titleBar)
+        }
+        binding.tvEmptyState.isVisible = value
+        binding.tvTapIcon.isVisible = value
+        binding.tvTapIconCont.isVisible = value
     }
 
     private fun initAdapter() {

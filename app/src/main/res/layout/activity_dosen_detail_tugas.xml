@@ -117,6 +117,7 @@
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="8dp"
                 android:justificationMode="inter_word"
+                android:lineSpacingMultiplier="1.2"
                 android:text="@string/tv_description_tugas_detail"
                 app:layout_constraintEnd_toEndOf="@id/ll_desc_task_tugas_dosen"
                 app:layout_constraintStart_toStartOf="@id/iv_task_tugas_mahasiswa"

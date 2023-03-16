@@ -13,6 +13,7 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMahasiswaMateriDetailBinding
 import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
+import com.uinjkt.mobilepqi.util.capitalizeEachWord
 import com.uinjkt.mobilepqi.util.downloadFileToStorage
 import com.uinjkt.mobilepqi.util.getFileNameFromUrl
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -43,6 +44,8 @@ class MahasiswaMateriDetailIbadahActivity : BaseActivity<ActivityMahasiswaMateri
     }
 
     private fun initView() {
+        val breadcrumbText = getString(R.string.tv_title_menu_materi_detail, "Materi Ibadah", "Materi Detail Ibadah")
+        binding.tvTitleMenuDetail.text = breadcrumbText
         getDetailMateriIbadah()
     }
 
@@ -82,8 +85,16 @@ class MahasiswaMateriDetailIbadahActivity : BaseActivity<ActivityMahasiswaMateri
             )
         }
         initAdapter()
-        binding.tvTitleMenuDetail.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title)
-        binding.tvDescriptionMenuDetail.text = materi.description
+        binding.tvTitleMenuDetail.text = getString(R.string.tv_title_detail_materi_ibadah, materi.title.capitalizeEachWord())
+        checkEmptyDescription(materi.description)
+    }
+
+    private fun checkEmptyDescription(description: String) {
+        if (description.isEmpty() || description.isBlank()) {
+            binding.tvDescriptionMenuDetail.text = getString(R.string.description_empty_state, "Materi")
+        } else {
+            binding.tvDescriptionMenuDetail.text = description
+        }
     }
 
     private fun initAdapter() {

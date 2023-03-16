@@ -219,7 +219,11 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                 R.string.tv_tenggat_waktu_tugas,
                 model.deadline.convertTime("EEEE, dd MMMM yyyy (HH:mm)")
             )
-        binding.tvDescriptionTugasDetail.text = model.description
+        if (model.description.isBlank() || model.description.isEmpty()) {
+            binding.tvDescriptionTugasDetail.text = getString(R.string.description_empty_state, "Tugas")
+        } else {
+            binding.tvDescriptionTugasDetail.text = model.description
+        }
         listFileDosenAttached = model.file.toMutableList()
         fileUploadedByDosenAdapter.setData(listFileDosenAttached)
     }

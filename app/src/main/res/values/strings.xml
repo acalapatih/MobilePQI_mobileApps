@@ -28,7 +28,7 @@
     <string name="tv_description_materi">Berikut adalah file materi pembelajaran %1$s</string>
     <string name="tv_document_name_pdf">Materi %1$d.pdf</string>
     <string name="tv_comment">Komentar</string>
-    <string name="tv_title_menu_materi_detail"><![CDATA[Materi Qiroah > Hukum Non Sukun dan Tanwin]]></string>
+    <string name="tv_title_menu_materi_detail">%1$s > %2$s</string>
     <string name="tv_description_menu_detail">Berikut adalah file materi pembelajaran Hukum Nun Sukun dan tanwin.</string>
     <string name="tv_name_document">Materi 1.pdf</string>
 
@@ -240,4 +240,8 @@
     <string name="nilai_tugas">%d / 100</string>
     <string name="tv_empty_list_dosen">List dosen belum tersedia</string>
     <string name="desc_sukses_tambah_dosen">Sukses</string>
+    <string name="empty_state">Tidak ada %s</string>
+    <string name="tap_icon">Tap Icon</string>
+    <string name="tap_icon_cont">Untuk Menambahkan %s</string>
+    <string name="description_empty_state">Tidak Ada Deskripsi %s</string>
 </resources>
