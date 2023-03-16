@@ -77,7 +77,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                     model.data?.let {
                         getListDosen = it.list
                         if (getListDosen.isEmpty()) {
-                            showEmptyState()
+                            showEmptyState(it)
                         } else {
                             tambahDosenAdapter =
                                 TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
@@ -125,8 +125,8 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         }
     }
 
-    private fun showEmptyState() {
-        binding.tvEmptyState.isVisible = true
+    private fun showEmptyState(data: GetTambahDosenModel) {
+        binding.tvEmptyState.isVisible = data.list.isEmpty()
     }
 
     @SuppressLint("CheckResult")
