@@ -23,6 +23,13 @@ import com.uinjkt.mobilepqi.ui.profil.ProfilViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
+    companion object {
+        @JvmStatic
+        fun start(context: Context, idKelas: Int): Intent {
+            return Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
+        }
+    }
+
     private var listDosen: List<DetailKelasModel.ListDosen> = listOf()
     private var listMahasiswa: List<DetailKelasModel.ListMahasiswa> = listOf()
     private lateinit var dosenAdapter: DosenAdapter
@@ -30,13 +37,6 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
     private val viewModel by viewModel<DetailKelasViewModel>()
     private val viewModelProfil by viewModel<ProfilViewModel>()
     private val classId by lazy { intent.getIntExtra("idKelas", 0) }
-
-    companion object {
-        @JvmStatic
-        fun start(context: Context, idKelas: Int): Intent {
-            return Intent(context, DetailKelasActivity::class.java).putExtra("idKelas", idKelas)
-        }
-    }
 
     override fun getViewBinding(): ActivityDetailKelasBinding =
         ActivityDetailKelasBinding.inflate(layoutInflater)

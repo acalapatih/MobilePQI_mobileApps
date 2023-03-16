@@ -31,15 +31,15 @@ import java.util.Calendar as JavaCalendar
 
 
 class ProfileInfoActivity : BaseActivity<ActivityProfilInformasiBinding>() {
-    private val viewModel by viewModel<ProfilViewModel>()
-    private var urlAvatar = ""
-
     companion object {
         @JvmStatic
         fun start(context: Context): Intent {
             return Intent(context, ProfileInfoActivity::class.java)
         }
     }
+
+    private val viewModel by viewModel<ProfilViewModel>()
+    private var urlAvatar = ""
 
     override fun getViewBinding(): ActivityProfilInformasiBinding =
         ActivityProfilInformasiBinding.inflate(layoutInflater)

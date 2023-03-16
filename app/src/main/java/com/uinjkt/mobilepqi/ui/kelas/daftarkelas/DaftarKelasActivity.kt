@@ -17,8 +17,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
     DaftarKelasAdapter.OnUserClickListener {
-    private var listKelas: List<DaftarKelasModel.DaftarKelas> = listOf()
-
     companion object {
         @JvmStatic
         fun start(context: Context) {
@@ -27,8 +25,8 @@ class DaftarKelasActivity : BaseActivity<ActivityDaftarKelasBinding>(),
         }
     }
 
+    private var listKelas: List<DaftarKelasModel.DaftarKelas> = listOf()
     private val viewModel by viewModel<DaftarKelasViewModel>()
-
     private val createClassLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
         if (it.resultCode == RESULT_OK) {
             viewModel.daftarkelas()

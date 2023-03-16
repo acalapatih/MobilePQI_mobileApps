@@ -19,13 +19,6 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
-    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
-    private lateinit var tambahDosenAdapter: TambahDosenAdapter
-    private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
-    private val viewModel by viewModel<TambahDosenViewModel>()
-    private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
-    private var namaNip: String = ""
-
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
@@ -35,6 +28,13 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         }
         private const val ID_KELAS = "id_kelas"
     }
+
+    private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
+    private lateinit var tambahDosenAdapter: TambahDosenAdapter
+    private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
+    private val viewModel by viewModel<TambahDosenViewModel>()
+    private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private var namaNip: String = ""
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
         ActivityTambahDosenBinding.inflate(layoutInflater)
