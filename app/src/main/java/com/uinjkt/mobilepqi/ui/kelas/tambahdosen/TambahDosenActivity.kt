@@ -76,18 +76,10 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                     getListDosen = model.data?.list ?: emptyList()
                     model.data?.let {
                         getListDosen = it.list
-                        if (getListDosen.isEmpty()) {
-                            showEmptyState(it)
-                        } else {
-                            tambahDosenAdapter =
-                                TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
-                        }
+                        actionAfterGetListDosen(it)
                     }
-                    binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
-                    binding.rvTambahDosen.adapter = tambahDosenAdapter
 
                     binding.icTambahDosen.isVisible = listDosenSelected.isNotEmpty()
-
                     tambahDosenAdapter.onDosenSelected = { data ->
                         if (listDosenSelected.contains(data)) {
                             listDosenSelected.remove(data)
@@ -123,6 +115,17 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                 }
             }
         }
+    }
+
+    private fun actionAfterGetListDosen(data: GetTambahDosenModel) {
+        initAdapter(data)
+        showEmptyState(data)
+    }
+
+    private fun initAdapter(data: GetTambahDosenModel) {
+        tambahDosenAdapter = TambahDosenAdapter(this, getListDosen, 2 - data.dosenregistered)
+        binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
+        binding.rvTambahDosen.adapter = tambahDosenAdapter
     }
 
     private fun showEmptyState(data: GetTambahDosenModel) {
