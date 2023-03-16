@@ -7,7 +7,6 @@ import com.mobilepqi.core.domain.model.tambahdosen.PostTambahDosenModel
 import kotlinx.coroutines.flow.Flow
 
 interface TambahDosenRepository {
-    fun getTambahDosen(idKelas: Int): Flow<Resource<GetTambahDosenModel>>
-
+    fun getTambahDosen(idKelas: Int, namaNip: String): Flow<Resource<GetTambahDosenModel>>
     fun postTambahDosen(request: PostTambahDosenPayload, idKelas: Int): Flow<Resource<PostTambahDosenModel>>
 }

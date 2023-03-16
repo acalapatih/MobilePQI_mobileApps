@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
 import com.uinjkt.mobilepqi.R
@@ -20,9 +21,26 @@ class DashboardAdapter(
         private val binding = RecycleViewTugasDashboardBinding.bind(view)
         fun bindItem(tugasDashboard: GetTugasModel.ListTugas) {
             binding.tvNamaTugas.text = tugasDashboard.title
-            binding.tvLabelDeadlineTugas.text = context.getString(R.string.tv_tenggat_waktu_tugas, tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)"))
+            binding.tvLabelDeadlineTugas.text = context.getString(
+                R.string.tv_tenggat_waktu_tugas,
+                tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)")
+            )
             binding.tvTanggalTugas.text = tugasDashboard.createdAt.convertTime("dd MMMM yyyy")
-
+            if (tugasDashboard.status == true) {
+                binding.clTugasDashboard.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.blue_6199C1
+                    )
+                )
+            } else {
+                binding.clTugasDashboard.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        R.color.white
+                    )
+                )
+            }
             binding.cvTugasDashboard.setOnClickListener {
                 listener?.onUserClicked(tugasDashboard.idTugas, "detailTugas")
             }

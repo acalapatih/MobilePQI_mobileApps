@@ -15,12 +15,12 @@ import kotlinx.coroutines.flow.Flow
 class TambahDosenRepositoryImpl(
     private val remoteDataSource: RemoteDataSource
 ): TambahDosenRepository {
-    override fun getTambahDosen(idKelas: Int): Flow<Resource<GetTambahDosenModel>> =
+    override fun getTambahDosen(idKelas: Int, namaNip: String): Flow<Resource<GetTambahDosenModel>> =
         object : NetworkOnlyResource<GetTambahDosenModel, GetTambahDosenResponse>() {
             override fun loadFromNetwork(data: GetTambahDosenResponse): Flow<GetTambahDosenModel> =
                 GetTambahDosenModel.mapResponseToModel(data)
             override suspend fun createCall(): Flow<ApiResponse<GetTambahDosenResponse>> =
-                remoteDataSource.getTambahDosen(idKelas)
+                remoteDataSource.getTambahDosen(idKelas, namaNip)
         }.asFlow()
 
     override fun postTambahDosen(request: PostTambahDosenPayload, idKelas: Int): Flow<Resource<PostTambahDosenModel>> =

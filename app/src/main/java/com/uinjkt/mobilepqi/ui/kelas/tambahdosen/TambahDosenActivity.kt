@@ -1,11 +1,13 @@
 package com.uinjkt.mobilepqi.ui.kelas.tambahdosen
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.tambahdosen.PostTambahDosenPayload
 import com.mobilepqi.core.domain.model.tambahdosen.GetTambahDosenModel
@@ -13,9 +15,10 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityTambahDosenBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
-
     companion object {
         @JvmStatic
         fun start(context: Context, idKelas: Int) {
@@ -27,11 +30,12 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         private const val ID_KELAS = "id_kelas"
     }
 
-    private lateinit var tambahDosenAdapter: TambahDosenAdapter
     private var getListDosen: List<GetTambahDosenModel.GetTambahDosen> = listOf()
+    private lateinit var tambahDosenAdapter: TambahDosenAdapter
     private val listDosenSelected: MutableList<GetTambahDosenModel.GetTambahDosen> = mutableListOf()
     private val viewModel by viewModel<TambahDosenViewModel>()
     private val classId by lazy { intent.getIntExtra(ID_KELAS, 0) }
+    private var namaNip: String = ""
 
     override fun getViewBinding(): ActivityTambahDosenBinding =
         ActivityTambahDosenBinding.inflate(layoutInflater)
@@ -44,7 +48,7 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
     }
 
     private fun initView() {
-        getTambahDosen(classId)
+        getTambahDosen(classId, namaNip)
     }
 
     private fun postTambahDosen(
@@ -58,8 +62,8 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         ), idKelas)
     }
 
-    private fun getTambahDosen(idKelas: Int) {
-        viewModel.getTambahDosen(idKelas)
+    private fun getTambahDosen(idKelas: Int, namaNip: String) {
+        viewModel.getTambahDosen(idKelas, namaNip)
     }
 
     private fun initObserver() {
@@ -73,12 +77,10 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
                     getListDosen = model.data?.list ?: emptyList()
                     model.data?.let {
                         getListDosen = it.list
-                        tambahDosenAdapter =
-                            TambahDosenAdapter(this, getListDosen, 2 - it.dosenregistered)
+                        actionAfterGetListDosen(it)
                     }
-                    binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
-                    binding.rvTambahDosen.adapter = tambahDosenAdapter
 
+                    binding.icTambahDosen.isVisible = listDosenSelected.isNotEmpty()
                     tambahDosenAdapter.onDosenSelected = { data ->
                         if (listDosenSelected.contains(data)) {
                             listDosenSelected.remove(data)
@@ -116,6 +118,22 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
         }
     }
 
+    private fun actionAfterGetListDosen(data: GetTambahDosenModel) {
+        initAdapter(data)
+        showEmptyState(data)
+    }
+
+    private fun initAdapter(data: GetTambahDosenModel) {
+        tambahDosenAdapter = TambahDosenAdapter(this, getListDosen, 2 - data.dosenregistered)
+        binding.rvTambahDosen.layoutManager = LinearLayoutManager(this)
+        binding.rvTambahDosen.adapter = tambahDosenAdapter
+    }
+
+    private fun showEmptyState(data: GetTambahDosenModel) {
+        binding.tvEmptyState.isVisible = data.list.isEmpty()
+    }
+
+    @SuppressLint("CheckResult")
     private fun initListener() {
         binding.icBackWhite.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
@@ -130,6 +148,20 @@ class TambahDosenActivity : BaseActivity<ActivityTambahDosenBinding>() {
 
         binding.icTambahDosen.setOnClickListener {
             postTambahDosen(classId, listDosenSelected)
+        }
+
+        val searchDosenStream = RxTextView.textChanges(binding.etSearchDosen)
+            .skipInitialValue()
+            .debounce(800, TimeUnit.MILLISECONDS)
+            .map { charSequence ->
+                charSequence.isNotEmpty()
+            }
+        searchDosenStream.subscribe { isValid ->
+            if (isValid) {
+                getTambahDosen(classId, binding.etSearchDosen.text.toString())
+            } else {
+                getTambahDosen(classId, namaNip)
+            }
         }
     }
 

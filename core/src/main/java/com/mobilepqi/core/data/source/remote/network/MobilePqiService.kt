@@ -1,6 +1,5 @@
 package com.mobilepqi.core.data.source.remote.network
 
-import com.mobilepqi.core.data.source.remote.response.tugas.CreateNilaiResponse
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasPayload
 import com.mobilepqi.core.data.source.remote.response.buatkelas.BuatKelasResponse
 import com.mobilepqi.core.data.source.remote.response.daftarkelas.DaftarKelasResponse
@@ -90,7 +89,10 @@ interface MobilePqiService {
     ): DeleteSilabusResponse
 
     @GET("v1/mobilepqi/kelas/{idKelas}/dosen")
-    suspend fun getTambahDosen(@Path("idKelas") idKelas: Int): GetTambahDosenResponse
+    suspend fun getTambahDosen(
+        @Path("idKelas") idKelas: Int,
+        @Query("query") namaNip: String
+    ): GetTambahDosenResponse
 
     @POST("v1/mobilepqi/kelas/{idKelas}/dosen")
     suspend fun postTambahdosen(
