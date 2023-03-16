@@ -27,6 +27,7 @@ class TambahDosenAdapter(
             binding.tvNipDosen.text = data.nip
             Glide.with(context)
                 .load(data.avatar)
+                .placeholder(R.drawable.img_user)
                 .into(binding.imgProfilDosen)
 
             binding.cvTambahDosen.setOnClickListener {
