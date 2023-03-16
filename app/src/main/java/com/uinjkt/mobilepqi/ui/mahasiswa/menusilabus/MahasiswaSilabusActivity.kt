@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -37,6 +38,7 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initWebView()
         initView()
         initListener()
         initObserver()
@@ -67,8 +69,9 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
                     showLoading(false)
                     if (model.data?.silabus?.isNotEmpty() == true) {
                         urlSilabus = model.data?.silabus ?: ""
+                        binding.wvSilabusPdf.isVisible = true
                         binding.tvEmptySilabus.isVisible = false
-                        initWebView()
+                        binding.wvSilabusPdf.loadUrl("https://docs.google.com/gview?embedded=true&url=$urlSilabus")
                     } else {
                         binding.tvEmptySilabus.isVisible = true
                         binding.wvSilabusPdf.isVisible = false
@@ -99,7 +102,8 @@ class MahasiswaSilabusActivity : BaseActivity<ActivityMahasiswaSilabusBinding>()
             settings.javaScriptEnabled = true
             settings.builtInZoomControls = true
             settings.displayZoomControls = false
-            loadUrl("https://docs.google.com/gview?embedded=true&url=$urlSilabus")
+            settings.domStorageEnabled = true
+            webChromeClient = WebChromeClient()
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(
                     view: WebView?,
