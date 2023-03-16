@@ -273,8 +273,8 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 viewModel.getTugas(classIdMahasiswa)
                 Log.d("Class Id Mahasiswa", "class Id: $value")
             }
-            binding.icKelas.isVisible = false
         } else {
+            binding.icKelas.isVisible = true
             viewModel.getClass(classIdDosen)
             viewModel.getTugas(classIdDosen)
         }

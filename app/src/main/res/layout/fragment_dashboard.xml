@@ -53,6 +53,7 @@
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/desc_iv_logo_kelas"
             android:src="@drawable/ic_kelas"
+            android:visibility="gone"
             app:layout_constraintEnd_toStartOf="@+id/img_user"
             app:layout_constraintTop_toTopOf="parent" />
 
