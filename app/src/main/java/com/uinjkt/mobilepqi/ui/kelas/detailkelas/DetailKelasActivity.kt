@@ -120,6 +120,15 @@ class DetailKelasActivity : BaseActivity<ActivityDetailKelasBinding>() {
         }
     }
 
+    private fun showImgProfil(data: ProfilModel) {
+        with(binding) {
+            Glide.with(this@DetailKelasActivity)
+                .load(data.avatar)
+                .placeholder(R.drawable.img_user)
+                .into(imgProfil)
+        }
+    }
+
     private fun showLoading(value: Boolean) {
         binding.progressBar.isVisible = value
     }
