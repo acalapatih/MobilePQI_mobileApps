@@ -269,14 +269,18 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
                 classIdMahasiswa = value
-                viewModel.getClass(classIdMahasiswa)
-                viewModel.getTugas(classIdMahasiswa)
-                Log.d("Class Id Mahasiswa", "class Id: $value")
+                if(classIdMahasiswa != 0) {
+                    viewModel.getClass(classIdMahasiswa)
+                    viewModel.getTugas(classIdMahasiswa)
+                    Log.d("Class Id Mahasiswa", "class Id: $value")
+                }
             }
         } else {
-            binding.icKelas.isVisible = true
-            viewModel.getClass(classIdDosen)
-            viewModel.getTugas(classIdDosen)
+            if (classIdDosen != 0) {
+                binding.icKelas.isVisible = true
+                viewModel.getClass(classIdDosen)
+                viewModel.getTugas(classIdDosen)
+            }
         }
     }
 
