@@ -87,7 +87,7 @@ class ProfilFragment : Fragment() {
         }
 
         binding.tvPengaturan.setOnClickListener {
-            DashboardActivity.start(requireContext(), "pengaturan")
+            baseActivity.navView.selectedItemId = R.id.navigation_pengaturan
         }
 
         val baseActivity = activity as DashboardActivity
