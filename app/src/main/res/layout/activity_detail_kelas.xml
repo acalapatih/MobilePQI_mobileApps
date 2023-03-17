@@ -38,13 +38,17 @@
 
     <TextView
         android:id="@+id/tv_action_bar_namakelas"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
+        android:layout_marginEnd="5dp"
+        android:ellipsize="end"
         android:fontFamily="@font/inter_bold"
+        android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/action_bar_detailkelas"
+        app:layout_constraintEnd_toStartOf="@id/img_profil"
         app:layout_constraintStart_toEndOf="@id/tv_action_bar_detailkelas"
         app:layout_constraintTop_toTopOf="@id/action_bar_detailkelas"
         tools:text="@string/tv_action_bar_namakelas" />
