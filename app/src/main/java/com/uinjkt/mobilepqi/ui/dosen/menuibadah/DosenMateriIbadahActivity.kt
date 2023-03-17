@@ -129,8 +129,9 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
             showEmptyState(true)
         } else {
             showEmptyState(false)
-            initAdapter()
         }
+
+        initAdapter()
     }
 
     private fun showEmptyState(value: Boolean) {
