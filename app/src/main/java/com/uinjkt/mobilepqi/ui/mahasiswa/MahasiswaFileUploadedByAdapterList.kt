@@ -34,6 +34,7 @@ class MahasiswaFileUploadedByAdapterList(
         fun bindItem(listTugas : FileItem) {
             binding.tvNamaFileMahasiswaTerlampir.text = listTugas.url.getFileNameFromUrl()
             getTypeFile = listTugas.url.getFileExtension()
+
             when(getTypeFile) {
                 in listTypeImageFile -> {
                     Glide.with(itemView.context)
@@ -44,6 +45,7 @@ class MahasiswaFileUploadedByAdapterList(
                 }
                 else -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_documentwithtext_margined)
             }
+
             if (setIcon == "delete") {
                 with(binding.ivIconCloseOrDownloadFile) {
                     setImageResource(R.drawable.ic_close_with_margin)
