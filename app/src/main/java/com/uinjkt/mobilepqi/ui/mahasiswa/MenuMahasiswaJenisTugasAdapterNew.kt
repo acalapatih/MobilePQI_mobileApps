@@ -17,7 +17,7 @@ class MenuMahasiswaJenisTugasAdapterNew(
 ) : RecyclerView.Adapter<MenuMahasiswaJenisTugasAdapterNew.ViewHolder>() {
 
     interface OnUserClickJenisTugasListener {
-        fun onUserJenisTugasClicked(data : JenisTugas)
+        fun onUserJenisTugasClicked(data: JenisTugas)
     }
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
@@ -32,6 +32,7 @@ class MenuMahasiswaJenisTugasAdapterNew(
             }
             binding.btnJenisTugas.setOnClickListener {
                 listener?.onUserJenisTugasClicked(jenisTugas)
+                changeSelected(adapterPosition)
             }
         }
     }
@@ -49,4 +50,17 @@ class MenuMahasiswaJenisTugasAdapterNew(
     }
 
     override fun getItemCount(): Int = dataset.size
+
+    fun changeSelected(index: Int) {
+        val listJenisTugas = dataset
+        for (i in listJenisTugas.indices) {
+            when (i) {
+                index -> {
+                    listJenisTugas[i].isSelected = true
+                }
+                else -> listJenisTugas[i].isSelected = false
+            }
+        }
+        notifyItemRangeChanged(0, itemCount)
+    }
 }

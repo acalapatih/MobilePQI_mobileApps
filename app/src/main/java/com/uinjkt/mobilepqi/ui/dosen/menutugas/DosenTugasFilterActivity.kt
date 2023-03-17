@@ -183,6 +183,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         } else {
             showEmptyState(false)
         }
+
         initListTugasAdapter(model)
     }
 
@@ -214,7 +215,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         binding.tvTugasFilter.text = title
         titleTopic = title
         topic = getSelectedTopic(title)
-        initView()
+        getListTugas()
     }
 
     private fun changeStatusSelected(index: Int) {
