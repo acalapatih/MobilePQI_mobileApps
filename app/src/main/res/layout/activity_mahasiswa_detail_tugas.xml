@@ -120,6 +120,7 @@
                     android:text="@string/tv_tenggat_waktu_tugas" />
 
                 <TextView
+                    android:id="@+id/tv_max_poin"
                     style="@style/TextNormal14spMobilePQI"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
