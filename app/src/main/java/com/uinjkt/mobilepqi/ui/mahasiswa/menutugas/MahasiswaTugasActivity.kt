@@ -166,6 +166,7 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
 
     override fun onRestart() {
         super.onRestart()
+        mahasiswaJenisTugasAdapter.changeSelected(0)
         getListTugas()
     }
 }
