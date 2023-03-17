@@ -63,7 +63,7 @@ class DosenBuatEditTugasActivity : BaseActivity<ActivityDosenBuatTugasBaruBindin
     private var urlFile = ""
     private val listDataTopik =
         arrayOf("Praktikum Qiroah", "Praktikum Ibadah", "Hafalan Doa", "Hafalan Surah")
-    private val listDataJenisTugas = arrayOf("Individu", "Kelompok")
+    private val listDataJenisTugas = arrayOf("Individu")
 
 
     override fun getViewBinding(): ActivityDosenBuatTugasBaruBinding =
