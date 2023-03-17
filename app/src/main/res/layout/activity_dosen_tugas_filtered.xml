@@ -26,6 +26,7 @@
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/inter_bold"
         android:lineSpacingExtra="3dp"
+        android:minHeight="48dp"
         android:text="@string/tv_title_jenis_tugas_mahasiswa"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -41,35 +42,35 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_jenis_tugas_dosen" />
+        app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_dosen_filter" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_jenis_tugas_dosen_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="horizontal"
+        android:scrollbarThumbHorizontal="@null"
+        android:scrollbars="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_jenis_tugas_dosen"
+        tools:listitem="@layout/recycle_view_jenis_tugas" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv_tugas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_logo_back_circle_button_tugas_dosen_filter">
+        app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_dosen_filter">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_jenis_tugas_dosen_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="12dp"
-                android:orientation="horizontal"
-                android:scrollbarThumbHorizontal="@null"
-                android:scrollbars="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@layout/recycle_view_jenis_tugas" />
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tv_icon_unduh_nilai"
@@ -83,7 +84,7 @@
                 android:text="@string/tv_icon_unduh_nilai"
                 app:drawableStartCompat="@drawable/ic_unduh_nilai_blue"
                 app:layout_constraintStart_toStartOf="@id/tv_tugas_filter"
-                app:layout_constraintTop_toBottomOf="@id/rv_jenis_tugas_dosen_filter" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_tugas_filter"

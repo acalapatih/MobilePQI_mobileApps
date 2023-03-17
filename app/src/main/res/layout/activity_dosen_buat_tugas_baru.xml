@@ -140,6 +140,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_insert_link"
                     android:padding="5dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_sharp_insert_link" />
 
                 <ImageView
@@ -169,6 +170,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/desc_iv_mic_attach"
                     android:padding="5dp"
+                    android:visibility="gone"
                     android:src="@drawable/ic_mic_attach" />
             </LinearLayout>
 

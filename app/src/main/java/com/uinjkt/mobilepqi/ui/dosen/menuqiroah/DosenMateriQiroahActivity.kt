@@ -108,8 +108,8 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
             showEmptyState(true)
         } else {
             showEmptyState(false)
-            initAdapter()
         }
+        initAdapter()
     }
 
     private fun showEmptyState(value: Boolean) {

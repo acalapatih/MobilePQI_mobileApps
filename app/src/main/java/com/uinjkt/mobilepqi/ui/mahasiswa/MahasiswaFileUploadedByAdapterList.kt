@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.mobilepqi.core.domain.model.common.FileItem
 import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.databinding.RecycleViewFileUploadedByDosenBinding
@@ -32,10 +34,18 @@ class MahasiswaFileUploadedByAdapterList(
         fun bindItem(listTugas : FileItem) {
             binding.tvNamaFileMahasiswaTerlampir.text = listTugas.url.getFileNameFromUrl()
             getTypeFile = listTugas.url.getFileExtension()
+
             when(getTypeFile) {
-                in listTypeImageFile -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_image_file_type)
+                in listTypeImageFile -> {
+                    Glide.with(itemView.context)
+                        .load(listTugas.url)
+                        .placeholder(R.drawable.ic_image_file_type)
+                        .apply(RequestOptions().override(200,175))
+                        .into(binding.ivLogoFileMahasiswaTerlampir)
+                }
                 else -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_documentwithtext_margined)
             }
+
             if (setIcon == "delete") {
                 with(binding.ivIconCloseOrDownloadFile) {
                     setImageResource(R.drawable.ic_close_with_margin)
