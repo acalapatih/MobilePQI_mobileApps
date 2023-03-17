@@ -192,7 +192,7 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         binding.tvTugasFiltered.text = title
         titleTopic = title
         topic = getSelectedTopic(title)
-        initView()
+        getListTugas()
     }
 
     override fun onRestart() {

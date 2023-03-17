@@ -31,8 +31,8 @@ class MenuMahasiswaJenisTugasAdapterNew(
                 binding.btnJenisTugas.setBackgroundColor(ContextCompat.getColor(context, R.color.light_blue_0078ce))
             }
             binding.btnJenisTugas.setOnClickListener {
-                listener?.onUserJenisTugasClicked(jenisTugas)
                 changeSelected(adapterPosition)
+                listener?.onUserJenisTugasClicked(jenisTugas)
             }
         }
     }
