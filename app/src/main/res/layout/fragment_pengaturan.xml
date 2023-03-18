@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/ic_bahasa"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="78dp"
         android:contentDescription="@string/desc_iv_logo_bahasa"
@@ -74,11 +74,12 @@
 
     <ImageView
         android:id="@+id/ic_camera"
-        android:layout_width="34dp"
-        android:layout_height="27dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginTop="25dp"
         android:contentDescription="@string/desc_iv_logo_camera"
         android:src="@drawable/ic_camera"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@id/ic_bahasa"
         app:layout_constraintTop_toBottomOf="@id/ic_bahasa" />
 
@@ -91,6 +92,7 @@
         android:text="@string/tv_camera"
         android:textColor="@color/black"
         android:textSize="20sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/ic_camera"
         app:layout_constraintStart_toEndOf="@id/ic_camera"
         app:layout_constraintTop_toTopOf="@id/ic_camera" />
@@ -100,6 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/tv_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tv_camera" />
@@ -109,6 +112,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="12dp"
         android:background="@color/navy_06283D"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_camera" />
