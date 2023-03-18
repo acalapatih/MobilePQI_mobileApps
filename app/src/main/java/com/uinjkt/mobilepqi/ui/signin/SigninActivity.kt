@@ -126,7 +126,11 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    showToast(model.message ?: "Something Went Wrong")
+                    if (model.message?.contains("not found", true) == true) {
+                        showToast("Anda belum mempunyai akun")
+                    } else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                 }
             }
         }
