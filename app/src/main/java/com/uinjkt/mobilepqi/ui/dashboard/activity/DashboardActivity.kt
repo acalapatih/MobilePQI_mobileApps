@@ -90,9 +90,11 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
 
         navController = findNavController(R.id.nav_host_fragment_activity_home)
         navView.setupWithNavController(navController)
+        navController.setGraph(R.navigation.app_navigation)
 
         /*
         https://stackoverflow.com/a/54613997
+        https://stackoverflow.com/a/66170615
          */
 
         when (intent.getStringExtra("action")) {
