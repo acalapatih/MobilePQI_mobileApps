@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.activity.addCallback
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.lupapassword.LupaPasswordPayload
@@ -32,8 +33,17 @@ class LupaPasswordActivity : BaseActivity<ActivityLupaPasswordBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initView()
         initListener()
         initObserver()
+    }
+
+    private fun initView() {
+        binding.etEmailLupaPassword.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
     }
 
     @SuppressLint("CheckResult")

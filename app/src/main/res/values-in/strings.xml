@@ -193,8 +193,8 @@
     <string name="tv_action_bar_pengaturan">Pengaturan</string>
     <string name="tv_bahasa">Bahasa</string>
     <string name="btn_bahasa">Ubah</string>
-    <string name="tv_camera">Camera</string>
-    <string name="tv_about">About</string>
+    <string name="tv_camera">Kamera</string>
+    <string name="tv_about">Tentang</string>
     <string name="tv_bantuan">Bantuan</string>
 
     <!--Profil Pengaturan Bahasa-->

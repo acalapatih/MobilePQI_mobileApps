@@ -24,7 +24,8 @@ import kotlin.properties.Delegates
 
 
 class DosenBeriNilaiTugasMahasiswaActivity :
-    BaseActivity<ActivityDosenBeriNilaiTugasMahasiswaBinding>(), DosenFileUploadedByMahasiswaAdapter.OnUserClickListener {
+    BaseActivity<ActivityDosenBeriNilaiTugasMahasiswaBinding>(),
+    DosenFileUploadedByMahasiswaAdapter.OnUserClickListener {
 
     companion object {
         @JvmStatic
@@ -79,6 +80,12 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                 if (editInputNilai.text.toString().toInt() !in 0..100) {
                     editInputNilai.setText("100")
                 }
+                if (editInputNilai.text.toString().trim().length > 1 &&
+                    editInputNilai.text.toString().trim().first() == '0'
+                ) {
+                    editInputNilai.setText(editInputNilai.text.removePrefix("0"))
+                }
+                editInputNilai.setSelection(editInputNilai.text.toString().length)
             }
         }
 
@@ -151,9 +158,13 @@ class DosenBeriNilaiTugasMahasiswaActivity :
         val dataUser = model.user
         val dataTugas = model.tugas
         val dataJawaban = model.jawaban
+
         // Show Jawaban
-        dosenFileUploadedByMahasiswaAdapter =
+        dosenFileUploadedByMahasiswaAdapter = if (dataJawaban.file.isEmpty() || dataJawaban.file.isBlank()) {
+            DosenFileUploadedByMahasiswaAdapter(this, emptyList(), this)
+        } else {
             DosenFileUploadedByMahasiswaAdapter(this, listOf(dataJawaban), this)
+        }
         binding.rvFileUpload.adapter = dosenFileUploadedByMahasiswaAdapter
         binding.rvFileUpload.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -168,7 +179,10 @@ class DosenBeriNilaiTugasMahasiswaActivity :
             .into(binding.ivProfilePictureMahasiswa)
 
         // Show Tugas
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_title_tugas_detail_mahasiswa, "${dataTugas.title.capitalizeEachWord()} > ${dataTugas.topic.capitalizeEachWord()}")
+        binding.tvTitleTugasDetailMahasiswa.text = getString(
+            R.string.tv_title_tugas_detail_mahasiswa,
+            "${dataTugas.title.capitalizeEachWord()} > ${dataTugas.topic.capitalizeEachWord()}"
+        )
         binding.etNilaiTugasMahasiswa.setText(dataJawaban.nilai.toString())
 
     }

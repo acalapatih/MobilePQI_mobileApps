@@ -347,14 +347,17 @@
 
         <TextView
             android:id="@+id/tv_empty_state"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="25dp"
             android:fontFamily="@font/inter"
             android:text="@string/tv_belum_ada_tugas"
             android:textSize="16sp"
             android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/tv_judul"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_judul" />
 
         <androidx.recyclerview.widget.RecyclerView

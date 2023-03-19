@@ -3,6 +3,8 @@ package com.uinjkt.mobilepqi.common
 import android.app.Dialog
 import android.content.res.Resources
 import android.os.Bundle
+import android.text.Editable
+import android.text.style.MetricAffectingSpan
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
@@ -190,5 +192,12 @@ abstract class BaseActivity<VB : ViewBinding> : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    protected fun clearPasteTextFormatting(string: Editable) {
+        val toBeRemoved = string.getSpans(0, string.length, MetricAffectingSpan::class.java)
+        for (i in toBeRemoved.indices) {
+            string.removeSpan(toBeRemoved[i])
+        }
     }
 }

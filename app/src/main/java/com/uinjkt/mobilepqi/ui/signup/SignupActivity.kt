@@ -8,6 +8,7 @@ import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.signup.SignupPayload
@@ -44,6 +45,36 @@ class SignupActivity : BaseActivity<ActivitySignupBinding>() {
     }
 
     private fun initView() {
+        binding.etNamaSignup.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
+        binding.etNipNimSignup.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
+        binding.etKodeKelasSignup.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
+        binding.etEmailSignup.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
+        binding.etPasswordSignup.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
         // show hide password with eye icon
         var isSelected = true
         binding.ivShowHidePassword.setOnClickListener {
