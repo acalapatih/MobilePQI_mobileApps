@@ -25,8 +25,13 @@ class ProfilPengaturanBahasaActivity : BaseActivity<ActivityProfilPengaturanBaha
         binding.icBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+
         onBackPressedDispatcher.addCallback(this) {
             finish()
+        }
+
+        binding.rbBahasaIndo.setOnClickListener {
+            binding.btnTerapkan.isEnabled = true
         }
 
         binding.btnTerapkan.setOnClickListener {
