@@ -77,8 +77,12 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         viewModel.getUser()
 
         initObserver()
-        initView()
         initListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initView()
     }
 
     private fun initObserver() {
@@ -371,10 +375,5 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         } else {
             DosenDetailTugasActivity.start(requireContext(), tugasId)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        initView()
     }
 }
