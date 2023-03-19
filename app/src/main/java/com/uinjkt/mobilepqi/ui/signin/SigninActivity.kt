@@ -141,6 +141,8 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
                     showLoading(false)
                     if (model.message?.contains("not found", true) == true) {
                         showToast("Anda belum mempunyai akun")
+                    } else if (model.message?.contains("wrong password", true) == true){
+                        showToast("Password yang Anda masukkan salah")
                     } else {
                         showToast(model.message ?: "Something Went Wrong")
                     }
