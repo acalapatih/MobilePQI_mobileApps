@@ -157,15 +157,14 @@ class MahasiswaTugasActivity : BaseActivity<ActivityMahasiswaTugasSemuaBinding>(
     }
 
     override fun onUserJenisTugasClicked(data: JenisTugas) {
-        MahasiswaTugasFilterActivity.start(
-            this@MahasiswaTugasActivity,
-            idKelas,
-            data.titleJenisTugas
-        )
+        if (data.titleJenisTugas != "Semua") {
+            MahasiswaTugasFilterActivity.start(this@MahasiswaTugasActivity, idKelas, data.titleJenisTugas)
+        }
     }
 
     override fun onRestart() {
         super.onRestart()
+        mahasiswaJenisTugasAdapter.changeSelected(0)
         getListTugas()
     }
 }

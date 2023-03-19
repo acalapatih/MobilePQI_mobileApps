@@ -50,6 +50,7 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
     private lateinit var mahasiswaTugasFilterAdapter: ListMahasiswaTugasAdapterList
     private val viewModel by viewModel<MahasiswaTugasFilterViewModel>()
     private lateinit var topic: String
+    private var idxTopic = 0
 
 
     override fun getViewBinding(): ActivityMahasiswaTugasFilteredBinding =
@@ -74,6 +75,7 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         binding.rvJenisTugasMahasiswaFilter.adapter = mahasiswaJenisTugasAdapter
         binding.rvJenisTugasMahasiswaFilter.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvJenisTugasMahasiswaFilter.scrollToPosition(idxTopic)
     }
 
     private fun getListTugas() {
@@ -151,18 +153,22 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         when (title) {
             "Praktikum Qiroah" -> {
                 changeStatusSelected(0)
+                idxTopic = 0
                 return "qiroah"
             }
             "Praktikum Ibadah" -> {
                 changeStatusSelected(1)
+                idxTopic = 1
                 return "ibadah"
             }
             "Hafalan Surah" -> {
                 changeStatusSelected(2)
+                idxTopic = 2
                 return "surat"
             }
             "Hafalan Doa" -> {
                 changeStatusSelected(3)
+                idxTopic = 3
                 return "doa"
             }
             else -> {
@@ -192,7 +198,8 @@ class MahasiswaTugasFilterActivity : BaseActivity<ActivityMahasiswaTugasFiltered
         binding.tvTugasFiltered.text = title
         titleTopic = title
         topic = getSelectedTopic(title)
-        initView()
+        mahasiswaJenisTugasAdapter.changeSelected(idxTopic)
+        getListTugas()
     }
 
     override fun onRestart() {

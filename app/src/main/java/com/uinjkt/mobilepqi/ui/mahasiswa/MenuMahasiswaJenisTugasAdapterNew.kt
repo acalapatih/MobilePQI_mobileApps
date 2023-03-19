@@ -32,7 +32,6 @@ class MenuMahasiswaJenisTugasAdapterNew(
             }
             binding.btnJenisTugas.setOnClickListener {
                 listener?.onUserJenisTugasClicked(jenisTugas)
-                changeSelected(adapterPosition)
             }
         }
     }

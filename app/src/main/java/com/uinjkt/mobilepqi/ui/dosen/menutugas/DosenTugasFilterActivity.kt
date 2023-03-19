@@ -51,6 +51,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
     private lateinit var dosenTugasFilterAdapter: ListMahasiswaTugasAdapterList
     private val viewModel by viewModel<DosenTugasFilterViewModel>()
     private lateinit var topic: String
+    private var idxTopic = 0
 
     override fun getViewBinding(): ActivityDosenTugasFilteredBinding =
         ActivityDosenTugasFilteredBinding.inflate(layoutInflater)
@@ -71,18 +72,22 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         when (title) {
             "Praktikum Qiroah" -> {
                 changeStatusSelected(0)
+                idxTopic = 0
                 return "qiroah"
             }
             "Praktikum Ibadah" -> {
                 changeStatusSelected(1)
+                idxTopic = 1
                 return "ibadah"
             }
             "Hafalan Surah" -> {
                 changeStatusSelected(2)
+                idxTopic = 2
                 return "surat"
             }
             "Hafalan Doa" -> {
                 changeStatusSelected(3)
+                idxTopic = 3
                 return "doa"
             }
             else -> {
@@ -93,7 +98,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
 
 
     private fun initView() {
-        initJenisTugasAdapter()
+        initJenisTugasAdapter(idxTopic)
         getListTugas()
     }
 
@@ -101,11 +106,12 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         viewModel.getListTopicTugas(idKelas, topic)
     }
 
-    private fun initJenisTugasAdapter() {
+    private fun initJenisTugasAdapter(position: Int) {
         dosenJenisTugasAdapter = MenuMahasiswaJenisTugasAdapterNew(this, listJenisTugas, this)
         binding.rvJenisTugasDosenFilter.adapter = dosenJenisTugasAdapter
         binding.rvJenisTugasDosenFilter.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvJenisTugasDosenFilter.scrollToPosition(position)
     }
 
     private fun initListener() {
@@ -215,6 +221,7 @@ class DosenTugasFilterActivity : BaseActivity<ActivityDosenTugasFilteredBinding>
         binding.tvTugasFilter.text = title
         titleTopic = title
         topic = getSelectedTopic(title)
+        dosenJenisTugasAdapter.changeSelected(idxTopic)
         getListTugas()
     }
 

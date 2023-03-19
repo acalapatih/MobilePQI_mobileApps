@@ -200,6 +200,7 @@ class DosenTugasActivity : BaseActivity<ActivityDosenTugasSemuaBinding>(),
 
     override fun onRestart() {
         super.onRestart()
+        dosenJenisTugasAdapter.changeSelected(0)
         getListTugas(idKelas)
     }
 

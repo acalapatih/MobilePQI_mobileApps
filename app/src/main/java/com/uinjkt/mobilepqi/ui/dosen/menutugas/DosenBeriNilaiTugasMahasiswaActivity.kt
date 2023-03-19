@@ -151,9 +151,13 @@ class DosenBeriNilaiTugasMahasiswaActivity :
         val dataUser = model.user
         val dataTugas = model.tugas
         val dataJawaban = model.jawaban
+
         // Show Jawaban
-        dosenFileUploadedByMahasiswaAdapter =
+        dosenFileUploadedByMahasiswaAdapter = if (dataJawaban.file.isEmpty() || dataJawaban.file.isBlank()) {
+            DosenFileUploadedByMahasiswaAdapter(this, emptyList(), this)
+        } else {
             DosenFileUploadedByMahasiswaAdapter(this, listOf(dataJawaban), this)
+        }
         binding.rvFileUpload.adapter = dosenFileUploadedByMahasiswaAdapter
         binding.rvFileUpload.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)

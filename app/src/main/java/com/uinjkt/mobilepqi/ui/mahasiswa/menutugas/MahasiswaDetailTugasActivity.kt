@@ -22,7 +22,6 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
 import com.uinjkt.mobilepqi.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
-
 class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBinding>(),
     MahasiswaFileUploadedByAdapterList.OnUserClickListener {
 
@@ -98,7 +97,9 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     }
 
     private fun createJawaban() {
-        val jawaban = listFileMahasiswaAttached[0].url
+        val jawaban = listFileMahasiswaAttached.ifEmpty {
+            mutableListOf(FileItem(""))
+        }[0].url
         viewModel.createJawaban(CreateJawabanPayload(jawaban), idTugas)
     }
 
@@ -297,3 +298,4 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         return file.delete()
     }
 }
+
