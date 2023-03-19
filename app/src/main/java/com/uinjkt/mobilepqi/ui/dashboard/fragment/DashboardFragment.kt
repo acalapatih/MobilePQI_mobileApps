@@ -77,8 +77,12 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         viewModel.getUser()
 
         initObserver()
-        initView()
         initListener()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initView()
     }
 
     private fun initObserver() {
