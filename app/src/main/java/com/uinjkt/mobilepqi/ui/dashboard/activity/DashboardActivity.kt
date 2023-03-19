@@ -25,9 +25,8 @@ import com.uinjkt.mobilepqi.R
 import com.uinjkt.mobilepqi.common.BaseActivity
 import com.uinjkt.mobilepqi.databinding.ActivityMainBinding
 import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardSharedViewModel
-import com.uinjkt.mobilepqi.ui.dashboard.viewmodel.DashboardViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.GetLocationService {
@@ -43,7 +42,6 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
     }
 
     private val classId by lazy { intent.getIntExtra("class_id", 0) }
-    private val viewModel by viewModel<DashboardViewModel>()
     private val sharedViewModel by viewModel<DashboardSharedViewModel>()
     private lateinit var locationService: LocationService
     private val locationPermissionCode = 99
@@ -66,16 +64,24 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
 
     private fun handleOnBackPressed() {
         onBackPressedDispatcher.addCallback(this) {
-            if (doubleBackToExitPressedOnce) {
-                finish()
-                return@addCallback
+            val tag = navController.currentDestination?.id
+
+            if (tag != null) {
+                if (tag == R.id.navigation_dashboard) {
+                    if (doubleBackToExitPressedOnce) {
+                        finish()
+                        return@addCallback
+                    }
+                    doubleBackToExitPressedOnce = true
+                    showToast("Press Back Again to Exit")
+                    Handler(Looper.getMainLooper()).postDelayed(
+                        { doubleBackToExitPressedOnce = false },
+                        2000
+                    )
+                } else {
+                    navView.selectedItemId = R.id.navigation_dashboard
+                }
             }
-            doubleBackToExitPressedOnce = true
-            showToast("Press Back Again to Exit")
-            Handler(Looper.getMainLooper()).postDelayed(
-                { doubleBackToExitPressedOnce = false },
-                2000
-            )
         }
     }
 
@@ -84,9 +90,11 @@ class DashboardActivity : BaseActivity<ActivityMainBinding>(), LocationService.G
 
         navController = findNavController(R.id.nav_host_fragment_activity_home)
         navView.setupWithNavController(navController)
+        navController.setGraph(R.navigation.app_navigation)
 
         /*
         https://stackoverflow.com/a/54613997
+        https://stackoverflow.com/a/66170615
          */
 
         when (intent.getStringExtra("action")) {
