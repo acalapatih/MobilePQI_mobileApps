@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.method.PasswordTransformationMethod
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.data.source.remote.response.signin.SigninPayload
@@ -43,6 +44,18 @@ class SigninActivity : BaseActivity<ActivitySigninBinding>() {
     }
 
     private fun initView() {
+        binding.etNipNimSignin.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
+        binding.etPasswordSignin.doAfterTextChanged {
+            it?.let {
+                clearPasteTextFormatting(it)
+            }
+        }
+
         // show hide password with eye icon
         var isSelected = true
         binding.ivShowHidePassword.setOnClickListener {
