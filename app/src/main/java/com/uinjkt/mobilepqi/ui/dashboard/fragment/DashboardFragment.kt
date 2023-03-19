@@ -372,4 +372,9 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
             DosenDetailTugasActivity.start(requireContext(), tugasId)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        initView()
+    }
 }
