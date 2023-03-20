@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
@@ -99,7 +98,8 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                         binding.tvSilahkanUploadFile.isVisible = true
                     }
                 }
-                else -> createJawaban()
+                "Kirim" -> showTwoActionDialog("Kirim tugas", btnPositiveMessage = "Yes", btnNegativeMessage = "Batal") { createJawaban() }
+                "Tandai Selesai" -> showTwoActionDialog("Yakin Tandai Selesai?", "Anda belum mengunggah dokumen", true, "Yes", "Batal") { createJawaban() }
             }
         }
 
@@ -183,7 +183,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    showOneActionDialog("Sudah Melewati Deadline", "Okay")
                     showloading(false)
                 }
             }
@@ -195,7 +195,6 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showRvloading(true)
                 }
                 is Resource.Success -> {
-                    showToast("Sudah DELETE", Toast.LENGTH_SHORT)
                     showRvloading(false)
                 }
                 is Resource.Error -> {
