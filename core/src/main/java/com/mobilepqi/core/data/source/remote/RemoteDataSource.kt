@@ -600,6 +600,21 @@ class RemoteDataSource(
         }.flowOn(Dispatchers.IO)
     }
 
+    suspend fun deleteJawaban(
+        idTugas: Int
+    ): Flow<ApiResponse<DeleteJawabanResponse>> {
+        return flow {
+            try {
+                val response = mobilePqiService.deleteJawaban(idTugas)
+                if (response.status == 200) {
+                    emit(ApiResponse.Success(response))
+                }
+            } catch (e: Exception) {
+                emit(ApiResponse.Error(e.setGeneralError()))
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
     suspend fun downloadNilai(
         idKelas: Int,
         query: String? = null

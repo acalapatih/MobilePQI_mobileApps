@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
@@ -68,10 +68,10 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, 0)
 
         getDetailTugas()
-        getUploadFileTugas()
+        getJawabanMahasiswa()
     }
 
-    private fun getUploadFileTugas() {
+    private fun getJawabanMahasiswa() {
         viewModel.getJawabanForMahasiswa(idTugas)
     }
 
@@ -179,9 +179,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showloading(true)
                 }
                 is Resource.Success -> {
-                    showOneActionDialogWithInvoke("File Berhasil Dikirim", "Okay") {
-                        onBackPressedDispatcher.onBackPressed()
-                    }
+                    getJawabanMahasiswa()
                     showloading(false)
                 }
                 is Resource.Error -> {
@@ -190,6 +188,22 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                 }
             }
         }
+
+        viewModel.deleteJawaban.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showRvloading(true)
+                }
+                is Resource.Success -> {
+                    showToast("Sudah DELETE", Toast.LENGTH_SHORT)
+                    showRvloading(false)
+                }
+                is Resource.Error -> {
+                    showRvloading(false)
+                }
+            }
+        }
+
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
@@ -198,7 +212,6 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private fun showRvloading(value: Boolean) {
         binding.pbFileLoading.isVisible = value
         binding.rvFileUpload.isInvisible = value
-        binding.tvSilahkanUploadFile.isVisible = !value
         binding.btnTambahFileUpload.isVisible = !value
     }
 
@@ -281,11 +294,15 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
             listFileMahasiswaAttached.removeAt(position)
             fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
             setListContentAvaiable(listFileMahasiswaAttached)
-            if (idJawabanMahasiswa != 0) Log.d("ini_log", "Delete Jawaban Triggered")
+            if (idJawabanMahasiswa != 0) deleteJawaban()
         } else {
             val url = listFileDosenAttached[position].url
             downloadFileToStorage(this, url, url.getFileNameFromUrl())
         }
+    }
+
+    private fun deleteJawaban() {
+        viewModel.deleteJawaban(idTugas)
     }
 
     private fun setListContentAvaiable(list: MutableList<FileItem>) {

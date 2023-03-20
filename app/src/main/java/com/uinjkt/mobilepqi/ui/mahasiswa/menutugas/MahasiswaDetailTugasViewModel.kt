@@ -31,6 +31,9 @@ class MahasiswaDetailTugasViewModel(
     private val _createJawaban = MutableLiveData<Resource<Boolean>>()
     val createJawaban: LiveData<Resource<Boolean>> get() = _createJawaban
 
+    private val _deleteJawaban = MutableLiveData<Resource<Boolean>>()
+    val deleteJawaban: LiveData<Resource<Boolean>> get() = _deleteJawaban
+
     fun getDetailTugas(idTugas: Int) {
         viewModelScope.launch {
             useCase.getDetailTugas(idTugas).collect {
@@ -63,6 +66,14 @@ class MahasiswaDetailTugasViewModel(
         viewModelScope.launch {
             useCase.createJawaban(request, idTugas).collect {
                 _createJawaban.value = it
+            }
+        }
+    }
+
+    fun deleteJawaban(idTugas: Int) {
+        viewModelScope.launch {
+            useCase.deleteJawaban(idTugas).collect {
+                _deleteJawaban.value = it
             }
         }
     }
