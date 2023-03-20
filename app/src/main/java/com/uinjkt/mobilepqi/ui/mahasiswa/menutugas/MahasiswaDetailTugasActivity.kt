@@ -183,7 +183,11 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showOneActionDialog("Sudah Melewati Deadline", "Okay")
+                    if(model.message?.contains("deadline") == true) {
+                        showOneActionDialog("Sudah Melewati Deadline", "Okay")
+                    } else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                     showloading(false)
                 }
             }
@@ -202,8 +206,13 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showRvloading(false)
                 }
                 is Resource.Error -> {
+                    if(model.message?.contains("jawaban sudah di nilai") == true) {
+                        showOneActionDialog("Jawaban Anda Sudah Dinilai", "Okay")
+                    } else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                     showRvloading(false)
-                    showOneActionDialog("Jawaban Anda Sudah Dinilai", "Okay")
+                    setListContentAvaiable(listFileMahasiswaAttached)
                 }
             }
         }
