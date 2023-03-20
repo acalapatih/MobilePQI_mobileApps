@@ -117,6 +117,10 @@ class DosenCekTugasMahasiswaActivity : BaseActivity<ActivityDosenCekTugasMahasis
         } else {
             showOneActionThinFontDialog("Mahasiswa belum mengumpulkan Tugas", "Okay")
         }
+    }
 
+    override fun onRestart() {
+        super.onRestart()
+        getListTugasMahasiswa()
     }
 }

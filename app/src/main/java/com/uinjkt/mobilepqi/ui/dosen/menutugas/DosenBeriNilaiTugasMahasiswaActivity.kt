@@ -126,7 +126,9 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    showOneActionDialogWithInvoke("Mahasiswa belum mengumpulkan tugas", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                     showloading(false)
                 }
             }
@@ -143,7 +145,9 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    showOneActionDialogWithInvoke("Mahasiswa belum mengumpulkan tugas", "Okay") {
+                        onBackPressedDispatcher.onBackPressed()
+                    }
                     showloading(false)
                 }
             }
@@ -200,5 +204,8 @@ class DosenBeriNilaiTugasMahasiswaActivity :
         downloadFileToStorage(this, url, url.getFileNameFromUrl())
     }
 
-
+    override fun onRestart() {
+        super.onRestart()
+        getJawabanForDosen()
+    }
 }
