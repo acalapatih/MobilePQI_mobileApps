@@ -52,7 +52,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_bahasa"
         style="@style/btn_blue_rounded"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="34dp"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="45dp"
