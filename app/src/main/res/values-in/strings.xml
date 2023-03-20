@@ -16,7 +16,7 @@
     <string name="tv_masuk_sekarang_text"><u>Masuk Sekarang</u></string>
     <string name="tv_action_bar_lupa_password_text">Lupa Password</string>
     <string name="lupa_password_deskripsi_text">Silakan masukkan email Anda pada kotak di bawah ini untuk mengatur ulang password Anda</string>
-    <string name="btn_kirim_lupa_password_text">Kirim</string>
+    <string name="kirim">Kirim</string>
     <string name="btn_location_text">Click Location</string>
     <string name="tv_kode_kelas_text">Kode Kelas</string>
     <string name="btn_kirim_lupa_password_deksripsi_text">"Kami telah mengirim password baru ke email Anda"</string>
@@ -81,7 +81,6 @@
     <string name="desc_iv_logo_file_terlampir">Logo File Terlampir</string>
     <string name="tv_silahkan_upload_file">Silahkan Upload File Tugas Anda</string>
     <string name="btn_tambah_file_upload">Tambah File +</string>
-    <string name="btn_kirim_file_upload">Kirim</string>
     <string name="tv_title_jenis_tugas_mahasiswa"><![CDATA[Tugas > %s]]></string>
     <string name="tv_date_file_mahasiswa_terlampir">Diupload pada %s</string>
     <string name="tv_nama_file_mahasiswa_terlampir">File Jawaban Tugas 4</string>
@@ -243,4 +242,7 @@
     <string name="tap_icon">Tap Icon</string>
     <string name="tap_icon_cont">Untuk Menambahkan %s</string>
     <string name="description_empty_state">Tidak Ada Deskripsi %s</string>
+    <string name="user_tidak_mengunggah_file">Anda Tidak Mengunggah dokumen</string>
+    <string name="tandai_selesai">Tandai Selesai</string>
+    <string name="batalkan_pengiriman">Batalkan Pengiriman</string>
 </resources>

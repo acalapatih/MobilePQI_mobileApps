@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -46,26 +47,32 @@ class MahasiswaFileUploadedByAdapterList(
                 else -> binding.ivLogoFileMahasiswaTerlampir.setImageResource(R.drawable.ic_documentwithtext_margined)
             }
 
-            if (setIcon == "delete") {
-                with(binding.ivIconCloseOrDownloadFile) {
-                    setImageResource(R.drawable.ic_close_with_margin)
-                    // Resize drawable size
-                    scaleX = 1.3f
-                    scaleY = 1.3f
-                    setOnClickListener {
-                        listener?.onUserClickListener("delete", adapterPosition)
+            when(setIcon) {
+                "delete" -> {
+                    with(binding.ivIconCloseOrDownloadFile) {
+                        setImageResource(R.drawable.ic_close_with_margin)
+                        // Resize drawable size
+                        scaleX = 1.3f
+                        scaleY = 1.3f
+                        setOnClickListener {
+                            listener?.onUserClickListener("delete", adapterPosition)
+                        }
                     }
                 }
-            } else {
-                with(binding.ivIconCloseOrDownloadFile) {
-                    setImageResource(R.drawable.ic_download_blue)
-                    // Resize drawable size
-                    scaleX = 1.0f
-                    scaleY = 1.0f
-                    setOnClickListener {
-                        listener?.onUserClickListener("download", adapterPosition)
+
+                "donwload" -> {
+                    with(binding.ivIconCloseOrDownloadFile) {
+                        setImageResource(R.drawable.ic_download_blue)
+                        // Resize drawable size
+                        scaleX = 1.0f
+                        scaleY = 1.0f
+                        setOnClickListener {
+                            listener?.onUserClickListener("download", adapterPosition)
+                        }
                     }
                 }
+
+                "hide" -> binding.ivIconCloseOrDownloadFile.isVisible = false
             }
         }
     }
