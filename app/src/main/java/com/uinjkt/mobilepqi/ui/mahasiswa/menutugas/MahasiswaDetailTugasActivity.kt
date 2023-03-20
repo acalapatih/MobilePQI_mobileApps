@@ -195,10 +195,15 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showRvloading(true)
                 }
                 is Resource.Success -> {
+                    listFileMahasiswaAttached.removeFirst()
+                    fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
+                    setListContentAvaiable(listFileMahasiswaAttached)
+                    idJawabanMahasiswa = 0
                     showRvloading(false)
                 }
                 is Resource.Error -> {
                     showRvloading(false)
+                    showOneActionDialog("Jawaban Anda Sudah Dinilai", "Okay")
                 }
             }
         }
@@ -290,10 +295,12 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
 
     override fun onUserClickListener(action: String, position: Int) {
         if (action == "delete") {
-            listFileMahasiswaAttached.removeAt(position)
-            fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
-            setListContentAvaiable(listFileMahasiswaAttached)
-            if (idJawabanMahasiswa != 0) deleteJawaban()
+            if (idJawabanMahasiswa != 0) { deleteJawaban() }
+            else {
+                listFileMahasiswaAttached.removeAt(position)
+                fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
+                setListContentAvaiable(listFileMahasiswaAttached)
+            }
         } else {
             val url = listFileDosenAttached[position].url
             downloadFileToStorage(this, url, url.getFileNameFromUrl())

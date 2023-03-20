@@ -183,7 +183,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal|top"
                     android:minHeight="48dp"
                     android:text="@string/tv_silahkan_upload_file" />
 
