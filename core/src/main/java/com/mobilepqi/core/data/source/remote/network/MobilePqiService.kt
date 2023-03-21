@@ -203,6 +203,11 @@ interface MobilePqiService {
         @Path("idTugas") idTugas: Int
     ): CreateJawabanResponse
 
+    @DELETE("v1/mobilepqi/kelas/tugas/{idTugas}/jawaban/mahasiswa")
+    suspend fun deleteJawaban(
+        @Path("idTugas") idTugas: Int
+    ): DeleteJawabanResponse
+
     @GET("v1/mobilepqi/kelas/{idKelas}/nilai")
     suspend fun downloadNilai(
         @Path("idKelas") idKelas: Int,

@@ -126,7 +126,16 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    if (model.message?.contains("not found") == true) {
+                        showOneActionDialogWithInvoke(
+                            "Mahasiswa belum mengumpulkan tugas",
+                            "Okay"
+                        ) {
+                            onBackPressedDispatcher.onBackPressed()
+                        }
+                    } else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                     showloading(false)
                 }
             }
@@ -143,7 +152,16 @@ class DosenBeriNilaiTugasMahasiswaActivity :
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    if (model.message?.contains("not found") == true) {
+                        showOneActionDialogWithInvoke(
+                            "Mahasiswa belum mengumpulkan tugas",
+                            "Okay"
+                        ) {
+                            onBackPressedDispatcher.onBackPressed()
+                        }
+                    } else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                     showloading(false)
                 }
             }
@@ -160,11 +178,12 @@ class DosenBeriNilaiTugasMahasiswaActivity :
         val dataJawaban = model.jawaban
 
         // Show Jawaban
-        dosenFileUploadedByMahasiswaAdapter = if (dataJawaban.file.isEmpty() || dataJawaban.file.isBlank()) {
-            DosenFileUploadedByMahasiswaAdapter(this, emptyList(), this)
-        } else {
-            DosenFileUploadedByMahasiswaAdapter(this, listOf(dataJawaban), this)
-        }
+        dosenFileUploadedByMahasiswaAdapter =
+            if (dataJawaban.file.isEmpty() || dataJawaban.file.isBlank()) {
+                DosenFileUploadedByMahasiswaAdapter(this, emptyList(), this)
+            } else {
+                DosenFileUploadedByMahasiswaAdapter(this, listOf(dataJawaban), this)
+            }
         binding.rvFileUpload.adapter = dosenFileUploadedByMahasiswaAdapter
         binding.rvFileUpload.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -200,5 +219,8 @@ class DosenBeriNilaiTugasMahasiswaActivity :
         downloadFileToStorage(this, url, url.getFileNameFromUrl())
     }
 
-
+    override fun onRestart() {
+        super.onRestart()
+        getJawabanForDosen()
+    }
 }

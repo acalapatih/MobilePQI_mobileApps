@@ -157,7 +157,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_description_tugas_detail"
                 app:layout_constraintVertical_bias="0"
-                tools:itemCount="1"
+                tools:itemCount="2"
                 tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
 
 
@@ -173,10 +173,9 @@
                 <View
                     android:id="@+id/vw_line_break_file_upload"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
+                    android:layout_height="0.5dp"
                     android:layout_marginTop="3dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@color/blue_6199C1" />
+                    android:background="@color/black" />
 
                 <TextView
                     android:id="@+id/tv_silahkan_upload_file"
@@ -184,17 +183,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"
-                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_horizontal|top"
                     android:minHeight="48dp"
-                    android:text="@string/tv_silahkan_upload_file"
-                    android:visibility="gone" />
+                    android:text="@string/tv_silahkan_upload_file" />
 
                 <ProgressBar
                     android:id="@+id/pb_file_loading"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:minHeight="48dp"
+                    android:minHeight="40dp"
                     android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -206,11 +205,22 @@
                     tools:itemCount="2"
                     tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
 
+                <TextView
+                    android:id="@+id/tv_user_tidak_mengunggah_file"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/TextRegular16spMobilePQI"
+                    android:textColor="#72777A"
+                    android:minHeight="158dp"
+                    android:text="@string/user_tidak_mengunggah_file"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_tambah_file_upload"
                     style="@style/TextNormal16spMobilePQI"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
                     android:layout_marginHorizontal="21dp"
                     android:background="@drawable/bg_button_stroke6199c1_ripple"
                     android:text="@string/btn_tambah_file_upload"
@@ -220,13 +230,13 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_kirim_file_upload"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
                     android:layout_marginHorizontal="21dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_button_06283d_48dp_ripple"
                     android:fontFamily="@font/inter_medium"
-                    android:text="@string/btn_kirim_file_upload"
+                    android:text="@string/kirim"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="16sp" />

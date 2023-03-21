@@ -54,5 +54,9 @@ class MenuTugasInteractor(
         idTugas: Int
     ): Flow<Resource<Boolean>> = repository.createJawaban(request, idTugas)
 
-    override fun downloadNilai(idKelas: Int, query: String?): Flow<Resource<DownloadNilaiModel>> = repository.downloadNilai(idKelas, query)
+    override fun deleteJawaban(idTugas: Int): Flow<Resource<Boolean>> =
+        repository.deleteJawaban(idTugas)
+
+    override fun downloadNilai(idKelas: Int, query: String?): Flow<Resource<DownloadNilaiModel>> =
+        repository.downloadNilai(idKelas, query)
 }

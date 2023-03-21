@@ -1,10 +1,10 @@
 package com.uinjkt.mobilepqi.ui.mahasiswa.menutugas
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
@@ -22,6 +22,8 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
 import com.uinjkt.mobilepqi.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
+import kotlin.properties.Delegates
+
 class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBinding>(),
     MahasiswaFileUploadedByAdapterList.OnUserClickListener {
 
@@ -47,13 +49,15 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private lateinit var topic: String
     private lateinit var title: String
     private var urlFile = ""
+    private var idJawabanMahasiswa = 0
+    private var isTugasOnGoing by Delegates.notNull<Boolean>()
 
     override fun getViewBinding(): ActivityMahasiswaDetailTugasBinding =
         ActivityMahasiswaDetailTugasBinding.inflate(layoutInflater)
 
-    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("ini_log", "onCreate() dipanggil")
         initAdapter()
         initView()
         initListener()
@@ -67,10 +71,9 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, 0)
 
         getDetailTugas()
-        getUploadFileTugas()
     }
 
-    private fun getUploadFileTugas() {
+    private fun getJawabanMahasiswa() {
         viewModel.getJawabanForMahasiswa(idTugas)
     }
 
@@ -88,7 +91,38 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         }
 
         binding.btnKirimFileUpload.setOnClickListener {
-            createJawaban()
+            when (binding.btnKirimFileUpload.text) {
+                "Batalkan Pengiriman" -> {
+                    showTwoActionDialog(
+                        "Yakin batalkan pengiriman?",
+                        btnPositiveMessage = "Yes",
+                        btnNegativeMessage = "Batal"
+                    ) {
+                        setListContentAvaiable(listFileMahasiswaAttached)
+                        fileUploadedByMahasiswaAdapter = MahasiswaFileUploadedByAdapterList(
+                            this,
+                            listFileMahasiswaAttached,
+                            "delete",
+                            this
+                        )
+                        binding.rvFileUpload.adapter = fileUploadedByMahasiswaAdapter
+                        binding.tvUserTidakMengunggahFile.isVisible = false
+                        binding.tvSilahkanUploadFile.isVisible = true
+                    }
+                }
+                "Kirim" -> showTwoActionDialog(
+                    "Kirim tugas",
+                    btnPositiveMessage = "Yes",
+                    btnNegativeMessage = "Batal"
+                ) { createJawaban() }
+                "Tandai Selesai" -> showTwoActionDialog(
+                    "Yakin Tandai Selesai?",
+                    "Anda belum mengunggah dokumen",
+                    true,
+                    "Yes",
+                    "Batal"
+                ) { createJawaban() }
+            }
         }
 
         onBackPressedDispatcher.addCallback(this) {
@@ -127,11 +161,10 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showRvloading(true)
                 }
                 is Resource.Success -> {
+                    showRvloading(false)
                     model.data?.let {
                         actionAfterGetJawabanForMahasiswa(it)
                     }
-                    showRvloading(false)
-                    setListContentAvaiable(listFileMahasiswaAttached)
                 }
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
@@ -168,17 +201,49 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showloading(true)
                 }
                 is Resource.Success -> {
-                    showOneActionDialogWithInvoke("File Berhasil Dikirim", "Okay") {
-                        onBackPressedDispatcher.onBackPressed()
-                    }
+                    getJawabanMahasiswa()
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    showToast(model.message ?: "Something Went Wrong")
+                    if (model.message?.contains("deadline") == true) {
+                        showOneActionDialog("Sudah Melewati Deadline", "Okay")
+                    } else if( model.message?.contains("nilai") == true) {
+                        showOneActionDialog("Tugas Telah Dinilai", "Okay")
+                    }
+                    else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                     showloading(false)
+                    getJawabanMahasiswa()
                 }
             }
         }
+
+        viewModel.deleteJawaban.observe(this) { model ->
+            when (model) {
+                is Resource.Loading -> {
+                    showRvloading(true)
+                }
+                is Resource.Success -> {
+                    listFileMahasiswaAttached.removeFirst()
+                    fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
+                    setListContentAvaiable(listFileMahasiswaAttached)
+                    idJawabanMahasiswa = 0
+                    showRvloading(false)
+                }
+                is Resource.Error -> {
+                    if (model.message?.contains("jawaban sudah di nilai") == true) {
+                        showOneActionDialog("Jawaban Anda Sudah Dinilai", "Okay")
+                    } else {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
+                    showRvloading(false)
+                    setListContentAvaiable(listFileMahasiswaAttached)
+                    getJawabanMahasiswa()
+                }
+            }
+        }
+
         onBackPressedDispatcher.addCallback(this) {
             finish()
         }
@@ -187,18 +252,33 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private fun showRvloading(value: Boolean) {
         binding.pbFileLoading.isVisible = value
         binding.rvFileUpload.isInvisible = value
-        binding.tvSilahkanUploadFile.isVisible = !value
         binding.btnTambahFileUpload.isVisible = !value
     }
 
     private fun actionAfterGetJawabanForMahasiswa(model: GetJawabanForMahasiswaModel) {
         val file = model.file
+        idJawabanMahasiswa = model.id
+
         if (file.isNotEmpty()) {
             listFileMahasiswaAttached = mutableListOf(FileItem(model.file))
             fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
         }
         setListContentAvaiable(listFileMahasiswaAttached)
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, model.nilai)
+
+
+        if (idJawabanMahasiswa != 0) {
+            binding.tvSilahkanUploadFile.isVisible = false
+            binding.btnTambahFileUpload.isVisible = false
+            fileUploadedByMahasiswaAdapter =
+                MahasiswaFileUploadedByAdapterList(this, listFileMahasiswaAttached, "hide")
+            binding.rvFileUpload.adapter = fileUploadedByMahasiswaAdapter
+            binding.btnKirimFileUpload.text = getString(R.string.batalkan_pengiriman)
+            binding.tvUserTidakMengunggahFile.isVisible = file.isEmpty()
+        }
+
+        binding.btnKirimFileUpload.isEnabled = isTugasOnGoing && model.nilai == 0
+        Log.d("ini_log", "isTugasOnGoing : $isTugasOnGoing, nilai: ${model.nilai}")
     }
 
     private fun actionAfterGetDetailTugas(model: GetDetailTugasModel) {
@@ -208,7 +288,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
             "hafalan surat" -> "hafalan surah"
             else -> model.topic
         }
-
+        isTugasOnGoing = model.status
         binding.tvTitleTugasDetailMahasiswa.text =
             getString(
                 R.string.tv_title_tugas_detail_mahasiswa,
@@ -221,12 +301,15 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                 model.deadline.convertTime("EEEE, dd MMMM yyyy (HH:mm)")
             )
         if (model.description.isBlank() || model.description.isEmpty()) {
-            binding.tvDescriptionTugasDetail.text = getString(R.string.description_empty_state, "Tugas")
+            binding.tvDescriptionTugasDetail.text =
+                getString(R.string.description_empty_state, "Tugas")
         } else {
             binding.tvDescriptionTugasDetail.text = model.description
         }
         listFileDosenAttached = model.file.toMutableList()
         fileUploadedByDosenAdapter.setData(listFileDosenAttached)
+
+        getJawabanMahasiswa()
     }
 
     private fun initAdapter() {
@@ -253,19 +336,31 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
 
     override fun onUserClickListener(action: String, position: Int) {
         if (action == "delete") {
-            listFileMahasiswaAttached.removeAt(position)
-            fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
-            setListContentAvaiable(listFileMahasiswaAttached)
+            if (idJawabanMahasiswa != 0) {
+                deleteJawaban()
+            } else {
+                listFileMahasiswaAttached.removeAt(position)
+                fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
+                setListContentAvaiable(listFileMahasiswaAttached)
+            }
         } else {
             val url = listFileDosenAttached[position].url
             downloadFileToStorage(this, url, url.getFileNameFromUrl())
         }
     }
 
+    private fun deleteJawaban() {
+        viewModel.deleteJawaban(idTugas)
+    }
+
     private fun setListContentAvaiable(list: MutableList<FileItem>) {
-        binding.tvSilahkanUploadFile.isVisible = list.isEmpty()
         binding.btnTambahFileUpload.isVisible = list.isEmpty()
         binding.rvFileUpload.isVisible = list.isNotEmpty()
+        binding.btnKirimFileUpload.text = if (list.isEmpty()) {
+            getString(R.string.tandai_selesai)
+        } else {
+            getString(R.string.kirim)
+        }
     }
 
     private val launcherIntentFile = registerForActivityResult(
