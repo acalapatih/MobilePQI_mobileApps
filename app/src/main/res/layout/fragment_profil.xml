@@ -75,7 +75,6 @@
         android:text="@string/tv_profil"
         android:textColor="@color/black"
         app:drawableLeftCompat="@drawable/ic_profil"
-        app:layout_constraintEnd_toStartOf="@id/tv_profil"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nomor_induk" />
 
@@ -91,7 +90,6 @@
         android:text="@string/tv_pengaturan"
         android:textColor="@color/black"
         app:drawableLeftCompat="@drawable/ic_pengaturan"
-        app:layout_constraintEnd_toStartOf="@id/tv_pengaturan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_profil" />
 
@@ -107,7 +105,6 @@
         android:text="@string/tv_logout"
         android:textColor="@color/black"
         app:drawableLeftCompat="@drawable/ic_logout"
-        app:layout_constraintEnd_toStartOf="@id/tv_logout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pengaturan" />
 

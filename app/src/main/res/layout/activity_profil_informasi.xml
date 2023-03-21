@@ -111,12 +111,11 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:autofillHints=""
             android:enabled="false"
             android:hint="@string/hint_fakultas"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ic_edit_fakultas"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_fakultas" />
 
@@ -124,11 +123,13 @@
             android:id="@+id/ic_edit_fakultas"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
             android:background="@color/white"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/et_fakultas"
-            app:layout_constraintEnd_toEndOf="@id/et_fakultas"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/et_fakultas"
             app:layout_constraintTop_toTopOf="@id/et_fakultas" />
 
         <TextView
@@ -148,12 +149,11 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:autofillHints=""
             android:enabled="false"
             android:hint="@string/hint_prodi"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ic_edit_prodi"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_prodi" />
 
@@ -161,11 +161,12 @@
             android:id="@+id/ic_edit_prodi"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
             android:background="@color/white"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/et_prodi"
-            app:layout_constraintEnd_toEndOf="@id/et_prodi"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_prodi" />
 
         <TextView
@@ -185,12 +186,11 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:autofillHints=""
             android:enabled="false"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/ic_edit_password"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_password" />
 
@@ -198,11 +198,12 @@
             android:id="@+id/ic_edit_password"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
             android:background="@color/white"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/et_password"
-            app:layout_constraintEnd_toEndOf="@id/et_password"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_password" />
 
         <TextView
@@ -222,12 +223,12 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
+
             android:autofillHints=""
             android:enabled="false"
             android:hint="@string/hint_tglahir"
             android:inputType="date"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ic_edit_tglahir"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_tglahir" />
 
@@ -235,11 +236,12 @@
             android:id="@+id/ic_edit_tglahir"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
             android:background="@color/white"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/et_tglahir"
-            app:layout_constraintEnd_toEndOf="@id/et_tglahir"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_tglahir" />
 
         <TextView
@@ -259,12 +261,12 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:autofillHints=""
             android:enabled="false"
             android:hint="@string/hint_nohp"
             android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintEnd_toStartOf="@+id/ic_edit_nohp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_nohp" />
 
@@ -272,11 +274,12 @@
             android:id="@+id/ic_edit_nohp"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
             android:background="@color/white"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/et_nohp"
-            app:layout_constraintEnd_toEndOf="@id/et_nohp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_nohp" />
 
         <TextView
@@ -296,12 +299,11 @@
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
             android:autofillHints=""
             android:enabled="false"
             android:hint="@string/hint_alamat"
             android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ic_edit_alamat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_alamat" />
 
@@ -309,11 +311,12 @@
             android:id="@+id/ic_edit_alamat"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginEnd="40dp"
             android:background="@color/white"
             android:importantForAccessibility="no"
             android:src="@drawable/ic_edit"
             app:layout_constraintBottom_toBottomOf="@id/et_alamat"
-            app:layout_constraintEnd_toEndOf="@id/et_alamat"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/et_alamat" />
 
         <androidx.appcompat.widget.AppCompatButton
