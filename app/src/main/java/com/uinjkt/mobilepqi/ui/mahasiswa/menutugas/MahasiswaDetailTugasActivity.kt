@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isInvisible
@@ -21,6 +22,7 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.MahasiswaFileUploadedByAdapterList
 import com.uinjkt.mobilepqi.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
+import kotlin.properties.Delegates
 
 class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBinding>(),
     MahasiswaFileUploadedByAdapterList.OnUserClickListener {
@@ -48,12 +50,14 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private lateinit var title: String
     private var urlFile = ""
     private var idJawabanMahasiswa = 0
+    private var isTugasOnGoing by Delegates.notNull<Boolean>()
 
     override fun getViewBinding(): ActivityMahasiswaDetailTugasBinding =
         ActivityMahasiswaDetailTugasBinding.inflate(layoutInflater)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("ini_log", "onCreate() dipanggil")
         initAdapter()
         initView()
         initListener()
@@ -67,7 +71,6 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, 0)
 
         getDetailTugas()
-        getJawabanMahasiswa()
     }
 
     private fun getJawabanMahasiswa() {
@@ -88,18 +91,37 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         }
 
         binding.btnKirimFileUpload.setOnClickListener {
-            when(binding.btnKirimFileUpload.text) {
+            when (binding.btnKirimFileUpload.text) {
                 "Batalkan Pengiriman" -> {
-                    showTwoActionDialog("Yakin batalkan pengiriman?", btnPositiveMessage = "Yes", btnNegativeMessage = "Batal") {
+                    showTwoActionDialog(
+                        "Yakin batalkan pengiriman?",
+                        btnPositiveMessage = "Yes",
+                        btnNegativeMessage = "Batal"
+                    ) {
                         setListContentAvaiable(listFileMahasiswaAttached)
-                        fileUploadedByMahasiswaAdapter = MahasiswaFileUploadedByAdapterList(this, listFileMahasiswaAttached,"delete", this)
+                        fileUploadedByMahasiswaAdapter = MahasiswaFileUploadedByAdapterList(
+                            this,
+                            listFileMahasiswaAttached,
+                            "delete",
+                            this
+                        )
                         binding.rvFileUpload.adapter = fileUploadedByMahasiswaAdapter
                         binding.tvUserTidakMengunggahFile.isVisible = false
                         binding.tvSilahkanUploadFile.isVisible = true
                     }
                 }
-                "Kirim" -> showTwoActionDialog("Kirim tugas", btnPositiveMessage = "Yes", btnNegativeMessage = "Batal") { createJawaban() }
-                "Tandai Selesai" -> showTwoActionDialog("Yakin Tandai Selesai?", "Anda belum mengunggah dokumen", true, "Yes", "Batal") { createJawaban() }
+                "Kirim" -> showTwoActionDialog(
+                    "Kirim tugas",
+                    btnPositiveMessage = "Yes",
+                    btnNegativeMessage = "Batal"
+                ) { createJawaban() }
+                "Tandai Selesai" -> showTwoActionDialog(
+                    "Yakin Tandai Selesai?",
+                    "Anda belum mengunggah dokumen",
+                    true,
+                    "Yes",
+                    "Batal"
+                ) { createJawaban() }
             }
         }
 
@@ -183,12 +205,16 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showloading(false)
                 }
                 is Resource.Error -> {
-                    if(model.message?.contains("deadline") == true) {
+                    if (model.message?.contains("deadline") == true) {
                         showOneActionDialog("Sudah Melewati Deadline", "Okay")
-                    } else {
+                    } else if( model.message?.contains("nilai") == true) {
+                        showOneActionDialog("Tugas Telah Dinilai", "Okay")
+                    }
+                    else {
                         showToast(model.message ?: "Something Went Wrong")
                     }
                     showloading(false)
+                    getJawabanMahasiswa()
                 }
             }
         }
@@ -206,13 +232,14 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
                     showRvloading(false)
                 }
                 is Resource.Error -> {
-                    if(model.message?.contains("jawaban sudah di nilai") == true) {
+                    if (model.message?.contains("jawaban sudah di nilai") == true) {
                         showOneActionDialog("Jawaban Anda Sudah Dinilai", "Okay")
                     } else {
                         showToast(model.message ?: "Something Went Wrong")
                     }
                     showRvloading(false)
                     setListContentAvaiable(listFileMahasiswaAttached)
+                    getJawabanMahasiswa()
                 }
             }
         }
@@ -239,6 +266,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         setListContentAvaiable(listFileMahasiswaAttached)
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, model.nilai)
 
+
         if (idJawabanMahasiswa != 0) {
             binding.tvSilahkanUploadFile.isVisible = false
             binding.btnTambahFileUpload.isVisible = false
@@ -249,6 +277,8 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
             binding.tvUserTidakMengunggahFile.isVisible = file.isEmpty()
         }
 
+        binding.btnKirimFileUpload.isEnabled = isTugasOnGoing && model.nilai == 0
+        Log.d("ini_log", "isTugasOnGoing : $isTugasOnGoing, nilai: ${model.nilai}")
     }
 
     private fun actionAfterGetDetailTugas(model: GetDetailTugasModel) {
@@ -258,7 +288,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
             "hafalan surat" -> "hafalan surah"
             else -> model.topic
         }
-
+        isTugasOnGoing = model.status
         binding.tvTitleTugasDetailMahasiswa.text =
             getString(
                 R.string.tv_title_tugas_detail_mahasiswa,
@@ -278,6 +308,8 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         }
         listFileDosenAttached = model.file.toMutableList()
         fileUploadedByDosenAdapter.setData(listFileDosenAttached)
+
+        getJawabanMahasiswa()
     }
 
     private fun initAdapter() {
@@ -304,8 +336,9 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
 
     override fun onUserClickListener(action: String, position: Int) {
         if (action == "delete") {
-            if (idJawabanMahasiswa != 0) { deleteJawaban() }
-            else {
+            if (idJawabanMahasiswa != 0) {
+                deleteJawaban()
+            } else {
                 listFileMahasiswaAttached.removeAt(position)
                 fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
                 setListContentAvaiable(listFileMahasiswaAttached)
@@ -323,7 +356,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private fun setListContentAvaiable(list: MutableList<FileItem>) {
         binding.btnTambahFileUpload.isVisible = list.isEmpty()
         binding.rvFileUpload.isVisible = list.isNotEmpty()
-        binding.btnKirimFileUpload.text = if(list.isEmpty()) {
+        binding.btnKirimFileUpload.text = if (list.isEmpty()) {
             getString(R.string.tandai_selesai)
         } else {
             getString(R.string.kirim)
