@@ -71,7 +71,6 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Dashboard", "onViewCreated: $classIdDosen")
         viewModel.getUserRole()
         viewModel.getClassId()
         viewModel.getUser()
@@ -97,9 +96,12 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    model.message?.let {
-                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT)
-                            .show()
+                    model.message.let {
+                        Toast.makeText(
+                            requireContext(),
+                            it ?: "Something went wrong",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -117,7 +119,13 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                        model.message.let {
+                            Toast.makeText(
+                                requireContext(),
+                                it ?: "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
@@ -135,7 +143,13 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                        model.message.let {
+                            Toast.makeText(
+                                requireContext(),
+                                it ?: "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                         binding.tvWaktu.text = "-"
                     }
                 }
@@ -173,11 +187,13 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Success -> {
                     showLoading(false)
                     listTugasDashboard = model.data?.listTugas ?: emptyList()
-                    if(listTugasDashboard.isEmpty()) {
+                    if (listTugasDashboard.isEmpty()) {
                         showEmptyState()
                     } else {
-                        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
-                        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
+                        tugasDashboardAdapter =
+                            DashboardAdapter(requireContext(), listTugasDashboard, this)
+                        binding.rvTugasDashboard.layoutManager =
+                            LinearLayoutManager(requireContext())
                         binding.rvTugasDashboard.adapter = tugasDashboardAdapter
                         binding.rvTugasDashboard.isNestedScrollingEnabled = false
                     }
@@ -186,7 +202,13 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                        model.message.let {
+                            Toast.makeText(
+                                requireContext(),
+                                it ?: "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
@@ -194,7 +216,8 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
     }
 
     private fun showEmptyState() {
-        binding.tvEmptyState.text = String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
+        binding.tvEmptyState.text =
+            String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
         binding.tvEmptyState.isVisible = true
     }
 
@@ -273,10 +296,9 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
                 classIdMahasiswa = value
-                if(classIdMahasiswa != 0) {
+                if (classIdMahasiswa != 0) {
                     viewModel.getClass(classIdMahasiswa)
                     viewModel.getTugas(classIdMahasiswa)
-                    Log.d("Class Id Mahasiswa", "class Id: $value")
                 }
             }
         } else {
