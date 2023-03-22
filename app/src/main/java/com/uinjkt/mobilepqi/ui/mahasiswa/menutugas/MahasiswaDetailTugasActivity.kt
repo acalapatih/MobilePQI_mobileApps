@@ -67,7 +67,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private fun initView() {
         binding.tvTitleTugasDetailMahasiswa.text =
             getString(R.string.tv_title_tugas_detail_mahasiswa, "")
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_tenggat_waktu_tugas, "")
+        binding.tvTenggatWaktuTugasMahasiswa.text = getString(R.string.tv_tenggat_waktu_tugas, "")
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, 0)
 
         getDetailTugas()

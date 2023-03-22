@@ -227,7 +227,7 @@
     <string name="btn_edit_tugas_dosen">Edit Tugas</string>
     <string name="btn_cek_tugas_mahasiswa">Cek Tugas Mahasiswa</string>
     <string name="nim_detail_mahasiswa">NIM : 11200910000077</string>
-    <string name="et_input_nilai_tugas_mahasiswa">0</string>
+    <string name="et_input_nilai_tugas_mahasiswa">50</string>
     <string name="et_input_nilai_seratus">100</string>
     <string name="btn_beri_nilai">Beri Nilai</string>
     <string name="tv_nilai">Nilai</string>
@@ -245,4 +245,5 @@
     <string name="user_tidak_mengunggah_file">Anda Tidak Mengunggah dokumen</string>
     <string name="tandai_selesai">Tandai Selesai</string>
     <string name="batalkan_pengiriman">Batalkan Pengiriman</string>
+    <string name="format_nim_mahasiswa">NIM : %s</string>
 </resources>
