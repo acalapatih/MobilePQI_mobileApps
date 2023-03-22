@@ -81,6 +81,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
                     showLoading(false)
+                    showEmptyState(true)
                 }
             }
         }

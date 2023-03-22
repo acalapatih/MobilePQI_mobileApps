@@ -102,10 +102,8 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
                     }
                 }
                 is Resource.Error -> {
-                    showOneActionDialogWithInvoke("Materi Gagal Ditambahkan", "Okay") {
-                        showToast(model.message ?: "Something Went Wrong")
-                    }
                     showLoading(false)
+                    showEmptyState(true)
                 }
             }
         }
