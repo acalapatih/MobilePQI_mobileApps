@@ -10,6 +10,5 @@ class LogoutRepositoryImpl(
         localDataSource.clearClassId()
         localDataSource.clearToken()
         localDataSource.clearUserRole()
-        localDataSource.clearOnboardingStatus()
     }
 }
