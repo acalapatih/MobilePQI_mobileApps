@@ -221,7 +221,7 @@
                     android:gravity="center"
                     android:minHeight="158dp"
                     android:text="@string/user_tidak_mengunggah_file"
-                    android:textColor="#72777A"
+                    android:textColor="@color/grey_72777a"
                     android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatButton
