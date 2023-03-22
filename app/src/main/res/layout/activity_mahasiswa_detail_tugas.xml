@@ -69,15 +69,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/ll_desc_task_tugas_mahasiswa" />
 
-            <TextView
-                android:id="@+id/tv_nilai_tugas"
-                style="@style/TextNormal16spMobilePQI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:text="@string/nilai_tugas"
-                app:layout_constraintEnd_toEndOf="@id/ll_desc_task_tugas_mahasiswa"
-                app:layout_constraintTop_toTopOf="@id/ll_desc_task_tugas_mahasiswa" />
 
             <LinearLayout
                 android:id="@+id/ll_desc_task_tugas_mahasiswa"
@@ -91,14 +82,31 @@
                 app:layout_constraintStart_toEndOf="@id/iv_task_tugas_mahasiswa"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tv_nama_task_tugas"
-                    style="@style/TextBold20spMobilePQI"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:maxWidth="220dp"
-                    android:text="@string/tv_nama_task_tugas" />
+                    android:layout_marginStart="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_nama_task_tugas"
+                        style="@style/TextBold20spMobilePQI"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="@string/tv_nama_task_tugas"
+                        app:layout_constraintEnd_toStartOf="@+id/tv_nilai_tugas"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_nilai_tugas"
+                        style="@style/TextNormal16spMobilePQI"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/nilai_tugas"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 <View
@@ -207,14 +215,14 @@
 
                 <TextView
                     android:id="@+id/tv_user_tidak_mengunggah_file"
+                    style="@style/TextRegular16spMobilePQI"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/TextRegular16spMobilePQI"
-                    android:textColor="#72777A"
+                    android:gravity="center"
                     android:minHeight="158dp"
                     android:text="@string/user_tidak_mengunggah_file"
-                    android:gravity="center"
-                    android:visibility="gone"/>
+                    android:textColor="#72777A"
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_tambah_file_upload"

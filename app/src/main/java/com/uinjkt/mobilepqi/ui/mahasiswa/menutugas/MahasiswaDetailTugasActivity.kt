@@ -259,12 +259,16 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         val file = model.file
         idJawabanMahasiswa = model.id
 
+
         if (file.isNotEmpty()) {
             listFileMahasiswaAttached = mutableListOf(FileItem(model.file))
             fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
         }
         setListContentAvaiable(listFileMahasiswaAttached)
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, model.nilai)
+
+        binding.tvNilaiTugas.isVisible = model.nilai != 0
+        binding.tvMaxPoin.isVisible = model.nilai == 0
 
 
         if (idJawabanMahasiswa != 0) {
