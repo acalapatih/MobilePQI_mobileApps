@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.dashboard.GetClassModel
-import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
 import com.mobilepqi.core.domain.model.dashboard.GetUserModel
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import com.uinjkt.mobilepqi.R
@@ -47,7 +46,6 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
     private val sharedViewModel by activityViewModel<DashboardSharedViewModel>()
 
     private lateinit var baseActivity: DashboardActivity
-    private var listTugasDashboard: List<GetTugasModel.ListTugas> = listOf()
     private lateinit var tugasDashboardAdapter: DashboardAdapter
     private var latitude = ""
     private var longitude = ""
@@ -71,6 +69,7 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("Dashboard", "onViewCreated: $classIdDosen")
         viewModel.getUserRole()
         viewModel.getClassId()
         viewModel.getUser()
@@ -96,12 +95,9 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 }
                 is Resource.Error -> {
                     showLoading(false)
-                    model.message.let {
-                        Toast.makeText(
-                            requireContext(),
-                            it ?: "Something went wrong",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    model.message?.let {
+                        Toast.makeText(requireContext(), "Something went wrong", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }
@@ -186,10 +182,11 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    listTugasDashboard = model.data?.listTugas ?: emptyList()
+                    val listTugasDashboard = model.data?.listTugas ?: emptyList()
                     if (listTugasDashboard.isEmpty()) {
-                        showEmptyState()
+                        showEmptyState(true)
                     } else {
+                        showEmptyState(false)
                         tugasDashboardAdapter =
                             DashboardAdapter(requireContext(), listTugasDashboard, this)
                         binding.rvTugasDashboard.layoutManager =
@@ -215,10 +212,10 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         }
     }
 
-    private fun showEmptyState() {
+    private fun showEmptyState(value: Boolean) {
         binding.tvEmptyState.text =
             String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
-        binding.tvEmptyState.isVisible = true
+        binding.tvEmptyState.isVisible = value
     }
 
     private fun showClass(data: GetClassModel) {
@@ -299,6 +296,7 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 if (classIdMahasiswa != 0) {
                     viewModel.getClass(classIdMahasiswa)
                     viewModel.getTugas(classIdMahasiswa)
+                    Log.d("Class Id Mahasiswa", "class Id: $value")
                 }
             }
         } else {

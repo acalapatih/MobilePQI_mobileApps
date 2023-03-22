@@ -58,11 +58,15 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                 }
                 is Resource.Success -> {
                     showLoadingInDialog(false)
-                    model.data?.let { actionAfterCreateMateri() }
+                    showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
+                        model.data?.let { actionAfterCreateMateri() }
+                    }
                 }
                 is Resource.Error -> {
                     showLoadingInDialog(false)
-                    showToast(model.message ?: "Something Went Wrong")
+                    showOneActionDialogWithInvoke("Materi Gagal Ditambahkan", "Okay") {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                 }
             }
         }
@@ -81,6 +85,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
                 is Resource.Error -> {
                     showToast(model.message ?: "Something Went Wrong")
                     showLoading(false)
+                    showEmptyState(true)
                 }
             }
         }
@@ -183,9 +188,7 @@ class DosenMateriQiroahActivity : BaseActivity<ActivityDosenMateriBinding>(),
             tvTitleMessage.text = getString(R.string.hint_et_insert_topic_materi)
             btnTambahkanMateriDosen.setOnClickListener {
                 if (etInsertTopicText.text.isNotEmpty()) {
-                    showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
-                        createMateriQiroah(etInsertTopicText.text.toString(), idKelas)
-                    }
+                    createMateriQiroah(etInsertTopicText.text.toString(), idKelas)
                     dialog.dismiss()
                 } else {
                     dialog.hide()
