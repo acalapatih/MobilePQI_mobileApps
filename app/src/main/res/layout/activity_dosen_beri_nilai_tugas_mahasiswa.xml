@@ -96,10 +96,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/nim_detail_mahasiswa"
                 app:layout_constraintEnd_toStartOf="@+id/et_nilai_tugas_mahasiswa"
                 app:layout_constraintStart_toStartOf="@id/tv_cek_tugas_nama_mahasiswa"
-                app:layout_constraintTop_toTopOf="@id/vw_line_break" />
+                app:layout_constraintTop_toTopOf="@id/vw_line_break"
+                tools:text="@string/nim_detail_mahasiswa"/>
 
             <TextView
                 android:id="@+id/tv_title_nilai_tugas_mahasiswa"
@@ -127,6 +127,7 @@
                 android:inputType="number"
                 android:maxLength="3"
                 android:maxLines="1"
+                android:minHeight="48dp"
                 android:paddingVertical="10dp"
                 android:textAlignment="center"
                 android:textAllCaps="false"

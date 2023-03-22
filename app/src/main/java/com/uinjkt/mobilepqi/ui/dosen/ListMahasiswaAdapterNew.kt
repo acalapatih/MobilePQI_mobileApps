@@ -25,7 +25,7 @@ class ListMahasiswaAdapterNew(
         private val binding =  RecycleViewCekTugasMahasiswaListBinding.bind(itemView)
         fun bindItem(mahasiswa: GetListTugasMahasiswaModel.JawabanItem) {
             binding.tvCekNamaMahasiswa.text = mahasiswa.name
-            binding.tvCekNimMahasiswa.text = mahasiswa.nim
+            binding.tvCekNimMahasiswa.text = context.getString(R.string.format_nim_mahasiswa, mahasiswa.nim)
             Glide.with(context)
                 .load(mahasiswa.avatar)
                 .placeholder(R.drawable.img_user)

@@ -67,7 +67,7 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
     private fun initView() {
         binding.tvTitleTugasDetailMahasiswa.text =
             getString(R.string.tv_title_tugas_detail_mahasiswa, "")
-        binding.tvTitleTugasDetailMahasiswa.text = getString(R.string.tv_tenggat_waktu_tugas, "")
+        binding.tvTenggatWaktuTugasMahasiswa.text = getString(R.string.tv_tenggat_waktu_tugas, "")
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, 0)
 
         getDetailTugas()
@@ -259,12 +259,16 @@ class MahasiswaDetailTugasActivity : BaseActivity<ActivityMahasiswaDetailTugasBi
         val file = model.file
         idJawabanMahasiswa = model.id
 
+
         if (file.isNotEmpty()) {
             listFileMahasiswaAttached = mutableListOf(FileItem(model.file))
             fileUploadedByMahasiswaAdapter.setData(listFileMahasiswaAttached)
         }
         setListContentAvaiable(listFileMahasiswaAttached)
         binding.tvNilaiTugas.text = getString(R.string.nilai_tugas, model.nilai)
+
+        binding.tvNilaiTugas.isVisible = model.nilai != 0
+        binding.tvMaxPoin.isVisible = model.nilai == 0
 
 
         if (idJawabanMahasiswa != 0) {

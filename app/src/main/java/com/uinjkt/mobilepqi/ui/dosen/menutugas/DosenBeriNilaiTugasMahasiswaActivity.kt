@@ -79,13 +79,13 @@ class DosenBeriNilaiTugasMahasiswaActivity :
             if (isValid) {
                 if (editInputNilai.text.toString().toInt() !in 0..100) {
                     editInputNilai.setText("100")
+                    editInputNilai.setSelection(editInputNilai.text.toString().length)
                 }
-                if (editInputNilai.text.toString().trim().length > 1 &&
-                    editInputNilai.text.toString().trim().first() == '0'
+                if (editInputNilai.text.toString().trim().length == 1 &&
+                    editInputNilai.text.toString().trim() == "0"
                 ) {
-                    editInputNilai.setText(editInputNilai.text.removePrefix("0"))
+                    editInputNilai.setText("")
                 }
-                editInputNilai.setSelection(editInputNilai.text.toString().length)
             }
         }
 
@@ -191,7 +191,7 @@ class DosenBeriNilaiTugasMahasiswaActivity :
 
         // Show User
         binding.tvCekTugasNamaMahasiswa.text = dataUser.name
-        binding.tvCekTugasNimMahasiswa.text = dataUser.nim
+        binding.tvCekTugasNimMahasiswa.text = getString(R.string.format_nim_mahasiswa, dataUser.nim)
         Glide.with(baseContext)
             .load(dataUser.avatar)
             .placeholder(R.drawable.img_user)

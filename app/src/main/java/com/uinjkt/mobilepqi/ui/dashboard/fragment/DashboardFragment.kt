@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mobilepqi.core.data.Resource
 import com.mobilepqi.core.domain.model.dashboard.GetClassModel
-import com.mobilepqi.core.domain.model.dashboard.GetTugasModel
 import com.mobilepqi.core.domain.model.dashboard.GetUserModel
 import com.mobilepqi.core.domain.model.jadwalsholat.JadwalSholatModel
 import com.uinjkt.mobilepqi.R
@@ -32,11 +31,11 @@ import com.uinjkt.mobilepqi.ui.mahasiswa.menuqiroah.MahasiswaMateriQiroahActivit
 import com.uinjkt.mobilepqi.ui.mahasiswa.menusilabus.MahasiswaSilabusActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaDetailTugasActivity
 import com.uinjkt.mobilepqi.ui.mahasiswa.menutugas.MahasiswaTugasActivity
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
 
@@ -47,7 +46,6 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
     private val sharedViewModel by activityViewModel<DashboardSharedViewModel>()
 
     private lateinit var baseActivity: DashboardActivity
-    private var listTugasDashboard: List<GetTugasModel.ListTugas> = listOf()
     private lateinit var tugasDashboardAdapter: DashboardAdapter
     private var latitude = ""
     private var longitude = ""
@@ -117,7 +115,13 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                        model.message.let {
+                            Toast.makeText(
+                                requireContext(),
+                                it ?: "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
@@ -135,7 +139,13 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                        model.message.let {
+                            Toast.makeText(
+                                requireContext(),
+                                it ?: "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                         binding.tvWaktu.text = "-"
                     }
                 }
@@ -172,12 +182,15 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 }
                 is Resource.Success -> {
                     showLoading(false)
-                    listTugasDashboard = model.data?.listTugas ?: emptyList()
-                    if(listTugasDashboard.isEmpty()) {
-                        showEmptyState()
+                    val listTugasDashboard = model.data?.listTugas ?: emptyList()
+                    if (listTugasDashboard.isEmpty()) {
+                        showEmptyState(true)
                     } else {
-                        tugasDashboardAdapter = DashboardAdapter(requireContext(), listTugasDashboard, this)
-                        binding.rvTugasDashboard.layoutManager = LinearLayoutManager(requireContext())
+                        showEmptyState(false)
+                        tugasDashboardAdapter =
+                            DashboardAdapter(requireContext(), listTugasDashboard, this)
+                        binding.rvTugasDashboard.layoutManager =
+                            LinearLayoutManager(requireContext())
                         binding.rvTugasDashboard.adapter = tugasDashboardAdapter
                         binding.rvTugasDashboard.isNestedScrollingEnabled = false
                     }
@@ -186,16 +199,23 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
                 is Resource.Error -> {
                     showLoading(false)
                     model.message?.let {
-                        model.message.let { Toast.makeText(requireContext(), it ?: "Something went wrong", Toast.LENGTH_SHORT).show() }
+                        model.message.let {
+                            Toast.makeText(
+                                requireContext(),
+                                it ?: "Something went wrong",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun showEmptyState() {
-        binding.tvEmptyState.text = String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
-        binding.tvEmptyState.isVisible = true
+    private fun showEmptyState(value: Boolean) {
+        binding.tvEmptyState.text =
+            String.format(getString(R.string.tv_belum_ada_tugas, "Praktikum Qiroah dan Ibadah"))
+        binding.tvEmptyState.isVisible = value
     }
 
     private fun showClass(data: GetClassModel) {
@@ -273,7 +293,7 @@ class DashboardFragment : Fragment(), DashboardAdapter.OnUserClickListener {
         if (viewModel.userRole.value.equals("mahasiswa")) {
             viewModel.classId.observe(viewLifecycleOwner) { value ->
                 classIdMahasiswa = value
-                if(classIdMahasiswa != 0) {
+                if (classIdMahasiswa != 0) {
                     viewModel.getClass(classIdMahasiswa)
                     viewModel.getTugas(classIdMahasiswa)
                     Log.d("Class Id Mahasiswa", "class Id: $value")

@@ -82,11 +82,15 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
                 }
                 is Resource.Success -> {
                     showLoadingInDialog(false)
-                    model.data?.let { actionAfterCreateMateri() }
+                    showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
+                        model.data?.let { actionAfterCreateMateri() }
+                    }
                 }
                 is Resource.Error -> {
                     showLoadingInDialog(false)
-                    showToast(model.message ?: "Something Went Wrong")
+                    showOneActionDialogWithInvoke("Materi Gagal Ditambahkan", "Okay") {
+                        showToast(model.message ?: "Something Went Wrong")
+                    }
                 }
             }
         }
@@ -102,19 +106,15 @@ class DosenMateriIbadahActivity : BaseActivity<ActivityDosenMateriBinding>(), Me
                     }
                 }
                 is Resource.Error -> {
-                    showOneActionDialogWithInvoke("Materi Gagal Ditambahkan", "Okay") {
-                        showToast(model.message ?: "Something Went Wrong")
-                    }
                     showLoading(false)
+                    showEmptyState(true)
                 }
             }
         }
     }
 
     private fun actionAfterCreateMateri() {
-        showOneActionDialogWithInvoke("Materi Berhasil Ditambahkan", "Okay") {
-            getMateriIbadah(idKelas)
-        }
+        getMateriIbadah(idKelas)
     }
 
     private fun actionAfterGetMateri(model: GetMateriIbadahModel) {
