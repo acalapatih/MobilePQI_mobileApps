@@ -13,7 +13,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginEnd="15dp"
         android:fontFamily="@font/inter"
-        android:text="@string/tv_update"
+        android:text="@string/tv_update_tugas_dosen"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

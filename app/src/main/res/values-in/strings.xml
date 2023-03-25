@@ -103,7 +103,7 @@
     <string name="tv_edit_namakelas">Nama Kelas</string>
     <string name="tv_edit_ruangkelas">Ruang Kelas</string>
     <string name="tv_edit_jadwalkelas">Jadwal Kelas</string>
-    <string name="et_hint_namakelas">PQ!-1A</string>
+    <string name="et_hint_namakelas">PQI-1A</string>
     <string name="et_hint_ruangkelas">4.001</string>
     <string name="et_hint_jadwalkelas">Senin, 07.30 – 10.00</string>
     <string name="btn_simpan">Simpan</string>
@@ -148,7 +148,7 @@
     <string name="tv_qiroah">Qiroah</string>
     <string name="tv_tugas">Tugas</string>
     <string name="tv_judul">Praktikum Qiroah dan Ibadah</string>
-    <string name="tv_update">Anda memposting tugas baru</string>
+    <string name="tv_update_tugas_dosen">Anda memposting tugas baru</string>
     <string name="tv_tanggal_tugas">29 November 2022</string>
     <string name="tv_nama_tugas">Tugas 6</string>
     <string name="tv_deadline_tugas">30 Desember 2022</string>
@@ -246,4 +246,5 @@
     <string name="tandai_selesai">Tandai Selesai</string>
     <string name="batalkan_pengiriman">Batalkan Pengiriman</string>
     <string name="format_nim_mahasiswa">NIM : %s</string>
+    <string name="tv_update_tugas_mahasiswa">Anda memiliki tugas baru</string>
 </resources>
