@@ -60,7 +60,7 @@ class MahasiswaFileUploadedByAdapterList(
                     }
                 }
 
-                "donwload" -> {
+                "download" -> {
                     with(binding.ivIconCloseOrDownloadFile) {
                         setImageResource(R.drawable.ic_download_blue)
                         // Resize drawable size
