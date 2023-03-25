@@ -14,6 +14,7 @@ import com.uinjkt.mobilepqi.util.convertTime
 class DashboardAdapter(
     private val context: Context,
     private val dataset: List<GetTugasModel.ListTugas>,
+    private val setRole: String?,
     val listener: OnUserClickListener? = null,
 ) : RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
 
@@ -26,6 +27,13 @@ class DashboardAdapter(
                 tugasDashboard.deadline.convertTime("dd MMMM yyyy (HH.mm)")
             )
             binding.tvTanggalTugas.text = tugasDashboard.createdAt.convertTime("dd MMMM yyyy")
+
+            if (setRole == "dosen") {
+                binding.tvUpdateTugas.text = context.getString(R.string.tv_update_tugas_dosen)
+            } else {
+                binding.tvUpdateTugas.text = context.getString(R.string.tv_update_tugas_mahasiswa)
+            }
+
             if (tugasDashboard.status == true) {
                 binding.clTugasDashboard.setBackgroundColor(
                     ContextCompat.getColor(
