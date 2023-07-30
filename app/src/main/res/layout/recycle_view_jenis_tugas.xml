@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cv_jenis_tugas"
+    android:layout_width="wrap_content"
+    android:layout_height="35dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="48dp"
+    android:layout_marginEnd="7dp"
+    app:cardElevation="4dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_jenis_tugas"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/light_blue_0078ce"
+        android:text="@string/btn_jenis_tugas"
+        android:fontFamily="@font/inter_medium"
+        android:textFontWeight="500"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:paddingHorizontal="8dp"
+        tools:targetApi="p" />
+</androidx.cardview.widget.CardView>

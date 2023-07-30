@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_logo_back_circle_button_buat_tugas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/desc_iv_logo_back_circle_dosen"
+        android:src="@drawable/ic_arrow_circle_left_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_menu_buat_tugas_dosen"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:minHeight="48dp"
+        android:paddingBottom="5dp"
+        android:text="@string/tv_title_menu_buat_tugas_dosen"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_buat_tugas"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_menu_buat_tugas_dosen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"/>
+
+    <ScrollView
+        android:id="@+id/nsv_buat_tugas"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_menu_buat_tugas_dosen"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="15dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/tv_judul_buat_tugas_dosen"
+                style="@style/TextRegular16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="24dp"
+                android:text="@string/tv_judul_buat_tugas_dosen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/et_desc_judul_buat_tugas_dosen"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="66dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/box_shape"
+                android:gravity="start"
+                android:hint="@string/tv_judul_buat_tugas_dosen"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="@id/tv_judul_buat_tugas_dosen"
+                app:layout_constraintStart_toStartOf="@id/tv_judul_buat_tugas_dosen"
+                app:layout_constraintTop_toBottomOf="@id/tv_judul_buat_tugas_dosen" />
+
+            <TextView
+                android:id="@+id/tv_deskripsi_buat_tugas_dosen"
+                style="@style/TextRegular16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:text="@string/tv_deskripsi_buat_tugas_dosen"
+                app:layout_constraintEnd_toEndOf="@id/et_desc_judul_buat_tugas_dosen"
+                app:layout_constraintStart_toStartOf="@id/et_desc_judul_buat_tugas_dosen"
+                app:layout_constraintTop_toBottomOf="@id/et_desc_judul_buat_tugas_dosen" />
+
+            <EditText
+                android:id="@+id/et_desc_deskripsi_buat_tugas_dosen"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="174dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/box_shape"
+                android:gravity="start"
+                android:hint="@string/et_hint_deskripsi_buat_tugas_dosen"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:padding="15dp"
+                app:layout_constraintEnd_toEndOf="@id/tv_deskripsi_buat_tugas_dosen"
+                app:layout_constraintStart_toStartOf="@id/tv_deskripsi_buat_tugas_dosen"
+                app:layout_constraintTop_toBottomOf="@id/tv_deskripsi_buat_tugas_dosen"
+                tools:ignore="VisualLintTextFieldSize" />
+
+            <LinearLayout
+                android:id="@+id/ll_attach_buat_tugas_dosen"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/et_desc_deskripsi_buat_tugas_dosen"
+                app:layout_constraintStart_toStartOf="@id/et_desc_deskripsi_buat_tugas_dosen"
+                app:layout_constraintTop_toBottomOf="@id/et_desc_deskripsi_buat_tugas_dosen">
+
+                <ImageView
+                    android:id="@+id/iv_attach_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/desc_iv_attach_files"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_baseline_attach_file" />
+
+                <ImageView
+                    android:id="@+id/iv_insert_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/desc_iv_insert_link"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_sharp_insert_link" />
+
+                <ImageView
+                    android:id="@+id/iv_google_drive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:contentDescription="@string/desc_iv_google_drive"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_google_drive"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/iv_image_attach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/desc_iv_image_attach"
+                    android:src="@drawable/ic_image_attach" />
+
+                <ImageView
+                    android:id="@+id/iv_mic_attach"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/desc_iv_mic_attach"
+                    android:padding="5dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_mic_attach" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_jenis_tugas_spinner_dosen"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_jenis_tugas_spinner_dosen"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner_jenis_tugas"
+                app:layout_constraintStart_toStartOf="@id/ll_attach_buat_tugas_dosen"
+                app:layout_constraintTop_toTopOf="@+id/spinner_jenis_tugas" />
+
+            <ProgressBar
+                android:id="@+id/pb_file_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/rv_file_upload_by_dosen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_attach_buat_tugas_dosen" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_file_upload_by_dosen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/pb_file_loading"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycle_view_file_uploaded_by_dosen" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_jenis_tugas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/style_spinner_pqi"
+                android:dropDownVerticalOffset="48dp"
+                android:minHeight="48dp"
+                android:popupBackground="@drawable/bg_rounded_solid_white_blue_06283d_border_2dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="@id/ll_attach_buat_tugas_dosen"
+                app:layout_constraintStart_toEndOf="@id/tv_jenis_tugas_spinner_dosen"
+                app:layout_constraintTop_toBottomOf="@id/rv_file_upload_by_dosen"
+                tools:listitem="@layout/item_spinner" />
+
+            <TextView
+                android:id="@+id/tv_deadline_spinner_dosen"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_deadline_spinner_dosen"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_deadline_tugas"
+                app:layout_constraintEnd_toEndOf="@id/tv_jenis_tugas_spinner_dosen"
+                app:layout_constraintStart_toStartOf="@id/tv_jenis_tugas_spinner_dosen"
+                app:layout_constraintTop_toTopOf="@+id/tv_deadline_tugas" />
+
+            <TextView
+                android:id="@+id/tv_deadline_tugas"
+                style="@style/TextNormal18spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/style_spinner_pqi"
+                android:contentDescription="@string/spinner_deadline_tugas"
+                android:minHeight="48dp"
+                android:padding="10dp"
+                android:text="@string/tv_deadline_spinner_dosen"
+                app:layout_constraintEnd_toEndOf="@id/spinner_jenis_tugas"
+                app:layout_constraintStart_toEndOf="@id/tv_deadline_spinner_dosen"
+                app:layout_constraintTop_toBottomOf="@id/spinner_jenis_tugas" />
+
+            <TextView
+                android:id="@+id/tv_topik_spinner_dosen"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_topik_spinner_dosen"
+                app:layout_constraintBottom_toBottomOf="@+id/spinner_topik_tugas"
+                app:layout_constraintEnd_toEndOf="@id/tv_deadline_spinner_dosen"
+                app:layout_constraintStart_toStartOf="@id/tv_deadline_spinner_dosen"
+                app:layout_constraintTop_toTopOf="@+id/spinner_topik_tugas" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spinner_topik_tugas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/style_spinner_pqi"
+                android:dropDownWidth="match_parent"
+                android:dropDownVerticalOffset="48dp"
+                android:minHeight="48dp"
+                android:popupBackground="@drawable/bg_rounded_solid_white_blue_06283d_border_2dp"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="@id/tv_deadline_tugas"
+                app:layout_constraintStart_toEndOf="@id/tv_topik_spinner_dosen"
+                app:layout_constraintTop_toBottomOf="@id/tv_deadline_tugas"
+                tools:listitem="@layout/item_spinner" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_posting_tugas_baru_dosen"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="75dp"
+                android:layout_marginTop="70dp"
+                android:background="@drawable/bg_button_06283d_48dp_ripple"
+                android:text="@string/btn_posting_tugas_baru_dosen"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/spinner_topik_tugas"
+                tools:ignore="VisualLintButtonSize" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

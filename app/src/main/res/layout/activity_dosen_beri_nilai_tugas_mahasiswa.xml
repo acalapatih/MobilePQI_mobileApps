@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_logo_back_circle_button_tugas_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="@string/desc_iv_logo_back_circle_dosen"
+        android:src="@drawable/ic_arrow_circle_left_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_title_tugas_detail_mahasiswa"
+        style="@style/TextBold18spMobilePQI"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:lineSpacingExtra="3dp"
+        android:minHeight="48dp"
+        android:text="@string/tv_title_tugas_detail_mahasiswa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_logo_back_circle_button_tugas_dosen"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv_content_detail_list_mahasiswa"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="22dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_tugas_detail_mahasiswa">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_profile_picture_mahasiswa"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/img_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_cek_tugas_nama_mahasiswa"
+                style="@style/TextBold20spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="8dp"
+                android:paddingVertical="5dp"
+                android:text="@string/tv_nama_mahasiswa"
+                app:layout_constraintEnd_toStartOf="@+id/et_nilai_tugas_mahasiswa"
+                app:layout_constraintStart_toEndOf="@id/iv_profile_picture_mahasiswa"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/vw_line_break"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="@id/tv_cek_tugas_nim_mahasiswa"
+                app:layout_constraintStart_toStartOf="@id/tv_cek_tugas_nama_mahasiswa"
+                app:layout_constraintTop_toBottomOf="@id/tv_cek_tugas_nama_mahasiswa" />
+
+            <TextView
+                android:id="@+id/tv_cek_tugas_nim_mahasiswa"
+                style="@style/TextNormal14spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/et_nilai_tugas_mahasiswa"
+                app:layout_constraintStart_toStartOf="@id/tv_cek_tugas_nama_mahasiswa"
+                app:layout_constraintTop_toTopOf="@id/vw_line_break"
+                tools:text="@string/nim_detail_mahasiswa"/>
+
+            <TextView
+                android:id="@+id/tv_title_nilai_tugas_mahasiswa"
+                style="@style/TextNormal18spMobilePQI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/tv_nilai"
+                app:layout_constraintBottom_toTopOf="@id/et_nilai_tugas_mahasiswa"
+                app:layout_constraintEnd_toEndOf="@id/et_nilai_tugas_mahasiswa"
+                app:layout_constraintStart_toStartOf="@id/et_nilai_tugas_mahasiswa"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <EditText
+                android:id="@+id/et_nilai_tugas_mahasiswa"
+                style="@style/TextNormal18spMobilePQI"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_rounded_blue_06283d_border_2dp"
+                android:hint="@string/et_input_nilai_tugas_mahasiswa"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:maxLength="3"
+                android:maxLines="1"
+                android:minHeight="48dp"
+                android:paddingVertical="10dp"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                app:layout_constraintBottom_toBottomOf="@id/tv_cek_tugas_nim_mahasiswa"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_nilai_tugas_mahasiswa" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_file_upload"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_cek_tugas_nim_mahasiswa"
+                tools:itemCount="1"
+                tools:listitem="@layout/recycle_view_file_sent_by_mahasiswa" />
+
+            <LinearLayout
+                android:id="@+id/ll_comment_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/list_shape"
+                android:elevation="10dp"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/rv_file_upload">
+
+                <ImageView
+                    android:id="@+id/ic_image_profile"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_weight="0.1"
+                    android:contentDescription="@string/desc_ic_image_profile"
+                    android:elevation="10dp"
+                    app:srcCompat="@drawable/img_user" />
+
+                <EditText
+                    android:id="@+id/et_insert_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="14dp"
+                    android:layout_weight="0.8"
+                    android:autofillHints="Tambahkan Komentar Anda"
+                    android:background="@null"
+                    android:fontFamily="@font/inter_medium"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_tambah_komentar"
+                    android:inputType="textMultiLine"
+                    android:labelFor="@id/cl_comment_box"
+                    android:maxLines="4"
+                    android:minHeight="48dp"
+                    android:textColor="@color/black_090A0A"
+                    android:textSize="16sp"
+                    tools:text="Tambahkan komentar anda" />
+
+                <ImageView
+                    android:id="@+id/iv_icon_send"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1"
+                    android:contentDescription="@string/desc_iv_icon_send"
+                    app:srcCompat="@drawable/ic_sent" />
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_beri_nilai"
+                style="@style/TextNormal16spMobilePQI"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/bg_button_06283d_48dp_ripple"
+                android:text="@string/btn_beri_nilai"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ll_comment_box"
+                app:layout_constraintVertical_bias="1" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:background="@drawable/bg_white_rounded_16dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:textColor="@color/black_090A0A"
+        android:textSize="24sp"
+        tools:text="Yakin Log Out?" />
+
+    <TextView
+        android:id="@+id/tv_body_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/inter"
+        android:gravity="center"
+        android:textColor="@color/black_090A0A"
+        android:textSize="16sp"
+        tools:text="Anda akan keluar dari akun ini" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_yes"
+        style="@style/ButtonBlueRounded30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:textAllCaps="false"
+        tools:text="Yes" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/inter_medium"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        tools:text="No" />
+
+</LinearLayout>

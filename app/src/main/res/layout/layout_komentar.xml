@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_comment_box"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_shape"
+    android:elevation="10dp"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/ic_image_profile"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="0.1"
+        android:contentDescription="@string/desc_ic_image_profile"
+        android:elevation="10dp"
+        app:srcCompat="@drawable/img_user" />
+
+    <EditText
+        android:id="@+id/et_insert_comments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="14dp"
+        android:layout_weight="0.8"
+        android:autofillHints="Tambahkan Komentar Anda"
+        android:background="@null"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center_vertical"
+        android:hint="@string/hint_tambah_komentar"
+        android:inputType="textMultiLine"
+        android:labelFor="@id/cl_comment_box"
+        android:maxLines="4"
+        android:minHeight="48dp"
+        android:textColor="@color/black_090A0A"
+        android:textSize="16sp"
+        tools:text="Tambahkan komentar anda" />
+
+    <ImageView
+        android:id="@+id/iv_icon_send"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.1"
+        android:contentDescription="@string/desc_iv_icon_send"
+        app:srcCompat="@drawable/ic_sent" />
+
+</LinearLayout>

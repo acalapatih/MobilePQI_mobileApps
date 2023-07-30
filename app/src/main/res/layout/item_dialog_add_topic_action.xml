@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="24dp"
+    android:layout_marginHorizontal="50dp"
+    android:background="@drawable/bg_white_rounded_16dp">
+
+    <TextView
+        android:id="@+id/tv_title_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_bold"
+        android:gravity="center"
+        android:textColor="@color/black_090A0A"
+        android:textSize="24sp"
+        tools:text="Topik"
+        android:layout_marginTop="32sp"/>
+
+    <EditText
+        android:id="@+id/et_insert_topic_text"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:fontFamily="@font/inter"
+        android:gravity="center_vertical"
+        android:textColor="@color/black_090A0A"
+        android:textSize="16sp"
+        android:hint="@string/hint_et_insert_topic_materi"
+        android:background="@drawable/bg_rectangle_greywhitestroke_8dp"
+        android:inputType="textNoSuggestions"
+        android:paddingHorizontal="16dp"
+        android:importantForAutofill="no"
+        android:layout_marginVertical="24dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_tambahkan_materi_dosen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/ButtonSimpanHapusPostingMateriDosen"
+        android:background="@drawable/bg_button_simpan_48dp"
+        android:text="@string/tv_btn_tambahkan_materi_dosen"
+        android:textColor="@color/white"
+        android:layout_marginBottom="12dp"/>
+
+    <ProgressBar
+        android:id="@+id/pb_loading_screen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_batal_tambahkan_materi_dosen"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="@color/purple_6b4eff"
+        android:text="@string/tv_batal_tambahkan_materi_dosen"
+        android:layout_marginBottom="24dp"/>
+
+</LinearLayout>
